@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#f0f0f0" id="theme-color-meta">
     <title>Matthew Ahn</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollToPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollSmoother.min.js"></script>
     <script src="global-clock-component.js"></script>
     <style>
         @font-face {
@@ -426,12 +427,7 @@
             box-sizing: border-box;
         }
 
-        /* Ensure archive section has adequate height for navigation detection */
-        #archive {
-            min-height: 80vh;
-            display: flex;
-            align-items: center;
-        }
+        /* Archive section removed */
 
         #home {
             padding: 140px 0 120px 0;
@@ -1035,56 +1031,19 @@
             color: rgba(255, 255, 255, 1);
         }
 
-        /* Archive search bar styling */
-        .search-container {
-            max-width: 600px;
-            margin: 0 auto;
-            opacity: 0;
-            transform: translateY(30px);
-            will-change: transform, opacity;
-        }
+        /* Archive search styles removed */
 
-        .archive-content {
-            margin-top: 80px;
-            text-align: center;
-        }
+        
 
-        .archive-coming-soon p {
-            font-family: 'Unica77LL', Arial, sans-serif;
-            font-size: 18px;
-            color: var(--secondary-text-color);
-            margin: 16px 0;
-            line-height: 1.6;
-        }
+        /* Archive styles removed */
 
-        .search-bar {
-            position: relative;
-            margin-bottom: 24px;
-        }
+        
 
-        #archive-search {
-            width: 100%;
-            height: 56px;
-            padding: 16px 60px 16px 20px;
-            border: 1px solid var(--toggle-border-color);
-            border-radius: 12px;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Unica77LL', Arial, sans-serif;
-            font-size: 16px;
-            outline: none;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            box-sizing: border-box;
-        }
+        
 
-        #archive-search::placeholder {
-            color: var(--secondary-text-color);
-        }
+        
 
-        #archive-search:focus {
-            border-color: var(--text-color);
-            box-shadow: 0 0 0 1px var(--text-color);
-        }
+        
 
         .search-button {
             position: absolute;
@@ -1109,12 +1068,7 @@
             color: var(--text-color);
         }
 
-        .search-suggestions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            justify-content: center;
-        }
+        
 
         .suggestion-tag {
             padding: 8px 16px;
@@ -1141,11 +1095,7 @@
                 padding: 0 20px;
             }
 
-            #archive-search {
-                height: 48px;
-                padding: 12px 50px 12px 16px;
-                font-size: 15px;
-            }
+            
 
             .search-button {
                 width: 36px;
@@ -1801,7 +1751,7 @@
         @media (min-width: 769px) {
             /* Desktop CTA dimensions - width adjusted for text */
             .gallery-cta {
-                width: 140px; /* Increased width to fit "Explore project" on one line */
+                width: 180px; /* Increased width to fit "Explore project" on one line */
                 height: 48px; /* Match arrow icon height */
                 padding: 14px 16px; /* Adjusted padding to match 48px height */
                 display: flex;
@@ -1927,14 +1877,67 @@
                 font-size: 14px;
             }
         }
+        /* Contact overrides - scoped to #contact to avoid global collisions */
+        #contact .contact-container {
+            display: block;
+            max-width: 800px;
+            margin: 0; /* left-align to section title */
+            opacity: 1;
+            transform: none;
+            margin-bottom: 60px;
+        }
+        #contact .contact-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            border-top: 1px solid var(--border-color);
+        }
+        #contact .form-row { display: contents; }
+        #contact .form-group { border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color); position: relative; }
+        #contact .form-group:nth-child(even) { border-right: none; }
+        #contact .form-group.full-width { grid-column: 1 / -1; border-right: none; }
+        #contact .form-field { position: relative; width: 100%; }
+        #contact .form-field input, #contact .form-field textarea {
+            width: 100%; padding: 24px 20px; border: none; background: transparent; color: var(--text-color);
+            font-family: 'Unica77LL', Arial, sans-serif; font-size: 16px; outline: none; resize: none; box-sizing: border-box;
+        }
+        #contact .form-field textarea { min-height: 120px; }
+        #contact .form-field input::placeholder, #contact .form-field textarea::placeholder { color: transparent; }
+        #contact .form-label { position: absolute; left: 20px; top: 24px; color: var(--secondary-text-color); font-family: 'Input', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; pointer-events: none; transition: all 0.2s ease; }
+        #contact .form-field input:focus + .form-label,
+        #contact .form-field input:not(:placeholder-shown) + .form-label,
+        #contact .form-field textarea:focus + .form-label,
+        #contact .form-field textarea:not(:placeholder-shown) + .form-label,
+        #contact .form-label.active { transform: translateY(-8px); font-size: 10px; color: var(--text-color); }
+        #contact .form-field input:focus, #contact .form-field textarea:focus { background: rgba(255,255,255,0.5); }
+        #contact .submit-group { grid-column: 1 / -1; border-bottom: none; position: relative; overflow: hidden; }
+        #contact .submit-button { width: 100%; padding: 32px 20px; border: none; background: rgb(0,5,11); color: var(--bg-color); font-family: 'Input', monospace; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden; border-radius: 12px; }
+        #contact .submit-button:hover { background: rgb(0,3,8); }
+        #contact .submit-button:active { transform: translateY(1px); }
+        #contact .form-group:hover { background: rgba(255,255,255,0.3); }
+        #contact .form-group:focus-within { background: rgba(255,255,255,0.5); }
+        @media (max-width: 768px) {
+            #contact .contact-container { max-width: none; }
+            #contact .contact-form { grid-template-columns: 1fr; }
+            #contact .form-group { border-right: none; }
+            #contact .form-field input, #contact .form-field textarea { padding: 20px 16px; }
+            #contact .form-label { left: 16px; top: 20px; }
+            #contact .submit-button { padding: 24px 16px; }
+        }
+        #contact .form-success { padding: 40px 20px; text-align: center; border: 1px solid var(--border-color); background: rgba(255,255,255,0.5); border-radius: 12px; margin-top: 16px; }
+        #contact .form-success h3 { margin: 0 0 12px 0; font-family: 'Unica77LL', Arial, sans-serif; font-size: 18px; font-weight: 500; }
+        #contact .form-success p { margin: 0; color: var(--secondary-text-color); font-size: 14px; }
+        #contact .hidden { display: none; }
     </style>
 </head>
 <body>
     <!-- Global Clock Component Container -->
     <div id="global-clock-container"></div>
 
-
-
+    <!-- ScrollSmoother Wrapper -->
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
+    
     <!-- Home Section -->
     <section id="home" class="section">
         <div class="section-content">
@@ -2024,131 +2027,52 @@
         </div>
     </section>
 
-    <!-- Archive Section -->
-    <section id="archive" class="section">
-        <div class="section-content">
-            <h2 id="archive-title" class="section-title">Archive</h2>
-            <div class="search-container">
-                <div class="search-bar">
-                    <input type="text" id="archive-search" placeholder="Search projects, technologies, case studies..." />
-                    <button class="search-button">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.5"/>
-                            <path d="21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                        </svg>
-                    </button>
-                </div>
-                <div class="search-suggestions">
-                    <span class="suggestion-tag">React</span>
-                    <span class="suggestion-tag">Design Systems</span>
-                    <span class="suggestion-tag">Mobile UX</span>
-                    <span class="suggestion-tag">AI/ML</span>
-                    <span class="suggestion-tag">E-commerce</span>
-                    <span class="suggestion-tag">Prototyping</span>
-                </div>
-                
-                <!-- Archive content placeholder to ensure proper navigation detection -->
-                <div class="archive-content">
-                    <div class="archive-coming-soon">
-                        <p>Project archive coming soon...</p>
-                        <p>Use the search above to explore upcoming features and past work.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Contact Section -->
     <section id="contact" class="section">
         <div class="section-content">
             <h2 id="contact-title" class="section-title">Contact</h2>
             <div class="contact-container">
-                                <div class="contact-form-card">
-                    <form id="contact-form" class="contact-form">
-                        <!-- Column 1: Form Inputs -->
-                        <div class="form-inputs-column">
-                            <div class="form-group">
-                                <label for="preferred-name">Preferred Name</label>
-                                <input type="text" id="preferred-name" name="preferredName" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" name="email" placeholder="" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="phone">Phone Number</label>
-                                <input type="tel" id="phone" name="phone" placeholder="" pattern="[0-9\s\(\)\-\+]*">
-                            </div>
-                            
-                            <!-- Mobile canvas (shown only on mobile) -->
-                            <div class="form-group canvas-form-group">
-                                <label for="drawing-canvas">Sketch a doodle!</label>
-                                <div class="canvas-container">
-                                    <canvas id="drawing-canvas" width="320" height="200"></canvas>
-                                    <div class="canvas-controls">
-                                        <button type="button" class="trash-btn clear-btn">
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2 2V6M10 11v6M14 11v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                        </button>
-                                        <div class="brush-controls">
-                                            <input type="range" id="brush-size" min="1" max="10" value="2" class="brush-slider vertical" orient="vertical">
-                                            <span class="brush-label">Size</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Mobile toggle (shown only on mobile) -->
-                            <div class="mobile-toggle-container">
-                                <div class="send-toggle-container">
-                                    <div class="send-toggle-track">
-                                        <div class="send-toggle-thumb"></div>
-                                        <span class="send-toggle-text"></span>
-                                    </div>
-                                </div>
-                            </div>
+                <form id="contact-form" class="contact-form">
+                    <div class="form-group">
+                        <div class="form-field">
+                            <input type="text" id="name" name="name" placeholder="Your name" required>
+                            <label for="name" class="form-label">Name</label>
                         </div>
-                        
-                        <!-- Column 2: Desktop Canvas -->
-                        <div class="canvas-column">
-                            <div class="form-group desktop-canvas-field">
-                                <label for="drawing-canvas-desktop">Sketch a doodle!</label>
-                                <div class="canvas-container">
-                                    <canvas id="drawing-canvas-desktop" width="300" height="300"></canvas>
-                                    <div class="canvas-controls">
-                                        <button type="button" class="trash-btn clear-btn">
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2 2V6M10 11v6M14 11v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                        </button>
-                                        <div class="brush-controls">
-                                            <input type="range" id="brush-size-desktop" min="1" max="10" value="2" class="brush-slider vertical" orient="vertical">
-                                            <span class="brush-label">Size</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="form-field">
+                            <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                            <label for="email" class="form-label">Email</label>
                         </div>
-                        
-                        <!-- Column 3: Desktop Toggle -->
-                        <div class="toggle-column">
-                            <div class="desktop-toggle-container">
-                                <div class="send-toggle-container">
-                                    <div class="send-toggle-track">
-                                        <div class="send-toggle-thumb" id="send-toggle-thumb"></div>
-                                        <span class="send-toggle-text" id="send-toggle-text"></span>
-                                    </div>
-                                </div>
-                            </div>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <div class="form-field">
+                            <textarea id="message" name="message" placeholder="Tell me about your project..." required></textarea>
+                            <label for="message" class="form-label">Message</label>
                         </div>
-                    </form>
+                    </div>
+                    
+                    <div class="form-group submit-group">
+                        <button type="submit" class="submit-button">
+                            Send Message
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Success message (hidden by default) -->
+                <div id="success-message" class="form-success hidden">
+                    <h3>Message sent successfully!</h3>
+                    <p>Thank you for reaching out. I'll get back to you soon.</p>
                 </div>
             </div>
         </div>
     </section>
+
+        </div>
+    </div>
 
     <!-- New navigation bar -->
     <div id="nav-container">
@@ -2157,7 +2081,6 @@
             <div id="nav-slider"></div>
             <a href="#home" class="nav-button">Home</a>
             <a href="#work" class="nav-button">Work</a>
-            <a href="#archive" class="nav-button">Archive</a>
             <a href="#contact" class="nav-button">Contact</a>
         </nav>
     </div>
@@ -2276,9 +2199,9 @@ humanity and technology.`;
                     
                     descriptionIndex++;
                     
-                    // Check if we've started typing "and technology" and trigger gallery fade-in
-                    const technologyIndex = currentDescriptionText.indexOf('and technology');
-                    if (technologyIndex !== -1 && descriptionIndex >= technologyIndex + 1 && !galleryTriggered) {
+                    // Trigger gallery fade-in right after the first sentence finishes
+                    const firstPeriodIndex = currentDescriptionText.indexOf('.');
+                    if (firstPeriodIndex !== -1 && descriptionIndex >= firstPeriodIndex + 1 && !galleryTriggered) {
                         galleryTriggered = true;
                         triggerGalleryFadeIn();
                     }
@@ -2514,7 +2437,26 @@ humanity and technology.`;
         }
 
         // Initialize GSAP plugins for Home page
-        gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+        gsap.registerPlugin(ScrollSmoother, ScrollTrigger, ScrollToPlugin);
+
+        // Initialize smooth scrolling consistent with case study page
+        (function initScrollSmoother() {
+            if (typeof ScrollSmoother === 'undefined') return;
+            try {
+                const smoother = ScrollSmoother.create({
+                    wrapper: "#smooth-wrapper",
+                    content: "#smooth-content",
+                    smooth: 1,
+                    effects: false,
+                    smoothTouch: 0.1,
+                    normalizeScroll: false,
+                    ignoreMobileResize: true
+                });
+                window.smoother = smoother;
+            } catch (e) {
+                console.warn('ScrollSmoother init failed:', e);
+            }
+        })();
 
         // Advanced GSAP smooth scrolling for navigation
         function smoothScrollToSection(targetId) {
@@ -2522,67 +2464,61 @@ humanity and technology.`;
             if (targetSection) {
                 const headerOffset = 120; // Offset for clock container
                 
-                // Kill any existing scroll animations for smooth interruption
-                gsap.killTweensOf(window);
-                
-                gsap.to(window, {
-                    duration: 1.4,
-                    scrollTo: {
-                        y: targetSection,
+                if (window.smoother) {
+                    window.smoother.scrollTo(targetSection, {
+                        duration: 1.4,
                         offsetY: headerOffset,
-                        autoKill: false
-                    },
-                    ease: "power3.inOut",
-                    onStart: () => {
-                        // Prevent scroll hijacking during animation
-                        document.body.style.pointerEvents = 'none';
-                    },
-                    onComplete: () => {
-                        // Re-enable interactions
-                        document.body.style.pointerEvents = 'auto';
-                        
-                        // Force navigation update after scroll completes to ensure correct state
-                        setTimeout(() => {
-                            if (!isManualNavigation) {
-                                updateActiveNavigation();
-                            }
-                        }, 50);
-                    }
-                });
+                        ease: "power3.inOut",
+                        onStart: () => { document.body.style.pointerEvents = 'none'; },
+                        onComplete: () => {
+                            document.body.style.pointerEvents = 'auto';
+                            setTimeout(() => { if (!isManualNavigation) updateActiveNavigation(); }, 50);
+                        }
+                    });
+                } else {
+                    // Kill any existing scroll animations for smooth interruption
+                    gsap.killTweensOf(window);
+                    gsap.to(window, {
+                        duration: 1.4,
+                        scrollTo: { y: targetSection, offsetY: headerOffset, autoKill: false },
+                        ease: "power3.inOut",
+                        onStart: () => { document.body.style.pointerEvents = 'none'; },
+                        onComplete: () => {
+                            document.body.style.pointerEvents = 'auto';
+                            setTimeout(() => { if (!isManualNavigation) updateActiveNavigation(); }, 50);
+                        }
+                    });
+                }
             }
         }
 
         // Enhanced scroll to top with elegant animation
         function smoothScrollToTop() {
-            gsap.killTweensOf(window);
-            
-            gsap.to(window, {
-                duration: 1.8,
-                scrollTo: { y: 0 },
-                ease: "power4.inOut",
-                onStart: () => {
-                    document.body.style.pointerEvents = 'none';
-                },
-                onComplete: () => {
-                    document.body.style.pointerEvents = 'auto';
-                }
-            });
+            if (window.smoother) {
+                window.smoother.scrollTo(0, { duration: 1.8, ease: "power4.inOut" });
+            } else {
+                gsap.killTweensOf(window);
+                gsap.to(window, {
+                    duration: 1.8,
+                    scrollTo: { y: 0 },
+                    ease: "power4.inOut",
+                    onStart: () => { document.body.style.pointerEvents = 'none'; },
+                    onComplete: () => { document.body.style.pointerEvents = 'auto'; }
+                });
+            }
         }
 
         // Function to trigger gallery fade-in
         function triggerGalleryFadeIn() {
             const galleryCard = document.querySelector('.gallery-card');
-            
-            if (galleryCard) {
-                gsap.to(galleryCard, {
-                    opacity: 1,
-                    y: 0,
-                    scale: 1,
-                    duration: 2.2,
-                    ease: "power3.out",
-                    delay: 0.3
-                });
-            }
+            if (!galleryCard) return;
+            gsap.to(galleryCard, {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.6,
+                ease: "power2.out"
+            });
         }
 
         // Function to restart typing animation
@@ -2608,8 +2544,8 @@ humanity and technology.`;
             if (galleryCard) {
                 gsap.set(galleryCard, {
                     opacity: 0,
-                    y: 20,
-                    scale: 0.95
+                    y: 10,
+                    scale: 1
                 });
             }
             
@@ -2853,10 +2789,7 @@ I have a deep curiousity in harmonizing humanity and technology.`;
         });
         
         if (galleryCard) {
-            gsap.set(galleryCard, {
-                opacity: 0,
-                y: 20
-            });
+            gsap.set(galleryCard, { opacity: 0, y: 10 });
         }
         
         // Set up contact container initial state
@@ -2904,7 +2837,6 @@ I have a deep curiousity in harmonizing humanity and technology.`;
         // Section title typing animation
         const sectionTitles = [
             { id: 'work-title', text: 'Work' },
-            { id: 'archive-title', text: 'Archive' },
             { id: 'contact-title', text: 'Contact' }
         ];
 
@@ -3014,16 +2946,7 @@ I have a deep curiousity in harmonizing humanity and technology.`;
             if (!animatedCards.has(sectionId)) {
                 animatedCards.add(sectionId);
                 
-                if (sectionId === 'archive' && searchContainer) {
-                    // Archive section: animate search container
-                    gsap.to(searchContainer, {
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.6,
-                        ease: "power2.out",
-                        delay: 0.3
-                    });
-                } else if (sectionId === 'contact' && contactContainer) {
+                if (sectionId === 'contact' && contactContainer) {
                     // Contact section: animate contact container
                     gsap.to(contactContainer, {
                         opacity: 1,
@@ -3116,54 +3039,9 @@ I have a deep curiousity in harmonizing humanity and technology.`;
 
         // Gallery CTA buttons are display-only with hover states
 
-        // Archive search functionality
-        const archiveSearch = document.getElementById('archive-search');
-        const searchButton = document.querySelector('.search-button');
-        const suggestionTags = document.querySelectorAll('.suggestion-tag');
+        // Archive search removed
 
-        if (archiveSearch) {
-            // Search input functionality
-            archiveSearch.addEventListener('input', function(e) {
-                const query = e.target.value.trim();
-                if (query.length > 0) {
-                    console.log('Searching for:', query);
-                    // Add your search logic here
-                }
-            });
-
-            // Search button click
-            searchButton.addEventListener('click', function() {
-                const query = archiveSearch.value.trim();
-                if (query.length > 0) {
-                    console.log('Search button clicked for:', query);
-                    // Add your search action here
-                }
-            });
-
-            // Enter key search
-            archiveSearch.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    const query = archiveSearch.value.trim();
-                    if (query.length > 0) {
-                        console.log('Enter key search for:', query);
-                        // Add your search action here
-                    }
-                }
-            });
-        }
-
-        // Suggestion tags functionality
-        suggestionTags.forEach(tag => {
-            tag.addEventListener('click', function() {
-                const tagText = this.textContent;
-                if (archiveSearch) {
-                    archiveSearch.value = tagText;
-                    archiveSearch.focus();
-                    console.log('Suggestion selected:', tagText);
-                    // Add your search action here
-                }
-            });
-        });
+        // Archive functionality removed
 
         // Contact form and canvas functionality
         const mobileCanvas = document.getElementById('drawing-canvas');
