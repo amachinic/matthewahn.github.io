@@ -974,18 +974,13 @@
             border-radius: 8px;
             cursor: pointer;
             transition: background-color 0.2s ease-in, border-color 0.2s ease-in, color 0.2s ease-in;
-            opacity: 1;
-            visibility: visible;
+            opacity: 0;
             position: absolute;
             top: 44px; /* Arrow center: 20px (top) + 24px (half of 48px height) = 44px */
             left: 50%;
             transform: translate(-50%, -50%);
             will-change: transform;
             white-space: nowrap; /* Prevent text wrapping */
-            z-index: 25; /* Ensure CTA renders above arrows and other overlays */
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
         }
 
         /* First card CTA starts in final position */
@@ -1012,11 +1007,35 @@
             color: rgba(240, 240, 240, 1);
         }
 
-        /* Improve CTA contrast in light mode */
-        body:not([data-theme="dark"]) .gallery-cta.ui-btn[data-variant="b4"] {
-            color: var(--bg-color);
-            border-color: var(--bg-color);
-            background: rgba(0, 0, 0, 0.06);
+        /* Global overlay CTA that always sits above the gallery card */
+        .gallery-global-cta {
+            position: absolute;
+            top: 44px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 30; /* above arrows (z-index:20) and slide content */
+            font-family: 'Input', monospace;
+            font-size: 12px;
+            padding: 8px 16px;
+            background: transparent;
+            border: 1px solid rgba(240, 240, 240, 1);
+            color: rgba(240, 240, 240, 1);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in, border-color 0.2s ease-in, color 0.2s ease-in;
+            white-space: nowrap;
+        }
+
+        .gallery-global-cta:hover {
+            background-color: rgba(240, 240, 240, 0.25);
+            border-color: rgba(240, 240, 240, .6);
+            color: rgba(240, 240, 240, .8);
+        }
+
+        .gallery-global-cta.is-disabled {
+            opacity: 0.6;
+            cursor: default;
+            pointer-events: none;
         }
 
         /* Work section CTA styling - extends caption typography */
@@ -1765,6 +1784,13 @@
         .gallery-slide .gallery-cta {
             opacity: 1 !important;
             transform: translate(-50%, -50%);
+            z-index: 5; /* ensure above background video and other layered elements */
+            pointer-events: auto; /* ensure clickable even if ancestor disables */
+        }
+
+        /* Reinforce visibility for the active slide CTA to override any prior rules */
+        .gallery-slide.active .gallery-cta {
+            opacity: 1 !important;
         }
 
         /* Mobile adjustments - hide text but show CTA */
@@ -2014,17 +2040,17 @@
                             <div class="gallery-slide">
                                 <h3>Design System</h3>
                                 <p>Creating cohesive design languages that scale across products and teams, ensuring consistency and efficiency in every interaction.</p>
-                                <button class="gallery-cta ui-btn" data-variant="b4" aria-pressed="false">Explore</button>
+                                <button class="gallery-cta ui-btn" data-variant="b4" aria-pressed="false">Currently Unavailable</button>
                             </div>
                             <div class="gallery-slide">
                                 <h3>Mobile Experience</h3>
                                 <p>Crafting intuitive mobile experiences that feel natural and delightful, with careful attention to touch interactions and performance.</p>
-                                <button class="gallery-cta ui-btn" data-variant="b4" aria-pressed="false">Explore</button>
+                                <button class="gallery-cta ui-btn" data-variant="b4" aria-pressed="false">Currently Unavailable</button>
                             </div>
                             <div class="gallery-slide">
                                 <h3>AI Integration</h3>
                                 <p>Seamlessly integrating artificial intelligence into user workflows, making complex tasks simple and intelligent automation accessible.</p>
-                                <button class="gallery-cta ui-btn" data-variant="b4" aria-pressed="false">Explore</button>
+                                <button class="gallery-cta ui-btn" data-variant="b4" aria-pressed="false">Currently Unavailable</button>
                             </div>
 
                         </div>
@@ -2043,6 +2069,8 @@
                             </svg>
                         </button>
                     </div>
+                    <!-- Global overlay CTA that mirrors the active slide's CTA -->
+                    <button class="gallery-global-cta ui-btn" data-variant="b4" aria-pressed="false">Explore</button>
                 </div>
                 </div>
             </div>
@@ -2680,6 +2708,7 @@ I have a deep curiousity in harmonizing humanity and technology.`;
         function updateGallerySlide(slideIndex) {
             currentSlide = slideIndex;
             const slides = document.querySelectorAll('.gallery-slide');
+            const globalCta = document.querySelector('.gallery-global-cta');
             
             // Simple slide switching - just update active class
             slides.forEach((slide, index) => {
@@ -2689,6 +2718,25 @@ I have a deep curiousity in harmonizing humanity and technology.`;
                 }
             });
             
+            // Sync global CTA label and click with active slide
+            if (globalCta) {
+                const activeSlide = slides[slideIndex];
+                const slideButton = activeSlide ? activeSlide.querySelector('.gallery-cta') : null;
+                if (slideButton) {
+                    globalCta.textContent = slideButton.textContent || 'Explore';
+                    const onclickAttr = slideButton.getAttribute('onclick');
+                    globalCta.classList.toggle('is-disabled', slideButton.disabled || slideButton.textContent.toLowerCase().includes('unavailable'));
+
+                    // Reset handler
+                    globalCta.onclick = null;
+                    if (onclickAttr && !globalCta.classList.contains('is-disabled')) {
+                        globalCta.setAttribute('onclick', onclickAttr);
+                    } else {
+                        globalCta.removeAttribute('onclick');
+                    }
+                }
+            }
+
             // Update arrow visibility based on current position
             updateArrowVisibility();
         }
