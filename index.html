@@ -1889,9 +1889,22 @@
         /* Ensure background video fills and stays behind content */
         .gallery-card { position: relative; overflow: hidden; }
         .gallery-bg-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; pointer-events: none; }
+        /* Ensure background video fits within the slide/card bounds */
+        .gallery-slide .gallery-bg-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+        /* Ensure active slide stacks above others and only its video is visible */
+        .gallery-slide { z-index: 0; }
+        .gallery-slide.active { z-index: 2; }
+        .gallery-slide:not(.active) .gallery-bg-video { opacity: 0; }
+        .gallery-slide.active .gallery-bg-video { opacity: 1; }
+        /* Slide 2: keep content padding; ensure background video fills the container */
+        .gallery-slides .gallery-slide:nth-child(2) { padding: 20px !important; overflow: hidden; }
+        .gallery-slides .gallery-slide:nth-child(2) .gallery-bg-video { left: 0; right: 0; top: 0; bottom: 0; width: 100%; height: 100%; object-fit: cover; }
         .gallery-card .gallery-container,
-        .gallery-card .gallery-slides,
-        .gallery-card .gallery-slide { position: relative; z-index: 1; background: transparent !important; }
+        .gallery-card .gallery-slides { position: relative; z-index: 1; background: transparent !important; }
+        /* Keep each slide absolutely stacked within the card */
+        .gallery-card .gallery-slide { position: absolute; inset: 0; z-index: 1; background: transparent !important; }
+        /* keep background video below content but above card background */
+        .gallery-bg-video { z-index: 0; }
 
         /* Mobile responsiveness for home layout */
         @media (max-width: 768px) {
@@ -2083,7 +2096,9 @@
                                 <button class="gallery-cta ui-btn" data-variant="b4" aria-pressed="false" onclick="navigateToCase('case-study-qa-framework.html')">Explore</button>
                             </div>
                             <div class="gallery-slide">
-                                <video class="gallery-bg-video" autoplay muted loop playsinline src="https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/assets/kinetic%20typography.mp4"></video>
+                                <video id="gallery-bg-video-2" class="gallery-bg-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+                                    <source src="https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/assets/kinetic%20typography.mp4" type="video/mp4" />
+                                </video>
                                 <h3>Design System</h3>
                                 <p>Creating cohesive design languages that scale across products and teams, ensuring consistency and efficiency in every interaction.</p>
                                 <button class="gallery-cta ui-btn" data-variant="b4" aria-pressed="false">Currently Unavailable</button>
@@ -2773,6 +2788,22 @@ I have a deep curiousity in harmonizing humanity and technology.`;
                 if (index === slideIndex) {
                     slide.classList.add('active');
                 }
+
+                // Manage background video playback per slide
+                const bgVideo = slide.querySelector('.gallery-bg-video');
+                if (bgVideo) {
+                    try {
+                        if (index === slideIndex) {
+                            bgVideo.muted = true;
+                            const playPromise = bgVideo.play();
+                            if (playPromise && typeof playPromise.catch === 'function') {
+                                playPromise.catch(() => {});
+                            }
+                        } else {
+                            bgVideo.pause();
+                        }
+                    } catch (_) {}
+                }
             });
             
             // Sync global CTA label and click with active slide
@@ -2793,7 +2824,7 @@ I have a deep curiousity in harmonizing humanity and technology.`;
                     }
                 }
             }
-
+            
             // Update arrow visibility based on current position
             updateArrowVisibility();
         }
@@ -3201,6 +3232,7 @@ I have a deep curiousity in harmonizing humanity and technology.`;
             const container = document.createElement('div');
             container.innerHTML = `
 <link rel="stylesheet" href="https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/assets/archive-search.css">
+<style id="archive-shadow-overrides">.search-container{position:relative;z-index:2000}.search-dropdown{z-index:4000}</style>
 <div class="search-section">
   <div class="search-container">
     <div class="ui-search">
@@ -3248,6 +3280,32 @@ I have a deep curiousity in harmonizing humanity and technology.`;
   </div>
 </div>`;
             shadow.appendChild(container);
+
+            // Robustly load external CSS into shadow (in case <link> is blocked by CORS/cache)
+            (async () => {
+              try {
+                const res = await fetch('https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/assets/archive-search.css', { mode: 'cors', cache: 'no-cache' });
+                if (res.ok) {
+                  const cssText = await res.text();
+                  const styleEl = document.createElement('style');
+                  styleEl.setAttribute('data-injected', 'archive-search');
+                  styleEl.textContent = cssText + "\n/* ensure stacking */\n.search-container{position:relative;z-index:2000}.search-dropdown{z-index:4000}";
+                  shadow.appendChild(styleEl);
+                }
+              } catch (e) {
+                // Fallback: inline minimal critical styles to avoid unstyled field
+                const fallback = document.createElement('style');
+                fallback.textContent = `
+                  .ui-search{display:inline-flex;align-items:stretch;gap:0;width:100%;position:relative}
+                  .ui-search-key{display:inline-flex;align-items:center;padding:12px 16px;background:#F0F0F0;border:1px solid #D9D9D9;border-right:none;border-radius:6px 0 0 0}
+                  .ui-search-field{display:flex;align-items:center;flex:1;border:1px solid #D9D9D9;border-radius:0 6px 0 0;height:56px}
+                  .ui-search-field input{width:100%;padding:16px 20px;border:0;outline:0}
+                  .search-dropdown{position:absolute;top:100%;left:0;right:0;background:#fff;border:1px solid #D9D9D9;border-top:none;border-radius:0 0 6px 6px;opacity:0;visibility:hidden;transform:translateY(-10px);transition:opacity .3s,visibility .3s,transform .3s;z-index:4000}
+                  .search-dropdown.active{opacity:1;visibility:visible;transform:translateY(0)}
+                `;
+                shadow.appendChild(fallback);
+              }
+            })();
 
             // Attach behavior directly from here (no script tag in shadow)
             (function initShadowSearch(root) {
