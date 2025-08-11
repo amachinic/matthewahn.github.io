@@ -1062,19 +1062,51 @@
             color: rgba(255, 255, 255, 1);
         }
 
-        /* Archive search styles removed */
+        /* Archive: search + layout */
+        .search-container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto 24px auto;
+        }
 
-        
+        .search-field {
+            position: relative;
+            width: 100%;
+            margin-bottom: 12px;
+        }
 
-        /* Archive styles removed */
+        .search-input {
+            width: 100%;
+            height: 44px;
+            padding: 0 48px 0 14px; /* room for button */
+            border-radius: 10px;
+            border: 1px solid var(--toggle-border-color);
+            background: transparent;
+            color: var(--text-color);
+            font-family: 'Input', monospace;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+        }
 
-        
+        .search-input::placeholder {
+            color: var(--secondary-text-color);
+        }
 
-        
+        .search-input:focus {
+            border-color: var(--text-color);
+            background-color: var(--nav-hover-color);
+        }
 
-        
+        .search-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
 
-        
+        .archive-grid {
+            margin-top: 12px;
+        }
 
         .search-button {
             position: absolute;
@@ -1780,18 +1812,9 @@
             }
         }
 
-        /* Always show CTA on every gallery slide (desktop and mobile) */
-        .gallery-slide .gallery-cta {
-            opacity: 1 !important;
-            transform: translate(-50%, -50%);
-            z-index: 5; /* ensure above background video and other layered elements */
-            pointer-events: auto; /* ensure clickable even if ancestor disables */
-        }
-
-        /* Reinforce visibility for the active slide CTA to override any prior rules */
-        .gallery-slide.active .gallery-cta {
-            opacity: 1 !important;
-        }
+        /* Hide per-slide CTAs; use global overlay CTA instead */
+        .gallery-slide .gallery-cta { display: none !important; }
+        .gallery-slide.active .gallery-cta { display: none !important; }
 
         /* Mobile adjustments - hide text but show CTA */
         @media (max-width: 768px) {
@@ -2072,6 +2095,50 @@
                     <!-- Global overlay CTA that mirrors the active slide's CTA -->
                     <button class="gallery-global-cta ui-btn" data-variant="b4" aria-pressed="false">Explore</button>
                 </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Archive Section -->
+    <section id="archive" class="section">
+        <div class="section-content">
+            <h2 id="archive-title" class="section-title">Archive</h2>
+            
+            <div class="search-container">
+                <div class="search-field">
+                    <input id="archive-search" class="search-input" type="search" placeholder="Search projects, tags, or years..." autocomplete="off" />
+                    <button class="search-button" id="archive-search-btn" aria-label="Search">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 21L15.8 15.8M18 10.5C18 14.09 14.87 17 11 17C7.13 17 4 14.09 4 10.5C4 6.91 7.13 4 11 4C14.87 4 18 6.91 18 10.5Z" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="search-suggestions" id="archive-suggestions">
+                    <button class="suggestion-tag" data-query="2024">2024</button>
+                    <button class="suggestion-tag" data-query="design system">Design system</button>
+                    <button class="suggestion-tag" data-query="mobile">Mobile</button>
+                    <button class="suggestion-tag" data-query="ai">AI</button>
+                </div>
+            </div>
+
+            <div class="card-grid two-columns archive-grid" id="archive-grid">
+                <!-- Example archive items; replace/extend as needed -->
+                <div class="card" data-title="QA Framework" data-tags="2024 qa framework testing" data-year="2024">
+                    <h3>QA Framework</h3>
+                    <p>Foundational QA workflow and tooling.</p>
+                </div>
+                <div class="card" data-title="Design System" data-tags="2023 design system tokens components" data-year="2023">
+                    <h3>Design System</h3>
+                    <p>Unified UI language across surfaces.</p>
+                </div>
+                <div class="card" data-title="Mobile Experience" data-tags="2022 mobile app gestures performance" data-year="2022">
+                    <h3>Mobile Experience</h3>
+                    <p>High-fidelity mobile interaction patterns.</p>
+                </div>
+                <div class="card" data-title="AI Integration" data-tags="2024 ai automation personalization" data-year="2024">
+                    <h3>AI Integration</h3>
+                    <p>Assistive features integrated across flows.</p>
                 </div>
             </div>
         </div>
@@ -2913,6 +2980,7 @@ I have a deep curiousity in harmonizing humanity and technology.`;
         
         // Section title typing animation
         const sectionTitles = [
+            { id: 'archive-title', text: 'Archive' },
             { id: 'work-title', text: 'Work' },
             { id: 'contact-title', text: 'Contact' }
         ];
@@ -3032,6 +3100,25 @@ I have a deep curiousity in harmonizing humanity and technology.`;
                         ease: "power2.out",
                         delay: 0.3
                     });
+                } else if (sectionId === 'archive' && searchContainer) {
+                    // Archive section: fade in search
+                    gsap.to(searchContainer, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.4,
+                        ease: "power2.out",
+                        delay: 0.2
+                    });
+                    // Then fade in cards
+                    cards.forEach((card, index) => {
+                        gsap.to(card, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.25,
+                            ease: "power2.in",
+                            delay: 0.3 + (index * 0.06)
+                        });
+                    });
                 } else {
                     // Other sections: individual card animation
                     cards.forEach((card, index) => {
@@ -3115,10 +3202,43 @@ I have a deep curiousity in harmonizing humanity and technology.`;
 
 
         // Gallery CTA buttons are display-only with hover states
+        // Archive search: simple client-side filtering
+        (function setupArchiveSearch() {
+            const input = document.getElementById('archive-search');
+            const btn = document.getElementById('archive-search-btn');
+            const tags = document.querySelectorAll('#archive-suggestions .suggestion-tag');
+            const items = document.querySelectorAll('#archive-grid .card');
 
-        // Archive search removed
+            if (!input || !items.length) return;
 
-        // Archive functionality removed
+            function normalize(text) {
+                return (text || '').toLowerCase().trim();
+            }
+
+            function matches(item, q) {
+                if (!q) return true;
+                const title = item.getAttribute('data-title') || '';
+                const tags = item.getAttribute('data-tags') || '';
+                const year = item.getAttribute('data-year') || '';
+                const haystack = `${title} ${tags} ${year}`.toLowerCase();
+                return haystack.includes(q);
+            }
+
+            function applyFilter(query) {
+                const q = normalize(query);
+                items.forEach(card => {
+                    const show = matches(card, q);
+                    card.style.display = show ? '' : 'none';
+                });
+            }
+
+            input.addEventListener('input', () => applyFilter(input.value));
+            if (btn) btn.addEventListener('click', () => applyFilter(input.value));
+            tags.forEach(tag => tag.addEventListener('click', () => {
+                input.value = tag.getAttribute('data-query') || '';
+                applyFilter(input.value);
+            }));
+        })();
 
         // Contact form and canvas functionality
         const mobileCanvas = document.getElementById('drawing-canvas');
