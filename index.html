@@ -974,13 +974,18 @@
             border-radius: 8px;
             cursor: pointer;
             transition: background-color 0.2s ease-in, border-color 0.2s ease-in, color 0.2s ease-in;
-            opacity: 0;
+            opacity: 1;
+            visibility: visible;
             position: absolute;
             top: 44px; /* Arrow center: 20px (top) + 24px (half of 48px height) = 44px */
             left: 50%;
             transform: translate(-50%, -50%);
             will-change: transform;
             white-space: nowrap; /* Prevent text wrapping */
+            z-index: 25; /* Ensure CTA renders above arrows and other overlays */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* First card CTA starts in final position */
@@ -1005,6 +1010,13 @@
             background: transparent;
             border: 1px solid rgba(240, 240, 240, 1);
             color: rgba(240, 240, 240, 1);
+        }
+
+        /* Improve CTA contrast in light mode */
+        body:not([data-theme="dark"]) .gallery-cta.ui-btn[data-variant="b4"] {
+            color: var(--bg-color);
+            border-color: var(--bg-color);
+            background: rgba(0, 0, 0, 0.06);
         }
 
         /* Work section CTA styling - extends caption typography */
@@ -1749,6 +1761,12 @@
             }
         }
 
+        /* Always show CTA on every gallery slide (desktop and mobile) */
+        .gallery-slide .gallery-cta {
+            opacity: 1 !important;
+            transform: translate(-50%, -50%);
+        }
+
         /* Mobile adjustments - hide text but show CTA */
         @media (max-width: 768px) {
             .gallery-slide h3,
@@ -1996,17 +2014,17 @@
                             <div class="gallery-slide">
                                 <h3>Design System</h3>
                                 <p>Creating cohesive design languages that scale across products and teams, ensuring consistency and efficiency in every interaction.</p>
-                                <button class="gallery-cta ui-btn" data-variant="b4" aria-pressed="false">Currently Unavailable</button>
+                                <button class="gallery-cta ui-btn" data-variant="b4" aria-pressed="false">Explore</button>
                             </div>
                             <div class="gallery-slide">
                                 <h3>Mobile Experience</h3>
                                 <p>Crafting intuitive mobile experiences that feel natural and delightful, with careful attention to touch interactions and performance.</p>
-                                <button class="gallery-cta ui-btn" data-variant="b4" aria-pressed="false">Currently Unavailable</button>
+                                <button class="gallery-cta ui-btn" data-variant="b4" aria-pressed="false">Explore</button>
                             </div>
                             <div class="gallery-slide">
                                 <h3>AI Integration</h3>
                                 <p>Seamlessly integrating artificial intelligence into user workflows, making complex tasks simple and intelligent automation accessible.</p>
-                                <button class="gallery-cta ui-btn" data-variant="b4" aria-pressed="false">Currently Unavailable</button>
+                                <button class="gallery-cta ui-btn" data-variant="b4" aria-pressed="false">Explore</button>
                             </div>
 
                         </div>
