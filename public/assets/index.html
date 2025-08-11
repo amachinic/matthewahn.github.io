@@ -1089,6 +1089,11 @@
             transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
         }
 
+
+
+
+
+
         .search-input::placeholder {
             color: var(--secondary-text-color);
         }
@@ -1919,19 +1924,19 @@
             }
         }
 
-        /* Archive grid layout: 5 columns, center the search in a 3-col span */
+        /* Archive grid layout: 6 columns; search spans centered 4 columns */
         #archive .section-content {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(6, 1fr);
             gap: 20px;
             align-items: start;
         }
         #archive .section-title {
-            grid-column: 2 / span 3;
+            grid-column: 2 / span 4; /* center across 4 columns */
             justify-self: center;
         }
         #archive #archive-search-mount {
-            grid-column: 2 / span 3;
+            grid-column: 2 / span 4; /* columns 2 through 5 */
             justify-self: center;
             width: 100%;
         }
@@ -2078,6 +2083,7 @@
                                 <button class="gallery-cta ui-btn" data-variant="b4" aria-pressed="false" onclick="navigateToCase('case-study-qa-framework.html')">Explore</button>
                             </div>
                             <div class="gallery-slide">
+                                <video class="gallery-bg-video" autoplay muted loop playsinline src="https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/assets/kinetic%20typography.mp4"></video>
                                 <h3>Design System</h3>
                                 <p>Creating cohesive design languages that scale across products and teams, ensuring consistency and efficiency in every interaction.</p>
                                 <button class="gallery-cta ui-btn" data-variant="b4" aria-pressed="false">Currently Unavailable</button>
