@@ -1065,8 +1065,8 @@
         /* Archive: search + layout */
         .search-container {
             width: 100%;
-            max-width: 1000px;
-            margin: 0 auto 24px auto;
+            max-width: 640px;
+            margin: 0 auto;
         }
 
         .search-field {
@@ -1088,6 +1088,11 @@
             outline: none;
             transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
         }
+
+
+
+
+
 
         .search-input::placeholder {
             color: var(--secondary-text-color);
@@ -1918,6 +1923,23 @@
                 font-size: 14px;
             }
         }
+
+        /* Archive grid layout: 6 columns; search spans centered 4 columns */
+        #archive .section-content {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+            align-items: start;
+        }
+        #archive .section-title {
+            grid-column: 2 / span 4; /* center across 4 columns */
+            justify-self: center;
+        }
+        #archive #archive-search-mount {
+            grid-column: 2 / span 4; /* columns 2 through 5 */
+            justify-self: center;
+            width: 100%;
+        }
         /* Contact overrides - scoped to #contact to avoid global collisions */
         #contact .contact-container {
             display: block;
@@ -2061,6 +2083,7 @@
                                 <button class="gallery-cta ui-btn" data-variant="b4" aria-pressed="false" onclick="navigateToCase('case-study-qa-framework.html')">Explore</button>
                             </div>
                             <div class="gallery-slide">
+                                <video class="gallery-bg-video" autoplay muted loop playsinline src="https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/assets/kinetic%20typography.mp4"></video>
                                 <h3>Design System</h3>
                                 <p>Creating cohesive design languages that scale across products and teams, ensuring consistency and efficiency in every interaction.</p>
                                 <button class="gallery-cta ui-btn" data-variant="b4" aria-pressed="false">Currently Unavailable</button>
@@ -2105,42 +2128,9 @@
         <div class="section-content">
             <h2 id="archive-title" class="section-title">Archive</h2>
             
-            <div class="search-container">
-                <div class="search-field">
-                    <input id="archive-search" class="search-input" type="search" placeholder="Search projects, tags, or years..." autocomplete="off" />
-                    <button class="search-button" id="archive-search-btn" aria-label="Search">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M21 21L15.8 15.8M18 10.5C18 14.09 14.87 17 11 17C7.13 17 4 14.09 4 10.5C4 6.91 7.13 4 11 4C14.87 4 18 6.91 18 10.5Z" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
-                </div>
-                <div class="search-suggestions" id="archive-suggestions">
-                    <button class="suggestion-tag" data-query="2024">2024</button>
-                    <button class="suggestion-tag" data-query="design system">Design system</button>
-                    <button class="suggestion-tag" data-query="mobile">Mobile</button>
-                    <button class="suggestion-tag" data-query="ai">AI</button>
-                </div>
-            </div>
+            <div id="archive-search-mount"></div>
 
-            <div class="card-grid two-columns archive-grid" id="archive-grid">
-                <!-- Example archive items; replace/extend as needed -->
-                <div class="card" data-title="QA Framework" data-tags="2024 qa framework testing" data-year="2024">
-                    <h3>QA Framework</h3>
-                    <p>Foundational QA workflow and tooling.</p>
-                </div>
-                <div class="card" data-title="Design System" data-tags="2023 design system tokens components" data-year="2023">
-                    <h3>Design System</h3>
-                    <p>Unified UI language across surfaces.</p>
-                </div>
-                <div class="card" data-title="Mobile Experience" data-tags="2022 mobile app gestures performance" data-year="2022">
-                    <h3>Mobile Experience</h3>
-                    <p>High-fidelity mobile interaction patterns.</p>
-                </div>
-                <div class="card" data-title="AI Integration" data-tags="2024 ai automation personalization" data-year="2024">
-                    <h3>AI Integration</h3>
-                    <p>Assistive features integrated across flows.</p>
-                </div>
-            </div>
+            <!-- Archive grid removed as requested -->
         </div>
     </section>
 
@@ -3202,42 +3192,221 @@ I have a deep curiousity in harmonizing humanity and technology.`;
 
 
         // Gallery CTA buttons are display-only with hover states
-        // Archive search: simple client-side filtering
-        (function setupArchiveSearch() {
-            const input = document.getElementById('archive-search');
-            const btn = document.getElementById('archive-search-btn');
-            const tags = document.querySelectorAll('#archive-suggestions .suggestion-tag');
-            const items = document.querySelectorAll('#archive-grid .card');
+        // Archive search: mount provided 1:1 search UI in Shadow DOM to avoid global style conflicts
+        (function mountArchiveSearchShadow() {
+            const mount = document.getElementById('archive-search-mount');
+            if (!mount) return;
 
-            if (!input || !items.length) return;
+            const shadow = mount.attachShadow({ mode: 'open' });
+            const container = document.createElement('div');
+            container.innerHTML = `
+<link rel="stylesheet" href="Assets/archive-search.css">
+<div class="search-section">
+  <div class="search-container">
+    <div class="ui-search">
+      <div class="ui-search-key">
+        <div class="ui-icon"></div>
+        <span class="ui-text">Search</span>
+      </div>
+      <div class="ui-search-field">
+        <input type="search" placeholder="What interests you?" aria-autocomplete="list" aria-expanded="false" aria-controls="search-suggestions"/>
+        <div class="ui-search-clear"><div class="ui-icon"></div></div>
+      </div>
+      <div id="search-suggestions" class="search-dropdown" role="listbox" aria-label="Search suggestions"></div>
+    </div>
+  </div>
+  <div class="filter-section">
+    <div class="filter-header">
+      <div class="filter-header-content">
+        <span class="filter-title">Filter</span>
+        <span class="filter-count">6 categories</span>
+      </div>
+      <div class="filter-controls">
+        <button class="control-btn" data-action="sort">A-Z</button>
+        <button class="control-btn view-toggle" data-view="list" aria-label="List view"><span class="control-icon list-icon"></span></button>
+        <button class="control-btn view-toggle active" data-view="grid" aria-label="Grid view"><span class="control-icon grid-icon"></span></button>
+      </div>
+    </div>
+    <div class="filter-content">
+      <div class="pills-grid active" role="listbox" aria-label="Filter categories grid">
+        <button class="ui-btn pill" data-variant="b6" data-value="Trending">Design Philosophy</button>
+        <button class="ui-btn pill" data-variant="b6" data-value="New Releases">Architecture</button>
+        <button class="ui-btn pill" data-variant="b6" data-value="Categories">Kinetic Typography</button>
+        <button class="ui-btn pill" data-variant="b6" data-value="Best Sellers">Editorial Design</button>
+        <button class="ui-btn pill" data-variant="b6" data-value="Top Rated">Simone Weil</button>
+        <button class="ui-btn pill" data-variant="b6" data-value="Sale Items">Kafka On the Shore</button>
+      </div>
+      <div class="pills-list" role="listbox" aria-label="Filter categories list">
+        <div class="filter-dropdown-item" data-value="Trending">Design Philosophy</div>
+        <div class="filter-dropdown-item" data-value="New Releases">Architecture</div>
+        <div class="filter-dropdown-item" data-value="Categories">Kinetic Typography</div>
+        <div class="filter-dropdown-item" data-value="Best Sellers">Editorial Design</div>
+        <div class="filter-dropdown-item" data-value="Top Rated">Simone Weil</div>
+        <div class="filter-dropdown-item" data-value="Sale Items">Kafka On the Shore</div>
+      </div>
+    </div>
+  </div>
+</div>`;
+            shadow.appendChild(container);
 
-            function normalize(text) {
-                return (text || '').toLowerCase().trim();
-            }
+            // Attach behavior directly from here (no script tag in shadow)
+            (function initShadowSearch(root) {
+              const searchSection  = root.querySelector('.search-section');
+              const searchInput    = root.querySelector('.ui-search-field input');
+              const searchClear    = root.querySelector('.ui-search-clear');
+              const searchField    = root.querySelector('.ui-search-field');
+              const searchDropdown = root.querySelector('#search-suggestions');
+              const uiSearch       = root.querySelector('.ui-search');
 
-            function matches(item, q) {
-                if (!q) return true;
-                const title = item.getAttribute('data-title') || '';
-                const tags = item.getAttribute('data-tags') || '';
-                const year = item.getAttribute('data-year') || '';
-                const haystack = `${title} ${tags} ${year}`.toLowerCase();
-                return haystack.includes(q);
-            }
+              if (!searchSection || !searchInput || !searchField || !uiSearch || !searchDropdown) return;
 
-            function applyFilter(query) {
-                const q = normalize(query);
-                items.forEach(card => {
-                    const show = matches(card, q);
-                    card.style.display = show ? '' : 'none';
+              const BASE_SUGGESTIONS = [
+                'Latest trends', 'New releases', 'Best sellers',
+                'Top rated items', 'Sale items', "Editor's picks",
+                'Featured collections', 'New arrivals'
+              ];
+
+              let selectedIndex = -1;
+
+              function openSearchDropdown() {
+                selectedIndex = -1;
+                searchDropdown.classList.add('active');
+                uiSearch.classList.add('searching');
+                searchInput.setAttribute('aria-expanded', 'true');
+                searchSection.classList.add('search-open');
+              }
+              function closeSearchDropdown() {
+                searchDropdown.classList.remove('active');
+                uiSearch.classList.remove('searching');
+                searchInput.setAttribute('aria-expanded', 'false');
+                selectedIndex = -1;
+                searchSection.classList.remove('search-open');
+              }
+
+              function renderSuggestions(items) {
+                searchDropdown.innerHTML = '';
+                items.forEach((text) => {
+                  const div = document.createElement('div');
+                  div.className = 'search-dropdown-item';
+                  div.setAttribute('role', 'option');
+                  div.textContent = text;
+                  div.addEventListener('mousedown', (e) => {
+                    e.preventDefault();
+                    searchInput.value = text;
+                    searchField.classList.add('has-value');
+                    closeSearchDropdown();
+                  });
+                  searchDropdown.appendChild(div);
                 });
-            }
+              }
 
-            input.addEventListener('input', () => applyFilter(input.value));
-            if (btn) btn.addEventListener('click', () => applyFilter(input.value));
-            tags.forEach(tag => tag.addEventListener('click', () => {
-                input.value = tag.getAttribute('data-query') || '';
-                applyFilter(input.value);
-            }));
+              function filterSuggestions(query) {
+                const q = (query || '').trim().toLowerCase();
+                if (!q) return BASE_SUGGESTIONS.slice(0, 6);
+                return BASE_SUGGESTIONS.filter(item => item.toLowerCase().includes(q)).slice(0, 8);
+              }
+
+              function updateSelection() {
+                const items = Array.from(searchDropdown.querySelectorAll('.search-dropdown-item'));
+                items.forEach((el, idx) => el.classList.toggle('selected', idx === selectedIndex));
+                if (items[selectedIndex]) items[selectedIndex].scrollIntoView({ block: 'nearest' });
+              }
+
+              searchInput.addEventListener('focus', () => {
+                searchSection.classList.add('search-linking');
+                const list = filterSuggestions(searchInput.value);
+                if (list.length) { renderSuggestions(list); openSearchDropdown(); } else { closeSearchDropdown(); }
+              });
+
+              uiSearch.addEventListener('focusin',  () => searchSection.classList.add('search-linking'));
+              uiSearch.addEventListener('focusout', () => searchSection.classList.remove('search-linking'));
+
+              searchInput.addEventListener('input', () => {
+                searchField.classList.toggle('has-value', !!searchInput.value.trim());
+                const list = filterSuggestions(searchInput.value);
+                if (list.length) { renderSuggestions(list); openSearchDropdown(); } else { closeSearchDropdown(); }
+              });
+
+              searchInput.addEventListener('blur', () => { setTimeout(() => closeSearchDropdown(), 120); });
+
+              searchInput.addEventListener('keydown', (e) => {
+                const items = Array.from(searchDropdown.querySelectorAll('.search-dropdown-item'));
+                if (!searchDropdown.classList.contains('active') || !items.length) return;
+                if (e.key === 'ArrowDown') { e.preventDefault(); selectedIndex = Math.min(selectedIndex + 1, items.length - 1); if (selectedIndex < 0) selectedIndex = 0; updateSelection(); }
+                else if (e.key === 'ArrowUp') { e.preventDefault(); selectedIndex = Math.max(selectedIndex - 1, 0); updateSelection(); }
+                else if (e.key === 'Enter') { e.preventDefault(); if (selectedIndex >= 0 && items[selectedIndex]) { searchInput.value = items[selectedIndex].textContent.trim(); searchField.classList.add('has-value'); } closeSearchDropdown(); }
+                else if (e.key === 'Escape') { closeSearchDropdown(); }
+              });
+
+              if (searchClear) {
+                searchClear.addEventListener('click', () => {
+                  searchInput.value = '';
+                  searchField.classList.remove('has-value');
+                  searchInput.focus();
+                  const list = filterSuggestions('');
+                  renderSuggestions(list);
+                  openSearchDropdown();
+                });
+              }
+
+              let currentSort = 'default';
+              let hideTimeout;
+              const sortBtn       = root.querySelector('[data-action="sort"]');
+              const viewButtons   = root.querySelectorAll('.view-toggle');
+              const pillsGrid     = root.querySelector('.pills-grid');
+              const pillsList     = root.querySelector('.pills-list');
+              const filterSectionEl = root.querySelector('.filter-section');
+
+              function showFilterDropdown() {
+                const filterContent = root.querySelector('.filter-content');
+                if (!filterContent) return;
+                clearTimeout(hideTimeout);
+                filterContent.classList.add('visible');
+                hideTimeout = setTimeout(() => filterContent.classList.remove('visible'), 2000);
+              }
+
+              function getListItems() { return pillsList ? Array.from(pillsList.querySelectorAll('.filter-dropdown-item')) : []; }
+              function getGridPills() { return pillsGrid ? Array.from(pillsGrid.querySelectorAll('.ui-btn.pill')) : []; }
+
+              if (sortBtn && pillsGrid && pillsList) {
+                sortBtn.addEventListener('click', (e) => {
+                  e.stopPropagation();
+                  currentSort = currentSort === 'default' ? 'alpha' : 'default';
+                  sortBtn.classList.toggle('active', currentSort === 'alpha');
+                  const defaultOrder = ['Trending','New Releases','Categories','Best Sellers','Top Rated','Sale Items'];
+                  const getText = (el) => (el.dataset.value || el.textContent).trim();
+                  const listItems = getListItems();
+                  const gridItems = getGridPills();
+                  const sorter = (a, b) => currentSort === 'alpha' ? getText(a).localeCompare(getText(b)) : defaultOrder.indexOf(getText(a)) - defaultOrder.indexOf(getText(b));
+                  listItems.sort(sorter).forEach(el => pillsList.appendChild(el));
+                  gridItems.sort(sorter).forEach(el => pillsGrid.appendChild(el));
+                  showFilterDropdown();
+                });
+              }
+
+              if (viewButtons && pillsGrid && pillsList) {
+                viewButtons.forEach(btn => {
+                  btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    viewButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const isGrid = btn.dataset.view === 'grid';
+                    pillsGrid.classList.toggle('active', isGrid);
+                    pillsList.classList.toggle('active', !isGrid);
+                    closeSearchDropdown();
+                    showFilterDropdown();
+                  });
+                });
+              }
+
+              getListItems().forEach(item => item.addEventListener('click', () => item.classList.toggle('selected')));
+              getGridPills().forEach(pill => pill.addEventListener('click', () => pill.classList.toggle('active')));
+
+              if (filterSectionEl) {
+                filterSectionEl.addEventListener('mouseenter', () => { clearTimeout(hideTimeout); /* keep suggestions if open */ });
+                filterSectionEl.addEventListener('mouseleave', () => { const filterContent = root.querySelector('.filter-content'); if (!filterContent) return; clearTimeout(hideTimeout); filterContent.classList.remove('visible'); });
+              }
+            })(shadow);
         })();
 
         // Contact form and canvas functionality
