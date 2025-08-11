@@ -5,7 +5,7 @@
 class GlobalClockComponent {
     constructor(options = {}) {
         this.backLinkText = options.backLinkText !== undefined ? options.backLinkText : '← Back to Portfolio';
-        this.backLinkUrl = options.backLinkUrl || 'Home.html';
+        this.backLinkUrl = options.backLinkUrl || 'index.html';
         this.showNameDisplay = options.showNameDisplay || false;
         this.hideLocationClock = options.hideLocationClock || false;
         this.caseStudyTitle = options.caseStudyTitle || '';
@@ -44,34 +44,8 @@ class GlobalClockComponent {
                 <div id="controls-container">
                     <!-- Home Button -->
                     <div id="home-button-container">
-                
                         <button class="nav-button" id="home-button">
                             <span class="home-label">Home</span>
-                        </button>
-                    </div>
-
-                    <!-- Dark mode toggle -->
-                    <div id="dark-mode-toggle">
-               
-                        <button class="nav-button" id="theme-toggle">
-                            <span class="theme-option" id="light-icon">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="12" cy="12" r="5.81" fill="none" stroke="currentColor" stroke-miterlimit="10"/>
-                                    <line x1="12" y1="1.07" x2="12" y2="4.23" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <line x1="12" y1="19.77" x2="12" y2="22.93" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <line x1="22.93" y1="12" x2="19.77" y2="12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <line x1="4.23" y1="12" x2="1.07" y2="12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <line x1="4.28" y1="4.27" x2="6.5" y2="6.51" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <line x1="17.5" y1="17.49" x2="19.73" y2="19.73" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <line x1="19.73" y1="4.27" x2="17.5" y2="6.51" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <line x1="6.5" y1="17.49" x2="4.28" y2="19.73" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </span>
-                            <span class="theme-option" id="dark-icon">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6.84,11.17c0-4.29,3.02-7.88,7.04-8.77.3-.07.6-.12.91-.15-.35-.04-.71-.06-1.08-.06C8.3,2.19,3.91,6.58,3.91,12s4.39,9.81,9.81,9.81c3,0,5.68-1.35,7.48-3.47-1.5,1.13-3.36,1.8-5.38,1.8-4.96,0-8.98-4.02-8.98-8.98Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </span>
                         </button>
                     </div>
                 </div>
@@ -105,7 +79,7 @@ class GlobalClockComponent {
 
             #clock-container.scrolled {
                 height: 58px;
-                padding: 10px 40px;
+                padding: 10px 20px;
                 border-bottom: 1px solid var(--toggle-border-color);
             }
             
@@ -266,15 +240,14 @@ class GlobalClockComponent {
 
             /* Controls Container */
             #controls-container {
-                position: absolute;
-                right: 40px;
-                top: 50%;
-                transform: translateY(-50%);
+                position: static;
+                margin-left: auto;
                 display: flex;
                 gap: 12px !important;
                 align-items: center;
+                justify-content: flex-end;
                 z-index: 10;
-                width: 158px !important;
+                width: auto !important;
                 height: 38px !important;
                 box-sizing: border-box !important;
                 flex-shrink: 0 !important;
@@ -348,98 +321,7 @@ class GlobalClockComponent {
             }
 
 
-            /* Dark mode toggle */
-            #dark-mode-toggle {
-                position: relative;
-                border-radius: 8px;
-                white-space: nowrap;
-                border: 1px solid var(--toggle-border-color) !important;
-                height: 38px !important;
-                width: 76px !important;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                box-sizing: border-box !important;
-                flex-shrink: 0 !important;
-                flex-grow: 0 !important;
-            }
-
-            #dark-mode-toggle .blur-bg {
-                background-color: rgba(255, 255, 255, 0.8);
-                border: 1px solid var(--toggle-border-color);
-                backdrop-filter: none;
-                -webkit-backdrop-filter: none;
-                box-shadow: none;
-                border-radius: 8px;
-            }
-
-            [data-theme="dark"] #dark-mode-toggle .blur-bg {
-                background-color: transparent;
-            }
-
-            #theme-toggle {
-                padding: 3px !important;
-                font-family: 'Input', monospace !important;
-                font-size: 15px !important;
-                position: relative;
-                overflow: hidden;
-                width: 72px !important;
-                height: 32px !important;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                gap: 0;
-                background: none !important;
-                border: none !important;
-                cursor: pointer;
-                box-sizing: border-box !important;
-                flex-shrink: 0 !important;
-                flex-grow: 0 !important;
-            }
-
-            #theme-toggle:hover {
-                background-color: transparent;
-            }
-
-            .theme-option {
-                color: rgb(0 0 0 / 48%);
-                transition: color 0.3s ease;
-                position: relative;
-                z-index: 2;
-                padding: 0 !important;
-                flex: 1;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                white-space: nowrap;
-                height: 24px;
-            }
-
-            .theme-option svg {
-                fill: currentColor;
-                stroke: currentColor;
-            }
-
-            .theme-option.active {
-                color: var(--text-color);
-            }
-
-            #theme-toggle::before {
-                content: '';
-                position: absolute;
-                top: 3px;
-                bottom: 3px;
-                width: 33px;
-                left: 3px;
-                background-color: var(--nav-hover-color);
-                border-radius: 4px;
-                transition: transform 0.3s ease;
-                z-index: 1;
-            }
-
-            [data-theme="dark"] #theme-toggle::before {
-                transform: translateX(33px);
-            }
+            /* Dark mode toggle removed */
 
             /* Fix light icon visibility in dark mode */
             [data-theme="dark"] #light-icon {
@@ -470,8 +352,7 @@ class GlobalClockComponent {
                 overflow: hidden;
             }
 
-            .navigating #home-button,
-            .navigating #theme-toggle {
+            .navigating #home-button {
                 pointer-events: none;
                 opacity: 0.7;
             }
@@ -517,9 +398,8 @@ class GlobalClockComponent {
                 }
 
                 #controls-container {
-                    right: 20px;
                     gap: 8px !important;
-                    width: 124px !important;
+                    width: auto !important;
                     height: 26px !important;
                     flex-shrink: 0 !important;
                     flex-grow: 0 !important;
@@ -549,31 +429,7 @@ class GlobalClockComponent {
                     text-rendering: optimizeLegibility !important;
                 }
 
-                #dark-mode-toggle {
-                    width: 60px !important;
-                    height: 26px !important;
-                    flex-shrink: 0 !important;
-                    flex-grow: 0 !important;
-                }
-
-                #theme-toggle {
-                    width: 60px !important;
-                    height: 26px !important;
-                    font-size: 13px !important;
-                    flex-shrink: 0 !important;
-                    flex-grow: 0 !important;
-                }
-
-                #theme-toggle::before {
-                    width: 27px !important;
-                    top: 3px;
-                    bottom: 3px;
-                    left: 3px;
-                }
-
-                [data-theme="dark"] #theme-toggle::before {
-                    transform: translateX(27px) !important;
-                }
+                /* Dark mode toggle removed */
 
                 #name-display {
                     display: none;
@@ -581,13 +437,7 @@ class GlobalClockComponent {
                 
                 /* Mobile adjustments for home page */
                 body.home-page #controls-container {
-                    width: 60px !important;
-                }
-                
-                body.home-page #dark-mode-toggle {
-                    position: relative;
-                    right: auto;
-                    top: auto;
+                    width: 56px !important;
                 }
             }
             
@@ -601,12 +451,7 @@ class GlobalClockComponent {
                 width: 76px !important;
             }
             
-            /* Ensure dark mode toggle is right-aligned in container */
-            body.home-page #dark-mode-toggle {
-                position: relative;
-                right: auto;
-                top: auto;
-            }
+            /* Dark mode toggle removed */
         `;
     }
 
@@ -614,7 +459,7 @@ class GlobalClockComponent {
     init() {
         this.checkHomePage();
         this.initClock();
-        this.initTheme();
+        /* Dark mode removed */
         this.initHomeButton();
         this.initBackButton();
         this.initScrollBehavior();
@@ -625,7 +470,7 @@ class GlobalClockComponent {
         const currentPath = window.location.pathname;
         const currentPage = currentPath.split('/').pop();
         
-        if (currentPage === 'Home.html' || currentPage === '' || currentPath === '/') {
+        if (currentPage === 'index.html' || currentPage === '' || currentPath === '/') {
             document.body.classList.add('home-page');
         }
     }
@@ -652,54 +497,7 @@ class GlobalClockComponent {
         }
     }
 
-    // Theme functionality
-    initTheme() {
-        this.initializeTheme();
-        
-        const themeToggle = document.getElementById('theme-toggle');
-        if (themeToggle) {
-            themeToggle.addEventListener('click', () => this.toggleTheme());
-        }
-    }
-
-    toggleTheme() {
-        const body = document.body;
-        const lightIcon = document.getElementById('light-icon');
-        const darkIcon = document.getElementById('dark-icon');
-        const themeColorMeta = document.getElementById('theme-color-meta');
-        
-        if (body.getAttribute('data-theme') === 'dark') {
-            body.removeAttribute('data-theme');
-            lightIcon.classList.add('active');
-            darkIcon.classList.remove('active');
-            if (themeColorMeta) themeColorMeta.content = '#f0f0f0';
-            localStorage.setItem('theme', 'light');
-        } else {
-            body.setAttribute('data-theme', 'dark');
-            lightIcon.classList.remove('active');
-            darkIcon.classList.add('active');
-            if (themeColorMeta) themeColorMeta.content = '#0f0f0f';
-            localStorage.setItem('theme', 'dark');
-        }
-    }
-
-    initializeTheme() {
-        const savedTheme = localStorage.getItem('theme');
-        const lightIcon = document.getElementById('light-icon');
-        const darkIcon = document.getElementById('dark-icon');
-        const themeColorMeta = document.getElementById('theme-color-meta');
-        
-        if (savedTheme === 'dark') {
-            document.body.setAttribute('data-theme', 'dark');
-            if (lightIcon) lightIcon.classList.remove('active');
-            if (darkIcon) darkIcon.classList.add('active');
-            if (themeColorMeta) themeColorMeta.content = '#0f0f0f';
-        } else {
-            if (lightIcon) lightIcon.classList.add('active');
-            if (darkIcon) darkIcon.classList.remove('active');
-            if (themeColorMeta) themeColorMeta.content = '#f0f0f0';
-        }
-    }
+    /* Dark mode removed: theme initialization and toggling deleted */
 
     // Home button functionality
     initHomeButton() {
@@ -725,36 +523,17 @@ class GlobalClockComponent {
         const currentPage = currentPath.split('/').pop();
         
         // Check if we're already on the home page
-        if (currentPage === 'Home.html' || currentPage === '' || currentPath === '/') {
+        if (currentPage === 'index.html' || currentPage === '' || currentPath === '/') {
             return; // Already on home page, do nothing
         }
         
         // Create elegant transition like the explore buttons
-        const isDarkMode = document.body.getAttribute('data-theme') === 'dark';
-        
         // Prevent multiple clicks
         if (document.body.classList.contains('navigating')) return;
         document.body.classList.add('navigating');
-        
-        if (isDarkMode) {
-            // Dark mode: Use black overlay
-            const overlay = document.getElementById('fade-overlay') || this.createFadeOverlay();
-            overlay.style.background = '#0f0f0f';
-            overlay.classList.add('active');
-            
-            // Navigate after fade completes
-            setTimeout(() => {
-                window.location.href = 'Home.html';
-            }, 800);
-        } else {
-            // Light mode: Use light fade out
-            document.body.classList.add('fade-out');
-            
-            // Navigate after fade completes
-            setTimeout(() => {
-                window.location.href = 'Home.html';
-            }, 800);
-        }
+        // Use light fade out
+        document.body.classList.add('fade-out');
+        setTimeout(() => { window.location.href = 'index.html'; }, 800);
     }
 
     navigateBack() {
@@ -769,16 +548,8 @@ class GlobalClockComponent {
         body.classList.add('navigating');
         
         // Determine theme for overlay color
-        const isDarkMode = body.getAttribute('data-theme') === 'dark';
-        
-        if (isDarkMode) {
-            // Dark mode: use black overlay
-            overlay.style.backgroundColor = '#0f0f0f';
-            overlay.classList.add('active');
-        } else {
-            // Light mode: use body fade out
-            body.classList.add('fade-out');
-        }
+        // Use light mode fade-out only
+        body.classList.add('fade-out');
         
         // Navigate after transition
         setTimeout(() => {

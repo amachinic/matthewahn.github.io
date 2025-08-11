@@ -81,6 +81,26 @@
             --case-study-design-system: rgb(8, 0, 11); /* Violet */
             --case-study-mobile-experience: rgb(0, 10, 5); /* Forest green */
             --case-study-ai-integration: rgb(14, 6, 0); /* Rouge */
+
+            /* UI Button palette (light mode) */
+            --ui-border: #D9D9D9;
+            --ui-text: #000810;
+            --ui-bg: #ffffff;
+            --ui-active-border: #7EBB1C;
+            --ui-active-bg: rgba(162,230,51,0.05);
+            --ui-alt-active-border: #000810;
+            --ui-alt-active-bg: rgba(0,8,16,0.03);
+            --ui-error-border: #710C0E;
+            --ui-error-bg: rgba(113,12,14,0.05);
+            --motion-ms: 1000ms;
+            --ease-smooth: cubic-bezier(.2,.7,.2,1);
+            --btn-dark: #000810;
+            --btn-lime: #A2E633;
+            --btn-lime-border: #7EBB1C;
+            --btn-gray: #9C9C9C;
+            --btn-gray-bg: #F0F0F0;
+            --btn-lime-40: rgba(162,230,51,0.40);
+            --btn-white: #FFFFFF;
         }
 
         [data-theme="dark"] {
@@ -133,6 +153,8 @@
             --case-study-design-system: rgb(28, 30, 35); /* Dark-mid gradient - refined slate */
             --case-study-mobile-experience: rgb(35, 38, 42); /* Mid-light gradient - elegant graphite */
             --case-study-ai-integration: rgb(42, 45, 50); /* Lightest gradient - premium steel */
+
+            /* Keep button variables defined but not used in dark mode override */
         }
 
         /* =================================
@@ -1063,9 +1085,10 @@
             #implementation .final-video-card { grid-column: 1; }
         }
 
-        /* Default desktop layout: 5/8 columns for content, 3/8 for component */
-        .triage-info-card {
+        /* Default desktop layout: 5/8 columns for compare card, 3/8 for component */
+        .triage-compare-card {
             grid-column: 1 / 6; /* 5 columns (62.5%) */
+            height: 100%;
         }
 
         .triage-component-container {
@@ -1074,7 +1097,7 @@
 
         /* Smaller viewports: Fill all 8 columns */
         @media (max-width: 1440px) {
-            .triage-info-card {
+            .triage-compare-card {
                 grid-column: 1 / 6; /* 5 columns */
             }
             
@@ -1086,7 +1109,7 @@
         
         /* Prevent overflow in narrow triage layout - covers side-by-side layout range only */
         @media (max-width: 1440px) and (min-width: 1201px) {
-            .triage-info-card {
+            .triage-compare-card {
                 grid-column: 1 / 6; /* 5 columns */
             }
             
@@ -1104,8 +1127,8 @@
             }
             
             .triage-component-container .annotation-circle {
-                width: 36px;
-                height: 36px;
+                width: 32px;
+                height: 32px;
                 font-size: 13px;
             }
             
@@ -1187,7 +1210,7 @@
             .triage-component-container .header-sync-btn,
             .triage-component-container .header-add-btn {
                 font-size: 10px;
-                padding: 2px 4px;
+                padding: 8px 8px;
                 height: 16px;
             }
         }
@@ -1205,6 +1228,7 @@
             /* Scale down text in triage component */
             .triage-component-container label {
                 font-size: 13px;
+                line-height: 14px;
             }
             
             .triage-component-container .annotation-label {
@@ -1212,8 +1236,8 @@
             }
             
             .triage-component-container .annotation-circle {
-                width: 36px;
-                height: 36px;
+                width: 32px;
+                height: 32px;
                 font-size: 13px;
             }
             
@@ -1233,6 +1257,11 @@
                 font-size: 13px;
                 padding: 8px;
                 max-height: 40px;
+            }
+
+        /* Restore bottom border for description input container in medium viewports */
+        .description-section .ui-field {
+            border-bottom: 1px solid var(--ui-border) !important;
             }
             
             .triage-component-container textarea #defect-description {
@@ -1314,7 +1343,7 @@
             .triage-component-container .header-sync-btn,
             .triage-component-container .header-add-btn {
                 font-size: 10px;
-                padding: 2px 4px;
+                padding: 8px 8px;
                 height: 16px;
             }
         }
@@ -1364,6 +1393,51 @@
             margin: 0 0 16px 0;
             color: var(--text-color); /* use dynamic token for visibility in both themes */
             font-family: 'Unica77LL', Arial, sans-serif;
+        }
+
+/* Light-mode overrides for hugging inputs/dropdowns in triage */
+body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea,
+body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea:hover,
+body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea:focus {
+    background: transparent !important;
+}
+
+/* Hugging label for triage dropdown labels */
+body:not([data-theme="dark"]) .triage-component-container .severity-section > label,
+body:not([data-theme="dark"]) .triage-component-container .defect-type-section > label,
+body:not([data-theme="dark"]) .triage-component-container .status-section > .status-header > label {
+    display: inline-block;
+    padding: 2px 8px;
+    background: var(--ui-bg);
+    border-top: 1px solid var(--ui-border);
+    border-left: 1px solid var(--ui-border);
+    border-right: 1px solid var(--ui-border);
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 14px;
+    margin: 0 0 -1px 0;
+}
+
+/* Chip field styling for our existing custom dropdown display */
+body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropdown .custom-dropdown-display {
+    border: 1px solid var(--ui-border) !important;
+    border-radius: 0 0 4px 4px !important;
+    background: var(--ui-bg) !important;
+    min-height: 36px !important;
+    padding: 8px 28px 8px 8px !important;
+    transition: background var(--motion-ms) var(--ease-smooth), border-color var(--motion-ms) var(--ease-smooth) !important;
+}
+body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropdown .custom-dropdown-display:hover {
+    background: var(--ui-active-bg) !important;
+}
+body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropdown.open .custom-dropdown-display {
+    border-color: var(--ui-active-border) !important;
+    background: var(--ui-active-bg) !important;
+}
+body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropdown.open .custom-dropdown-options {
+    border-color: var(--ui-active-border) !important;
         }
 
         .triage-info-card p {
@@ -1735,60 +1809,7 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
-        [data-theme="dark"] .triage-close-btn {
-            background: var(--surface-secondary);
-            border-color: var(--border-color);
-        }
-
-        [data-theme="dark"] .triage-close-btn:hover {
-            background: var(--interactive-hover);
-            border-color: var(--border-hover);
-        }
-
-        /* Triage Close Button */
-        .triage-close-btn {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--surface-color);
-            border: 1px solid var(--border-color);
-            box-shadow: 0 3px 12px var(--shadow-medium), 0 1px 4px var(--shadow-light);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 15;
-            transition: all 0.2s ease;
-            padding: 0;
-            color: var(--text-color);
-        }
-
-        .triage-close-btn:hover {
-            background: var(--surface-secondary);
-            border-color: var(--border-hover);
-            box-shadow: 0 4px 16px var(--shadow-strong), 0 2px 6px var(--shadow-medium);
-            transform: translateY(-1px);
-        }
-
-        .triage-close-btn:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 8px var(--shadow-medium), 0 1px 3px var(--shadow-light);
-        }
-
-        .close-icon {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            line-height: 1;
-            user-select: none;
-        }
-
-        .triage-close-btn:hover .close-icon {
-            color: var(--text-color);
-        }
+        /* Removed circular X close button styles */
 
         .triage-card {
             display: grid;
@@ -2208,15 +2229,7 @@
                 transition: none !important;
             }
             
-        /* Close button positioning */
-            .triage-close-btn {
-                position: absolute;
-                top: -10px;
-                right: -10px;
-                z-index: 15;
-                width: 30px;
-                height: 30px;
-        }
+        /* Removed close button positioning */
 
         /* Dark theme adjustments */
         [data-theme="dark"] .triage-card {
@@ -2413,11 +2426,33 @@
             font-weight: 400;
             margin-bottom: 6px;
             font-size: 12px;
-            color: var(--text-secondary);
+            color: var(--text-color);
             font-family: 'Unica77LL', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             text-align: left;
             width: 100%;
             line-height: 1.4;
+        }
+
+        /* Force all component labels to render in ALL CAPS */
+        .ui-label,
+        .defect-type-section > label,
+        .description-section > label,
+        .links-section > label,
+        .status-section > label,
+        .severity-section > label {
+            text-transform: uppercase;
+        }
+
+        /* Ensure author label hugs content */
+        .author-input-container > .ui-label {
+            width: fit-content !important;
+            display: inline-flex !important;
+        }
+
+        /* Fix description label clipping by not using inline-flex there */
+        .description-section > .ui-input > .ui-label {
+            width: fit-content !important;
+            display: inline-block !important;
         }
 
         /* Removed all .defect-dropdown and .severity-dropdown CSS garbage - we only use custom dropdowns now */
@@ -2457,9 +2492,23 @@
         }
 
         textarea[id^="defect-description"]::placeholder {
-            color: var(--text-muted);
+            color: var(--text-secondary);
+        }
+
+        /* Standardize hint placeholder color across all inputs */
+        .ui-field input::placeholder,
+        .ui-field textarea::placeholder {
+            color: var(--text-secondary) !important;
+        }
+
+        /* Standardize dropdown hint color */
+        .ui-select2.placeholder .ui-trigger .ui-value {
+            color: var(--text-color);
         }
         
+
+
+
         textarea[id^="defect-description"]:focus::placeholder {
             opacity: 0;
         }
@@ -2473,11 +2522,20 @@
         }
 
         .links-container {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
+            display: flex !important; /* override base ui-field display */
+            flex-direction: column !important; /* ensure vertical stacking */
+            gap: 8px !important; /* enforce visible spacing between link items */
             width: 100%;
             flex: 1;
+        }
+
+        /* Unique override for our ui-field-based links container to fix gap visibility */
+        #links-container.ui-field,
+        .links-section .links-container.ui-field.ui-field--static {
+            display: flex !important;
+            flex-direction: column !important;
+            row-gap: 8px !important;
+            gap: 8px !important;
         }
 
         .links-background-card {
@@ -2560,7 +2618,7 @@
         }
 
         .link-input::placeholder {
-            color: var(--text-muted);
+            color: var(--text-secondary) !important;
         }
         
         .link-input:focus::placeholder {
@@ -2687,21 +2745,91 @@
             width: 100%;
         }
 
-        .header-add-btn {
+        /* Make status label hug the info button inside the chip */
+        .status-header .status-ui-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding-right: 6px;
+        }
+
+        .status-header .status-info-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 14px; /* match label line-height for perfect centering */
+            height: 14px; /* match label line-height */
+            padding: 0;
+            margin: 0;
+            line-height: 0; /* remove baseline gap */
+            vertical-align: middle;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .status-header .status-info-btn svg {
+            display: block; /* prevent baseline gap */
+            width: 13px;
+            height: 13px;
+            margin-bottom: 3px;
+        }
+
+        /* Tablet range: reduce bottom offset for perfect centering */
+        @media (max-width: 1200px) and (min-width: 769px) {
+            .status-header .status-info-btn svg {
+                margin-bottom: 1px !important;
+            }
+
+
+            
+        .ui-select2 .ui-trigger {
+
+            padding: 32px 24px 32px 8px !important;
+
+        }
+
+        }
+
+
+
+
+
+
+
+        /* Size down tooltip to fit near the label; adjust position */
+        .status-header {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-header .status-tooltip {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            max-width: 160px;
+        }
+
+        .header-add-btn,
+        .header-sync-btn,
+        .triage-card .triage-remove-btn {
             background: none;
             border: 1px solid hsl(214.3 31.8% 91.4%);
             color: var(--text-secondary);
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 500;
             cursor: pointer;
-            padding: 4px 8px;
+            padding: 8px 8px;
             border-radius: 4px;
             transition: all 0.15s ease-in-out;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 2px;
-            height: 20px;
+            height: 16px;
             background-color: hsl(0 0% 100%);
             flex-shrink: 0;
             white-space: nowrap;
@@ -2725,17 +2853,13 @@
             background: none;
             border: 1px solid hsl(214.3 31.8% 91.4%);
             color: var(--text-secondary);
-            font-size: 11px;
             font-weight: 500;
-            cursor: default;
-            padding: 4px 8px;
             border-radius: 4px;
             transition: all 0.15s ease-in-out;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 2px;
-            height: 20px;
             background-color: hsl(0 0% 100%);
             flex-shrink: 0;
             white-space: nowrap;
@@ -3650,6 +3774,35 @@
 
             /* X close button remains visible in horizontal layout */
 
+            /* Align section labels consistently and make author label match description */
+            .severity-section > label,
+            .defect-type-section > label,
+            .status-header .status-ui-label,
+            .description-section > .ui-input > .ui-label,
+            .author-input-container > .ui-label {
+                display: inline-flex !important;
+                align-items: center !important;
+                line-height: 14px !important;
+                height: auto !important;
+                margin-bottom: -1px !important;
+            }
+
+            .author-input-container > .ui-label {
+                padding: 2px 8px !important;
+                border-top: 1px solid var(--ui-border) !important;
+                border-left: 1px solid var(--ui-border) !important;
+                border-right: 1px solid var(--ui-border) !important;
+                border-bottom: 1px solid var(--ui-border) !important;
+                border-radius: 4px 4px 0 0 !important;
+                background: var(--ui-bg) !important;
+            }
+
+            .severity-section,
+            .defect-type-section,
+            .status-section {
+                align-self: start !important;
+            }
+
             .triage-card {
                 display: grid !important;
                 grid-template-columns: auto 140px 1fr auto 120px !important; /* 5 columns: annotation(narrow), severity(140px), defect-type(wide), status-col, sync-cta(120px) */
@@ -3682,6 +3835,14 @@
             .annotation-number .annotation-circle {
                 display: inline-flex !important;
                 margin: 0 !important;
+            }
+
+            /* Ensure row 1 items sit at the top of their grid cells */
+            .annotation-number,
+            .severity-section,
+            .defect-type-section {
+                align-self: start !important;
+                margin-top: 0 !important;
             }
 
             /* Row 1, Column 2: Defect Severity */
@@ -3731,6 +3892,11 @@
                 margin: 0 !important;
                 display: flex !important;
                 flex-direction: column !important;
+            }
+
+            /* Reduce author label font size to match other chip labels */
+            .author-section .author-input-container > .ui-label {
+                font-size: 10px !important;
             }
 
             /* Row 3, Columns 2-3: Links */
@@ -3934,6 +4100,11 @@
             .triage-component-container {
                 width: 100% !important;
                 max-width: 460px !important; /* Remove any width constraints */
+            }
+
+            /* Ensure triage card occupies previous 3-column span (cols 6-9) */
+            .triage-layout-container > .triage-card {
+                grid-column: 6 / 9 !important;
             }
         }
 
@@ -4692,7 +4863,7 @@
             background: var(--case-study-qa-framework);
             color: var(--bg-color);
             font-family: 'Unica77LL', Arial, sans-serif;
-            font-size: 22px;
+            font-size: 19px;
             font-weight: 500;
             padding: 8px 12px; /* Reduced from 16px to match voice pill */
             border: 2px solid transparent; /* Invisible border prevents layout shift */
@@ -5931,49 +6102,94 @@
             height: 100%;
             padding: 0;
             width: max-content;
-            animation: impactMarqueeLeft 60s linear infinite;
+            animation: impactMarqueeLeft 35s linear infinite;
         }
 
-        .impact-marquee-content.reverse { animation: impactMarqueeRight 60s linear infinite; }
+        .impact-marquee-content.reverse { animation: impactMarqueeRight 35s linear infinite; }
 
         /* Faster marquee on large screens */
         @media (min-width: 1400px) {
-            .impact-marquee-content { animation-duration: 45s; }
-            .impact-marquee-content.reverse { animation-duration: 45s; }
-        }
-        @media (min-width: 1800px) {
-            .impact-marquee-content { animation-duration: 36s; }
-            .impact-marquee-content.reverse { animation-duration: 36s; }
-        }
-        @media (min-width: 2400px) {
             .impact-marquee-content { animation-duration: 28s; }
             .impact-marquee-content.reverse { animation-duration: 28s; }
+        }
+        @media (min-width: 1800px) {
+            .impact-marquee-content { animation-duration: 24s; }
+            .impact-marquee-content.reverse { animation-duration: 24s; }
+        }
+        @media (min-width: 2400px) {
+            .impact-marquee-content { animation-duration: 18s; }
+            .impact-marquee-content.reverse { animation-duration: 18s; }
         }
 
         .impact-pill {
             display: inline-flex;
             align-items: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+            cursor: default;
+            user-select: none;
+        }
+
+        /* Light mode: align impact-pills to B6 button styling */
+        body:not([data-theme="dark"]) .impact-pill {
+            background: var(--btn-white);
+            color: #777;
+            border: 1px solid var(--btn-gray);
+            height: 36px;
+            padding: 0 20px;
+            border-radius: 999px;
+            font-family: 'Unica77LL', Arial, sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            letter-spacing: normal;
+            text-transform: none;
+            transition: background var(--motion-ms) var(--ease-smooth), border-color var(--motion-ms) var(--ease-smooth), color var(--motion-ms) var(--ease-smooth);
+        }
+        body:not([data-theme="dark"]) .impact-pill:hover {
+            background: var(--btn-dark);
+            border-color: var(--btn-dark);
+            color: var(--btn-white);
+        }
+
+        /* Scale impact-pills up on larger viewports (light mode only) */
+        @media (min-width: 1400px) {
+            body:not([data-theme="dark"]) .impact-pill {
+                height: 40px;
+                padding: 0 24px;
+                font-size: 15px;
+            }
+        }
+        @media (min-width: 1800px) {
+            body:not([data-theme="dark"]) .impact-pill {
+                height: 44px;
+                padding: 0 28px;
+                font-size: 16px;
+            }
+        }
+        @media (min-width: 2400px) {
+            body:not([data-theme="dark"]) .impact-pill {
+                height: 48px;
+                padding: 0 32px;
+                font-size: 18px;
+            }
+        }
+
+        /* Dark mode keeps prior visual style */
+        [data-theme="dark"] .impact-pill {
             background: transparent;
-            color: #aaaaaa; /* Light mode text */
-            border: 2px solid #aaaaaa; /* Light mode border */
-            padding: 8px 16px;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            padding: 6px 16px;
             border-radius: 999px;
             font-weight: 600;
             font-size: 13px;
             white-space: nowrap;
             letter-spacing: 0.5px;
             text-transform: uppercase;
-            margin-right: 20px;
-            flex-shrink: 0;
             transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
-            cursor: default;
-            user-select: none;
         }
-
-        .impact-pill:hover {
-            transform: scale(1.08);
-            /* Background/border/text colors are set dynamically via JS for variability */
-        }
+        [data-theme="dark"] .impact-pill:hover { transform: scale(1.08); }
 
         .impact-fade-left,
         .impact-fade-right {
@@ -6083,25 +6299,31 @@
         /* Large viewport optimizations */
         @media (min-width: 1400px) {
             .impact-fade-left, .impact-fade-right { width: 180px; }
-            .impact-pill { font-size: 14px; padding: 12px 24px; margin-right: 32px; }
-            .impact-marquee-row { height: 70px; }
+            .impact-pill { font-size: 14px; padding: 8px 24px; margin-right: 32px; }
+            .impact-marquee-row { height: 60px; }
         }
 
         @media (min-width: 1800px) {
             .impact-fade-left, .impact-fade-right { width: 220px; }
-            .impact-pill { font-size: 16px; padding: 14px 28px; margin-right: 40px; }
+            .impact-pill { font-size: 16px; padding: 12px 28px; margin-right: 40px; }
         }
 
         @media (min-width: 2400px) {
             .impact-fade-left, .impact-fade-right { width: 300px; }
-            .impact-pill { font-size: 18px; padding: 16px 32px; margin-right: 48px; }
-            .impact-marquee-row { height: 100px; }
+            .impact-pill { font-size: 18px; padding: 12px 32px; margin-right: 48px; }
+            .impact-marquee-row { height: 70px; }
         }
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .impact-marquee-row { height: 48px; }
-            .impact-pill { padding: 8px 16px; font-size: 12px; margin-right: 12px; }
+            body:not([data-theme="dark"]).impact-pill,
+            body:not([data-theme="dark"]) .impact-pill {
+                height: 30px;
+                padding: 0 12px;
+                font-size: 12px;
+                margin-right: 10px;
+            }
             .impact-fade-left, .impact-fade-right { width: 80px; }
         }
 
@@ -6369,14 +6591,26 @@
             gap: 12px;
         }
 
+        /* Align defect glossary filter label to triage chip labels */
         .filter-label {
-            display: flex;
+            display: inline-flex;
             align-items: center;
+            gap: 6px;
+            padding: 2px 8px;
+            background: var(--ui-bg);
+            border-top: 1px solid var(--ui-border);
+            border-right: 1px solid var(--ui-border);
+            border-left: 1px solid var(--ui-border);
+            border-bottom: 1px solid var(--ui-border);
+            border-radius: 4px 4px 0 0;
             white-space: nowrap;
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-color);
+            font-size: 10px;
+            font-weight: 400;
+            color: var(--text-secondary);
             font-family: 'Unica77LL', Arial, sans-serif;
+            text-transform: uppercase;
+            width: fit-content;
+            margin: 0 0 -1px 0;
         }
 
         .filter-label svg {
@@ -6396,40 +6630,53 @@
 
         .severity-filters {
             display: flex;
-            background: var(--surface-accent);
-            border-radius: 8px;
-            padding: 3px;
-            gap: 8px;
-            flex-wrap: nowrap;
+            align-items: center;
+            justify-content: space-between;
             width: 100%;
+            gap: 8px;
+            background: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+            border-radius: 0 !important;
         }
 
         .severity-btn {
             flex: 1;
             min-width: 60px;
             height: 30px;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--ui-border);
             border-radius: 6px;
-            font-size: 12px;
+            background: var(--ui-bg);
+            font-size: 13px;
             font-weight: 500;
             cursor: pointer;
             text-transform: uppercase;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            transition: background-color 0.2s, color 0.2s;
-            padding: 0 4px;
+            transition: background var(--motion-ms) var(--ease-smooth), border-color var(--motion-ms) var(--ease-smooth), color var(--motion-ms) var(--ease-smooth);
+            padding: 0 8px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
             font-family: 'Unica77LL', Arial, sans-serif;
+            color: var(--ui-text);
         }
 
         .severity-btn.active {
-            background-color: var(--text-color);
-            color: var(--surface-color);
-            border-color: var(--text-color);
+            border-color: var(--ui-active-border);
+            background: var(--ui-active-bg);
         }
+
+        /* Make glossary filter CTAs fill the container */
+        #glossary-severity-filters {
+            display: flex !important;
+            align-items: center;
+            justify-content: stretch;
+            width: 100% !important;
+            gap: 8px;
+        }
+        #glossary-severity-filters .severity-btn { flex: 1 1 0 !important; }
 
         .severity-btn:not(.active) {
             background: var(--surface-secondary);
@@ -6460,26 +6707,24 @@
             height: 420px;
             overflow-y: scroll;
             scrollbar-width: thin;
-            scrollbar-color: var(--text-secondary) transparent;
+            scrollbar-color: var(--toggle-border-color) transparent; /* align to custom-scrollbar */
             flex: 1;
             scrollbar-gutter: stable;
             background: var(--surface-secondary);
         }
 
         .defect-cards-list::-webkit-scrollbar {
-            width: 8px;
-            background: var(--surface-color);
+            width: 3px; /* thinner like custom-scrollbar */
+            background: transparent;
         }
 
         .defect-cards-list::-webkit-scrollbar-track {
-            background: var(--surface-color);
-            border-radius: 4px;
+            background: transparent;
         }
 
         .defect-cards-list::-webkit-scrollbar-thumb {
-            background: var(--text-muted);
-            border-radius: 4px;
-            border: 1px solid var(--border-color);
+            background: var(--toggle-border-color); /* lighter grey to match custom */
+            border-radius: 2px;
         }
 
         .defect-cards-list::-webkit-scrollbar-thumb:hover {
@@ -6920,6 +7165,87 @@
             cursor: grabbing;
         }
 
+/* Triage inputs – design system variant 3 (chip/hugging label), light mode only */
+body:not([data-theme="dark"]) .ui-input { display: inline-block; width: 100%; color: var(--text-color) !important; }
+body:not([data-theme="dark"]) .ui-field input,
+body:not([data-theme="dark"]) .ui-field textarea {
+    appearance: none; border: 0; outline: 0; background: transparent; width: 100%; color: var(--text-color) !important; font: inherit; line-height: inherit;
+}
+body:not([data-theme="dark"]) .ui-field input::placeholder,
+body:not([data-theme="dark"]) .ui-field textarea::placeholder { color: #838383; }
+
+/* Chip (hugging) */
+body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-label {
+    display: block; width: fit-content; padding: 2px 8px; background: var(--ui-bg);
+    border-top: 1px solid var(--ui-border); border-right: 1px solid var(--ui-border); border-left: 1px solid var(--ui-border); border-bottom: 1px solid var(--ui-border);
+    border-radius: 4px 4px 0 0; font-size: 10px; font-weight: 400; margin: 0 0 -1px 0; color: var(--text-color) !important;
+}
+body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field {
+    display: block; width: 100%; padding: 12px 8px; border: 1px solid var(--ui-border); border-radius: 0 4px 4px 4px; background: var(--ui-bg);
+    font-size: 13px; line-height: 16px; font-weight: 400;
+    transition: background var(--motion-ms) var(--ease-smooth), border-color var(--motion-ms) var(--ease-smooth), box-shadow var(--motion-ms) var(--ease-smooth);
+}
+body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field:hover { background: var(--ui-active-bg); }
+body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field:focus-within { border-color: var(--ui-active-border); background: var(--ui-active-bg); }
+
+/* Static field variant (no hover/focus state changes) */
+body:not([data-theme="dark"]) .ui-field.ui-field--static { background: var(--ui-bg) !important; border-color: var(--ui-border) !important; }
+body:not([data-theme="dark"]) .ui-field.ui-field--static:hover,
+body:not([data-theme="dark"]) .ui-field.ui-field--static:focus-within { background: var(--ui-bg) !important; border-color: var(--ui-border) !important; }
+body:not([data-theme="dark"]) .status-section .ui-field { position: relative; }
+body:not([data-theme="dark"]) .status-field-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+
+/* Add gap between API and Add Link CTAs equal to link-item gap */
+.links-actions .header-buttons {
+    display: flex;
+    align-items: center;
+}
+
+/* Minimal scrollbar for ui-select2 dropdown menu */
+.ui-select2 .ui-menu { scrollbar-width: thin; scrollbar-color: var(--toggle-border-color) transparent; max-height: 160px; }
+.ui-select2 .ui-menu::-webkit-scrollbar { width: 3px; }
+.ui-select2 .ui-menu::-webkit-scrollbar-track { background: transparent; }
+.ui-select2 .ui-menu::-webkit-scrollbar-thumb { background-color: var(--toggle-border-color); border-radius: 2px; }
+.ui-select2 .ui-menu::-webkit-scrollbar-thumb:hover { background-color: var(--text-secondary); }
+
+/* Right-align the header buttons row within the field */
+.links-actions {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-bottom: -10px;
+}
+.links-actions .header-buttons { justify-content: flex-end; }
+
+/* Triage card top-right actions */
+.triage-card { position: relative; }
+.triage-card .triage-actions {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 3;
+}
+/* Remove CTA inherits small button styles from base selectors */
+/* (intentionally no extra declarations) */
+
+/* Description field: remove inner border and align padding to author (use container padding) */
+
+/* Ensure the field renders above the label so hover/focus visuals aren't clipped */
+body:not([data-theme="dark"]) .ui-input[data-variant="chip"] { position: relative; overflow: visible; }
+body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-label { position: relative; z-index: 1; }
+body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field { position: relative; z-index: 2; }
+body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea[id^="defect-description"] {
+    border: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+}
+body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea[id^="defect-description"]:hover,
+body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea[id^="defect-description"]:focus {
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+        }
+
         .process-map-image {
             position: relative;
             display: inline-block;  /* Shrink-to-fit around its contents */
@@ -7298,7 +7624,7 @@
             }
 
             .cta-pill {
-                font-size: 16px;
+                font-size: 17px;
                 padding: 6px 12px;
             }
 
@@ -7477,7 +7803,8 @@
         /* ===== Minimal Greyscale UI Overrides: Header Buttons, Status, Severity Filters ===== */
         /* Header buttons (light and dark): align to minimal greyscale */
         .header-add-btn,
-        .header-sync-btn {
+        .header-sync-btn,
+        .triage-card .triage-remove-btn {
             background-color: var(--surface-color) !important;
             border: 1px solid var(--border-color) !important;
             color: var(--text-secondary) !important;
@@ -7485,14 +7812,16 @@
         }
 
         .header-add-btn:hover,
-        .header-sync-btn:hover {
+        .header-sync-btn:hover,
+        .triage-card .triage-remove-btn:hover {
             background-color: var(--interactive-hover) !important;
             border-color: var(--border-hover) !important;
             color: var(--text-color) !important;
         }
 
         [data-theme="dark"] .header-add-btn,
-        [data-theme="dark"] .header-sync-btn {
+        [data-theme="dark"] .header-sync-btn,
+        [data-theme="dark"] .triage-card .triage-remove-btn {
             background-color: var(--surface-color) !important;
             border-color: var(--border-color) !important;
             color: var(--text-secondary) !important;
@@ -7656,7 +7985,7 @@
         .status-btn .status-icon {
             opacity: 0.85;
             filter: none;
-            transition: opacity 0.15s ease-in-out, filter 0.15s ease-in-out;
+            transition: opacity var(--motion-ms) var(--ease-smooth), filter var(--motion-ms) var(--ease-smooth);
         }
 
         /* Default (non-selected) status icons: neutral greyscale in light mode */
@@ -7672,6 +8001,14 @@
         .status-btn.selected .status-icon {
             filter: brightness(0) invert(1) !important;
             opacity: 1;
+        }
+
+        /* Smooth 1s transitions between CTA (status) selections */
+        .status-btn {
+            transition: background var(--motion-ms) var(--ease-smooth),
+                        border-color var(--motion-ms) var(--ease-smooth),
+                        color var(--motion-ms) var(--ease-smooth),
+                        box-shadow var(--motion-ms) var(--ease-smooth);
         }
 
         /* Dark theme: non-selected icons should be light; selected becomes dark on light selected bg */
@@ -8058,12 +8395,12 @@
                 <div class="content-container">
                     <div class="cta-pills-container">
                         <div class="pill-group" id="synopsis-pill-group">
-                            <button class="cta-pill text-pill pill-1" data-option="text" id="textPill">
+                            <button class="cta-pill text-pill pill-1 ui-btn" data-variant="b1" aria-pressed="false" data-option="text" id="textPill">
                                 <img src="https://raw.githubusercontent.com/amachinic/Merem/main/text.png" alt="Text" class="text-icon">
                             </button>
-                            <button class="cta-pill tldr-pill pill-2" data-option="tldr" id="tldrPill">tl;dr</button>
+                            <button class="cta-pill tldr-pill pill-2 ui-btn" data-variant="b2" aria-pressed="false" data-option="tldr" id="tldrPill">tl;dr</button>
                         </div>
-                        <button class="cta-pill voice-pill pill-3" data-cta="voice" id="voicePill" data-pill-id="synopsis-voice" data-audio="https://raw.githubusercontent.com/amachinic/Merem/main/QA%20Voiceover.mp3"></button>
+                        <button class="cta-pill voice-pill pill-3 ui-btn" data-variant="b6" aria-pressed="false" data-cta="voice" id="voicePill" data-pill-id="synopsis-voice" data-audio="https://raw.githubusercontent.com/amachinic/Merem/main/QA%20Voiceover.mp3">Voice</button>
                     </div>
                     
                     <div class="story-content">
@@ -8117,7 +8454,7 @@
                             <button class="cta-pill text-pill pill-1" data-option="text">
                                 <img src="https://raw.githubusercontent.com/amachinic/Merem/main/text.png" alt="Text" class="text-icon">
                             </button>
-                            <button class="cta-pill tldr-pill pill-2" data-option="tldr">tl;dr</button>
+                            <button class="cta-pill tldr-pill pill-2 ui-btn" data-variant="b2" aria-pressed="false" data-option="tldr">tl;dr</button>
                 </div>
                         <button class="cta-pill voice-pill pill-3" data-cta="voice" id="hmwVoicePill" data-pill-id="hmw-voice" data-audio="https://raw.githubusercontent.com/amachinic/Merem/main/QA%20-%20Defect%20list.mp3"></button>
                     </div>
@@ -8179,12 +8516,12 @@
                 <div class="defect-glossary-content">
                     <div class="cta-pills-container">
                         <div class="pill-group" id="defect-glossary-pill-group">
-                            <button class="cta-pill text-pill pill-1" data-option="text">
+                            <button class="cta-pill text-pill pill-1 ui-btn" data-variant="b1" aria-pressed="false" data-option="text">
                                 <img src="https://raw.githubusercontent.com/amachinic/Merem/main/text.png" alt="Text" class="text-icon">
                             </button>
-                            <button class="cta-pill tldr-pill pill-2" data-option="tldr">tl;dr</button>
+                            <button class="cta-pill tldr-pill pill-2 ui-btn" data-variant="b2" aria-pressed="false" data-option="tldr">tl;dr</button>
                         </div>
-                        <button class="cta-pill voice-pill pill-3" data-cta="voice" id="defectVoicePill" data-pill-id="defect-voice" data-audio="https://raw.githubusercontent.com/amachinic/Merem/main/QA%20-%20Defect%20Glossary.mp3"></button>
+                        <button class="cta-pill voice-pill pill-3 ui-btn" data-variant="b6" aria-pressed="false" data-cta="voice" id="defectVoicePill" data-pill-id="defect-voice" data-audio="https://raw.githubusercontent.com/amachinic/Merem/main/QA%20-%20Defect%20Glossary.mp3">Voice</button>
                     </div>
                     <p>Understanding the taxonomy of defects is crucial for effective quality assurance. <span class="highlight-target" data-highlight="tldr">Visual defects</span> include misaligned elements, incorrect typography, color inconsistencies, and spacing issues that compromise the design integrity. <span class="highlight-target" data-highlight="tldr">These seemingly minor issues compound over time, eroding user trust and brand perception.</span></p>
                     
@@ -8199,18 +8536,14 @@
                         <!-- Filter Header -->
                         <div class="defect-table-header">
                             <div class="filter-section">
-                                <div class="filter-label">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46 22,3"></polygon>
-                                    </svg>
-                                    <span>Filter by Severity</span>
-                                </div>
-                                
-                                <div class="severity-filters">
-                                    <button id="severity-all-defect" class="severity-btn active" data-severity="all">ALL</button>
-                                    <button class="severity-btn low-severity" data-severity="low">LOW</button>
-                                    <button class="severity-btn medium-severity" data-severity="medium">MEDIUM</button>
-                                    <button class="severity-btn high-severity" data-severity="high">HIGH</button>
+                                <div class="ui-input" data-variant="chip">
+                                    <label class="ui-label" for="glossary-severity-filters">Defect severity</label>
+                                    <div class="ui-field ui-field--static" id="glossary-severity-filters">
+                                        <button id="severity-all-defect" class="severity-btn active" data-severity="all">ALL</button>
+                                        <button class="severity-btn low-severity" data-severity="low">LOW</button>
+                                        <button class="severity-btn medium-severity" data-severity="medium">MEDIUM</button>
+                                        <button class="severity-btn high-severity" data-severity="high">HIGH</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -8304,11 +8637,11 @@
                 </div>
                 
                 <!-- Right: Triage component -->
-                <div class="triage-component-container">
                 <div class="triage-card">
-                    <button class="triage-close-btn" onclick="smartCloseTriageCard(this)" title="Reset or remove triage card">
-                        <span class="close-icon">✕</span>
-                    </button>
+                    <div class="triage-actions">
+                        <button class="header-add-btn triage-remove-btn" onclick="removeTriageCard(this)" title="Remove triage card">Remove</button>
+                    </div>
+                    
                     <div class="annotation-number">
                         <span class="annotation-label">Annotation</span>
                         <div class="annotation-circle" id="annotation-circle">1</div>
@@ -8321,16 +8654,16 @@
                         <label>Defect type</label>
                         <!-- Custom dropdown will be created here by JavaScript -->
                     </div>
-                    <div class="status-section">
+                    <div class="status-section ui-input" data-variant="chip">
                 <div class="status-header">
-                    <label>Defect status</label>
+                            <label class="ui-label status-ui-label" for="status-buttons">Defect status
                     <button class="status-info-btn" onclick="toggleStatusTooltip(this)" title="Show status legend">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10"></circle>
                             <path d="M9,9h0a3,3,0,0,1,6,0c0,2-3,3-3,3"></path>
                             <path d="M12,17h0"></path>
                         </svg>
-                    </button>
+                            </button></label>
                     <div class="status-tooltip" style="display: none;">
                         <button class="status-tooltip-close" onclick="closeStatusTooltip(this)">×</button>
                         <div class="status-tooltip-content">
@@ -8353,6 +8686,8 @@
                         </div>
                     </div>
                 </div>
+                        <div class="ui-field ui-field--static">
+                            <div class="status-field-row">
                         <div class="status-buttons" id="status-buttons">
                                                         <button type="button" class="status-btn selected" data-status="not-started" onclick="selectStatusForCard(this, 'not-started')" title="Not Started">
                                 <img class="status-icon" src="https://raw.githubusercontent.com/amachinic/Merem/main/GREY---NOT-STARTED.png" alt="Not Started">
@@ -8366,14 +8701,19 @@
                             <button type="button" class="status-btn" data-status="resolved" onclick="selectStatusForCard(this, 'resolved')" title="Resolved">
                                 <img class="status-icon" src="https://raw.githubusercontent.com/amachinic/Merem/main/GREY---RESOLVED.png" alt="Resolved">
                             </button>
+                                </div>
+                                <!-- Keep CTA inline if present -->
+                            </div>
                         </div>
                         <input type="hidden" id="status-select" name="status" value="not-started">
                     </div>
                     <div class="author-section">
                         <div class="author-container">
-                            <div class="author-input-container">
-                                <label for="defect-author">Author</label>
-                                <textarea id="defect-author" placeholder="Name"></textarea>
+                            <div class="author-input-container ui-input" data-variant="chip">
+                                <label class="ui-label" for="defect-author">AUTHOR</label>
+                                <div class="ui-field">
+                                    <input id="defect-author" type="text" placeholder="Name" />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -8395,24 +8735,30 @@
                         </div>
                     </button>
                     <div class="description-section">
-                        <label for="defect-description">Description</label>
+                        <div class="ui-input" data-variant="chip">
+                            <label class="ui-label" for="defect-description">DESCRIPTION</label>
+                            <div class="ui-field">
                         <textarea id="defect-description" placeholder="Provide a brief but accurate description of the defect."></textarea>
                     </div>
-                    <div class="links-section">
-                        <div class="links-header">
-                            <label>Links</label>
+                        </div>
+                    </div>
+                    <div class="links-section ui-input" data-variant="chip">
+                        <div class="links-actions">
                             <div class="header-buttons">
                                 <button class="header-sync-btn" title="Sync functionality" tabindex="-1">
                                     ⇄ API
                                     <div class="sync-tooltip">I'm sorry this feature is not yet available. We're still building and scaling.</div>
                                 </button>
                                 <button class="header-add-btn" onclick="openLinkModalForCard(1)" title="Add link">+ Add Link</button>
+                            </div>
                         </div>
+                        <div class="links-header">
+                            <label class="ui-label" for="links-container">LINKS</label>
                         </div>
-                        <div class="links-background-card">
-                        <div class="links-container" id="links-container">
+                        <div class="ui-field ui-field--static">
+                            <div class="links-container" id="links-container">
                                 <div class="link-item">
-                                    <a href="https://zip.co" target="_blank" class="simple-link service-link" title="https://zip.co">
+                                    <a href="https://ziphq.com" target="_blank" class="simple-link service-link" title="https://ziphq.com">
                                         <span class="service-link-icon"><img src="https://raw.githubusercontent.com/amachinic/Merem/main/zip.png" width="27" height="20" alt="Zip"></span>
                                         <span>Zip</span>
                                     </a>
@@ -8426,7 +8772,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
                 </div>
             </div>
         </div>
@@ -8766,7 +9111,7 @@
             // Initialize Clock Container Component (using the working approach)
             const clockContainer = new GlobalClockComponent({
                 backLinkText: '← Back',
-                backLinkUrl: 'Home.html',
+                backLinkUrl: 'index.html',
                 showNameDisplay: false,
                 hideLocationClock: true,
                 caseStudyTitle: 'Case Study - Quality Assurance Framework'
@@ -10164,46 +10509,82 @@
         // Function to refresh dropdown icons after custom icons are loaded
         function refreshDropdownIcons() {
             console.log('🔄 Refreshing dropdown icons...');
+            const iconMap = window.currentIconMap || defectIconMap;
             
-            const customOptions = document.querySelectorAll('.custom-option[data-icon]');
-            customOptions.forEach(optionDiv => {
+            // Legacy custom dropdowns (if any still present)
+            document.querySelectorAll('.custom-option[data-icon]').forEach(optionDiv => {
                 const iconType = optionDiv.getAttribute('data-icon');
-                const iconMap = window.currentIconMap || defectIconMap;
                 const iconContainer = optionDiv.querySelector('.option-icon');
-                
                 if (iconContainer && iconType && iconMap[iconType]) {
-                    console.log(`🔄 Refreshing dropdown icon: ${iconType}`);
                     iconContainer.innerHTML = iconMap[iconType];
                 }
             });
             
-            // Also update selected display if defect type is selected
-            const defectDropdown = document.querySelector('[data-dropdown-id="defect-type-select"]');
-            if (defectDropdown) {
-                const selectedIcon = defectDropdown.querySelector('.selected-icon');
-                const selectedText = defectDropdown.querySelector('.selected-text');
-                const originalDropdown = document.getElementById('defect-type-select');
-                
-                if (selectedIcon && originalDropdown && originalDropdown.value) {
-                    const selectedOption = originalDropdown.querySelector(`option[value="${originalDropdown.value}"]`);
-                    if (selectedOption) {
-                        const iconType = selectedOption.getAttribute('data-icon');
-                        const iconMap = window.currentIconMap || defectIconMap;
-                        if (iconType && iconMap[iconType]) {
-                            selectedIcon.innerHTML = iconMap[iconType];
-                        }
+            // New ui-select2 dropdowns (options list)
+            document.querySelectorAll('.ui-select2 .ui-option[data-icon]').forEach(li => {
+                const iconType = li.getAttribute('data-icon') || li.getAttribute('data-value');
+                if (!iconType) return;
+                // Preserve current text
+                const textEl = li.querySelector('.option-text');
+                const text = textEl ? textEl.textContent : (li.textContent || '').trim();
+                li.innerHTML = getIconMarkup(iconType) + `<span class="option-text">${text}</span>`;
+            });
+
+            // Update selected trigger icons for all ui-select2
+            document.querySelectorAll('.ui-select2[data-dropdown-id]').forEach(root => {
+                const dropdownId = root.getAttribute('data-dropdown-id');
+                const original = document.getElementById(dropdownId);
+                const trigger = root.querySelector('.ui-trigger');
+                if (!original || !trigger) return;
+                const val = original.value;
+                const opt = original.querySelector(`option[value="${val}"]`);
+                if (!opt) return;
+                const iconType = opt.getAttribute('data-icon') || opt.value;
+                const markup = getIconMarkup(iconType);
+                let selectedIcon = trigger.querySelector('.selected-icon');
+                if (markup) {
+                    if (!selectedIcon) {
+                        selectedIcon = document.createElement('span');
+                        selectedIcon.className = 'selected-icon';
+                        trigger.insertBefore(selectedIcon, trigger.firstChild);
                     }
+                    selectedIcon.innerHTML = markup;
+                    root.classList.remove('placeholder');
+                } else {
+                    if (selectedIcon) selectedIcon.remove();
+                    if (!val) root.classList.add('placeholder');
                 }
-            }
+            });
         }
 
-        // Universal function to create custom dropdowns
+        // Optional PNG icon URLs (fill these with your actual PNG asset URLs if available)
+        window.pngIconUrlMap = window.pngIconUrlMap || {
+            // Example mappings:
+            // 'missing-component': 'https://raw.githubusercontent.com/amachinic/Merem/main/icons/missing-component.png',
+            // 'broken-code': 'https://raw.githubusercontent.com/amachinic/Merem/main/icons/broken-code.png',
+            // 'layout-alignment': 'https://raw.githubusercontent.com/amachinic/Merem/main/icons/layout-alignment.png',
+            // 'high': 'https://raw.githubusercontent.com/amachinic/Merem/main/icons/severity-high.png',
+            // 'medium': 'https://raw.githubusercontent.com/amachinic/Merem/main/icons/severity-medium.png',
+            // 'low': 'https://raw.githubusercontent.com/amachinic/Merem/main/icons/severity-low.png'
+        };
+
+        function getIconMarkup(iconKey) {
+            if (!iconKey) return '';
+            const pngUrl = (window.pngIconUrlMap || {})[iconKey];
+            if (pngUrl) return `<img class="option-icon-img" src="${pngUrl}" alt="" width="16" height="16" />`;
+            const map = window.currentIconMap || defectIconMap;
+            const svg = map[iconKey];
+            if (svg) return `<span class="option-icon">${svg}</span>`;
+            return '';
+        }
+
+        // Universal function to create custom dropdowns (align to ui-select2 Chip/Hugging)
         function createCustomDropdown(dropdownId, hasIcons = false) {
             const dropdown = document.getElementById(dropdownId);
             if (!dropdown) return;
 
             // CHECK IF CUSTOM DROPDOWN ALREADY EXISTS - PREVENT DUPLICATES
-            const existingCustomDropdown = document.querySelector(`[data-dropdown-id="${dropdownId}"]`);
+            const existingCustomDropdown = document.querySelector(`.ui-select2[data-dropdown-id="${dropdownId}"]`);
             if (existingCustomDropdown) {
                 console.log(`⚠️ Custom dropdown already exists for ${dropdownId}, skipping creation`);
                 return;
@@ -10212,182 +10593,237 @@
             console.log(`🔧 Creating custom dropdown for: ${dropdownId}`);
 
             // IMMEDIATELY hide original dropdown to prevent any flickering
-            dropdown.style.display = 'none !important';
-            dropdown.style.opacity = '0 !important';
-            dropdown.style.visibility = 'hidden !important';
-            dropdown.style.position = 'absolute !important';
-            dropdown.style.zIndex = '-9999 !important';
-            
-            // Create a custom dropdown container
+            dropdown.style.display = 'none';
+            dropdown.style.opacity = '0';
+            dropdown.style.visibility = 'hidden';
+            dropdown.style.position = 'absolute';
+            dropdown.style.zIndex = '-9999';
+
+            // Build ui-select2 structure (Chip variant with hugging label)
             const dropdownContainer = dropdown.parentElement;
-            const customDropdown = document.createElement('div');
-            customDropdown.className = 'custom-enhanced-dropdown';
-            customDropdown.setAttribute('data-dropdown-id', dropdownId);
+            const uiSelect = document.createElement('div');
+            uiSelect.className = 'ui-select2';
+            uiSelect.setAttribute('data-variant', 'chip');
+            uiSelect.setAttribute('data-dropdown-id', dropdownId);
             
-            // Get the default option text
+            // Move existing label text into hugging label
+            const originLabel = dropdownContainer.querySelector('label') || dropdownContainer.querySelector('.status-header label');
+            if (originLabel) {
+                const uiLabel = document.createElement('label');
+                uiLabel.className = 'ui-label';
+                uiLabel.textContent = originLabel.textContent;
+                uiLabel.setAttribute('for', dropdownId + '__trigger');
+                uiSelect.appendChild(uiLabel);
+                originLabel.remove();
+            }
+
+            // Hidden field for value (optional) - keep syncing original select for logic
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = dropdownId;
+            uiSelect.appendChild(hiddenInput);
+
+            // Default text
             const defaultOption = dropdown.querySelector('option[value=""]') || dropdown.querySelector('option:first-child');
-            const defaultText = defaultOption ? defaultOption.textContent : 'Select option...';
+            const defaultText = defaultOption ? defaultOption.textContent : 'Select option';
             
-            // Create the display (what shows when dropdown is closed)
-            const customDisplay = document.createElement('div');
-            customDisplay.className = 'custom-dropdown-display';
-            customDisplay.innerHTML = `
-                <div class="selected-option">
-                    <span class="selected-text">${defaultText}</span>
-                </div>
-                <svg class="dropdown-arrow" viewBox="0 0 24 24" width="20" height="20">
-                    <path d="M7 10l5 5 5-5z"/>
-                </svg>
+            // Trigger button
+            const triggerBtn = document.createElement('button');
+            triggerBtn.className = 'ui-trigger';
+            triggerBtn.id = dropdownId + '__trigger';
+            triggerBtn.type = 'button';
+            triggerBtn.setAttribute('aria-haspopup', 'listbox');
+            triggerBtn.setAttribute('aria-expanded', 'false');
+            triggerBtn.innerHTML = `
+                <span class="ui-value" id="${dropdownId}-hint">${defaultText}</span>
+                <span class="caret" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="16" height="16"><path d="M7 10l5 5 5-5z"/></svg>
+                </span>
             `;
+            uiSelect.appendChild(triggerBtn);
             
-            // Create the dropdown options list
-            const optionsList = document.createElement('div');
-            optionsList.className = 'custom-dropdown-options';
-            // Align to theme palette immediately
-            optionsList.style.setProperty('background-color', 'var(--surface-color)', 'important');
-            optionsList.style.setProperty('border', '1px solid var(--border-color)', 'important');
-            optionsList.style.setProperty('border-top', '1px solid var(--border-color)', 'important');
+            // Options list
+            const optionsList = document.createElement('ul');
+            optionsList.className = 'ui-menu';
+            optionsList.setAttribute('role', 'listbox');
             
             // Populate options
-            const options = dropdown.querySelectorAll('option');
-            options.forEach((option, index) => {
-                if (index === 0 && option.value === '') return; // Skip default empty option
-                
-                const optionDiv = document.createElement('div');
-                optionDiv.className = 'custom-option';
-                optionDiv.setAttribute('data-value', option.value);
+            const optionNodes = dropdown.querySelectorAll('option');
+            const liNodes = [];
+            optionNodes.forEach((option, index) => {
+                if (index === 0 && option.value === '') return; // Skip default empty option in menu
+                const li = document.createElement('li');
+                li.className = 'ui-option';
+                li.setAttribute('role', 'option');
+                li.setAttribute('aria-selected', option.selected ? 'true' : 'false');
+                li.setAttribute('data-value', option.value);
                 
                 if (hasIcons) {
-                    optionDiv.setAttribute('data-icon', option.getAttribute('data-icon'));
+                    li.setAttribute('data-icon', option.getAttribute('data-icon'));
                     const iconType = option.getAttribute('data-icon');
-                    const iconMap = window.currentIconMap || defectIconMap;
-                    const iconHtml = iconMap[iconType] || '';
-                    
-                    optionDiv.innerHTML = `
-                        <span class="option-icon">${iconHtml}</span>
+                    const iconHtml = getIconMarkup(iconType);
+                    li.innerHTML = `
+                        ${iconHtml}
                         <span class="option-text">${option.textContent}</span>
                     `;
                 } else {
-                    optionDiv.innerHTML = `<span class="option-text">${option.textContent}</span>`;
+                    li.innerHTML = `<span class="option-text">${option.textContent}</span>`;
                 }
                 
                 // Handle option click
-                optionDiv.addEventListener('click', () => {
+                li.addEventListener('click', () => {
                     console.log(`📝 Option selected: ${option.value}`);
                     
                     // Update original dropdown
                     dropdown.value = option.value;
                     dropdown.dispatchEvent(new Event('change'));
                     
-                    // Update custom display
-                    const selectedOption = customDisplay.querySelector('.selected-option');
-                    
+                    // Update trigger text & hidden value
+                    const valueEl = triggerBtn.querySelector('.ui-value');
+                    valueEl.textContent = option.textContent;
                     if (hasIcons && option.getAttribute('data-icon')) {
-                        // Add icon span if it doesn't exist
-                        let iconSpan = selectedOption.querySelector('.selected-icon');
-                        if (!iconSpan) {
-                            iconSpan = document.createElement('span');
-                            iconSpan.className = 'selected-icon';
-                            selectedOption.insertBefore(iconSpan, selectedOption.firstChild);
+                        let selectedIcon = triggerBtn.querySelector('.selected-icon');
+                        if (!selectedIcon) {
+                            selectedIcon = document.createElement('span');
+                            selectedIcon.className = 'selected-icon';
+                            triggerBtn.insertBefore(selectedIcon, triggerBtn.firstChild);
                         }
-                        
                         const iconType = option.getAttribute('data-icon');
-                        const iconMap = window.currentIconMap || defectIconMap;
-                        const iconHtml = iconMap[iconType] || '';
-                        iconSpan.innerHTML = iconHtml;
+                        selectedIcon.innerHTML = getIconMarkup(iconType);
                     }
-                    customDisplay.querySelector('.selected-text').textContent = option.textContent;
-                    
-                    // Add has-selection class for styling when actual option is selected
-                    if (option.value) {
-                        customDisplay.classList.add('has-selection');
-                    } else {
-                        customDisplay.classList.remove('has-selection');
-                    }
-                    
-                    // Remove active state from all options
-                    optionsList.querySelectorAll('.custom-option').forEach(opt => opt.classList.remove('active'));
-                    optionDiv.classList.add('active');
+                    hiddenInput.value = (option.getAttribute('data-value') || option.value || option.textContent).trim();
+
+                    // Active state and aria
+                    optionsList.querySelectorAll('.ui-option').forEach(opt => { opt.classList.remove('active'); opt.setAttribute('aria-selected','false'); });
+                    li.classList.add('active');
+                    li.setAttribute('aria-selected','true');
                     
                     // Close dropdown
-                    customDropdown.classList.remove('open');
-                    const optionsListToClose = customDropdown.querySelector('.custom-dropdown-options');
-                    if (optionsListToClose) {
-                        optionsListToClose.style.display = 'none';
-                    }
+                    uiSelect.classList.remove('open');
+                    triggerBtn.setAttribute('aria-expanded','false');
+                    optionsList.style.display = 'none';
                     console.log('🔒 Dropdown closed after selection');
                 });
                 
                 // Mark as selected if it matches current value
                 if (option.selected || option.value === dropdown.value) {
-                    optionDiv.classList.add('active');
-                    
-                    const selectedOption = customDisplay.querySelector('.selected-option');
-                    
+                    li.classList.add('active');
+                    li.setAttribute('aria-selected','true');
+                    triggerBtn.querySelector('.ui-value').textContent = option.textContent;
                     if (hasIcons && option.getAttribute('data-icon')) {
-                        // Add icon span if it doesn't exist
-                        let iconSpan = selectedOption.querySelector('.selected-icon');
-                        if (!iconSpan) {
-                            iconSpan = document.createElement('span');
-                            iconSpan.className = 'selected-icon';
-                            selectedOption.insertBefore(iconSpan, selectedOption.firstChild);
+                        let selectedIcon = triggerBtn.querySelector('.selected-icon');
+                        if (!selectedIcon) {
+                            selectedIcon = document.createElement('span');
+                            selectedIcon.className = 'selected-icon';
+                            triggerBtn.insertBefore(selectedIcon, triggerBtn.firstChild);
                         }
-                        
-                        const iconType = option.getAttribute('data-icon');
-                        const iconMap = window.currentIconMap || defectIconMap;
-                        const iconHtml = iconMap[iconType] || '';
-                        iconSpan.innerHTML = iconHtml;
-                    }
-                    customDisplay.querySelector('.selected-text').textContent = option.textContent;
-                    
-                    // Add has-selection class for styling when actual option is selected
-                    if (option.value) {
-                        customDisplay.classList.add('has-selection');
+                        selectedIcon.innerHTML = getIconMarkup(option.getAttribute('data-icon'));
+                        uiSelect.classList.remove('placeholder');
                     } else {
-                        customDisplay.classList.remove('has-selection');
+                        const ic = triggerBtn.querySelector('.selected-icon');
+                        if (ic) ic.remove();
+                        if (!dropdown.value) uiSelect.classList.add('placeholder');
                     }
+                    hiddenInput.value = (option.getAttribute('data-value') || option.value || option.textContent).trim();
                 }
-                
-                optionsList.appendChild(optionDiv);
+                optionsList.appendChild(li);
+                liNodes.push(li);
             });
             
-            // Assemble custom dropdown
-            customDropdown.appendChild(customDisplay);
-            customDropdown.appendChild(optionsList);
-            dropdownContainer.insertBefore(customDropdown, dropdown);
+            // Assemble ui-select
+            uiSelect.appendChild(optionsList);
+            dropdownContainer.insertBefore(uiSelect, dropdown);
+            // Mark placeholder state if no selection (left-align with no icon)
+            if (!dropdown.value) {
+                uiSelect.classList.add('placeholder');
+            }
             
-            // Handle display click to toggle dropdown - SINGLE DROPDOWN RULE
-            customDisplay.addEventListener('click', (e) => {
+            // Handle trigger click to toggle
+            triggerBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 
                 console.log(`🖱️ Click detected on dropdown ${dropdownId}`);
                 
-                const isCurrentlyOpen = customDropdown.classList.contains('open');
+                const isCurrentlyOpen = uiSelect.classList.contains('open');
                 
                 // CLOSE ALL DROPDOWNS FIRST - Only one dropdown open at a time
                 closeAllDropdowns();
                 
                 // If this dropdown was already open, keep it closed. Otherwise, open it.
                 if (!isCurrentlyOpen) {
-                    openDropdown(customDropdown, customDisplay);
+                    uiSelect.classList.add('open');
+                    triggerBtn.setAttribute('aria-expanded','true');
+                    optionsList.style.display = 'block';
                 }
             });
             
             // Close dropdown when clicking outside
             document.addEventListener('click', (e) => {
-                if (!customDropdown.contains(e.target)) {
-                    closeDropdown(customDropdown);
+                if (!uiSelect.contains(e.target)) {
+                    uiSelect.classList.remove('open');
+                    triggerBtn.setAttribute('aria-expanded','false');
+                    optionsList.style.display = 'none';
                 }
             });
             
                         // No need for repositioning with absolute positioning relative to container
             // The dropdown will naturally move with its parent
             
-            // Close dropdown on escape key
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && customDropdown.classList.contains('open')) {
-                    closeDropdown(customDropdown);
+            // Keyboard support
+            let activeIndex = -1;
+            function setActive(i){
+                liNodes.forEach(o => o.classList.remove('is-active'));
+                if (i >= 0 && i < liNodes.length){ liNodes[i].classList.add('is-active'); activeIndex = i; }
+                else activeIndex = -1;
+            }
+            function choose(i){ if (i >= 0 && i < liNodes.length) liNodes[i].click(); }
+            function scrollIntoView(i){
+                if (i < 0) return;
+                const li = liNodes[i]; if (!li) return;
+                const m = optionsList;
+                const oTop = li.offsetTop, oBottom = oTop + li.offsetHeight;
+                if (oTop < m.scrollTop) m.scrollTop = oTop;
+                else if (oBottom > m.scrollTop + m.clientHeight) m.scrollTop = oBottom - m.clientHeight;
+            }
+            triggerBtn.addEventListener('keydown', (e)=>{
+                if (e.key === 'Escape' && uiSelect.classList.contains('open')){
+                    e.preventDefault();
+                    uiSelect.classList.remove('open');
+                    triggerBtn.setAttribute('aria-expanded','false');
+                    optionsList.style.display = 'none';
+                } else if (e.key === 'ArrowDown'){
+                    e.preventDefault();
+                    if (!uiSelect.classList.contains('open')){
+                        uiSelect.classList.add('open');
+                        triggerBtn.setAttribute('aria-expanded','true');
+                        optionsList.style.display = 'block';
+                        setActive(0);
+                    } else {
+                        setActive(Math.min(liNodes.length-1, activeIndex+1));
+                        scrollIntoView(activeIndex);
+                    }
+                } else if (e.key === 'ArrowUp'){
+                    e.preventDefault();
+                    if (!uiSelect.classList.contains('open')){
+                        uiSelect.classList.add('open');
+                        triggerBtn.setAttribute('aria-expanded','true');
+                        optionsList.style.display = 'block';
+                        setActive(Math.max(0, activeIndex));
+                    } else {
+                        setActive(Math.max(0, activeIndex-1));
+                        scrollIntoView(activeIndex);
+                    }
+                } else if (e.key === 'Enter' || e.key === ' '){
+                    e.preventDefault();
+                    if (!uiSelect.classList.contains('open')){
+                        uiSelect.classList.add('open');
+                        triggerBtn.setAttribute('aria-expanded','true');
+                        optionsList.style.display = 'block';
+                        setActive(Math.max(0, activeIndex));
+                    } else {
+                        choose(activeIndex >= 0 ? activeIndex : 0);
+                    }
                 }
             });
             
@@ -10398,9 +10834,15 @@
         // Global dropdown management functions
         function closeAllDropdowns() {
             console.log('🔒 Closing all open dropdowns');
-            const openDropdowns = document.querySelectorAll('.custom-enhanced-dropdown.open');
-            openDropdowns.forEach(dropdown => {
-                closeDropdown(dropdown);
+            const openCustom = document.querySelectorAll('.custom-enhanced-dropdown.open');
+            openCustom.forEach(dropdown => closeDropdown(dropdown));
+            const openUi = document.querySelectorAll('.ui-select2.open');
+            openUi.forEach(root => {
+                const trigger = root.querySelector('.ui-trigger');
+                const menu = root.querySelector('.ui-menu');
+                root.classList.remove('open');
+                if (trigger) trigger.setAttribute('aria-expanded','false');
+                if (menu) menu.style.display = 'none';
             });
         }
         
@@ -10459,11 +10901,12 @@
             // CRITICAL: Add styles FIRST before creating dropdowns
             addDropdownStyles();
             
-            // Create dropdowns for main card (default to High severity)
+            // Create dropdowns for main card (severity starts with hint placeholder)
             createDropdownForSection('severity-section', 'severity-select', false, [
-                { value: 'high', text: 'High' },
+                { value: '', text: 'Select defect severity' },
+                { value: 'low', text: 'Low' },
                 { value: 'medium', text: 'Medium' },
-                { value: 'low', text: 'Low' }
+                { value: 'high', text: 'High' }
             ]);
             
             createDropdownForSection('defect-type-section', 'defect-type-select', true, [
@@ -10519,6 +10962,11 @@
             if (existingStyle) {
                 existingStyle.remove();
                 console.log('🗑️ Removed existing dropdown styles');
+            }
+            const existingUiStyle = document.getElementById('ui-select2-styles');
+            if (existingUiStyle) {
+                existingUiStyle.remove();
+                console.log('🗑️ Removed existing ui-select2 styles');
             }
             
             // ALSO REMOVE ANY DUPLICATE CUSTOM DROPDOWNS
@@ -10792,6 +11240,35 @@
             `;
             document.head.appendChild(style);
             console.log('🎨 Enhanced dropdown styles added to head');
+
+            // Inject ui-select2 styles (exact mapping from provided component + inline layout fixes)
+            const uiStyle = document.createElement('style');
+            uiStyle.id = 'ui-select2-styles';
+            uiStyle.textContent = `
+                .ui-select2 { position: relative; display: inline-block; width: 100%; }
+                .ui-select2 .ui-label { display: block; width: fit-content; padding: 2px 8px; border-radius: 4px 4px 0 0; border-top: 1px solid var(--ui-border); border-right: 1px solid var(--ui-border); border-left: 1px solid var(--ui-border); border-bottom: 1px solid var(--ui-border); background: var(--ui-bg); font-size: 10px; font-weight: 400; line-height: 14px; color: var(--text-color); text-transform: uppercase; margin: 0 0 -1px 0; }
+                .ui-select2[data-variant="chip"] .ui-label { width: fit-content; margin: 0 0 -1px 0; }
+                .ui-select2 .ui-trigger { display: flex; align-items: center; gap: 8px; width: 100%; box-sizing: border-box; padding: 12px 28px 12px 8px; max-height: 42px; border: 1px solid var(--ui-border); border-radius: 0 0 4px 4px; background: var(--ui-bg); font-size: 13px; line-height: 16px; font-weight: 400; text-align: left; cursor: pointer; position: relative; z-index: 2; transition: background var(--motion-ms) var(--ease-smooth), border-color var(--motion-ms) var(--ease-smooth), box-shadow var(--motion-ms) var(--ease-smooth); }
+                .ui-select2.placeholder .ui-trigger { gap: 8px; }
+                .ui-select2.placeholder .ui-trigger .ui-value { margin-left: 0; }
+                .ui-select2 .ui-trigger .selected-icon { display: inline-flex; width: 16px; height: 16px; align-items: center; justify-content: center; flex-shrink: 0; }
+                .ui-select2 .ui-trigger img.selected-icon-img { width: 16px; height: 16px; display: block; object-fit: contain; }
+                .ui-select2 .ui-trigger .ui-value { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-secondary); }
+                .ui-select2:not(.placeholder) .ui-trigger .ui-value { color: var(--ui-text); }
+                .ui-select2 .ui-trigger:hover { background: var(--ui-active-bg); }
+                .caret { position: absolute; top: 50%; right: 8px; transform: translateY(-50%); pointer-events: none; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; transition: transform var(--motion-ms) var(--ease-smooth); }
+                .ui-trigger[aria-expanded="true"] .caret { transform: translateY(-50%) rotate(180deg); }
+                .ui-menu { position: absolute; top: calc(100% - 1px); left: 0; right: 0; z-index: 10; margin: 0; padding: 0; list-style: none; border: 1px solid var(--ui-border); border-top: none; border-radius: 0 0 6px 6px; background: var(--ui-bg); box-shadow: 0 8px 20px rgba(0,0,0,.08); max-height: 240px; overflow: auto; display: none; transform-origin: top; opacity: 0; transform: translateY(-4px) scaleY(0.98); transition: opacity var(--motion-ms) var(--ease-smooth), transform var(--motion-ms) var(--ease-smooth), border-color var(--motion-ms) var(--ease-smooth); }
+                .ui-select2.open .ui-menu { display: block; opacity: 1; transform: translateY(0) scaleY(1); border-color: var(--ui-active-border); }
+                .ui-select2.open .ui-trigger { border-color: var(--ui-active-border); background: var(--ui-active-bg); border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+                .ui-option { display: flex; align-items: center; gap: 8px; max-height: 42px; padding: 8px 12px; font-size: 13px; line-height: 16px; cursor: pointer; user-select: none; transition: background var(--motion-ms) var(--ease-smooth); }
+                .ui-option .option-icon, .ui-option .option-icon-img { width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+                .ui-option img.option-icon-img { width: 16px; height: 16px; display: block; object-fit: contain; }
+                .ui-option:hover, .ui-option.is-active { background: var(--ui-active-bg); }
+                .ui-select2[data-state="error"] .ui-trigger { border-color: var(--ui-error-border); background: var(--ui-error-bg); }
+                .ui-select2[data-state="error"] .ui-menu { border-color: var(--ui-error-border); }
+            `;
+            document.head.appendChild(uiStyle);
             
             // Verify styles are applied
             setTimeout(() => {
@@ -11210,7 +11687,7 @@
                 zip: {
                     name: 'Zip',
                     icon: `<img src="https://raw.githubusercontent.com/amachinic/Merem/main/zip.png" width="27" height="20" alt="Zip">`,
-                    defaultUrl: 'https://zip.co'
+                    defaultUrl: 'https://ziphq.com'
                 }
             };
             
@@ -11267,12 +11744,11 @@
                 onComplete: () => {
                     linkItem.remove();
                     
-                    // If no more links, show placeholder
+                    // If no more real links, ensure exactly one default placeholder exists
                     const remainingLinks = linksContainer.querySelectorAll('.link-item:not(.link-placeholder)');
                     if (remainingLinks.length === 0) {
                         const placeholder = document.createElement('div');
                         placeholder.className = 'link-item link-placeholder';
-                        // Determine card ID from container
                         const cardId = linksContainer.id === 'links-container' ? 1 : parseInt(linksContainer.id.split('-')[2]);
                         placeholder.onclick = () => openLinkModalForCard(cardId);
                         placeholder.innerHTML = `
@@ -11280,6 +11756,8 @@
                                 <span class="add-icon">+</span>
                             </button>
                         `;
+                        // Remove any stray placeholders first
+                        linksContainer.querySelectorAll('.link-placeholder').forEach(p => p.remove());
                         linksContainer.appendChild(placeholder);
                         
                         // Animate in the placeholder
@@ -11310,13 +11788,17 @@
                 duration: 0.3,
                 ease: 'power2.out',
                 onComplete: () => {
-                    linksContainer.innerHTML = `
-                        <div class="link-item link-placeholder" onclick="openLinkModalForCard(1)">
+                    // Ensure exactly one default placeholder remains
+                    linksContainer.innerHTML = '';
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'link-item link-placeholder';
+                    placeholder.onclick = () => openLinkModalForCard(1);
+                    placeholder.innerHTML = `
                             <button class="add-link-btn-full" title="Add link">
                                 <span class="add-icon">+</span>
                             </button>
-                        </div>
                     `;
+                    linksContainer.appendChild(placeholder);
                     
                     // Add fade in animation
                     gsap.fromTo(linksContainer.firstElementChild, 
@@ -11332,22 +11814,7 @@
             });
         }
 
-        // Smart close behavior: Reset if only one card, Remove if multiple cards
-        function smartCloseTriageCard(button) {
-            const allTriageCards = document.querySelectorAll('.triage-card');
-            
-            if (allTriageCards.length === 1) {
-                // Only one card: Reset the component
-                console.log('🔄 Only one card - resetting component');
-                button.title = "Reset triage component";
-                closeTriageComponent();
-            } else {
-                // Multiple cards: Remove this specific card
-                console.log(`🗑️ Multiple cards (${allTriageCards.length}) - removing this card`);
-                button.title = "Remove this triage card";
-                removeTriageCard(button);
-            }
-        }
+        // Removed smartCloseTriageCard handler (replaced by Remove CTA)
 
         // Close/Reset Triage Component
         function closeTriageComponent() {
@@ -11429,7 +11896,7 @@
             // Reset links to default Zip + placeholder
             if (linksContainer) {
                 linksContainer.innerHTML = `
-                    <div class=\"link-item\">\n                        <a href=\"https://zip.co\" target=\"_blank\" class=\"simple-link service-link\" title=\"https://zip.co\">\n                            <span class=\"service-link-icon\"><img src=\"https://raw.githubusercontent.com/amachinic/Merem/main/zip.png\" width=\"27\" height=\"20\" alt=\"Zip\"></span>\n                            <span>Zip</span>\n                        </a>\n                        <button class=\"remove-link-btn\" onclick=\"removeLink(this)\" title=\"Remove link\">✕</button>\n                    </div>\n                    <div class=\"link-item link-placeholder\" onclick=\"openLinkModalForCard(1)\">\n                        <button class=\"add-link-btn-full\" title=\"Add link\">\n                            <span class=\"add-icon\">+</span>\n                        </button>\n                    </div>
+                    <div class=\"link-item\">\n                        <a href=\"https://ziphq.com\" target=\"_blank\" class=\"simple-link service-link\" title=\"https://zip.co\">\n                            <span class=\"service-link-icon\"><img src=\"https://raw.githubusercontent.com/amachinic/Merem/main/zip.png\" width=\"27\" height=\"20\" alt=\"Zip\"></span>\n                            <span>Zip</span>\n                        </a>\n                        <button class=\"remove-link-btn\" onclick=\"removeLink(this)\" title=\"Remove link\">✕</button>\n                    </div>\n                    <div class=\"link-item link-placeholder\" onclick=\"openLinkModalForCard(1)\">\n                        <button class=\"add-link-btn-full\" title=\"Add link\">\n                            <span class=\"add-icon\">+</span>\n                        </button>\n                    </div>
                 `;
             }
             
@@ -11690,14 +12157,13 @@
 
         // Status tooltip functionality
         function toggleStatusTooltip(button) {
-            const tooltip = button.parentElement.querySelector('.status-tooltip');
-            const isVisible = tooltip.style.display !== 'none';
-            
+            const header = button.closest('.status-header');
+            if (!header) return;
+            const tooltip = header.querySelector('.status-tooltip');
+            if (!tooltip) return;
+            const isVisible = getComputedStyle(tooltip).display !== 'none';
             // Close all other status tooltips first
-            document.querySelectorAll('.status-tooltip').forEach(t => {
-                t.style.display = 'none';
-            });
-            
+            document.querySelectorAll('.status-tooltip').forEach(t => { t.style.display = 'none'; });
             // Toggle this tooltip
             if (!isVisible) {
                 tooltip.style.display = 'block';
@@ -11886,7 +12352,7 @@
                 zip: {
                     name: 'Zip',
                     icon: `<img src="https://raw.githubusercontent.com/amachinic/Merem/main/zip.png" width="27" height="20" alt="Zip">`,
-                    defaultUrl: 'https://zip.co'
+                    defaultUrl: 'https://ziphq.com'
                 }
             };
             
