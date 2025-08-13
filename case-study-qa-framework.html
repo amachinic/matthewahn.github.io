@@ -28,31 +28,91 @@
         }
 
         :root {
+            /* NEW COLOR SYSTEM */
+            /* PRIMITIVES */
+            --brand-lime-500: #A2E633;
+            --brand-lime-600: #7EBB1C;
+            --neutral-0: #ffffff;
+            --neutral-50: #f8f9fa;
+            --neutral-100: #f3f4f6;
+            --neutral-200: #f0f0f0;
+            --neutral-700: #6b7280;
+            --neutral-800: #333333;
+            --ink-950: #000810;
+
+            /* ROLES */
+            --surface-1: var(--neutral-0);
+            --surface-2: var(--neutral-50);
+            --surface-3: var(--neutral-100);
+            --bg: var(--neutral-200);
+
+            --text-primary: var(--neutral-800);
+            --text-secondary: var(--neutral-700);
+            --text-muted: #9ca3af;
+
+            --border-subtle: rgba(0,0,0,.10);
+            --border: rgba(0,0,0,.15);
+            --border-strong: rgba(0,0,0,.20);
+
+            --shadow-sm: rgba(0,0,0,.08);
+            --shadow-md: rgba(0,0,0,.12);
+            --shadow-lg: rgba(0,0,0,.16);
+
+            --focus-ring: var(--brand-lime-600);
+
+            /* COMPONENT ALIASES */
+            --card-bg: var(--surface-1);
+            --card-text: var(--text-primary);
+
+            --button-primary-bg: var(--brand-lime-500);
+            --button-primary-text: #000;
+            --button-neutral-bg: var(--surface-2);
+            --button-neutral-text: var(--text-primary);
+            --button-border: #D9D9D9;
+
+            --state-hover: rgba(162,230,51,0.05);
+            --state-pressed: rgba(162,230,51,0.05);
+            --state-disabled: rgba(0,0,0,.12);
+            --field-hover-bg: rgba(162,230,51,0.05);
+
+            /* RADII */
+            --radius-card: 16px;
+
+            /* LINKS */
+            --link: #5a3ec8;
+            --link-hover: #5a3ec8;
+            --link-visited: #5a3ec8;
+
+            /* MOTION */
+            --motion-fast: 120ms;
+            --motion-normal: 180ms;
+            --motion-slow: 300ms;
+
             /* ===== UNIFIED DESIGN SYSTEM ===== */
             /* Background & Surface Colors */
-            --bg-color: #f0f0f0;
-            --surface-color: #ffffff;
-            --surface-secondary: #f8f9fa;
-            --surface-accent: #f3f4f6;
+            --bg-color: var(--bg);
+            --surface-color: var(--surface-1);
+            --surface-secondary: var(--surface-2);
+            --surface-accent: var(--surface-3);
             
             /* Text Colors */
-            --text-color: #333333;
-            --text-secondary: #8d8d8d;
-            --text-muted: #6b7280;
+            --text-color: var(--text-primary);
+            --text-secondary: var(--text-secondary);
+            --text-muted: var(--text-muted);
             
             /* Border & Stroke Colors */
-            --border-color: rgba(0, 0, 0, 0.1);
-            --border-hover: rgba(0, 0, 0, 0.15);
-            --border-focus: rgba(0, 0, 0, 0.2);
+            --border-color: var(--border-subtle);
+            --border-hover: var(--border);
+            --border-focus: var(--border-strong);
             
             /* Shadow Colors */
-            --shadow-light: rgba(0, 0, 0, 0.08);
-            --shadow-medium: rgba(0, 0, 0, 0.12);
-            --shadow-strong: rgba(0, 0, 0, 0.16);
+            --shadow-light: var(--shadow-sm);
+            --shadow-medium: var(--shadow-md);
+            --shadow-strong: var(--shadow-lg);
             
             /* Component Specific */
-            --card-bg-color: #1a1a1a;
-            --card-text-color: #ffffff;
+            --card-bg-color: var(--card-bg);
+            --card-text-color: var(--card-text);
             --interactive-bg: rgba(0, 0, 0, 0.05);
             --interactive-hover: rgba(0, 0, 0, 0.08);
             
@@ -61,20 +121,20 @@
             --line-height-body: 1.6;
 
             /* Link Colors */
-            --link-color: #0066cc;
-            --link-hover: #004499;
+            --link-color: var(--link);
+            --link-hover: var(--link-hover);
             
             /* Legacy Support */
-            --secondary-text-color: #8d8d8d;
-            --nav-bg-color: rgba(255, 255, 255, 0.15);
-            --nav-border-color: rgba(255, 255, 255, 0.2);
-            --nav-hover-color: rgba(0, 0, 0, 0.08);
-            --clock-bg-color: #f0f0f0;
-            --tooltip-bg-color: white;
-            --tooltip-text-color: black;
-            --shadow-color: rgba(0, 0, 0, 0.12);
-            --toggle-border-color: rgba(0, 0, 0, 0.3);
-            --light-nav-border-color: rgba(0, 0, 0, 0.15);
+            --secondary-text-color: var(--text-secondary);
+            --nav-bg-color: var(--state-hover);
+            --nav-border-color: var(--border-subtle);
+            --nav-hover-color: var(--state-hover);
+            --clock-bg-color: var(--bg);
+            --tooltip-bg-color: var(--surface-1);
+            --tooltip-text-color: var(--text-primary);
+            --shadow-color: var(--shadow-md);
+            --toggle-border-color: var(--border);
+            --light-nav-border-color: var(--border-subtle);
             
             /* Design System: Case Study Color Palette */
             --case-study-qa-framework: rgb(0, 5, 11); /* Obsidian */
@@ -83,79 +143,32 @@
             --case-study-ai-integration: rgb(14, 6, 0); /* Rouge */
 
             /* UI Button palette (light mode) */
-            --ui-border: #D9D9D9;
-            --ui-text: #000810;
-            --ui-bg: #ffffff;
-            --ui-active-border: #7EBB1C;
-            --ui-active-bg: rgba(162,230,51,0.05);
-            --ui-alt-active-border: #000810;
-            --ui-alt-active-bg: rgba(0,8,16,0.03);
-            --ui-error-border: #710C0E;
-            --ui-error-bg: rgba(113,12,14,0.05);
-            --motion-ms: 1000ms;
+            --ui-border: var(--button-border);
+            --ui-text: var(--ink-950);
+            --ui-bg: var(--surface-1);
+            --ui-active-border: var(--focus-ring);
+            --ui-active-bg: var(--state-hover);
+            --ui-alt-active-border: var(--ink-950);
+            --ui-alt-active-bg: var(--state-hover);
+            --ui-error-border: var(--border-strong);
+            --ui-error-bg: var(--state-hover);
+            --motion-ms: var(--motion-normal);
             --ease-smooth: cubic-bezier(.2,.7,.2,1);
-            --btn-dark: #000810;
-            --btn-lime: #A2E633;
-            --btn-lime-border: #7EBB1C;
-            --btn-gray: #9C9C9C;
-            --btn-gray-bg: #F0F0F0;
-            --btn-lime-40: rgba(162,230,51,0.40);
-            --btn-white: #FFFFFF;
+            --btn-dark: var(--ink-950);
+            --btn-lime: var(--brand-lime-500);
+            --btn-lime-border: var(--brand-lime-600);
+            --btn-gray: var(--text-muted);
+            --btn-gray-bg: var(--neutral-200);
+            --btn-lime-40: var(--button-primary-bg);
+            --btn-white: var(--neutral-0);
+
+            /* legacy tokens kept as aliases */
+            --white: var(--neutral-0);
+            --nav-white-overlay: var(--state-hover);
+            --lime-border: var(--brand-lime-600);
         }
 
-        [data-theme="dark"] {
-            /* ===== UNIFIED DESIGN SYSTEM - DARK MODE ===== */
-            /* Background & Surface Colors */
-            --bg-color: #0f0f0f;
-            --surface-color: #1a1a1a;
-            --surface-secondary: #222222;
-            --surface-accent: #2a2a2a;
-            
-            /* Text Colors */
-            --text-color: #ffffff;
-            --text-secondary: #888888;
-            --text-muted: #666666;
-            
-            /* Border & Stroke Colors */
-            --border-color: rgba(255, 255, 255, 0.1);
-            --border-hover: rgba(255, 255, 255, 0.15);
-            --border-focus: rgba(255, 255, 255, 0.2);
-            
-            /* Shadow Colors */
-            --shadow-light: rgba(0, 0, 0, 0.2);
-            --shadow-medium: rgba(0, 0, 0, 0.3);
-            --shadow-strong: rgba(0, 0, 0, 0.4);
-            
-            /* Component Specific */
-            --card-bg-color: #1a1a1a;
-            --card-text-color: #ffffff;
-            --interactive-bg: rgba(255, 255, 255, 0.05);
-            --interactive-hover: rgba(255, 255, 255, 0.08);
-            
-            /* Link Colors */
-            --link-color: #66b3ff;
-            --link-hover: #4da6ff;
-            
-            /* Legacy Support */
-            --secondary-text-color: #888888;
-            --nav-bg-color: rgba(255, 255, 255, 0.05);
-            --nav-border-color: rgba(255, 255, 255, 0.15);
-            --nav-hover-color: rgba(255, 255, 255, 0.2);
-            --clock-bg-color: #0f0f0f;
-            --tooltip-bg-color: #333;
-            --tooltip-text-color: #ffffff;
-            --shadow-color: rgba(0, 0, 0, 0.3);
-            --toggle-border-color: rgba(255, 255, 255, 0.15);
-            --light-nav-border-color: transparent;
-            
-            /* Design System: Monochromatic Gradient Palette for Dark Mode */
-            --case-study-qa-framework: rgb(22, 24, 28); /* Darkest gradient - sophisticated charcoal */
-            --case-study-design-system: rgb(28, 30, 35); /* Dark-mid gradient - refined slate */
-            --case-study-mobile-experience: rgb(35, 38, 42); /* Mid-light gradient - elegant graphite */
-            --case-study-ai-integration: rgb(42, 45, 50); /* Lightest gradient - premium steel */
-
-            /* Keep button variables defined but not used in dark mode override */
-        }
+        /* Dark mode removed */
 
         /* =================================
            TYPOGRAPHY SYSTEM
@@ -354,23 +367,23 @@
         }
 
         /* Dark theme textarea styles */
-        [data-theme="dark"] textarea {
+     textarea {
             background-color: var(--surface-color) !important;
             border-color: var(--border-color) !important;
             color: var(--text-color) !important;
         }
 
-        [data-theme="dark"] textarea:hover {
+    textarea:hover {
             border-color: var(--border-hover) !important;
             background-color: var(--surface-color) !important;
         }
 
-        [data-theme="dark"] textarea:focus {
+    textarea:focus {
             border-color: var(--border-focus) !important;
             background-color: var(--surface-color) !important;
         }
 
-        [data-theme="dark"] textarea::placeholder {
+    textarea::placeholder {
             color: var(--text-muted) !important;
         }
 
@@ -576,7 +589,7 @@
         }
 
         /* Dark mode border color for all meta-items */
-        [data-theme="dark"] .meta-item {
+     .meta-item {
             border-top-color: rgb(255 255 255 / 8%);
         }
         
@@ -624,7 +637,7 @@
             border: 1px solid var(--toggle-border-color);
         }
 
-        [data-theme="dark"] .pill {
+    .pill {
             background: rgba(255, 255, 255, 0.1);
             border-color: var(--toggle-border-color);
         }
@@ -640,7 +653,7 @@
             letter-spacing: 0.5px;
         }
 
-        [data-theme="dark"] .client-pill {
+     .client-pill {
             background: var(--text-color);
             color: var(--bg-color);
             border-color: var(--text-color);
@@ -953,7 +966,7 @@
         .defect-severity-legend {
             background: var(--card-bg-color);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
+            border-radius: var(--radius-card);
             padding: 24px;
             margin-bottom: 40px;
             max-width: 600px;
@@ -1212,6 +1225,9 @@
                 font-size: 10px;
                 padding: 8px 8px;
                 height: 16px;
+                background: var(--surface-1);
+                border: 1px solid var(--ui-border);
+                color: var(--text-secondary);
             }
         }
         
@@ -1259,10 +1275,6 @@
                 max-height: 40px;
             }
 
-        /* Restore bottom border for description input container in medium viewports */
-        .description-section .ui-field {
-            border-bottom: 1px solid var(--ui-border) !important;
-            }
             
             .triage-component-container textarea #defect-description {
                 min-height: 60px;
@@ -1395,17 +1407,17 @@
             font-family: 'Unica77LL', Arial, sans-serif;
         }
 
-/* Light-mode overrides for hugging inputs/dropdowns in triage */
-body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea,
-body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea:hover,
-body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea:focus {
+/* Light-mode (default) overrides for hugging inputs/dropdowns in triage */
+.ui-input[data-variant="chip"] .ui-field textarea,
+.ui-input[data-variant="chip"] .ui-field textarea:hover,
+.ui-input[data-variant="chip"] .ui-field textarea:focus {
     background: transparent !important;
 }
 
 /* Hugging label for triage dropdown labels */
-body:not([data-theme="dark"]) .triage-component-container .severity-section > label,
-body:not([data-theme="dark"]) .triage-component-container .defect-type-section > label,
-body:not([data-theme="dark"]) .triage-component-container .status-section > .status-header > label {
+.triage-component-container .severity-section > label,
+.triage-component-container .defect-type-section > label,
+.triage-component-container .status-section > .status-header > label {
     display: inline-block;
     padding: 2px 8px;
     background: var(--ui-bg);
@@ -1421,7 +1433,7 @@ body:not([data-theme="dark"]) .triage-component-container .status-section > .sta
 }
 
 /* Chip field styling for our existing custom dropdown display */
-body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropdown .custom-dropdown-display {
+.triage-component-container .custom-enhanced-dropdown .custom-dropdown-display {
     border: 1px solid var(--ui-border) !important;
     border-radius: 0 0 4px 4px !important;
     background: var(--ui-bg) !important;
@@ -1429,14 +1441,15 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
     padding: 8px 28px 8px 8px !important;
     transition: background var(--motion-ms) var(--ease-smooth), border-color var(--motion-ms) var(--ease-smooth) !important;
 }
-body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropdown .custom-dropdown-display:hover {
-    background: var(--ui-active-bg) !important;
+.triage-component-container .custom-enhanced-dropdown .custom-dropdown-display:hover {
+    background: var(--field-hover-bg) !important;
+    border-color: var(--ui-active-border) !important;
 }
-body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropdown.open .custom-dropdown-display {
+.triage-component-container .custom-enhanced-dropdown.open .custom-dropdown-display {
     border-color: var(--ui-active-border) !important;
     background: var(--ui-active-bg) !important;
 }
-body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropdown.open .custom-dropdown-options {
+body .triage-component-container .custom-enhanced-dropdown.open .custom-dropdown-options {
     border-color: var(--ui-active-border) !important;
         }
 
@@ -1451,15 +1464,19 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         .triage-info-card .triage-compare-card {
             background: var(--surface-color);
             backdrop-filter: blur(12px);
-            border-radius: 16px;
+            border-radius: var(--radius-card);
             border: 1px solid var(--border-color);
-            padding: 16px 24px 24px 24px;
+            padding: 0; /* allow inner container to span full width */
             width: 100%;
             position: relative;
             margin-top: 0;           /* remove extra gap */
             height: 100%;            /* fill full card height */
             display: flex;
             flex-direction: column;
+  /* enforce rounded clipping even for absolutely-positioned children */
+  overflow: hidden;
+  clip-path: inset(0 round var(--radius-card));
+            overflow: hidden; /* ensure bottom corners clip nested content */
             /* Local CTA color system for this canvas */
             --cta-bg-strong: var(--interactive-hover);
             --cta-border-strong: var(--border-hover);
@@ -1468,14 +1485,79 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             --cta-border-subtle: var(--border-color);
             --cta-fg-subtle: var(--text-color);
         }
-        [data-theme="dark"] .triage-info-card .triage-compare-card {
-            --cta-bg-strong: var(--interactive-hover);
-            --cta-border-strong: var(--border-hover);
-            --cta-fg-strong: var(--text-color);
-            --cta-bg-subtle: var(--surface-color);
-            --cta-border-subtle: var(--border-color);
-            --cta-fg-subtle: var(--text-color);
+        
+        /* Toolbar for compare card */
+        .triage-compare-toolbar {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            grid-template-rows: auto auto;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 12px;          
+            background: var(--surface-color);
+            border-top-left-radius: var(--radius-card);
+            border-top-right-radius: var(--radius-card);
+            box-shadow: 0 6px 10px -8px var(--shadow-lg);
+            z-index: 1;
         }
+        .triage-compare-toolbar .triage-compare-upload-left { justify-self: start; }
+        .triage-compare-toolbar .triage-compare-upload-right { justify-self: end; }
+        .triage-compare-toolbar-title { display: contents; }
+        .triage-compare-subtext { grid-column: 1 / -1; grid-row: 2; justify-self: center; font-size: 10px; line-height: 1; font-weight: 400; color: var(--text-secondary); font-family: 'Unica77LL', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+
+        /* Reset button styled like other CTAs (not pill) */
+        .triage-compare-reset {
+            background: var(--surface-1);
+            color: var(--text-secondary);
+            border: 1px solid var(--ui-border);
+            border-radius: 6px;
+            height: 32px;
+            padding: 0 10px;
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background var(--motion-ms) var(--ease-smooth), border-color var(--motion-ms) var(--ease-smooth);
+        }
+        .triage-compare-reset:hover { background: var(--field-hover-bg) !important; border-color: var(--ui-active-border) !important; color: var(--text-primary) !important; }
+
+        /* Ensure Reset in toolbar is inline-centered, not absolutely positioned */
+        .triage-compare-toolbar .triage-compare-reset {
+            position: static !important;
+            left: auto !important;
+            right: auto !important;
+            top: auto !important;
+            bottom: auto !important;
+            transform: none !important;
+            margin: 0;
+        }
+
+        /* Upload buttons like our CTAs */
+        .triage-compare-upload { border-radius: 6px !important; height: 32px !important; }
+        /* Ensure uploads in toolbar are not absolutely positioned to bottom */
+        .triage-compare-toolbar .triage-compare-upload {
+            position: static !important;
+            left: auto !important;
+            right: auto !important;
+            top: auto !important;
+            bottom: auto !important;
+            width: auto;
+            height: 32px;
+            padding: 0 10px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--surface-1) !important;
+            color: var(--text-secondary) !important;
+            border: 1px solid var(--ui-border) !important;
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: background var(--motion-ms) var(--ease-smooth), border-color var(--motion-ms) var(--ease-smooth);
+        }
+        .triage-compare-toolbar .triage-compare-upload:hover { background: var(--field-hover-bg) !important; border-color: var(--ui-active-border) !important; color: var(--text-primary) !important; }
+        /* Dark mode removed */
 
         .triage-info-card .triage-compare-container {
             position: relative;
@@ -1483,7 +1565,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             flex: 1;                /* grow to fill remaining height */
             min-height: 360px;
             background: #000;
-            border-radius: 12px;
+            border-radius: 0; /* rely on outer card for clipping */
             overflow: hidden;
         }
 
@@ -1496,6 +1578,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             height: 100%;
             object-fit: cover;
             display: block;
+            border-radius: 0; /* child images shouldn't set their own radius */
         }
 
         /* Light mode: slightly lighten images to improve overlay icon contrast */
@@ -1505,9 +1588,9 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             filter: brightness(1.1) contrast(1.05);
         }
         /* Dark mode: keep original without lightening */
-        [data-theme="dark"] .triage-info-card [class^="triage-compare-image-"],
-        [data-theme="dark"] .triage-info-card .triage-compare-image-before,
-        [data-theme="dark"] .triage-info-card .triage-compare-image-after {
+        .triage-info-card [class^="triage-compare-image-"],
+        .triage-info-card .triage-compare-image-before,
+     .triage-info-card .triage-compare-image-after {
             filter: none;
         }
 
@@ -1523,6 +1606,8 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             line-height: 1.2;
             color: var(--text-secondary);
             margin-bottom: 6px;
+            padding: 16px 24px 0 24px; /* keep readable padding for label */
+            border-radius: var(--radius-card);
         }
 
         .triage-info-card .triage-compare-annotation-widget {
@@ -1533,36 +1618,44 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             align-items: center;
             gap: 8px;
             padding: 6px 10px;
-            background: var(--cta-bg-strong);
-            border-radius: 16px;
-            border: 1px solid var(--cta-border-strong);
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid var(--ui-border); 
+            border-radius: 6px;
             z-index: 5;
-            transition: background-color .2s ease, border-color .2s ease, color .2s ease;
+            transition: none;
         }
+        /* no hover/selected states */
         .triage-info-card .triage-compare-annotation-widget:hover,
-        .triage-info-card .triage-compare-annotation-widget:focus-within { background: var(--cta-bg-subtle); border-color: var(--cta-border-subtle); }
+        .triage-info-card .triage-compare-annotation-widget:focus-within {      
+
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid var(--ui-border); 
+        
+    }
 
         /* Preview bubble beside the Annotate CTA: subtle, low-contrast */
         .triage-info-card .triage-compare-annotation-preview {
             display: inline-flex;
-            background: var(--cta-bg-strong);
-            color: var(--cta-fg-strong);
-            border: 1px solid var(--cta-border-strong) !important;
+            background: var(--border-hover);
+            color: var(--ui-border);
+            border: 1px solid var(--ui-border) !important;
             cursor: pointer; /* make it obvious it's clickable */
-            transition: background-color .2s ease, border-color .2s ease, color .2s ease;
+            transition: none;
         }
         .triage-info-card .triage-compare-annotation-preview:hover,
-        .triage-info-card .triage-compare-annotation-preview:focus-visible { background: var(--cta-bg-subtle); color: var(--cta-fg-subtle); border-color: var(--cta-border-subtle) !important; }
+        .triage-info-card .triage-compare-annotation-preview:focus-visible { background: var(--border-hover); color: var(--ui-border); border-color: var(--ui-border) !important; }
 
         .triage-info-card .triage-compare-annotation-btn {
-            background: var(--text-color);
-            color: var(--bg-color);
-            border: none;
+            background: var(--btn-dark);
+            color: var(--card-bg-color);
+            border: 1px solid var(--btn-dark);
             padding: 4px 10px;
-            border-radius: 10px;
+            border-radius: 6px;
             font-size: 12px;
             cursor: pointer;
+            transition: background var(--motion-ms) var(--ease-smooth), border-color var(--motion-ms) var(--ease-smooth);
         }
+        .triage-info-card .triage-compare-annotation-btn:hover { background: var(--field-hover-bg); border-color: var(--ui-active-border); color: var(--text-primary); }
 
         .triage-info-card .triage-compare-opacity {
             position: absolute;
@@ -1574,22 +1667,25 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             justify-content: flex-start;
             gap: 6px;
             padding: 0; /* no horizontal padding to keep width constant */
-            background: var(--cta-bg-strong);
-            border: 1px solid var(--cta-border-strong);
-            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid var(--ui-border);
+            border-radius: 6px;
             z-index: 5;
             cursor: pointer;
             width: 32px;
             height: 32px;
             box-sizing: border-box;
-            transition: border-radius 0.2s ease, padding 0.2s ease, height 0.2s ease, background-color 0.15s ease, border-color 0.15s ease;
+            color: var(--text-primary);
+            transition: background var(--motion-ms) var(--ease-smooth), border-color var(--motion-ms) var(--ease-smooth), color var(--motion-ms) var(--ease-smooth);
         }
+        .triage-info-card .triage-compare-opacity:hover,
+        .triage-info-card .triage-compare-opacity:focus-visible { background: var(--field-hover-bg) !important; border-color: var(--ui-active-border) !important; color: var(--text-primary) !important; }
 
         .triage-info-card .triage-compare-opacity-icon {
             width: 14px;
             height: 14px;
             display: block;
-            color: var(--text-color);
+            color: currentColor; /* follow parent button color */
             position: absolute;
             left: 50%; /* center horizontally regardless of width */
             transform: translateX(-50%);
@@ -1624,16 +1720,35 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: var(--cta-bg-strong);
-            border: 1px solid var(--cta-border-strong);
-            border-radius: 50%;
-            color: var(--cta-fg-strong);
+            background: rgba(255, 255, 255, 0.2);;
+            border: 1px solid var(--ui-border);
+            border-radius: 6px;
+            color: var(--text-primary);
             z-index: 6;
             cursor: pointer;
-            transition: background-color .2s ease, border-color .2s ease, color .2s ease;
+            transition: background var(--motion-ms) var(--ease-smooth), border-color var(--motion-ms) var(--ease-smooth), color var(--motion-ms) var(--ease-smooth);
         }
         .triage-info-card .triage-compare-delete:hover,
-        .triage-info-card .triage-compare-delete:focus-visible { background: var(--cta-bg-subtle); border-color: var(--cta-border-subtle); color: var(--cta-fg-subtle); }
+        .triage-info-card .triage-compare-delete:focus-visible { background: var(--field-hover-bg) !important; border-color: var(--ui-active-border) !important; color: var(--text-primary) !important; }
+        /* Unify hover and selected states with author-sync selected styling */
+        .triage-info-card .triage-compare-annotation-btn:hover,
+        .triage-info-card .triage-compare-annotation-btn.selected {
+            background: var(--btn-lime) !important;
+            border-color: var(--btn-lime) !important;
+            color: var(--ui-text) !important;
+        }
+        .triage-info-card .triage-compare-opacity:hover,
+        .triage-info-card .triage-compare-opacity.selected {
+            background: var(--btn-lime) !important;
+            border-color: var(--btn-lime) !important;
+            color: var(--ui-text) !important;
+        }
+        .triage-info-card .triage-compare-delete:hover,
+        .triage-info-card .triage-compare-delete.selected {
+            background: var(--btn-lime) !important;
+            border-color: var(--btn-lime) !important;
+            color: var(--ui-text) !important;
+        }
         .triage-info-card .triage-compare-opacity-slider {
             position: absolute;
             left: 50%;
@@ -1684,17 +1799,17 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             border-radius: 50%;
         }
         /* Dark theme tweaks for contrast */
-        [data-theme="dark"] .triage-info-card .triage-compare-opacity-slider {
+      .triage-info-card .triage-compare-opacity-slider {
             background: rgba(255,255,255,0.35);
             border-color: rgba(255,255,255,0.25);
         }
-        [data-theme="dark"] .triage-info-card .triage-compare-opacity-slider::-webkit-slider-runnable-track,
-        [data-theme="dark"] .triage-info-card .triage-compare-opacity-slider::-moz-range-track {
+        .triage-info-card .triage-compare-opacity-slider::-webkit-slider-runnable-track,
+       .triage-info-card .triage-compare-opacity-slider::-moz-range-track {
             background: rgba(255,255,255,0.35);
             border-color: rgba(255,255,255,0.25);
         }
-        [data-theme="dark"] .triage-info-card .triage-compare-opacity-slider::-webkit-slider-thumb,
-        [data-theme="dark"] .triage-info-card .triage-compare-opacity-slider::-moz-range-thumb {
+      .triage-info-card .triage-compare-opacity-slider::-webkit-slider-thumb,
+      .triage-info-card .triage-compare-opacity-slider::-moz-range-thumb {
             background: #fff;
             border-color: rgba(0,0,0,0.4);
         }
@@ -1706,7 +1821,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             position: absolute;
             background: var(--cta-bg-strong);
             border: 1px solid var(--cta-border-strong);
-            border-radius: 16px;
+            border-radius: var(--radius-card);
             cursor: pointer;
             z-index: 20;
             display: inline-flex;
@@ -1724,6 +1839,17 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         }
         .triage-info-card .triage-compare-upload-left { left: 12px; bottom: 12px; }
         .triage-info-card .triage-compare-upload-right { right: 12px; bottom: 12px; }
+        /* When inside toolbar, reset absolute positioning to be inline */
+        .triage-compare-toolbar .triage-compare-upload-left,
+        .triage-compare-toolbar .triage-compare-upload-right,
+        .triage-compare-toolbar .triage-compare-upload {
+            position: static !important;
+            left: auto !important;
+            right: auto !important;
+            bottom: auto !important;
+            top: auto !important;
+            height: 32px;
+        }
         .triage-info-card .triage-compare-upload-text { font-size: 11px; color: currentColor; opacity: 1; white-space: nowrap; }
         .triage-info-card .triage-compare-upload:hover,
         .triage-info-card .triage-compare-upload:focus-visible { background: var(--cta-bg-subtle); border-color: var(--cta-border-subtle); color: var(--cta-fg-subtle); }
@@ -1750,7 +1876,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             pointer-events: auto;
         }
 
-        [data-theme="dark"] .triage-info-card .triage-compare-card { background: var(--surface-color); border-color: var(--border-color); }
+    .triage-info-card .triage-compare-card { background: var(--surface-color); border-color: var(--border-color); }
 
         /* Removed metrics under the triage comparison canvas */
 
@@ -1779,14 +1905,14 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         }
 
         /* ===== DARK MODE SUPPORT FOR TRIAGE COMPONENT ===== */
-        [data-theme="dark"] .triage-info-card {
+       .triage-info-card {
             border-color: var(--border-color);
             box-shadow: 0 4px 20px var(--shadow-light);
         }
 
         .triage-component-container {
             background: var(--surface-color);
-            border-radius: 16px;
+            border-radius: var(--radius-card);
             opacity: 1; /* Ensure visible on small viewports */
             transform: none;
             padding: 24px;
@@ -1804,7 +1930,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
 
 
 
-        [data-theme="dark"] .triage-component-container {
+      .triage-component-container {
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
@@ -1814,11 +1940,11 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         .triage-card {
             display: grid;
             grid-template-columns: auto 1fr; /* Mobile layout for all screens */
-            grid-template-rows: auto auto auto auto auto auto; /* Added row for author section */
-            row-gap: 24px;
+            grid-template-rows: auto auto auto auto auto auto auto; /* Added top Actions row */
+            row-gap: 12px; /* default spacing between rows */
             column-gap: 24px;
             align-items: start;
-            padding: 16px;
+            padding: 12px 16px 16px 16px;
             background: var(--surface-secondary);
             border-radius: 12px;
             color: var(--text-color);
@@ -1829,12 +1955,22 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             backface-visibility: hidden;
             position: relative;
             z-index: 1;
+            box-shadow: 0 4px 20px var(--shadow-light);
         }
 
         
+        /* New Row 1: Remove actions (full-width, aligned right) */
+        .triage-actions {
+            grid-column: 1 / -1;
+            grid-row: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
         .annotation-number {
             grid-column: 1;
-            grid-row: 1 / 3;
+            grid-row: 2 / 4;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -1845,22 +1981,22 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         
         .severity-section {
             grid-column: 2;
-            grid-row: 1;
+            grid-row: 2;
         }
         
         .defect-type-section {
             grid-column: 3;
-            grid-row: 1;
+            grid-row: 2;
         }
         
         .status-section {
             grid-column: 4;
-            grid-row: 1;
+            grid-row: 2;
         }
         
         .description-section {
             grid-column: 2 / 4;
-            grid-row: 2;
+            grid-row: 3;
             display: flex;
             flex-direction: column;
             min-height: 100%;
@@ -1869,7 +2005,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         
         .links-section {
             grid-column: 4;
-            grid-row: 2;
+            grid-row: 3;
             display: flex;
             flex-direction: column;
             min-height: 100%;
@@ -1905,9 +2041,19 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             }
             
             /* Annotation component - left column */
+            /* New Row 1: Remove actions */
+            .triage-actions {
+                grid-column: 1 / -1;
+                grid-row: 1;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+            }
+
+            /* Row 2: Annotation */
             .annotation-number {
                 grid-column: 1;
-                grid-row: 1;
+                grid-row: 2;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -1933,7 +2079,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             /* Severity section - right column */
             .severity-section {
                 grid-column: 2;
-                grid-row: 1;
+                grid-row: 2;
                 display: flex;
                 flex-direction: column;
                 align-items: flex-start;
@@ -1953,40 +2099,40 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
                 z-index: 100001 !important;
             }
             
-            /* Row 2: Defect Type */
+            /* Row 3: Defect Type */
             .defect-type-section {
-                grid-column: 1 / 3;
-                grid-row: 2;
-                width: 100%;
-            }
-            
-            /* Row 3: Description */
-            .description-section {
                 grid-column: 1 / 3;
                 grid-row: 3;
                 width: 100%;
-                padding-top: 0;
             }
             
-            /* Row 4: Links */
-            .links-section {
+            /* Row 4: Description */
+            .description-section {
                 grid-column: 1 / 3;
                 grid-row: 4;
                 width: 100%;
                 padding-top: 0;
             }
             
-            /* Row 5: Status */
-            .status-section {
+            /* Row 5: Links */
+            .links-section {
                 grid-column: 1 / 3;
                 grid-row: 5;
                 width: 100%;
+                padding-top: 0;
             }
             
-        /* Row 6: Author */
+            /* Row 6: Status */
+            .status-section {
+                grid-column: 1 / 3;
+                grid-row: 6;
+                width: 100%;
+            }
+            
+        /* Row 7: Author */
         .author-section {
             grid-column: 1 / 3;
-            grid-row: 6;
+            grid-row: 7;
             width: 100%;
             
         }
@@ -2060,15 +2206,15 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             flex: 1; /* Takes 1/3 of the width */
             height: 44px !important; /* Match exact height with input field - force override */
             min-height: 44px; /* Ensure minimum height */
-            background: var(--text-secondary);
-            color: white;
-            border: none;
+            background-color: var(--btn-dark);
+            color: var(--card-bg-color);
+            border: 1px solid var(--btn-dark);
             border-radius: 6px;
             font-size: 13px;
             font-weight: 500;
             cursor: pointer;
             position: relative;
-            transition: background-color 0.3s ease, opacity 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -2079,14 +2225,16 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         
         /* Hover state - lighter fill */
         .author-sync-btn:hover:not(.selected) {
-            background: var(--text-color);
-            color: var(--surface-color);
+            background-color: var(--field-hover-bg);
+            color: var(--text-primary);
+            border-color: var(--ui-active-border);
         }
         
         /* Selected state - show synced content with transition */
         .author-sync-btn.selected {
-            background: var(--text-color);
-            color: var(--surface-color);
+            background-color: var(--btn-lime);
+            color: var(--ui-text);
+            border-color: var(--lime-border);
         }
         
         .author-sync-btn-content {
@@ -2098,7 +2246,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             position: absolute;
             top: 0;
             left: 0;
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+            transition: opacity .5s ease;
         }
         
         .author-sync-btn-content-default {
@@ -2108,29 +2256,27 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             justify-content: center;
             width: 100%;
             height: 100%;
+            transition: opacity .5s ease;
         }
         
         .author-sync-btn-content-selected {
             /* Selected checkmark + "Synced" content */
-            transform: translateY(100%); /* Hidden below by default */
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 6px;
+            opacity: 0;
+            transition: opacity .5s ease;
         }
         
         /* Show selected content when in selected state */
-        .author-sync-btn.selected .author-sync-btn-content-default {
-            transform: translateY(-100%); /* Slide default content up and out */
-        }
+        .author-sync-btn.selected .author-sync-btn-content-default { opacity: 0; }
         
-        .author-sync-btn.selected .author-sync-btn-content-selected {
-            transform: translateY(0%); /* Slide selected content up into view */
-        }
+        .author-sync-btn.selected .author-sync-btn-content-selected { opacity: 1; }
         
         .author-sync-btn-text {
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 600;
             color: inherit;
             white-space: nowrap;
         }
@@ -2142,7 +2288,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             width: 16px;
             height: 16px;
             flex-shrink: 0;
-            border: 1px solid white;
+            border: 1.25px solid var(--ui-text);
             border-radius: 50%;
             background: transparent;
         }
@@ -2150,7 +2296,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         .author-sync-btn-checkmark svg {
             width: 10px;
             height: 10px;
-            stroke: white;
+            stroke: var(--ui-text);
             stroke-width: 2;
             fill: none;
         }
@@ -2222,7 +2368,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
 
         
         /* Ensure proper spacing and immediate appearance without staggering */
-            .triage-card > * {
+            .triage-card > *:not(.author-sync-btn) {
                 margin: 0;
                 opacity: 1 !important;
                 transform: none !important;
@@ -2232,56 +2378,56 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         /* Removed close button positioning */
 
         /* Dark theme adjustments */
-        [data-theme="dark"] .triage-card {
+       .triage-card {
             color: var(--card-text-color);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        [data-theme="dark"] .author-input-container label {
+       .author-input-container label {
             color: var(--text-secondary);
             }
             
-        [data-theme="dark"] .author-input {
+       .author-input {
                 background: var(--surface-color);
             border-color: var(--border-color);
             color: var(--text-color);
         }
         
-        [data-theme="dark"] .author-input:hover {
+        .author-input:hover {
             border-color: var(--border-hover);
             background-color: var(--surface-color);
         }
         
-        [data-theme="dark"] .author-input:focus {
+    .author-input:focus {
                 border-color: var(--border-color);
             background-color: var(--surface-color);
             box-shadow: none;
         }
         
-        [data-theme="dark"] .author-input::placeholder {
+       author-input::placeholder {
             color: var(--text-muted);
         }
         
-        [data-theme="dark"] .author-input:focus::placeholder {
+     .author-input:focus::placeholder {
             opacity: 0; /* Hide placeholder on focus */
         }
         
-        [data-theme="dark"] .author-sync-btn {
-            background: var(--surface-color);
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
+      .author-sync-btn {
+            background-color: var(--btn-dark);
+            color: var(--card-bg-color);
+            border: 1px solid var(--btn-dark);
         }
         
-        [data-theme="dark"] .author-sync-btn:hover:not(.selected) {
-            background: var(--interactive-hover);
-            color: var(--text-color);
-            border-color: var(--border-hover);
+     .author-sync-btn:hover:not(.selected) {
+            background-color: var(--field-hover-bg);
+            color: var(--text-primary);
+            border-color: var(--ui-active-border);
         }
         
-        [data-theme="dark"] .author-sync-btn.selected {
-            background: var(--text-color);
-            color: var(--surface-color);
-            border-color: var(--text-color);
+     .author-sync-btn.selected {
+            background-color: var(--btn-lime);
+            color: var(--ui-text);
+            border-color: var(--lime-border);
         }
 
 
@@ -2361,10 +2507,11 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
 
 
         .annotation-circle {
-            width: 40px;
-            height: 40px;
-            background-color: var(--text-secondary);
-            color: var(--surface-color);
+            width: 36px;
+            height: 36px;
+            background-color: var(--btn-dark);
+            color: var(--card-bg-color);
+            border: 1px solid var(--btn-dark);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -2376,10 +2523,10 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             padding-bottom: 2px;
         }
 
-        [data-theme="dark"] .annotation-circle {
-            background: var(--surface-color);
-            color: var(--text-color);
-            border-color: var(--border-color);
+      .annotation-circle {
+            background: var(--btn-dark);
+            color: var(--card-bg-color);
+            border-color: var(--btn-dark);
         }
         
         /* Severity color variations */
@@ -2409,9 +2556,9 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
 
 
        .triage-annotation {
-        background-color: #A2E633 !important;
-        color: #000000 !important;
-        border: 1px solid #A2E633 !important;
+        background-color: var(--btn-dark) !important;
+        color: var(--card-bg-color) !important;
+        border: 1px solid var(--btn-dark) !important;
         }
 
 
@@ -2552,7 +2699,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
         }
 
-        [data-theme="dark"] .links-background-card {
+        .links-background-card {
             background-color: var(--surface-color);
             border-color: var(--border-color);
         }
@@ -2633,7 +2780,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             opacity: 0.5;
         }
         
-        [data-theme="dark"] .link-input:focus::placeholder {
+        .link-input:focus::placeholder {
             opacity: 0; /* Hide placeholder on focus */
         }
 
@@ -2749,7 +2896,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         .status-header .status-ui-label {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             padding-right: 6px;
         }
 
@@ -2773,13 +2920,22 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             display: block; /* prevent baseline gap */
             width: 13px;
             height: 13px;
-            margin-bottom: 3px;
+            margin-bottom: 1px;
+        }
+
+        /* Ensure consistent 4px gap between label text and tooltip icon across all viewports */
+        .status-header .status-ui-label { display: inline-flex !important; align-items: center !important; gap: 4px !important; }
+        @supports not (gap: 1px) {
+            .status-header .status-ui-label .status-info-btn { margin-left: 4px !important; }
         }
 
         /* Tablet range: reduce bottom offset for perfect centering */
         @media (max-width: 1200px) and (min-width: 769px) {
             .status-header .status-info-btn svg {
                 margin-bottom: 1px !important;
+                width: 12px;
+                height: 12px;
+
             }
 
 
@@ -2817,29 +2973,26 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         .header-sync-btn,
         .triage-card .triage-remove-btn {
             background: none;
-            border: 1px solid hsl(214.3 31.8% 91.4%);
+            border: 1px solid var(--ui-border);
             color: var(--text-secondary);
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 500;
             cursor: pointer;
-            padding: 8px 8px;
-            border-radius: 4px;
+            padding: 6px 14px;
+            border-radius: 3px; /* match input/severity button rounding */
             transition: all 0.15s ease-in-out;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 2px;
-            height: 16px;
-            background-color: hsl(0 0% 100%);
+            gap: 4px;
+            min-height: 26px;
+            background-color: var(--surface-1);
             flex-shrink: 0;
             white-space: nowrap;
             font-family: 'Unica77LL', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
-        .header-add-btn:hover {
-            border-color: hsl(214.3 31.8% 85%);
-            background-color: hsl(210 40% 98%);
-        }
+        /* Hover handled by unified rule below */
 
         /* Header buttons container */
         .header-buttons {
@@ -2851,7 +3004,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         /* Sync button - similar styling to add button */
         .header-sync-btn {
             background: none;
-            border: 1px solid hsl(214.3 31.8% 91.4%);
+            border: 1px solid var(--ui-border);
             color: var(--text-secondary);
             font-weight: 500;
             border-radius: 4px;
@@ -2860,17 +3013,14 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             align-items: center;
             justify-content: center;
             gap: 2px;
-            background-color: hsl(0 0% 100%);
+            background-color: var(--surface-1);
             flex-shrink: 0;
             white-space: nowrap;
             font-family: 'Unica77LL', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             position: relative;
         }
 
-        .header-sync-btn:hover {
-            border-color: hsl(214.3 31.8% 85%);
-            background-color: hsl(210 40% 98%);
-        }
+        /* Hover handled by unified rule below */
 
         .header-sync-btn:hover .sync-tooltip {
             visibility: visible;
@@ -2912,14 +3062,8 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             transform: translateX(0);
         }
 
-        .sync-tooltip::after {
-            content: '';
-            position: absolute;
-            bottom: 100%;
-            right: 20px;
-            border: 6px solid transparent;
-            border-bottom-color: var(--tooltip-bg-color);
-        }
+        /* Remove pointer triangle; keep rounded square */
+        .sync-tooltip::after { display: none !important; content: none !important; }
 
         /* Status Buttons - Updated for responsive design */
         .status-buttons {
@@ -2931,9 +3075,10 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         .status-btn {
             flex: 1;
             padding: 6px 4px;
-            border: 1px solid;
+            border: 1px solid var(--ui-border);
             border-radius: 6px;
-            background-color: transparent;
+            background-color: var(--surface-1);
+            color: var(--text-secondary);
             font-family: 'Unica77LL', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             font-size: 12px;
             font-weight: 500;
@@ -2965,84 +3110,78 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         .status-btn.selected:hover .status-icon {
             filter: brightness(0) invert(1) !important;
         }
-
-        /* Dark theme icon hover tints removed */
-
-        /* Dark icons when dark theme status button is selected */
-        [data-theme="dark"] .status-btn.selected .status-icon { filter: brightness(0); }
-
-        /* Ensure dark icons stay dark when selected button is hovered in dark theme */
-        [data-theme="dark"] .status-btn.selected:hover .status-icon { filter: brightness(0); }
+        /* Dark mode removed */
 
         /* Not Started - Neutral base (selected gets color) */
         .status-btn[data-status="not-started"] {
-            border-color: var(--border-color);
-            background-color: var(--surface-color);
+            border-color: var(--ui-border);
+            background-color: var(--surface-1);
             color: var(--text-secondary);
         }
 
         .status-btn[data-status="not-started"]:hover {
-            background-color: var(--interactive-hover);
-            border-color: var(--border-hover);
+            background-color: var(--field-hover-bg);
+            border-color: var(--ui-active-border);
         }
 
         .status-btn[data-status="not-started"].selected {
-            background-color: var(--card-bg-color) !important;
-    color: var(--card-bg-color) !important;
-    border-color: var(--text-secondary) !important;
+            background-color: var(--btn-dark) !important;
+            color: var(--card-bg-color) !important;
+            border-color: var(--btn-dark) !important;
         }
 
         /* In Progress - Neutral base */
         .status-btn[data-status="in-progress"] {
-            border-color: var(--border-color);
-            background-color: var(--surface-color);
+            border-color: var(--ui-border);
+            background-color: var(--surface-1);
             color: var(--text-secondary);
         }
 
         .status-btn[data-status="in-progress"]:hover {
-            background-color: var(--interactive-hover);
-            border-color: var(--border-hover);
+            background-color: var(--field-hover-bg);
+            border-color: var(--ui-active-border);
         }
 
         .status-btn[data-status="in-progress"].selected {
-            background-color: var(--card-bg-color) !important;
+            background-color: var(--btn-dark) !important;
             color: var(--card-bg-color) !important;
-            border-color: var(--text-secondary) !important;
+            border-color: var(--btn-dark) !important;
         }
 
         /* Defect Persists - Neutral base */
         .status-btn[data-status="defect-persists"] {
-            border-color: var(--border-color);
-            background-color: var(--surface-color);
+            border-color: var(--ui-border);
+            background-color: var(--surface-1);
             color: var(--text-secondary);
         }
 
         .status-btn[data-status="defect-persists"]:hover {
-            background-color: var(--interactive-hover);
-            border-color: var(--border-hover);
+            background-color: var(--field-hover-bg);
+            border-color: var(--ui-active-border);
         }
 
         .status-btn[data-status="defect-persists"].selected {
-            background-color: var(--card-bg-color) !important;
+            background-color: var(--btn-dark) !important;
             color: var(--card-bg-color) !important;
-            border-color: var(--text-secondary) !important;
+            border-color: var(--btn-dark) !important;
         }
 
         /* Resolved - Neutral base */
         .status-btn[data-status="resolved"] {
-            border-color: var(--border-color);
-            background-color: var(--surface-color);
+            border-color: var(--ui-border);
+            background-color: var(--surface-1);
             color: var(--text-secondary);
         }
 
         .status-btn[data-status="resolved"]:hover {
-            background-color: var(--interactive-hover);
-            border-color: var(--border-hover);
+            background-color: var(--field-hover-bg);
+            border-color: var(--ui-active-border);
         }
 
-        .status-btn[data-status="resolved"].selected {background-color: var(--card-bg-color) !important;
-    color: var(--card-bg-color) !important;
-    border-color: var(--text-secondary) !important;
+        .status-btn[data-status="resolved"].selected {
+            background-color: var(--btn-dark) !important;
+            color: var(--card-bg-color) !important;
+            border-color: var(--btn-dark) !important;
         }
 
         /* Status tooltip styling */
@@ -3074,8 +3213,8 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         }
 
         .status-info-btn:hover {
-            background-color: hsl(215.4 16.3% 95%);
-            color: hsl(215.4 16.3% 35%);
+            background-color: var(--field-hover-bg);
+            color: var(--text-primary);
         }
 
         .status-tooltip {
@@ -3084,10 +3223,10 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             left: calc(100% - 90px);
             right: -4px;
             z-index: 15000;
-            background: white;
-            border: 1px solid hsl(215.4 16.3% 85%);
+            background: var(--surface-1);
+            border: 1px solid var(--ui-border);
             border-radius: 8px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 6px 20px var(--shadow-color);
             width: 200px;
             font-family: 'Unica77LL', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             pointer-events: auto;
@@ -3102,7 +3241,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             cursor: pointer;
             font-size: 18px;
             line-height: 1;
-            color: hsl(215.4 16.3% 55%);
+            color: var(--text-muted);
             padding: 0;
             width: 20px;
             height: 20px;
@@ -3115,8 +3254,8 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         }
 
         .status-tooltip-close:hover {
-            background-color: hsl(215.4 16.3% 95%);
-            color: hsl(215.4 16.3% 35%);
+            background-color: var(--field-hover-bg);
+            color: var(--text-primary);
         }
 
         .status-tooltip-content {
@@ -3129,114 +3268,18 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             gap: 12px;
             padding: 8px 16px;
             font-size: 13px;
-            color: hsl(215.4 16.3% 35%);
+            color: var(--text-secondary);
         }
 
         .status-tooltip-item img {
             flex-shrink: 0;
         }
 
-        /* Dark theme support for status tooltip */
-        [data-theme="dark"] .status-info-btn {
-            color: hsl(215.4 16.3% 65%);
-        }
-
-        [data-theme="dark"] .status-info-btn:hover {
-            background-color: hsl(215.4 16.3% 25%);
-            color: hsl(215.4 16.3% 85%);
-        }
-
-        [data-theme="dark"] .status-tooltip {
-            border-color: var(--border-hover) !important;
-            background-color: var(--surface-color) !important;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-        }
+        /* Dark mode removed */
 
 
 
-        [data-theme="dark"] .status-tooltip-close {
-            color: hsl(215.4 16.3% 65%);
-        }
-
-        [data-theme="dark"] .status-tooltip-close:hover {
-            background-color: hsl(215.4 16.3% 25%);
-            color: hsl(215.4 16.3% 85%);
-        }
-
-        [data-theme="dark"] .status-tooltip-item {
-            color: hsl(215.4 16.3% 75%);
-        }
-
-
-
-        /* Dark theme status buttons */
-        [data-theme="dark"] .status-btn[data-status="not-started"] {
-            border-color: var(--border-color);
-            color: var(--text-secondary);
-            background-color: var(--surface-color);
-        }
-
-        [data-theme="dark"] .status-btn[data-status="not-started"]:hover {
-            background-color: var(--interactive-hover);
-            border-color: var(--border-hover);
-        }
-
-        [data-theme="dark"] .status-btn[data-status="not-started"].selected {
-            background-color: var(--text-secondary);
-            color: var(--surface-color);
-            border-color: var(--text-secondary);
-        }
-
-        [data-theme="dark"] .status-btn[data-status="in-progress"] {
-            border-color: var(--border-color);
-            color: var(--text-secondary);
-            background-color: var(--surface-color);
-        }
-
-        [data-theme="dark"] .status-btn[data-status="in-progress"]:hover {
-            background-color: var(--interactive-hover);
-            border-color: var(--border-hover);
-        }
-
-        [data-theme="dark"] .status-btn[data-status="in-progress"].selected {
-            background-color: #6FA9F5;
-            color: #0B1220;
-            border-color: #5A93DC;
-        }
-
-        [data-theme="dark"] .status-btn[data-status="defect-persists"] {
-            border-color: var(--border-color);
-            color: var(--text-secondary);
-            background-color: var(--surface-color);
-        }
-
-        [data-theme="dark"] .status-btn[data-status="defect-persists"]:hover {
-            background-color: var(--interactive-hover);
-            border-color: var(--border-hover);
-        }
-
-        [data-theme="dark"] .status-btn[data-status="defect-persists"].selected {
-            background-color: #F3C756;
-            color: #0B1220;
-            border-color: #DDB247;
-        }
-
-        [data-theme="dark"] .status-btn[data-status="resolved"] {
-            border-color: var(--border-color);
-            color: var(--text-secondary);
-            background-color: var(--surface-color);
-        }
-
-        [data-theme="dark"] .status-btn[data-status="resolved"]:hover {
-            background-color: var(--interactive-hover);
-            border-color: var(--border-hover);
-        }
-
-        [data-theme="dark"] .status-btn[data-status="resolved"].selected {
-            background-color: #37C690;
-            color: #0B1220;
-            border-color: #2BAB7E;
-        }
+        /* Dark mode removed */
 
 
 
@@ -3248,8 +3291,8 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
 
 
         .add-link-btn-full {
-            background: none;
-            border: none;
+            background: var(--surface-1);
+            border: 1px solid transparent;
             color: var(--text-secondary) !important;
             font-size: 12px;
             cursor: pointer;
@@ -3273,39 +3316,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             font-weight: 500;
         }
 
-        [data-theme="dark"] .header-add-btn {
-            background-color: hsl(222.2 84% 4.9%);
-            border-color: hsl(217.2 32.6% 17.5%);
-            color: hsl(215.4 16.3% 56.9%);
-        }
-
-        [data-theme="dark"] .header-add-btn:hover {
-            border-color: hsl(217.2 32.6% 22%);
-            background-color: hsl(217.2 32.6% 17.5%);
-        }
-
-        /* Dark theme sync button */
-        [data-theme="dark"] .header-sync-btn {
-            background-color: hsl(222.2 84% 4.9%);
-            border-color: hsl(217.2 32.6% 17.5%);
-            color: hsl(215.4 16.3% 56.9%);
-        }
-
-        [data-theme="dark"] .header-sync-btn:hover {
-            border-color: hsl(217.2 32.6% 22%);
-            background-color: hsl(217.2 32.6% 17.5%);
-        }
-
-        /* Dark theme sync tooltip */
-        [data-theme="dark"] .sync-tooltip {
-            background: hsl(210 40% 98%);
-            color: hsl(222.2 84% 4.9%);
-            box-shadow: 0 4px 16px rgba(255, 255, 255, 0.1), 0 2px 8px rgba(255, 255, 255, 0.05);
-        }
-
-        [data-theme="dark"] .sync-tooltip::after {
-            border-top-color: hsl(210 40% 98%);
-        }
+        /* Dark mode removed */
 
         /* Custom Defect Icons */
         .custom-defect-icon {
@@ -3355,27 +3366,27 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         }
 
         /* Dark theme icon adjustments */
-        [data-theme="dark"] .defect-card.critical .custom-defect-icon svg {
+    .defect-card.critical .custom-defect-icon svg {
             fill: #ff6b6b;
         }
 
-        [data-theme="dark"] .defect-card.high .custom-defect-icon svg {
+      .defect-card.high .custom-defect-icon svg {
             fill: #feca57;
         }
 
-        [data-theme="dark"] .defect-card.medium .custom-defect-icon svg {
+     .defect-card.medium .custom-defect-icon svg {
             fill: #54a0ff;
         }
 
-        [data-theme="dark"] .defect-card.low .custom-defect-icon svg {
+       .defect-card.low .custom-defect-icon svg {
             fill: #5f27cd;
         }
 
-        [data-theme="dark"] .defect-card.other .custom-defect-icon svg {
+        .defect-card.other .custom-defect-icon svg {
             fill: #a4b0be;
         }
 
-        [data-theme="dark"] .add-link-btn-full {
+     .add-link-btn-full {
             color: var(--text-secondary) !important;
         }
 
@@ -3490,27 +3501,28 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             align-items: center;
             gap: 8px;
             padding: 16px 12px;
-            border: 1px solid hsl(214.3 31.8% 91.4%);
+            border: 1px solid var(--ui-border);
             border-radius: 8px;
-            background-color: hsl(0 0% 100%);
+            background-color: var(--surface-1);
             cursor: pointer;
             transition: all 0.15s ease-in-out;
             font-family: 'Unica77LL', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             font-size: 14px;
             font-weight: 500;
-            color: hsl(215 15% 55%);
+            color: var(--text-secondary);
             min-height: 80px;
         }
 
         .service-option:hover {
-            border-color: hsl(215 15% 8-column);
-            box-shadow: 0 0 0 1px hsl(221.2 83.2% 53.3% / 0.2);
+            border-color: var(--ui-active-border);
+            background-color: var(--field-hover-bg);
+            box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand-lime-600), transparent 80%);
         }
 
         .service-option.selected {
-            border-color: #1f2937;
-            background-color: hsl(221.2 83.2% 97%);
-            box-shadow: 0 0 0 1px hsl(221.2 83.2% 53.3% / 0.2);
+            border-color: var(--ui-active-border);
+            background-color: var(--ui-active-bg);
+            box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand-lime-600), transparent 80%);
         }
 
         .service-icon {
@@ -3553,9 +3565,11 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             box-sizing: border-box;
         }
 
-        .modal-url-input:hover {
-            border-color: var(--border-hover);
-        }
+.modal-url-input:hover {
+    border-color: var(--ui-active-border);
+    background-color: var(--field-hover-bg);
+}
+.status-section { padding-top: 8px; }
 
         .modal-url-input:focus {
             border-color: var(--border-focus);
@@ -3574,8 +3588,8 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             align-items: center;
             justify-content: space-between;
             padding: 20px 24px;
-            border-top: 1px solid hsl(214.3 31.8% 91.4%);
-            background-color: hsl(210 40% 98%);
+            border-top: 1px solid var(--border-subtle);
+            background-color: var(--surface-2);
         }
 
         .modal-footer-right {
@@ -3600,45 +3614,55 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         }
 
         .modal-btn-secondary {
-            background-color: hsl(0 0% 100%);
-            color: hsl(215 15% 55%);
-            border-color: hsl(214.3 31.8% 91.4%);
+            background-color: var(--surface-1);
+            color: var(--text-secondary);
+            border-color: var(--border-subtle);
         }
 
         .modal-btn-secondary:hover {
-            background-color: hsl(210 40% 96%);
-            border-color: hsl(214.3 31.8% 85%);
+            background-color: var(--surface-2);
+            border-color: var(--border);
         }
 
         .modal-btn-primary {
-            background-color: hsl(215 15% 60%);
-            color: hsl(210 40% 98%);
-            border-color: hsl(215 15% 60%);
+            background-color: var(--btn-dark);
+            color: var(--card-bg-color);
+            border-color: var(--btn-dark);
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
         .modal-btn-primary:hover {
-            background-color: #1f2937;
-            border-color: #1f2937;
+            background-color: var(--field-hover-bg);
+            color: var(--text-primary);
+            border-color: var(--ui-active-border);
+        }
+
+        /* Align selected/success state to author-sync selected */
+        .modal-btn-primary.selected,
+        .modal-btn-primary.success {
+            background-color: var(--btn-lime);
+            color: var(--ui-text);
+            border-color: var(--lime-border);
         }
 
         .modal-btn-primary:disabled {
-            background-color: hsl(210 40% 96%);
+            background-color: var(--surface-2);
             color: var(--text-secondary);
-            border-color: hsl(214.3 31.8% 91.4%);
+            border-color: var(--border-subtle);
             cursor: not-allowed;
         }
 
         .modal-btn-sync {
-            background-color: hsl(0 0% 100%);
-            color: hsl(215 15% 55%);
-            border-color: hsl(215 15% 55%);
+            background-color: var(--surface-1);
+            color: var(--text-secondary);
+            border-color: var(--border-subtle);
             font-size: 14px;
         }
 
         .modal-btn-sync:hover {
-            background-color: hsl(210 40% 96%);
-            border-color: hsl(215 15% 50%);
-            color: hsl(215 15% 50%);
+            background-color: var(--surface-2);
+            border-color: var(--border);
+            color: var(--text-secondary);
         }
 
         .modal-btn-sync {
@@ -3678,20 +3702,14 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             min-width: 180px;
         }
 
-        .modal-sync-tooltip::after {
-            content: '';
-            position: absolute;
-            bottom: 100%;
-            left: 20px;
-            border: 6px solid transparent;
-            border-bottom-color: var(--tooltip-bg-color);
-        }
+        /* Remove pointer triangle; keep rounded square */
+        .modal-sync-tooltip::after { display: none !important; content: none !important; }
 
         /* Modal error banner */
         .modal-error-banner {
             display: none;
-            background-color: hsl(0, 93%, 12%);
-            color: white;
+            background-color: rgb(57 2 2);
+            color: var(--neutral-0);
             padding: 12px 24px;
             align-items: center;
             justify-content: flex-start;
@@ -3708,7 +3726,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         .modal-error-banner .error-icon {
             width: 16px;
             height: 16px;
-            color: white;
+            color: var(--neutral-0);
             flex-shrink: 0;
         }
 
@@ -3716,42 +3734,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             text-align: left;
         }
 
-        /* Dark mode for modal */
-        [data-theme="dark"] .modal-content {
-            background: hsl(222.2 84% 4.9%);
-            border-color: hsl(217.2 32.6% 17.5%);
-        }
-
-        [data-theme="dark"] .modal-header {
-            border-bottom-color: hsl(217.2 32.6% 17.5%);
-        }
-
-        [data-theme="dark"] .modal-header h3 {
-            color: hsl(210 40% 98%);
-        }
-
-        [data-theme="dark"] .modal-close {
-            color: hsl(215.4 16.3% 56.9%);
-        }
-
-        [data-theme="dark"] .modal-close:hover {
-            background-color: hsl(217.2 32.6% 17.5%);
-            color: hsl(210 40% 98%);
-        }
-
-        [data-theme="dark"] .service-option {
-            background-color: hsl(222.2 84% 4.9%);
-            border-color: hsl(217.2 32.6% 17.5%);
-            color: hsl(210 40% 98%);
-        }
-
-        [data-theme="dark"] .service-option:hover {
-            border-color: #1f2937;
-        }
-
-        [data-theme="dark"] .service-option.selected {
-            background-color: hsl(221.2 83.2% 10%);
-        }
+        /* Dark mode removed */
 
 
 
@@ -3759,7 +3742,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
 
 
         
-        [data-theme="dark"] .modal-url-input:focus::placeholder {
+   .modal-url-input:focus::placeholder {
             opacity: 0; /* Hide placeholder on focus */
         }
 
@@ -3806,17 +3789,31 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             .triage-card {
                 display: grid !important;
                 grid-template-columns: auto 140px 1fr auto 120px !important; /* 5 columns: annotation(narrow), severity(140px), defect-type(wide), status-col, sync-cta(120px) */
-                grid-template-rows: auto auto auto !important; /* 3 rows */
-                gap: 24px 16px !important; /* Row gap 24px, column gap 16px */
+                grid-template-rows: auto auto auto auto !important; /* 4 rows: 1) actions, 2) main, 3) description+author, 4) links+sync */
+                row-gap: 12px !important; /* Default gap */
+                column-gap: 16px !important;
                 padding: 16px !important;
                 width: 100% !important;
                 max-width: none !important;
             }
 
-            /* Row 1, Column 1: Annotation (narrow width) */
+            /* New Row 1: Remove actions (full-width) */
+            .triage-card .triage-actions {
+                position: static !important;
+                top: auto !important;
+                right: auto !important;
+                grid-column: 1 / -1 !important;
+                grid-row: 1 !important;
+                display: flex !important;
+                justify-content: flex-end !important;
+                align-items: center !important;
+                margin: 0 0 -12px 0 !important; /* Cancel the first row gap to create 0px between row 1 and 2 */
+            }
+
+            /* Row 2, Column 1: Annotation (narrow width) */
             .annotation-number {
                 grid-column: 1 !important;
-                grid-row: 1 !important;
+                grid-row: 2 !important;
                 position: static !important;
                 margin: 0 !important;
                 display: flex !important;
@@ -3845,10 +3842,10 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
                 margin-top: 0 !important;
             }
 
-            /* Row 1, Column 2: Defect Severity */
+            /* Row 2, Column 2: Defect Severity */
             .severity-section {
                 grid-column: 2 !important;
-                grid-row: 1 !important;
+                grid-row: 2 !important;
                 margin: 0 !important;
                 align-self: center !important;
                 width: 140px !important;
@@ -3861,33 +3858,34 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
                 min-width: 140px !important;
             }
 
-            /* Row 1, Column 3: Defect Type (wider) */
+            /* Row 2, Column 3: Defect Type (wider) */
             .defect-type-section {
                 grid-column: 3 !important;
-                grid-row: 1 !important;
+                grid-row: 2 !important;
                 margin: 0 !important;
                 align-self: center !important;
             }
 
-            /* Row 1, Columns 4-5: Defect Status */
+            /* Row 2, Columns 4-5: Defect Status */
             .status-section {
                 grid-column: 4 / 6 !important; /* Span columns 4-5 */
-                grid-row: 1 !important;
+                grid-row: 2 !important;
                 align-self: center !important;
                 margin: 0 !important;
+                padding-top: 0 !important;
             }
 
-            /* Row 2, Columns 2-3: Description */
+            /* Row 3, Columns 2-3: Description */
             .description-section {
                 grid-column: 2 / 4 !important; /* Span columns 2-3 */
-                grid-row: 2 !important;
+                grid-row: 3 !important;
                 align-self: start !important;
             }
 
-            /* Row 2, Columns 4-5: Author */
+            /* Row 3, Columns 4-5: Author */
             .author-section {
                 grid-column: 4 / 6 !important; /* Span columns 4-5 */
-                grid-row: 2 !important;
+                grid-row: 3 !important;
                 align-self: start !important;
                 margin: 0 !important;
                 display: flex !important;
@@ -3899,17 +3897,17 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
                 font-size: 10px !important;
             }
 
-            /* Row 3, Columns 2-3: Links */
+            /* Row 4, Columns 2-3: Links */
             .links-section {
                 grid-column: 2 / 4 !important; /* Span columns 2-3 */
-                grid-row: 3 !important;
+                grid-row: 4 !important;
                 align-self: start !important;
             }
 
-            /* Row 3, Columns 4-5: Sync CTA (spans both columns like status and author) - Override all other sync button rules */
+            /* Row 4, Columns 4-5: Sync CTA (spans both columns like status and author) - Override all other sync button rules */
             .triage-card .author-sync-btn {
                 grid-column: 4 / 6 !important; /* Span columns 4-5 */
-                grid-row: 3 !important;
+                grid-row: 4 !important;
                 height: 100% !important; /* Fill entire grid cell height */
                 min-height: 40px !important; /* Minimum height for usability */
                 max-height: none !important; /* Remove height constraint */
@@ -3996,7 +3994,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
 
 
 
-            [data-theme="dark"] .author-section textarea, .author-section textarea[id="defect-author"] {
+         .author-section textarea, .author-section textarea[id="defect-author"] {
                 border-color: var(--border-focus) !important;
                 background-color: var(--surface-color) !important;
                 outline: none !important;
@@ -4004,14 +4002,14 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         
             }
 
-            [data-theme="dark"].author-section textarea:focus::placeholder,
+       .author-section textarea:focus::placeholder,
             .author-section textarea[id="defect-author"]:focus {
                 border-color: var(--border-focus) !important;
                 background-color: var(--surface-color) !important;
                 transition: all 0.15s ease-in-out !important;
             }
 
-            [data-theme="dark"].author-section textarea:focus,
+           .author-section textarea:focus,
             .author-section textarea[id="defect-author"]:focus {
                 border-color: var(--border-focus) !important;
                 background-color: var(--surface-color) !important;
@@ -4150,23 +4148,23 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             }
         }
 
-        [data-theme="dark"] .modal-footer {
-            background-color: hsl(222.2 84% 6%);
-            border-top-color: hsl(217.2 32.6% 17.5%);
+ .modal-footer {
+            background-color: var(--surface-2);
+            border-top-color: var(--border-subtle);
         }
 
-        [data-theme="dark"] .modal-btn-secondary {
-            background-color: hsl(222.2 84% 4.9%);
-            color: hsl(210 40% 98%);
-            border-color: hsl(217.2 32.6% 17.5%);
+  .modal-btn-secondary {
+            background-color: var(--surface-1);
+            color: var(--text-secondary);
+            border-color: var(--border-subtle);
         }
 
-        [data-theme="dark"] .modal-btn-secondary:hover {
-            background-color: hsl(217.2 32.6% 17.5%);
-            border-color: hsl(217.2 32.6% 22%);
+        .modal-btn-secondary:hover {
+            background-color: var(--surface-2);
+            border-color: var(--border);
         }
 
-        [data-theme="dark"] .modal-field-label {
+       .modal-field-label {
             color: var(--text-secondary) !important;    
         }
 
@@ -4183,13 +4181,18 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         }
 
         .service-link-icon {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            width: 28px; /* fixed icon column so text starts aligned */
         }
 
+        .service-link-icon img,
         .service-link-icon svg {
+            max-width: 100%;
+            max-height: 1.25rem; /* gently cap height for tall icons */
+            height: auto;
             transition: transform 0.15s ease-in-out;
         }
 
@@ -4208,7 +4211,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
 
         .sprint-timeline {
             background: var(--card-bg-color);
-            border-radius: 16px;
+            border-radius: var(--radius-card);
             padding: 32px;
             margin-bottom: 40px;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -4326,7 +4329,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         /* Workflow Diagram */
         .workflow-diagram {
             background: var(--card-bg-color);
-            border-radius: 16px;
+            border-radius: var(--radius-card);
             padding: 32px;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -4364,20 +4367,20 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             align-items: center;
         }
 
-        .workflow-step {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 16px;
-            text-align: center;
-            color: var(--text-color);
-            font-size: 14px;
-            opacity: 0;
-            transform: translateX(-30px);
-        }
+.workflow-step {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    color: var(--text-color);
+    font-size: 14px;
+    opacity: 0;
+    transform: translateX(-30px);
+}
 
-        .workflow-arrow {
-            font-size: 20px;
+.workflow-arrow {
+    font-size: 20px;
             color: var(--text-color);
             opacity: 0.8;
         }
@@ -4450,7 +4453,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
 
         .insight-card {
             background: var(--card-bg-color);
-            border-radius: 16px;
+            border-radius: var(--radius-card);
             padding: 32px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
@@ -4699,7 +4702,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         .content-image {
             background: var(--card-bg-color);
             color: var(--card-text-color);
-            border-radius: 16px;
+            border-radius: var(--radius-card);
             aspect-ratio: 4/3;
             border: 1px solid transparent;
             display: flex;
@@ -4931,15 +4934,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             filter: brightness(0); /* Black icon for light/green background */
         }
 
-        /* Dark mode adjustments */
-        [data-theme="dark"] .text-icon {
-            filter: brightness(0) invert(1); /* White icon for dark background */
-        }
-
-        [data-theme="dark"] .text-pill.active .text-icon,
-        [data-theme="dark"] .text-pill:hover .text-icon {
-            filter: brightness(0); /* Black icon for green background in dark mode */
-        }
+        /* Dark mode removed */
 
         /* Secondary Action - TLDR Pill */
         .pill-2 {
@@ -5119,56 +5114,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             filter: none; /* Keep stop icon original color (black) */
         }
 
-        /* Dark mode */
-        [data-theme="dark"] .voice-pill:hover:not(.speaking) {
-            background: #a2e633;
-            color: transparent;
-            border-color: #a2e633;
-            position: relative;
-        }
-
-        [data-theme="dark"] .voice-pill:hover:not(.speaking)::before {
-            content: '';
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            background-image: url('https://raw.githubusercontent.com/amachinic/Merem/main/audio%20-%20play.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            filter: none; /* Keep play icon original color (black) */
-        }
-
-        [data-theme="dark"] .voice-pill.speaking {
-            background: #a2e633;
-            color: transparent;
-            border-color: #a2e633;
-            position: relative;
-        }
-
-        [data-theme="dark"] .voice-pill.speaking::before {
-            content: '';
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            background-image: url('https://raw.githubusercontent.com/amachinic/Merem/main/audio%20-%20stop.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            filter: none; /* Keep stop icon original color (black) */
-        }
-
-        [data-theme="dark"] .voice-pill::before {
-            content: '';
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            background-image: url('https://raw.githubusercontent.com/amachinic/Merem/main/sound.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            filter: brightness(0) invert(1); /* Makes the icon white */
-        }
+        /* Dark mode removed */
 
 
 
@@ -5183,35 +5129,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
 
 
 
-        /* Dark mode styles - Unified Design System */
-        [data-theme="dark"] .cta-pill {
-            background: rgba(255, 255, 255, 0.15);
-            color: var(--text-color);
-            border: 1px solid var(--toggle-border-color);
-        }
-
-        [data-theme="dark"] .cta-pill.selected {
-            background: #a2e633 !important;
-            color: #000000 !important;
-            border-color: #a2e633 !important;
-        }
-
-        [data-theme="dark"] .text-pill:hover,
-        [data-theme="dark"] .text-pill.active {
-            background: #a2e633;
-            color: #000000;
-            border-color: #a2e633;
-        }
-
-        [data-theme="dark"] .tldr-pill:hover,
-        [data-theme="dark"] .tldr-pill.active,
-        [data-theme="dark"] .tldr-pill.selected {
-            background: #76b314 !important;
-            color: #000000;
-            border: 2px solid #76b314 !important;
-        }
-
-        [data-theme="dark"] .voice-pill { border: 1px solid var(--toggle-border-color) !important; }
+        /* Dark mode removed */
 
 
 
@@ -5238,12 +5156,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             align-items: center !important;
         }
 
-        [data-theme="dark"] .voice-pill.available {
-            border: 1px solid var(--toggle-border-color);
-            width: 60px !important;
-            height: 44px !important;
-            transform: none !important;
-        }
+        /* Dark mode removed */
 
         /* Available + Speaking states handled by main speaking rules above */
 
@@ -5277,18 +5190,9 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             }
         }
 
-        [data-theme="dark"] .audio-control-widget.active {
-            animation: subtleGlowDark 2s ease-in-out infinite alternate;
-        }
+        /* Dark mode removed */
 
-        @keyframes subtleGlowDark {
-            0% {
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            }
-            100% {
-                box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
-            }
-        }
+        /* Dark mode removed */
 
         /* Word highlighting during speech */
         .story-content.speech-active {
@@ -5320,12 +5224,12 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             z-index: -1;
         }
 
-        [data-theme="dark"] .speech-word.current {
+      .speech-word.current {
             background: linear-gradient(120deg, rgba(255, 107, 107, 0.4) 0%, rgba(255, 107, 107, 0.2) 100%);
             box-shadow: 0 0 0 1px rgba(255, 107, 107, 0.3);
         }
 
-        [data-theme="dark"] .speech-word.current::before {
+       .speech-word.current::before {
             background: rgba(255, 107, 107, 0.15);
         }
 
@@ -5336,7 +5240,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             animation: wordConfirm 0.3s ease-out;
         }
 
-        [data-theme="dark"] .speech-word.highlighted {
+      .speech-word.highlighted {
             background: linear-gradient(120deg, rgba(255, 107, 107, 0.5) 0%, rgba(255, 107, 107, 0.25) 100%);
             box-shadow: 0 0 0 1px rgba(255, 107, 107, 0.4);
         }
@@ -5383,12 +5287,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
 
         }
 
-        [data-theme="dark"] .audio-control-widget {
-         
-            border-color: var(--toggle-border-color);
-            backdrop-filter: blur(3px);
-            background: rgba(24, 24, 24, 0.75);
-        }
+        /* Dark mode removed */
 
         .audio-control-widget.hidden {
             transform: translateX(-50%) translateY(100%);
@@ -5437,20 +5336,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             opacity: 0.5;
         }
 
-        [data-theme="dark"] .audio-close-btn {
-            background: transparent;
-            background-image: url('https://raw.githubusercontent.com/amachinic/Merem/main/X.png') !important;
-            background-size: 16px 16px !important;
-            background-repeat: no-repeat !important;
-            background-position: center !important;
-            border: 1px solid var(--toggle-border-color);
-            color: transparent;
-            filter: brightness(0) invert(1); /* Makes the icon white */
-        }
-
-        [data-theme="dark"] .audio-close-btn:hover {
-            opacity: 0.7;
-        }
+        /* Dark mode removed */
 
         .audio-control-widget.active {
             pointer-events: auto;
@@ -5490,7 +5376,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             height: 26px;
         }
 
-        [data-theme="dark"] .audio-control-btn {
+       .audio-control-btn {
             background-color: transparent;
             border: 1px solid var(--toggle-border-color);
             color: var(--text-color);
@@ -5500,9 +5386,9 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             opacity: 0.7;
         }
 
-        [data-theme="dark"] .audio-control-btn:hover {
-            opacity: 0.7;
-        }
+.audio-control-btn:hover {
+    opacity: 0.7;
+}
 
         .audio-control-btn:active {
             opacity: 0.5;
@@ -5525,7 +5411,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         }
 
         /* Dark mode - Make icons white */
-        [data-theme="dark"] .play-pause-btn {
+        .play-pause-btn {
             background-image: url('https://raw.githubusercontent.com/amachinic/Merem/main/audio%20-%20play.png') !important;
             background-size: 16px 16px !important;
             background-repeat: no-repeat !important;
@@ -5533,7 +5419,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             filter: brightness(0) invert(1) !important;
         }
 
-        [data-theme="dark"] .play-pause-btn.playing {
+      .play-pause-btn.playing {
             background-image: url('https://raw.githubusercontent.com/amachinic/Merem/main/audio%20-%20stop.png') !important;
             background-size: 16px 16px !important;
             background-repeat: no-repeat !important;
@@ -5551,22 +5437,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             background-position: center;
         }
 
-        /* Dark mode - Make seek icons white */
-        [data-theme="dark"] #rewindBtn {
-            background-image: url('https://raw.githubusercontent.com/amachinic/Merem/main/audio%20-%205s---LEFT.png') !important;
-            background-size: 16px 16px !important;
-            background-repeat: no-repeat !important;
-            background-position: center !important;
-            filter: brightness(0) invert(1) !important;
-        }
-
-        [data-theme="dark"] #fastForwardBtn {
-            background-image: url('https://raw.githubusercontent.com/amachinic/Merem/main/audio%20-%205s---Right.png') !important;
-            background-size: 16px 16px !important;
-            background-repeat: no-repeat !important;
-            background-position: center !important;
-            filter: brightness(0) invert(1) !important;
-        }
+        /* Dark mode removed */
 
         /* Rewind Button (Left) */
         #rewindBtn {
@@ -5590,7 +5461,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        [data-theme="dark"] .speed-btn {
+    .speed-btn {
             border: 1px solid var(--toggle-border-color);
         }
 
@@ -5621,15 +5492,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             flex-shrink: 0;
         }
 
-        [data-theme="dark"] .audio-settings-btn {
-            background-color: transparent;
-            background-image: url('https://raw.githubusercontent.com/amachinic/Merem/main/settings.png') !important;
-            background-size: 16px 16px !important;
-            background-repeat: no-repeat !important;
-            background-position: center !important;
-            border: 1px solid var(--toggle-border-color);
-            filter: brightness(0) invert(1);
-        }
+        /* Dark mode removed */
 
         .audio-settings-btn:hover {
             opacity: 0.7;
@@ -5646,7 +5509,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             position: absolute;
             bottom: 60px;
             left: 0;
-            background: rgba(24, 24, 24, 0.8);
+            background: var(--surface-1);
             backdrop-filter: blur(3px);
             border: 1px solid var(--toggle-border-color);
             border-radius: 8px;
@@ -5655,20 +5518,16 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             flex-direction: column;
             gap: 4px;
             min-width: 80px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 12px var(--shadow-md);
             z-index: 1001;
         }
 
-        [data-theme="dark"] .audio-settings-dropdown {
-            background: rgba(24, 24, 24, 0.98) !important;
-            backdrop-filter: blur(3px) !important;
-            -webkit-backdrop-filter: blur(3px) !important;
-        }
+        /* Dark mode removed */
 
         .audio-settings-dropdown.show {
             display: flex;
             animation: slideUpFade 0.4s ease;
-            background: rgb(134 134 134 / 89%);
+            background: var(--surface-2);
             backdrop-filter: blur(3px) !important;
             -webkit-backdrop-filter: blur(3px) !important;
         }
@@ -5821,7 +5680,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
                 flex-shrink: 0;
             }
 
-            [data-theme="dark"] .audio-settings-btn {
+            .audio-settings-btn {
                 background-color: transparent;
                 background-image: url('https://raw.githubusercontent.com/amachinic/Merem/main/settings.png') !important;
                 background-size: 12px 12px !important;
@@ -5854,7 +5713,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
                 z-index: 1001;
             }
 
-            [data-theme="dark"] .audio-settings-dropdown {
+            .audio-settings-dropdown {
                 background: rgba(24, 24, 24, 0.75);
                 backdrop-filter: blur(3px);
                 -webkit-backdrop-filter: blur(3px);
@@ -5944,7 +5803,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             }
 
             /* Dark mode mobile - Force icon properties */
-            [data-theme="dark"] .play-pause-btn {
+            .play-pause-btn {
                 background-image: url('https://raw.githubusercontent.com/amachinic/Merem/main/audio%20-%20play.png') !important;
                 background-size: 16px 16px !important;
                 background-repeat: no-repeat !important;
@@ -5952,7 +5811,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
                 filter: brightness(0) invert(1) !important;
             }
 
-            [data-theme="dark"] .play-pause-btn.playing {
+            .play-pause-btn.playing {
                 background-image: url('https://raw.githubusercontent.com/amachinic/Merem/main/audio%20-%20stop.png') !important;
                 background-size: 16px 16px !important;
                 background-repeat: no-repeat !important;
@@ -5960,7 +5819,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
                 filter: brightness(0) invert(1) !important;
             }
 
-            [data-theme="dark"] #rewindBtn {
+            #rewindBtn {
                 background-image: url('https://raw.githubusercontent.com/amachinic/Merem/main/audio%20-%205s---LEFT.png') !important;
                 background-size: 12px 12px !important;
                 background-repeat: no-repeat !important;
@@ -5968,7 +5827,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
                 filter: brightness(0) invert(1) !important;
             }
 
-            [data-theme="dark"] #fastForwardBtn {
+            #fastForwardBtn {
                 background-image: url('https://raw.githubusercontent.com/amachinic/Merem/main/audio%20-%205s---Right.png') !important;
                 background-size: 12px 12px !important;
                 background-repeat: no-repeat !important;
@@ -5976,7 +5835,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
                 filter: brightness(0) invert(1) !important;
             }
 
-            [data-theme="dark"] .audio-close-btn {
+           .audio-close-btn {
                 background-image: url('https://raw.githubusercontent.com/amachinic/Merem/main/X.png') !important;
                 background-size: 10px 10px !important;
                 background-repeat: no-repeat !important;
@@ -5999,7 +5858,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             transition: background-color 0.3s ease;
         }
 
-        [data-theme="dark"] .highlight-target.highlighted {
+        .highlight-target.highlighted {
             background: rgba(162, 230, 51, 0.2); /* Slightly more transparent for dark mode */
         }
 
@@ -6034,13 +5893,13 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         }
 
         /* Dark mode inline pill - matches CTA pill style */
-        [data-theme="dark"] .inline-pill {
+        .inline-pill {
             background: rgba(255, 255, 255, 0.15);
             color: var(--text-color);
             border-color: var(--toggle-border-color);
         }
 
-        [data-theme="dark"] .inline-pill:hover {
+         .inline-pill:hover {
             background: rgba(255, 255, 255, 0.25);
             color: var(--text-color);
             transform: translateY(-2px);
@@ -6176,7 +6035,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         }
 
         /* Dark mode keeps prior visual style */
-        [data-theme="dark"] .impact-pill {
+        .impact-pill {
             background: transparent;
             color: #ffffff;
             border: 2px solid #ffffff;
@@ -6189,7 +6048,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             text-transform: uppercase;
             transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
         }
-        [data-theme="dark"] .impact-pill:hover { transform: scale(1.08); }
+         .impact-pill:hover { transform: scale(1.08); }
 
         .impact-fade-left,
         .impact-fade-right {
@@ -6234,25 +6093,25 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         }
 
         /* Dark mode inversion */
-        [data-theme="dark"] .impact-marquee-row {
+       .impact-marquee-row {
             background: transparent; /* Dark mode bar */
         }
 
-        [data-theme="dark"] .impact-pill {
+        .impact-pill {
             color: #ffffff;
             border-color: #ffffff;
         }
 
         
 
-        [data-theme="dark"] .impact-fade-left {
+        .impact-fade-left {
             background: linear-gradient(90deg,
                 var(--bg-color) 0%,
                 var(--bg-color) 30%,
                 transparent 100%);
         }
 
-        [data-theme="dark"] .impact-fade-right {
+         .impact-fade-right {
             background: linear-gradient(270deg,
                 var(--bg-color) 0%,
                 var(--bg-color) 30%,
@@ -6261,7 +6120,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
 
         /* Apply fade-in on dark mode toggle */
         .impact-marquee { opacity: 1; will-change: opacity, transform; }
-        [data-theme="dark"] .impact-marquee {
+         .impact-marquee {
             opacity: 0;
             animation: impactMarqueeFadeIn 600ms ease-out 120ms forwards;
         }
@@ -6269,7 +6128,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         /* Final video card (Implementation section) */
         .final-video-card {
             background: #000;
-            border-radius: 16px;
+            border-radius: var(--radius-card);
             border: 1px solid var(--border-color);
             width: 100%;
             height: auto; /* let video define height */
@@ -6289,7 +6148,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         }
 
         @media (prefers-reduced-motion: reduce) {
-            [data-theme="dark"] .impact-marquee {
+           .impact-marquee {
                 animation: none;
                 opacity: 1;
                 transform: none;
@@ -6317,8 +6176,8 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .impact-marquee-row { height: 48px; }
-            body:not([data-theme="dark"]).impact-pill,
-            body:not([data-theme="dark"]) .impact-pill {
+            body.impact-pill,
+            body.impact-pill {
                 height: 30px;
                 padding: 0 12px;
                 font-size: 12px;
@@ -6485,9 +6344,10 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
 
         /* Large Screens - Better Readability */
         @media (min-width: 1600px) {
-            .defect-glossary-content {
+        .defect-glossary-content {
                 grid-column: 1 / 6; /* 5 columns (62.5%) - matches triage-info-card desktop */
                 margin-right: 160px;
+            padding: 16px; /* align with triage card padding */
             }
         }
 
@@ -6556,8 +6416,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
 
         /* Defect Table Card - aligned with triage component light styling */
         .defect-table-card {
-            background: var(--surface-color);
-            border-radius: 16px;
+            border-radius: var(--radius-card);
             border: 1px solid var(--border-color);
             box-shadow: 0 4px 20px var(--shadow-light);
             overflow: hidden;
@@ -6567,13 +6426,14 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             flex-direction: column;
             transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             color: var(--text-color);
+            background: var(--surface-secondary);
         }
 
         /* Defect Table Footer */
         .defect-table-footer {
             height: 10px;
             background: var(--surface-accent);
-            border-radius: 0 0 16px 16px;
+            border-radius: 0 0 var(--radius-card) var(--radius-card);
             flex-shrink: 0;
         }
 
@@ -6581,8 +6441,13 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         .defect-table-header {
             background: var(--surface-secondary);
             border-bottom: 1px solid var(--border-color);
-            padding: 18px 24px;
+            padding: 16px;
             color: var(--text-color);
+            border-top-left-radius: var(--radius-card);
+            border-top-right-radius: var(--radius-card);
+            /* subtle bottom shadow to define separation from scroll area */
+            box-shadow: 0 6px 10px -8px var(--shadow-lg);
+            z-index: 1;
         }
 
         .filter-section {
@@ -6619,12 +6484,12 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
 
 
 
-        [data-theme="dark"]     .filter-label svg {
+        .filter-label svg {
             margin-right: 8px;
             stroke: var(--text-secondary) !important;
         }
 
-        [data-theme="dark"]     .filter-label {
+        .filter-label {
             color: var(--text-secondary) !important;
         }
 
@@ -6664,8 +6529,9 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         }
 
         .severity-btn.active {
-            border-color: var(--ui-active-border);
-            background: var(--ui-active-bg);
+            background-color: var(--btn-dark) !important;
+            color: var(--card-bg-color) !important;
+            border-color: var(--btn-dark) !important;
         }
 
         /* Make glossary filter CTAs fill the container */
@@ -6679,44 +6545,61 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         #glossary-severity-filters .severity-btn { flex: 1 1 0 !important; }
 
         .severity-btn:not(.active) {
-            background: var(--surface-secondary);
-            color: var(--text-color);
-            border: 1px solid var(--border-color);
+            background: var(--surface-1);
+            color: var(--text-secondary);
+            border: 1px solid var(--ui-border);
         }
 
         /* Inherit neutral style explicitly to avoid empty ruleset */
         .severity-btn.low-severity:not(.active) { background: var(--surface-color); color: var(--case-study-qa-framework); border-color: var(--border-color); }
 
-        .severity-btn.low-severity.active { background-color: #E2F6C8 !important; color: var(--case-study-qa-framework) !important;             font-weight: 600 !important;}
+        .severity-btn.low-severity.active {
+            background-color: var(--ui-active-bg) !important;
+            color: var(--case-study-qa-framework) !important;
+            font-weight: 600 !important;
+            border-color: var(--ui-active-border) !important;
+        }
 
         .severity-btn.medium-severity:not(.active) { background: var(--surface-color); color: var(--case-study-qa-framework); border-color: var(--border-color); }
 
-        .severity-btn.medium-severity.active { background-color: #dfdc40 !important; color: var(--case-study-qa-framework) !important;             font-weight: 600 !important;}
+        .severity-btn.medium-severity.active {
+            background-color: var(--ui-active-bg) !important;
+            color: var(--case-study-qa-framework) !important;
+            font-weight: 600 !important;
+            border-color: var(--ui-active-border) !important;
+        }
 
         .severity-btn.high-severity:not(.active) { background: var(--surface-color); color: var(--text-secondary); border-color: var(--border-color); }
 
         .severity-btn.high-severity.active {
-            background-color: #a2e633 !important;
+            background-color: var(--ui-active-bg) !important;
             color: var(--case-study-qa-framework) !important;
             font-weight: 600;
+            border-color: var(--ui-active-border) !important;
         }
 
         /* Defect Cards List */
         .defect-cards-list {
-            padding: 12px 16px 24px 24px;
+            padding: 16px;
             height: 420px;
-            overflow-y: scroll;
-            scrollbar-width: thin;
-            scrollbar-color: var(--toggle-border-color) transparent; /* align to custom-scrollbar */
+            overflow-y: auto;
+            scrollbar-width: thin; /* Firefox: minimal width always reserved (no shift) */
+            scrollbar-color: var(--toggle-border-color) transparent;
             flex: 1;
-            scrollbar-gutter: stable;
+            scrollbar-gutter: stable; /* reserve space to avoid layout shift */
             background: var(--surface-secondary);
+            visibility: hidden; /* hide scrollbars without affecting layout */
         }
 
-        .defect-cards-list::-webkit-scrollbar {
-            width: 3px; /* thinner like custom-scrollbar */
-            background: transparent;
+        /* Keep content visible while hiding the scrollbar; reveal scrollbars on hover/focus */
+        .defect-cards-list .defect-cards-list-content,
+        .defect-cards-list:hover,
+        .defect-cards-list:focus {
+            visibility: visible;
         }
+
+        /* WebKit: minimal scrollbar; parent visibility hides it until hover/focus */
+        .defect-cards-list::-webkit-scrollbar { width: 3px; background: transparent; }
 
         .defect-cards-list::-webkit-scrollbar-track {
             background: transparent;
@@ -6742,7 +6625,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
 
         .defect-cards-list .defect-card {
             background: var(--surface-color);
-            border-radius: 6px;
+            border-radius: var(--radius-card);
             padding: 12px;
             margin-bottom: 8px;
             box-shadow: 0 1px 2px 0 var(--shadow-light);
@@ -6776,7 +6659,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         .defect-card-icon svg {
             width: 32px !important;
             height: 32px !important;
-            fill: #FFF !important;
+            fill: var(--ui-text) !important;
             stroke: none;
             flex-shrink: 0;
         }
@@ -6875,6 +6758,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         @media (max-width: 1440px) {
             .defect-glossary-content {
                 grid-column: 1 / 6; /* 5 columns - matches triage-info-card */
+            padding: 16px; /* align with triage card padding */
             }
             
             .defect-table-container {
@@ -6895,6 +6779,8 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
                 padding-top: 40px;
                 margin-bottom: 20px;
                 padding-right: 0;
+                padding-left: 16px;
+                padding-right: 16px;
                 justify-self: start; /* Left align the content with header */
                 max-width: 800px; /* Match header max-width for consistency */
             }
@@ -6940,13 +6826,10 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
 
             .defect-cards-list {
                 height: 300px; /* Reduced by 10px for footer */
-                padding: 12px;
-                padding-right: 16px;
+                padding: 16px;
             }
 
-            .defect-table-header {
-                padding: 12px;
-            }
+            .defect-table-header { padding: 16px; }
 
             .severity-filters {
                 gap: 8px;
@@ -7062,15 +6945,7 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             transform: translateY(-1px);
         }
 
-        [data-theme="dark"] .hmw-pill {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.1);
-        }
-
-        [data-theme="dark"] .hmw-pill:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
+        /* Dark mode removed */
 
         /* Word-by-word animation for hmw title */
         .hmw-animated-title {
@@ -7139,10 +7014,9 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
             position: relative;
             width: 100%;
             height: 600px;
-    
-            border-radius: 12px;
+            border-radius: var(--radius-card);
             overflow: hidden;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px var(--shadow-light);
             padding: 0 !important;
             margin: 0 !important;
         }
@@ -7166,34 +7040,70 @@ body:not([data-theme="dark"]) .triage-component-container .custom-enhanced-dropd
         }
 
 /* Triage inputs – design system variant 3 (chip/hugging label), light mode only */
-body:not([data-theme="dark"]) .ui-input { display: inline-block; width: 100%; color: var(--text-color) !important; }
-body:not([data-theme="dark"]) .ui-field input,
-body:not([data-theme="dark"]) .ui-field textarea {
+.ui-input { display: inline-block; width: 100%; color: var(--text-color) !important; }
+.ui-field input,
+.ui-field textarea {
     appearance: none; border: 0; outline: 0; background: transparent; width: 100%; color: var(--text-color) !important; font: inherit; line-height: inherit;
 }
-body:not([data-theme="dark"]) .ui-field input::placeholder,
-body:not([data-theme="dark"]) .ui-field textarea::placeholder { color: #838383; }
+.ui-field input::placeholder,
+.ui-field textarea::placeholder { color: var(--text-muted); }
 
 /* Chip (hugging) */
-body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-label {
+.ui-input[data-variant="chip"] .ui-label {
     display: block; width: fit-content; padding: 2px 8px; background: var(--ui-bg);
     border-top: 1px solid var(--ui-border); border-right: 1px solid var(--ui-border); border-left: 1px solid var(--ui-border); border-bottom: 1px solid var(--ui-border);
     border-radius: 4px 4px 0 0; font-size: 10px; font-weight: 400; margin: 0 0 -1px 0; color: var(--text-color) !important;
 }
-body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field {
+.ui-input[data-variant="chip"] .ui-field {
     display: block; width: 100%; padding: 12px 8px; border: 1px solid var(--ui-border); border-radius: 0 4px 4px 4px; background: var(--ui-bg);
     font-size: 13px; line-height: 16px; font-weight: 400;
     transition: background var(--motion-ms) var(--ease-smooth), border-color var(--motion-ms) var(--ease-smooth), box-shadow var(--motion-ms) var(--ease-smooth);
 }
-body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field:hover { background: var(--ui-active-bg); }
-body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field:focus-within { border-color: var(--ui-active-border); background: var(--ui-active-bg); }
+.ui-input[data-variant="chip"] .ui-field:hover { background: var(--field-hover-bg); border-color: var(--ui-active-border); }
+.ui-input[data-variant="chip"] .ui-field:focus-within { border-color: var(--ui-active-border); background: var(--ui-active-bg); }
 
 /* Static field variant (no hover/focus state changes) */
-body:not([data-theme="dark"]) .ui-field.ui-field--static { background: var(--ui-bg) !important; border-color: var(--ui-border) !important; }
-body:not([data-theme="dark"]) .ui-field.ui-field--static:hover,
-body:not([data-theme="dark"]) .ui-field.ui-field--static:focus-within { background: var(--ui-bg) !important; border-color: var(--ui-border) !important; }
-body:not([data-theme="dark"]) .status-section .ui-field { position: relative; }
-body:not([data-theme="dark"]) .status-field-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.ui-field.ui-field--static { background: var(--ui-bg) !important; border-color: var(--ui-border) !important; }
+.ui-field.ui-field--static:hover,
+.ui-field.ui-field--static:focus-within { background: var(--ui-bg) !important; border-color: var(--ui-border) !important; }
+.status-section .ui-field { position: relative; }
+.status-field-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+
+/* Global input field hover: lime outline + tinted background */
+.ui-field:hover {
+    background: var(--field-hover-bg);
+    border-color: var(--ui-active-border);
+}
+
+/* Link item hover/focus alignment with input fields */
+.link-item:hover,
+.link-item:focus,
+.link-item:focus-within {
+    background: var(--field-hover-bg) !important;
+    border-color: var(--ui-active-border) !important;
+}
+
+/* Prevent double hover inside link-item: neutralize inner button hover */
+.link-item .add-link-btn-full,
+.link-item .add-link-btn-full:hover,
+.link-item .add-link-btn-full:focus {
+    background: transparent !important;
+    border-color: transparent !important;
+}
+
+/* Unified hover outline behavior (match link-item) */
+.status-btn:hover,
+.header-add-btn:hover,
+.header-sync-btn:hover,
+.triage-card .triage-remove-btn:hover,
+.add-link-btn-full:hover,
+.triage-component-container .annotation-circle:hover,
+.triage-component-container .custom-option:hover,
+.severity-btn:hover {
+    background: var(--field-hover-bg) !important;
+    border-color: var(--ui-active-border) !important;
+    color: var(--text-primary) !important;
+}
 
 /* Add gap between API and Add Link CTAs equal to link-item gap */
 .links-actions .header-buttons {
@@ -7219,32 +7129,60 @@ body:not([data-theme="dark"]) .status-field-row { display: flex; align-items: ce
 
 /* Triage card top-right actions */
 .triage-card { position: relative; }
-.triage-card .triage-actions {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    z-index: 3;
-}
+ .triage-card .triage-actions {
+     position: absolute;
+     top: 8px;
+     right: 16px;
+     z-index: 1002;
+     pointer-events: auto;
+ }
 /* Remove CTA inherits small button styles from base selectors */
 /* (intentionally no extra declarations) */
+
+/* Maintain original placement in horizontal layout (tablet range) */
+@media (max-width: 1200px) and (min-width: 769px) {
+  .triage-card .triage-actions { top: 16px; }
+}
+
+/* Place Remove action in its own grid row for vertical layouts (desktop and mobile) */
+@media (min-width: 1201px), (max-width: 768px) {
+  .triage-card .triage-actions {
+    position: static !important;
+    grid-column: 1 / -1 !important; /* span all columns */
+    grid-row: 1 !important;         /* dedicated first row */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 0;
+    margin-bottom: 0;
+    z-index: auto !important;
+    pointer-events: auto;
+  }
+
+  /* Default gap 12px; cancel first gap so row1-row2 = 0 */
+  .triage-card { row-gap: 12px !important; }
+  .triage-card .triage-actions { margin-bottom: -12px; }
+  .triage-card .annotation-number { margin-top: 0; }
+}
 
 /* Description field: remove inner border and align padding to author (use container padding) */
 
 /* Ensure the field renders above the label so hover/focus visuals aren't clipped */
-body:not([data-theme="dark"]) .ui-input[data-variant="chip"] { position: relative; overflow: visible; }
-body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-label { position: relative; z-index: 1; }
-body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field { position: relative; z-index: 2; }
-body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea[id^="defect-description"] {
+/* Flattened (no dark-mode guards) */
+.ui-input[data-variant="chip"] { position: relative; overflow: visible; }
+.ui-input[data-variant="chip"] .ui-label { position: relative; z-index: 1; }
+.ui-input[data-variant="chip"] .ui-field { position: relative; z-index: 2; }
+.ui-input[data-variant="chip"] .ui-field textarea[id^="defect-description"] {
     border: 0 !important;
     padding: 0 !important;
     background: transparent !important;
 }
-body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea[id^="defect-description"]:hover,
-body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea[id^="defect-description"]:focus {
+.ui-input[data-variant="chip"] .ui-field textarea[id^="defect-description"]:hover,
+.ui-input[data-variant="chip"] .ui-field textarea[id^="defect-description"]:focus {
     border: 0 !important;
     background: transparent !important;
     box-shadow: none !important;
-        }
+}
 
         .process-map-image {
             position: relative;
@@ -7318,15 +7256,7 @@ body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea[
         }
 
         /* Dark mode adjustments */
-        [data-theme="dark"] .process-map-canvas {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-
-        [data-theme="dark"] .process-map-image img {
-            box-shadow: none;
-        }
+        /* Dark mode removed */
 
         /* Custom Scrollbar for Canvas */
         .canvas-content::-webkit-scrollbar {
@@ -7347,17 +7277,7 @@ body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea[
             background: rgba(0, 0, 0, 0.3);
         }
 
-        [data-theme="dark"] .canvas-content::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        [data-theme="dark"] .canvas-content::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        [data-theme="dark"] .canvas-content::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
+        /* Dark mode removed */
 
         /* Responsive Design */
         @media (max-width: 1024px) {
@@ -7412,17 +7332,19 @@ body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea[
             padding: 20px 20px;
             background: var(--card-bg-color);
             color: var(--card-text-color);
-            border-radius: 16px;
+            border-radius: var(--radius-card);
             border: 1px solid transparent;
             opacity: 0;
             transform: translateY(30px);
             border-color: var(--toggle-border-color);
+            /* stronger, layered shadow for visibility on light backgrounds */
+            box-shadow: 0 12px 24px -10px var(--shadow-lg), 0 2px 8px -2px var(--shadow-md);
         }
 
         .metric-number {
             font-size: 48px;
             font-weight: 500;
-            color: var(--card-text-color);
+            color: var(--neutral-0);
             margin-bottom: 12px;
             line-height: 1.1;
         }
@@ -7711,121 +7633,33 @@ body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea[
             }
         }
 
-        /* ===== DARK MODE SUPPORT FOR DEFECT GLOSSARY ===== */
-        [data-theme="dark"] .defect-table-card {
-            background: var(--case-study-design-system);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            color: var(--card-text-color);
-        }
+        /* Dark mode removed: defect glossary */
 
-        [data-theme="dark"] .defect-table-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        [data-theme="dark"] .defect-table-header {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--card-text-color);
-        }
-
-        [data-theme="dark"] .defect-cards-list {
-            background: #141414 !important;
-        }
-
-
-        [data-theme="dark"] .defect-table-footer {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        [data-theme="dark"] .filter-label {
-            color: var(--card-text-color);
-        }
-
-        [data-theme="dark"] .severity-filters {
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        [data-theme="dark"] .severity-btn {
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        [data-theme="dark"] .severity-btn.active {
-            background-color: rgba(255, 255, 255, 0.8);
-            color: var(--case-study-design-system);
-            border-color: rgba(255, 255, 255, 0.8);
-            font-weight: 600 !important;
-        }
-
-        /* Override only the 'ALL' CTA in defect glossary for dark mode */
-        [data-theme="dark"] #defect-glossary #severity-all-defect.severity-btn.active {
-            background-color: #ffffff !important;
-            color: #000000 !important;
-            border-color: #ffffff !important;
-        }
-
-        [data-theme="dark"] .severity-btn:not(.active) {
-            background: rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        [data-theme="dark"] .defect-cards-list {
-            scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
-        }
-
-        [data-theme="dark"] .defect-cards-list::-webkit-scrollbar {
-            background: transparent;
-        }
-
-        [data-theme="dark"] .defect-cards-list::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        [data-theme="dark"] .defect-cards-list::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        [data-theme="dark"] .defect-cards-list .defect-card {
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-            color: var(--card-text-color);
-        }
-
-        [data-theme="dark"] .defect-card-title {
-            color: var(--card-text-color);
-        }
-
-        [data-theme="dark"] .defect-card-description {
-            color: #a7a7a7;
-        }
+        /* Dark mode removed: severity/defect list overrides */
 
         /* ===== Minimal Greyscale UI Overrides: Header Buttons, Status, Severity Filters ===== */
         /* Header buttons (light and dark): align to minimal greyscale */
         .header-add-btn,
         .header-sync-btn,
         .triage-card .triage-remove-btn {
-            background-color: var(--surface-color) !important;
-            border: 1px solid var(--border-color) !important;
+            background-color: var(--surface-1) !important;
+            border: 1px solid var(--ui-border) !important;
             color: var(--text-secondary) !important;
             box-shadow: none !important;
+            padding: 6px 14px !important;
+            min-height: 26px !important;
+            border-radius: 3px !important;
         }
 
         .header-add-btn:hover,
         .header-sync-btn:hover,
         .triage-card .triage-remove-btn:hover {
-            background-color: var(--interactive-hover) !important;
-            border-color: var(--border-hover) !important;
-            color: var(--text-color) !important;
+            background-color: var(--field-hover-bg) !important;
+            border-color: var(--ui-active-border) !important;
+            color: var(--text-primary) !important;
         }
 
-        [data-theme="dark"] .header-add-btn,
-        [data-theme="dark"] .header-sync-btn,
-        [data-theme="dark"] .triage-card .triage-remove-btn {
-            background-color: var(--surface-color) !important;
-            border-color: var(--border-color) !important;
-            color: var(--text-secondary) !important;
-        }
+        /* Dark mode removed: header buttons */
 
         /* Severity filters: neutral greyscale */
         .severity-filters {
@@ -7841,190 +7675,21 @@ body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea[
             color: var(--text-secondary);
         }
 
-        .severity-btn:not(.active) {
-            background: var(--surface-color) !important;
-            color: var(--text-secondary) !important;
-            border-color: var(--border-color) !important;
-        }
-        
-       [data-theme="dark"] .severity-btn:not(.active) {
-            background: var(--surface-color) !important;
-            color: #FFF !important;
-            border-color: var(--border-color) !important; 
-        }
-
-        .severity-btn.active {
-            background-color: var(--case-study-qa-framework) !important;
-            color: var(--bg-color) !important;
-            border-color: var(--text-color) !important;
-        }
-
-        /* Neutralize severity-specific color variants */
-        .severity-btn.low-severity,
-        .severity-btn.medium-severity,
-        .severity-btn.high-severity {
-            border-color: var(--border-color) !important;
-        }
+        /* Legacy greyscale severity overrides removed */
 
 
         /* Status buttons: minimal greyscale across states */
-        .status-btn {
-            border: 1px solid var(--border-color) !important;
-            background: var(--surface-color) !important;
-            color: var(--text-secondary) !important;
-        }
+        /* Legacy greyscale status overrides removed */
 
-        .status-btn:hover {
-            background: var(--interactive-hover) !important;
-            border-color: var(--border-hover) !important;
-            color: var(--text-color) !important;
-        }
-
-        .status-btn.selected {
-            background-color: var(--text-color) !important;
-            color: var(--bg-color) !important;
-            border-color: var(--text-color) !important;
-        }
-
-        /* Neutralize per-status color rules (light and dark) */
-        .status-btn[data-status] {
-            border-color: var(--border-color) !important;
-            color: var(--text-secondary) !important;
-            background: var(--surface-color) !important;
-        }
-
-        [data-theme="dark"] .status-btn[data-status] {
-            border-color: var(--border-color) !important;
-            color: var(--text-secondary) !important;
-            background: #161616 !important;
-        }
-
-        /* Ensure selected state in dark mode keeps the same palette unless explicitly overridden */
-        [data-theme="dark"] .status-btn[data-status].selected {
-            border-color: var(--border-color) !important;
-            color: var(--text-secondary) !important;
-            background: #161616 !important;
-        }
+        /* Dark mode removed: status button variants */
 
         /* ===== Minimal Greyscale UI Overrides: Add Link Modal ===== */
-        .modal-footer {
-            background-color: var(--surface-secondary) !important;
-            border-top: 1px solid var(--border-color) !important;
-        }
+        /* Legacy greyscale modal button overrides removed (now using tokens above) */
 
-        .modal-btn {
-            border: 1px solid var(--border-color) !important;
-            box-shadow: none !important;
-        }
-
-        .modal-btn-secondary,
-        .modal-btn-sync {
-            background-color: var(--surface-color) !important;
-            color: var(--text-secondary) !important;
-            border-color: var(--border-color) !important;
-        }
-
-        .modal-btn-secondary:hover,
-        .modal-btn-sync:hover {
-            background-color: var(--interactive-hover) !important;
-            border-color: var(--border-hover) !important;
-            color: var(--text-color) !important;
-        }
-
-        .modal-btn-primary {
-            background-color: var(--text-color) !important;
-            color: var(--bg-color) !important;
-            border-color: var(--text-color) !important;
-        }
-
-        .modal-btn-primary:hover {
-            background-color: var(--text-color) !important;
-            filter: brightness(0.9) !important;
-            border-color: var(--text-color) !important;
-        }
-
-        .modal-btn-primary:disabled {
-            background-color: var(--surface-secondary) !important;
-            color: var(--text-secondary) !important;
-            border-color: var(--border-color) !important;
-        }
-
-        .service-option {
-            border: 1px solid var(--border-color) !important;
-            background-color: var(--surface-color) !important;
-            color: var(--text-secondary) !important;
-            box-shadow: none !important;
-        }
-
-        .service-option:hover {
-            border-color: var(--border-hover) !important;
-            background-color: var(--interactive-hover) !important;
-            color: var(--text-color) !important;
-        }
-
-        .service-option.selected {
-            border-color: var(--text-color) !important;
-            background-color: var(--surface-secondary) !important;
-            color: var(--text-color) !important;
-        }
-
-        [data-theme="dark"] .modal-content {
-            background: var(--surface-color) !important;
-            border-color: var(--border-color) !important;
-        }
-
-        [data-theme="dark"] .modal-header {
-            border-bottom-color: var(--border-color) !important;
-        }
-
-        [data-theme="dark"] .modal-header h3 {
-            color: var(--text-color) !important;
-        }
+        /* Legacy greyscale service-option/modal overrides removed */
 
         /* ===== Status icon contrast alignment ===== */
-        .status-btn .status-icon {
-            opacity: 0.85;
-            filter: none;
-            transition: opacity var(--motion-ms) var(--ease-smooth), filter var(--motion-ms) var(--ease-smooth);
-        }
-
-        /* Default (non-selected) status icons: neutral greyscale in light mode */
-        .status-btn:not(.selected) .status-icon {
-            filter: grayscale(1) saturate(0) brightness(0.55) contrast(1.05) !important;
-        }
-
-        .status-btn:hover .status-icon {
-            opacity: 1;
-        }
-
-        /* Selected: ensure icon contrasts with selected background (consistent for all statuses) */
-        .status-btn.selected .status-icon {
-            filter: brightness(0) invert(1) !important;
-            opacity: 1;
-        }
-
-        /* Smooth 1s transitions between CTA (status) selections */
-        .status-btn {
-            transition: background var(--motion-ms) var(--ease-smooth),
-                        border-color var(--motion-ms) var(--ease-smooth),
-                        color var(--motion-ms) var(--ease-smooth),
-                        box-shadow var(--motion-ms) var(--ease-smooth);
-        }
-
-        /* Dark theme: non-selected icons should be light; selected becomes dark on light selected bg */
-        /* Default (non-selected) status icons: neutral greyscale in dark mode (slightly brighter) */
-        [data-theme="dark"] .status-btn:not(.selected) .status-icon {
-            opacity: 0.95;
-            filter: grayscale(1) saturate(0) brightness(0.95) contrast(1.05) !important;
-        }
-
-        [data-theme="dark"] .status-btn.selected .status-icon {
-            filter: brightness(0) invert(1) !important;
-        }
-
-        [data-theme="dark"] .defect-table-footer {
-            background-color: var(--surface-accent);
-        }
+        /* Legacy status icon overrides and dark mode rules removed */
 
 
 
@@ -8221,6 +7886,12 @@ body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea[
     </style>
 </head>
 <body>
+    <!-- Simple page preloader (shared pattern) -->
+    <div id="preloader" style="position:fixed;inset:0;z-index:9999;background:var(--bg-color,#ffffff);display:flex;align-items:center;justify-content:center;opacity:1;transition:opacity .4s ease">
+        <div class="preloader-bar" style="width:min(560px,80vw);height:4px;background:linear-gradient(90deg,#cbd5e1,#9ca3af);border-radius:999px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)">
+            <div id="preloader-thumb" style="height:100%;width:0%;background:#000810;transition:width .5s cubic-bezier(.22,.7,.2,1)"></div>
+        </div>
+    </div>
     <!-- Global Clock Container Component (Outside ScrollSmoother for fixed positioning) -->
     <div id="global-clock-container"></div>
 
@@ -8549,8 +8220,10 @@ body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea[
                         </div>
                         
                         <!-- Defect Cards List -->
-                        <div class="defect-cards-list">
-                            <!-- Defect cards will be populated by JavaScript -->
+                        <div class="defect-cards-list" tabindex="0">
+                            <div class="defect-cards-list-content">
+                                <!-- Defect cards will be populated by JavaScript -->
+                            </div>
                         </div>
                         
                         <!-- Card Footer -->
@@ -8580,7 +8253,30 @@ body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea[
                 <!-- Left: Black card -->
                 <div class="triage-info-card">
                         <div class="triage-compare-card">
-                            <div class="triage-compare-label">slider</div>
+                            <div class="triage-compare-toolbar">
+                                <label class="triage-compare-upload triage-compare-upload-left" id="triageUploadLeft" title="Upload Dev Image">
+                                    <svg class="triage-compare-upload-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                                        <polyline points="7,10 12,5 17,10" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                                        <line x1="12" y1="5" x2="12" y2="16" stroke="currentColor" stroke-width="1.5"/>
+                                    </svg>
+                                    <span class="triage-compare-upload-text">Upload Dev</span>
+                                    <input type="file" class="triage-compare-upload-input" id="triageInputLeft" accept="image/*">
+                                </label>
+                                <div class="triage-compare-toolbar-title">
+                                    <button class="triage-compare-reset" id="triageReset" title="Reset compare">Reset canvas</button>
+                                    <div class="triage-compare-subtext">SLIDER</div>
+                                </div>
+                                <label class="triage-compare-upload triage-compare-upload-right" id="triageUploadRight" title="Upload Final Image">
+                                    <svg class="triage-compare-upload-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                                        <polyline points="7,10 12,5 17,10" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                                        <line x1="12" y1="5" x2="12" y2="16" stroke="currentColor" stroke-width="1.5"/>
+                                    </svg>
+                                    <span class="triage-compare-upload-text">Upload Final</span>
+                                    <input type="file" class="triage-compare-upload-input" id="triageInputRight" accept="image/*">
+                                </label>
+                            </div>
                         <div class="triage-compare-container" id="triageCompare">
                             <div class="triage-compare-annotation-widget">
                                 <button class="triage-compare-annotation-btn" id="triageAnnotateBtn">Annotate</button>
@@ -8612,33 +8308,16 @@ body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea[
                             </div>
                             <img class="triage-compare-image-before" id="triageImageBefore" src="https://raw.githubusercontent.com/amachinic/Merem/main/A2.png" alt="Dev Image">
                             <img class="triage-compare-image-after" id="triageImageAfter" src="https://raw.githubusercontent.com/amachinic/Merem/main/A1.png" alt="Final Image">
-                            <label class="triage-compare-upload triage-compare-upload-left" id="triageUploadLeft" title="Upload Dev Image">
-                                <svg class="triage-compare-upload-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" fill="none" stroke="currentColor" stroke-width="1.5"/>
-                                    <polyline points="7,10 12,5 17,10" fill="none" stroke="currentColor" stroke-width="1.5"/>
-                                    <line x1="12" y1="5" x2="12" y2="16" stroke="currentColor" stroke-width="1.5"/>
-                                </svg>
-                                <span class="triage-compare-upload-text">Upload Dev</span>
-                                <input type="file" class="triage-compare-upload-input" id="triageInputLeft" accept="image/*">
-                            </label>
-                            <label class="triage-compare-upload triage-compare-upload-right" id="triageUploadRight" title="Upload Final Image">
-                                <svg class="triage-compare-upload-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" fill="none" stroke="currentColor" stroke-width="1.5"/>
-                                    <polyline points="7,10 12,5 17,10" fill="none" stroke="currentColor" stroke-width="1.5"/>
-                                    <line x1="12" y1="5" x2="12" y2="16" stroke="currentColor" stroke-width="1.5"/>
-                                </svg>
-                                <span class="triage-compare-upload-text">Upload Final</span>
-                                <input type="file" class="triage-compare-upload-input" id="triageInputRight" accept="image/*">
-                            </label>
+                            
                             <div class="triage-compare-slider" id="triageSlider"></div>
                         </div>
-                        <button class="triage-compare-reset" id="triageReset">Reset</button>
+                        
                     </div>
                 </div>
                 
                 <!-- Right: Triage component -->
-                <div class="triage-card">
-                    <div class="triage-actions">
+                 <div class="triage-card">
+                     <div class="triage-actions">
                         <button class="header-add-btn triage-remove-btn" onclick="removeTriageCard(this)" title="Remove triage card">Remove</button>
                     </div>
                     
@@ -8900,8 +8579,8 @@ body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea[
 
                 const annPreview = document.getElementById('triageAnnotationPreview');
                 const deleteBtn = document.getElementById('triageDeleteBtn');
-                // Create a default high-severity annotation on load
-                (function createDefaultHighSeverityAnnotation(){
+                // Create a default annotation on load (default style, no severity)
+                (function createDefaultAnnotation(){
                     if (!container || !annotateBtn) return;
                     annotationCounter = 1;
                     const ann = document.createElement('div');
@@ -8915,7 +8594,7 @@ body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea[
                     let defaultTop  = btnRect.top - contRect.top + (btnRect.height - 24) / 2;
                     defaultLeft = Math.max(0, Math.min(contRect.width - 24, defaultLeft));
                     defaultTop  = Math.max(0, Math.min(contRect.height - 24, defaultTop));
-                    ann.className = 'triage-annotation severity-high';
+                    ann.className = 'triage-annotation append-btn';
                     ann.setAttribute('style', `position:absolute;top:${defaultTop}px;left:${defaultLeft}px;width:24px;height:24px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;cursor:grab;z-index:9;user-select:none;box-shadow:0 2px 6px rgba(0,0,0,.25);`);
                     num.setAttribute('style','position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)');
                     container.appendChild(ann);
@@ -8937,7 +8616,7 @@ body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea[
                         // clamp within container bounds
                         defaultLeft = Math.max(0, Math.min(contRect.width - 24, defaultLeft));
                         defaultTop  = Math.max(0, Math.min(contRect.height - 24, defaultTop));
-                        ann.className = 'triage-annotation';
+                        ann.className = 'triage-annotation append-btn';
                         // Default color matches the annotation CTA (black button on white widget): black fill with white inner dot is too strong.
                         // Use a neutral but clear accent: default to annotation CTA background (black) only if no severity yet; otherwise overridden.
                         ann.setAttribute('style', `position:absolute;top:${defaultTop}px;left:${defaultLeft}px;width:24px;height:24px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;cursor:grab;z-index:9;user-select:none;box-shadow:0 2px 6px rgba(0,0,0,.25);`);
@@ -9820,7 +9499,7 @@ body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea[
             async function renderDefectCards() {
                 if (window.isRenderingDefects) return; // Prevent concurrent renders
                 window.isRenderingDefects = true;
-                const container = document.querySelector('.defect-cards-list');
+                const container = document.querySelector('.defect-cards-list .defect-cards-list-content') || document.querySelector('.defect-cards-list');
                 if (!container) {
                     console.log('⚠️ Defect cards container not found');
                     window.isRenderingDefects = false;
@@ -10999,9 +10678,9 @@ body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea[
                     align-items: center !important;
                     justify-content: space-between !important;
                     padding: 8px 12px !important;
-                    border: 1px solid var(--border-color) !important;
+                    border: 1px solid var(--ui-border) !important;
                     border-radius: 6px !important;
-                    background-color: var(--surface-color) !important;
+                    background-color: var(--surface-1) !important;
                     cursor: pointer !important;
                     font-family: 'Unica77LL', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
                     font-size: 14px !important;
@@ -11027,8 +10706,8 @@ body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea[
                 }
                 
                 .custom-dropdown-display:hover {
-                    border-color: var(--border-hover);
-                    background-color: var(--interactive-hover);
+                    border-color: var(--ui-active-border) !important;
+                    background-color: var(--field-hover-bg) !important;
                 }
                 
                 .custom-enhanced-dropdown.open .custom-dropdown-display {
@@ -11103,9 +10782,9 @@ body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea[
                     top: calc(100% - 1px) !important;
                     left: 0 !important;
                     right: 0 !important;
-                    background-color: var(--surface-color) !important;
-                    border: 1px solid var(--border-color) !important;
-                    border-top: 1px solid var(--border-color) !important;
+                    background-color: var(--surface-1) !important;
+                    border: 1px solid var(--ui-border) !important;
+                    border-top: 1px solid var(--ui-border) !important;
                     border-bottom-left-radius: 6px !important;
                     border-bottom-right-radius: 6px !important;
                     box-shadow: 0 4px 12px var(--shadow-medium) !important;
@@ -11167,7 +10846,7 @@ body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea[
                     display: block !important;
                     visibility: visible !important;
                     opacity: 1 !important;
-                    border-top: 1px solid var(--border-color) !important;
+                    border-top: 1px solid var(--ui-border) !important;
                 }
                 
                 .custom-option {
@@ -11255,7 +10934,7 @@ body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea[
                 .ui-select2 .ui-trigger img.selected-icon-img { width: 16px; height: 16px; display: block; object-fit: contain; }
                 .ui-select2 .ui-trigger .ui-value { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-secondary); }
                 .ui-select2:not(.placeholder) .ui-trigger .ui-value { color: var(--ui-text); }
-                .ui-select2 .ui-trigger:hover { background: var(--ui-active-bg); }
+                .ui-select2 .ui-trigger:hover { background: var(--ui-active-bg); border-color: var(--ui-active-border); }
                 .caret { position: absolute; top: 50%; right: 8px; transform: translateY(-50%); pointer-events: none; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; transition: transform var(--motion-ms) var(--ease-smooth); }
                 .ui-trigger[aria-expanded="true"] .caret { transform: translateY(-50%) rotate(180deg); }
                 .ui-menu { position: absolute; top: calc(100% - 1px); left: 0; right: 0; z-index: 10; margin: 0; padding: 0; list-style: none; border: 1px solid var(--ui-border); border-top: none; border-radius: 0 0 6px 6px; background: var(--ui-bg); box-shadow: 0 8px 20px rgba(0,0,0,.08); max-height: 240px; overflow: auto; display: none; transform-origin: top; opacity: 0; transform: translateY(-4px) scaleY(0.98); transition: opacity var(--motion-ms) var(--ease-smooth), transform var(--motion-ms) var(--ease-smooth), border-color var(--motion-ms) var(--ease-smooth); }
@@ -11319,6 +10998,18 @@ body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea[
         else if (severity === 'high') el.classList.add('severity-high');
     });
         }
+
+        // On load, ensure default (no severity) so circle uses default dark style
+        document.addEventListener('DOMContentLoaded', () => {
+            updateAnnotationColor('');
+            // Ensure Glossary 'ALL' is selected by default
+            const allBtn = document.getElementById('severity-all-defect');
+            if (allBtn) {
+                // Remove other actives first
+                document.querySelectorAll('#glossary-severity-filters .severity-btn.active').forEach(btn => btn.classList.remove('active'));
+                allBtn.classList.add('active');
+            }
+        });
 
         // Initialize custom dropdown icons after DOM is ready
         if (document.readyState === 'loading') {
@@ -13891,6 +13582,43 @@ body:not([data-theme="dark"]) .ui-input[data-variant="chip"] .ui-field textarea[
     </div>
 
 </body>
+<script>
+    // Shared preloader logic for this page
+    (function setupPreloader(){
+        const preloader = document.getElementById('preloader');
+        const thumb = document.getElementById('preloader-thumb');
+        if (!preloader || !thumb) return;
+
+        const start = () => {
+            let progress = 0;
+            const pump = () => {
+                progress = Math.min(progress + (8 + Math.random() * 10), 92);
+                thumb.style.width = progress + '%';
+            };
+            const interval = setInterval(pump, 140);
+
+            const finish = () => {
+                clearInterval(interval);
+                thumb.style.transition = 'width .35s cubic-bezier(.22,.7,.2,1)';
+                thumb.style.width = '100%';
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => { preloader.remove(); }, 400);
+                }, 300);
+            };
+
+            if (document.readyState === 'complete') {
+                finish();
+            } else {
+                window.addEventListener('load', finish);
+            }
+        };
+
+        // Slight stagger so track is visible before movement
+        setTimeout(start, 500);
+    })();
+</script>
+</html>
 </html>
 </body>
 </html>
