@@ -48,6 +48,12 @@ class GlobalClockComponent {
                             <span class="home-label">Home</span>
                         </button>
                     </div>
+					<!-- Contact Button -->
+					<div id="contact-button-container">
+						<button class="nav-button" id="contact-button">
+							<span class="contact-label">Collaborate</span>
+						</button>
+					</div>
                 </div>
             </div>
 
@@ -266,6 +272,18 @@ class GlobalClockComponent {
                 flex-grow: 0 !important;
             }
 
+			/* Contact Button */
+			#contact-button-container {
+				position: relative;
+				border-radius: 8px;
+				white-space: nowrap;
+				width: 116px !important;
+				height: 38px !important;
+				box-sizing: border-box !important;
+				flex-shrink: 0 !important;
+				flex-grow: 0 !important;
+			}
+
             #home-button-container .blur-bg {
                 background-color: rgba(255, 255, 255, 0.8);
                 border: 1px solid var(--toggle-border-color);
@@ -281,7 +299,7 @@ class GlobalClockComponent {
 
             #home-button {
                 padding: 6px 16px !important;
-                font-family: 'Input', monospace !important;
+                font-family: 'Unica77LL', Arial, sans-serif !important;
                 font-size: 14px !important;
                 position: relative;
                 height: 38px !important;
@@ -289,35 +307,90 @@ class GlobalClockComponent {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                background: none;
+                background: #FFF !important;
+                color: var(--ui-text) !important;
                 cursor: pointer;
                 border-radius: 6px;
-                transition: background-color 0.3s ease, transform 0.3s ease;
-                border: 1px solid var(--toggle-border-color) !important;
+                transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1), border-color 300ms cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s ease;
+                border: 1px solid var(--ui-border, #D9D9D9) !important;
                 box-sizing: border-box !important;
                 flex-shrink: 0 !important;
                 flex-grow: 0 !important;
             }
 
-            #home-button:hover {
-                background-color: var(--nav-hover-color);
+            #contact-button {
+                padding: 0 20px !important;
+                font-family: 'Unica77LL', Arial, sans-serif !important;
+                font-size: 14px !important;
+                position: relative;
+                height: 36px !important;
+                min-width: 116px !important;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                background: #FFF !important;
+                color: var(--ui-text) !important;
+                cursor: pointer;
+                border-radius: 6px;
+                transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1), border-color 300ms cubic-bezier(0.4, 0, 0.2, 1), color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+                border: 1px solid var(--ui-border, #D9D9D9) !important;
+                box-sizing: border-box !important;
+                flex-shrink: 0 !important;
+                flex-grow: 0 !important;
+            }
+
+            #home-button:hover,
+            #home-button:focus-visible {
+                background: rgba(162,230,51,0.15) !important;
+                border-color: var(--btn-lime-border, #A2E633) !important;
             }
 
             .home-label {
-                color: var(--text-color);
+                color: var(--ui-text);
                 transition: color 0.3s ease;
                 position: relative;
                 z-index: 2;
                 white-space: nowrap !important;
                 font-weight: 500 !important;
-                font-family: 'Input', monospace !important;
+                font-family: 'Unica77LL', Arial, sans-serif !important;
                 font-size: 14px !important;
                 letter-spacing: 0 !important;
                 text-rendering: optimizeLegibility !important;
             }
 
+            .contact-label {
+                color: var(--ui-text) !important;
+				transition: color 0.3s ease;
+				position: relative;
+				z-index: 2;
+				white-space: nowrap !important;
+				font-weight: 500 !important;
+                font-family: 'Unica77LL', Arial, sans-serif !important;
+				font-size: 14px !important;
+				letter-spacing: 0 !important;
+				text-rendering: optimizeLegibility !important;
+			}
+
             #home-button:hover .home-label {
                 color: var(--text-color);
+            }
+
+            #contact-button:hover,
+            #contact-button:focus-visible {
+                background: rgba(162,230,51,0.15) !important;
+                border-color: var(--btn-lime-border, #A2E633) !important;
+            }
+
+            #home-button[aria-pressed="true"],
+            #home-button:active {
+                background: rgba(162,230,51,0.25) !important;
+                border-color: var(--btn-lime-border, #A2E633) !important;
+            }
+
+            #contact-button[aria-pressed="true"],
+            #contact-button:active {
+                background: rgba(162,230,51,0.25) !important;
+                border-color: var(--btn-lime-border, #A2E633) !important;
             }
 
 
@@ -405,23 +478,30 @@ class GlobalClockComponent {
                     flex-grow: 0 !important;
                 }
 
-                #home-button-container {
+				#home-button-container, #contact-button-container {
                     width: 56px !important;
                     height: 26px !important;
                     flex-shrink: 0 !important;
                     flex-grow: 0 !important;
                 }
 
-                #home-button {
+				/* Hide Collaborate button on mobile */
+				#contact-button-container { display: none !important; }
+
+				/* Keep Collaborate visible on case study pages (mobile) */
+				body.case-study-page #contact-button-container { display: block !important; width: auto !important; }
+				body.case-study-page #contact-button { min-width: 72px !important; padding: 4px 10px !important; font-size: 12px !important; }
+
+				#home-button, #contact-button {
                     padding: 4px 12px !important;
                     font-size: 12px !important;
                     height: 26px !important;
-                    width: 56px !important;
+					min-width: 72px !important;
                     flex-shrink: 0 !important;
                     flex-grow: 0 !important;
                 }
 
-                .home-label {
+				.home-label, .contact-label {
                     font-size: 12px !important;
                     font-family: 'Input', monospace !important;
                     font-weight: 500 !important;
@@ -441,13 +521,13 @@ class GlobalClockComponent {
                 }
             }
             
-            /* Hide home button when on home page */
-            body.home-page #home-button-container {
-                display: none;
-            }
+			/* Hide home button when on home page */
+			body.home-page #home-button-container {
+				display: none;
+			}
             
-            /* Adjust controls container when home button is hidden */
-            body.home-page #controls-container {
+			/* Adjust controls container when navigation buttons are hidden */
+			body.home-page #controls-container {
                 width: 76px !important;
             }
             
@@ -461,6 +541,7 @@ class GlobalClockComponent {
         this.initClock();
         /* Dark mode removed */
         this.initHomeButton();
+        this.initContactButton();
         this.initBackButton();
         this.initScrollBehavior();
     }
@@ -472,6 +553,12 @@ class GlobalClockComponent {
         
         if (currentPage === 'index.html' || currentPage === '' || currentPath === '/') {
             document.body.classList.add('home-page');
+        }
+        // Hide Home CTA on case study pages (anything that's not home)
+        else {
+            document.body.classList.add('case-study-page');
+            const homeContainer = document.getElementById('home-button-container');
+            if (homeContainer) homeContainer.style.display = 'none';
         }
     }
 
@@ -506,6 +593,30 @@ class GlobalClockComponent {
             homeButton.addEventListener('click', () => this.navigateHome());
         }
     }
+
+	// Contact button functionality
+	initContactButton() {
+		const contactButton = document.getElementById('contact-button');
+		if (!contactButton) return;
+
+		contactButton.addEventListener('click', (event) => {
+			event.preventDefault();
+			this.navigateContact();
+		});
+	}
+
+	// Navigate to contact on the home page with a light fade-out, no anchor swing
+	navigateContact() {
+		// Prevent multiple clicks
+		if (document.body.classList.contains('navigating')) return;
+		document.body.classList.add('navigating');
+		// Use light fade out similar to other navigations
+		document.body.classList.add('fade-out');
+		// Navigate after transition using query param (not hash) to avoid anchor scrolling animation
+		setTimeout(() => {
+			window.location.href = 'index.html?section=contact';
+		}, 800);
+	}
 
     // Back button functionality
     initBackButton() {

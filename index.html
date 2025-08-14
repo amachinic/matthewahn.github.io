@@ -1436,7 +1436,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             grid-template-rows: auto auto;
-            gap: 24px;
+            gap: 36px;
             align-items: stretch; /* allow spanning item to fill rows */
         }
 
@@ -2182,6 +2182,7 @@
             grid-column: 1 / -1; /* span full grid */
             justify-self: start; /* left-align title */
             margin-left: 40px; /* align with global section padding */
+            margin-bottom: 0;
         }
         #archive #archive-search-mount {
             grid-column: 2 / span 4; /* columns 2 through 5 */
@@ -2230,8 +2231,10 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             grid-template-rows: auto auto;
-            gap: 24px;
-            align-items: stretch;
+            column-gap: 48px;
+            row-gap: 36px;
+            align-items: stretch; /* allow spanning item to fill rows */
+            justify-items: stretch;
             border-top: 1px solid var(--border-color);
         }
         /* Grid placement */
@@ -2245,7 +2248,8 @@
         #contact .contact-form .ui-input.full-width { grid-column: 1 / -1; }
         #contact .form-field { position: relative; width: 100%; display: block; }
         /* Hugging label + field (chip variant) — exactly as component */
-        #contact .ui-input { display: inline-block; width: 100%; color: var(--ui-text); }
+        #contact .ui-input { display: block; width: 100%; min-width: 0; box-sizing: border-box; color: var(--ui-text); justify-self: stretch; }
+        #contact .ui-input .ui-field { width: 100%; box-sizing: border-box; }
         #contact .ui-field input, #contact .ui-field textarea { appearance: none; border: 0; outline: 0; background: transparent; width: 100%; color: inherit; font: inherit; line-height: inherit; }
         #contact .ui-field input::placeholder, #contact .ui-field textarea::placeholder { color: #838383; }
         #contact .ui-input[data-variant="chip"] .ui-label {
@@ -2275,9 +2279,9 @@
         }
         #contact .form-field input:focus::placeholder, #contact .form-field textarea:focus::placeholder { opacity: 0; }
         #contact .submit-group { grid-column: 1 / -1; border-bottom: none; position: relative; overflow: hidden; }
-        /* Ensure the submit CTA is in column 3 spanning both rows */
-        #contact .submit-group.contact-submit { grid-column: 3; grid-row: 1 / span 2; display: flex; align-items: stretch; }
-        #contact .submit-group.contact-submit .submit-button { width: 100%; height: 100%; min-height: 0; }
+        /* Ensure the submit CTA is in column 3 spanning both rows and fills height */
+        #contact .submit-group.contact-submit { grid-column: 3; grid-row: 1 / span 2; display: flex; align-items: stretch; height: 100%; align-self: stretch; }
+        #contact .submit-group.contact-submit .submit-button { width: 100%; height: 100% !important; min-height: 0 !important; }
         #contact .submit-button.ui-btn[data-variant="b1"] {
             width: 100%;
             height: 56px;
@@ -2285,6 +2289,23 @@
             border-radius: 12px;
             font-size: 16px;
             letter-spacing: 0.5px;
+        }
+        /* Align submit button styling to search bar behavior */
+        #contact .submit-button.ui-btn {
+            background: #FFF !important;
+            color: var(--ui-text) !important;
+            border: 1px solid var(--ui-border, #D9D9D9) !important;
+            transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1), border-color 300ms cubic-bezier(0.4, 0, 0.2, 1), color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #contact .submit-button.ui-btn:hover,
+        #contact .submit-button.ui-btn:focus-visible {
+            background: rgba(162,230,51,0.15) !important;
+            border-color: var(--btn-lime-border, #A2E633) !important;
+        }
+        #contact .submit-button.ui-btn[aria-pressed="true"],
+        #contact .submit-button.ui-btn:active {
+            background: rgba(162,230,51,0.25) !important;
+            border-color: var(--btn-lime-border, #A2E633) !important;
         }
         /* form-group removed */
         @media (max-width: 768px) {
@@ -2548,9 +2569,9 @@
     <!-- Contact Section -->
     <section id="contact" class="section">
         <div class="section-content">
-            <h2 id="contact-title" class="section-title">Contact</h2>
-            <div class="contact-container">
-                <form id="contact-form" class="contact-form">
+            <h2 id="contact-title" class="section-title">Collaborate</h2>
+            <div class="contact-container" style="max-width: none; width: 100%;">
+                <form id="contact-form" class="contact-form" style="width: 100%;">
                         <div class="ui-input contact-name" data-variant="chip">
                             <label class="ui-label" for="name">Name</label>
                             <div class="ui-field">
@@ -2900,19 +2921,11 @@ humanity and technology.`;
             let currentSection = 'home'; // Default to home
             let activeButton = null;
 
-            // Check if we're near the bottom of the page for better contact section detection
-            const isNearBottom = (currentScrollY + windowHeight) >= (documentHeight - 50);
-
             sections.forEach((section, index) => {
                 const sectionTop = section.offsetTop - headerOffset; // Account for header offset
                 const sectionBottom = sectionTop + section.offsetHeight;
                 const sectionId = section.getAttribute('id');
-                const isLastSection = index === sections.length - 1;
-
-                // For the last section (contact), activate when near bottom or when in normal range
-                if (isLastSection && isNearBottom) {
-                    currentSection = sectionId;
-                } else if (currentScrollY >= sectionTop && currentScrollY < sectionBottom) {
+                if (currentScrollY >= sectionTop && currentScrollY < sectionBottom) {
                     currentSection = sectionId;
                 }
             });
@@ -3800,7 +3813,7 @@ I have a deep curiousity in harmonizing humanity and technology.`;
         window.addEventListener('scroll', checkSectionVisibility);
         window.addEventListener('load', checkSectionVisibility);
 
-        // Contact mode: if ?section=contact is present, load the page with contact in focus
+        // Contact mode: only when ?section=contact is present should we focus contact on load
         (function initContactMode(){
             try {
                 const params = new URLSearchParams(window.location.search);
@@ -3856,6 +3869,12 @@ I have a deep curiousity in harmonizing humanity and technology.`;
                     computeAndScroll();
                     // Recompute after header collapses to scrolled state
                     setTimeout(computeAndScroll, 140);
+
+                    // Clear the query so refresh doesn't re-enter contact mode
+                    try {
+                        const newUrl = window.location.pathname + window.location.hash;
+                        window.history.replaceState({}, '', newUrl);
+                    } catch (_) { }
                 });
 
                 // Prevent over-scrolling downwards by ensuring body is scrollable normally
