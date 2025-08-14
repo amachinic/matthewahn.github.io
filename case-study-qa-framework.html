@@ -450,7 +450,7 @@
         .section {
             min-height: 100vh;
             min-height: 100dvh; /* Use dynamic viewport height on supported browsers */
-            padding: 40px;
+            padding: 160px 40px 160px;
             display: flex;
             align-items: left;
             justify-content: left;
@@ -642,6 +642,13 @@
             border-color: var(--toggle-border-color);
         }
 
+        /* Force white pills inside project meta layout (all themes) */
+        .project-meta-layout .pill {
+            background: #ffffff !important;
+            color: var(--text-color) !important;
+            border-color: var(--toggle-border-color) !important;
+        }
+
         /* Special styling for client pill */
         .client-pill {
             background: var(--text-color);
@@ -681,7 +688,7 @@
         /* Tablet responsive */
         @media (max-width: 1024px) {
             .section {
-                padding: 80px 30px 120px;
+                padding: 140px 30px 160px;
             }
             
             .project-meta-layout {
@@ -739,7 +746,7 @@
         /* Mobile responsive */
         @media (max-width: 768px) {
             .section {
-                padding: 60px 20px 40px;
+                padding: 100px 20px 100px;
             }
             
             .section-content {
@@ -839,7 +846,7 @@
         /* Extra small screens */
         @media (max-width: 480px) {
             .section {
-                padding: 40px 15px 30px;
+                padding: 80px 15px 80px;
             }
             
             .section-content {
@@ -4656,10 +4663,10 @@ body .triage-component-container .custom-enhanced-dropdown.open .custom-dropdown
             font-family: 'Unica77LL', Arial, sans-serif;
             font-size: clamp(32px, 5vw, 56px); /* between type-h2 and type-h1 */
             font-weight: 500;
-            margin-bottom: 16px;
+            margin-bottom: 40px; /* consistent space between title and content */
             opacity: 0;
             transform: translateY(30px);
-            padding-top: 200px;
+            padding-top: 0; /* unify spacing model: use margins, not padding */
         }
 
         .section-subtitle {
@@ -4677,7 +4684,7 @@ body .triage-component-container .custom-enhanced-dropdown.open .custom-dropdown
             grid-template-columns: 1fr 1fr;
             gap: 80px;
             align-items: center;
-            margin-top: 80px;
+            margin-top: 0; /* rely on .section-title margin-bottom for consistent spacing */
         }
 
         .content-text h3 {
@@ -4803,7 +4810,7 @@ body .triage-component-container .custom-enhanced-dropdown.open .custom-dropdown
                 word-spacing: 0.03em;
             }
 
-            .section-title { padding-top: 60px !important; }
+            .section-title { padding-top: 0 !important; margin-bottom: 36px; }
         }
 
         @media (max-width: 480px) {
@@ -4815,10 +4822,7 @@ body .triage-component-container .custom-enhanced-dropdown.open .custom-dropdown
                 word-spacing: 0.02em;
             }
 
-            .section-title {
-
-            padding-top: 80px !important;
-            }
+            .section-title { padding-top: 0 !important; margin-bottom: 32px; }
         }
 
         /* Hide old visual aids system */
@@ -8881,7 +8885,7 @@ body .triage-component-container .custom-enhanced-dropdown.open .custom-dropdown
 
         // Enhanced parallax with layered movement
         gsap.to('.parallax-container', {
-            yPercent: -50,
+            yPercent: -70,
             ease: 'none',
             scrollTrigger: {
                 trigger: '.challenge-section',
@@ -8894,7 +8898,7 @@ body .triage-component-container .custom-enhanced-dropdown.open .custom-dropdown
         // Parallax for content elements
         gsap.utils.toArray('.content-text, .content-image').forEach((element, index) => {
             gsap.to(element, {
-                y: index % 2 === 0 ? -50 : 50,
+                y: index % 2 === 0 ? -90 : 90,
                 ease: 'none',
                 scrollTrigger: {
                     trigger: element,
@@ -13275,19 +13279,31 @@ body .triage-component-container .custom-enhanced-dropdown.open .custom-dropdown
             const smoother = ScrollSmoother.create({
                 wrapper: "#smooth-wrapper",
                 content: "#smooth-content",
-                smooth: 1, // Reduced smooth scrolling strength
-                effects: false, // Keep disabled to preserve layout
-                smoothTouch: 0.1, // Light smooth scrolling on touch
-                normalizeScroll: false, // Disable to prevent scroll position conflicts
-                ignoreMobileResize: true, // iOS stability
-                onUpdate: self => {
-                    // Update custom scrollbar on every ScrollSmoother update
-                    updateCustomScrollbar(self);
-                }
+                smooth: 1,
+                effects: true, // enable data-speed / data-lag parallax
+                smoothTouch: 0.1,
+                normalizeScroll: false,
+                ignoreMobileResize: true,
+                onUpdate: self => { updateCustomScrollbar(self); }
             });
 
             // Make smoother globally accessible
             window.smoother = smoother;
+
+            // Slightly stronger default parallax for key elements using data-speed
+            try {
+                const root = document.querySelector('#smooth-content');
+                if (root) {
+                    root.querySelectorAll('section h2').forEach(el=> el.setAttribute('data-speed','0.84'));
+                    [
+                      '.final-video-card',
+                      '.process-map-canvas-container',
+                      '.triage-card',
+                      '.defect-table-card',
+                      '.content-image'
+                    ].forEach(sel => root.querySelectorAll(sel).forEach(el=> el.setAttribute('data-speed','0.72')));
+                }
+            } catch(_){}
 
             // Custom scrollbar update function for ScrollSmoother
             function updateCustomScrollbar(smoother) {

@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#f0f0f0" id="theme-color-meta">
     <title>Matthew Ahn</title>
+	<style>gallery-archive{display:block;width:100%;min-height:720px}</style>
+	<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+	<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+	<link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin>
+	<link rel="dns-prefetch" href="https://raw.githubusercontent.com">
+	<link rel="preconnect" href="https://github.com" crossorigin>
+	<link rel="dns-prefetch" href="https://github.com">
+	<link rel="preload" href="Unica77LLWeb-Medium.woff" as="font" type="font/woff">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollToPlugin.min.js"></script>
@@ -16,6 +24,7 @@
             src: url('Unica77LLWeb-Medium.woff') format('woff');
             font-weight: 500;
             font-style: normal;
+            font-display: swap;
         }
         
         @font-face {
@@ -23,52 +32,94 @@
             src: url('https://github.com/amachinic/Merem/raw/main/Input-Regular_(InputSansNarrow-Light).ttf') format('truetype');
             font-weight: 300;
             font-style: normal;
+            font-display: swap;
         }
         :root {
-            --bg-color: #f0f0f0;
+            /* NEW COLOR SYSTEM */
+            /* PRIMITIVES */
+            --brand-lime-500: #A2E633;
+            --brand-lime-600: #7EBB1C;
+            --neutral-0: #ffffff;
+            --neutral-50: #f8f9fa;
+            --neutral-100: #f3f4f6;
+            --neutral-200: #f0f0f0;
+            --neutral-700: #6b7280;
+            --neutral-800: #333333;
+            --ink-950: #000810;
+
+            /* ROLES */
+            --surface-1: var(--neutral-0);
+            --surface-2: var(--neutral-50);
+            --surface-3: var(--neutral-100);
+            --bg: var(--neutral-200);
+
+            --text-primary: var(--neutral-800);
+            --text-secondary: var(--neutral-700);
+            --text-muted: #9ca3af;
+
+            --border-subtle: rgba(0,0,0,.10);
+            --border: rgba(0,0,0,.15);
+            --border-strong: rgba(0,0,0,.20);
+
+            --shadow-sm: rgba(0,0,0,.08);
+            --shadow-md: rgba(0,0,0,.12);
+            --shadow-lg: rgba(0,0,0,.16);
+
+            --focus-ring: var(--brand-lime-600);
+
+            /* COMPONENT ALIASES */
+            --card-bg: var(--surface-1);
+            --card-text: var(--text-primary);
+
+            --button-primary-bg: var(--brand-lime-500);
+            --button-primary-text: #000;
+            --button-neutral-bg: var(--surface-2);
+            --button-neutral-text: var(--text-primary);
+            --button-border: #D9D9D9;
+
+            --state-hover: rgba(0,0,0,.04);
+            --state-pressed: rgba(0,0,0,.08);
+            --state-disabled: rgba(0,0,0,.12);
+
+            /* LINKS */
+            --link: #0066cc;
+            --link-hover: #004499;
+            --link-visited: #5a3ec8;
+
+            /* MOTION */
+            --motion-fast: 120ms;
+            --motion-normal: 180ms;
+            --motion-slow: 300ms;
+
+            /* legacy aliases + prior vars */
+            --white: var(--neutral-0);
+            --nav-white-overlay: var(--state-hover);
+            --lime-border: var(--brand-lime-600);
+            --bg-color: var(--bg);
             --text-color: #2c2c2c;
-            --secondary-text-color: #a0a0a0;
-            --nav-bg-color: rgba(255, 255, 255, 0.15);
-            --nav-border-color: rgba(255, 255, 255, 0.2);
+            --secondary-text-color: var(--text-secondary);
+            --nav-bg-color: var(--state-hover);
+            --nav-border-color: var(--border-subtle);
             --nav-hover-color: rgba(0, 0, 0, 0.1);
-            --clock-bg-color: #f0f0f0;
-            --tooltip-bg-color: white;
+            --clock-bg-color: var(--bg);
+            --tooltip-bg-color: var(--surface-1);
             --tooltip-text-color: black;
-            --shadow-color: rgba(0, 0, 0, 0.12);
-            --toggle-border-color: rgba(0, 0, 0, 0.3);
-            --light-nav-border-color: rgba(0, 0, 0, 0.15);
+            --shadow-color: var(--shadow-md);
+            --toggle-border-color: var(--border);
+            --light-nav-border-color: var(--border-subtle);
             --card-bg-color: #000;
-            --card-text-color: #fff;
+            --card-text-color: var(--card-text);
             
             /* Design System: Case Study Color Palette */
             --case-study-qa-framework: rgb(0, 5, 11); /* Obsidian */
             --case-study-design-system: rgb(8, 0, 11); /* Violet */
             --case-study-mobile-experience: rgb(0, 10, 5); /* Forest green */
             --case-study-ai-integration: rgb(14, 6, 0); /* Rouge */
+            --white: #ffffff;
+            --nav-white-overlay: rgba(255, 255, 255, 0.2);
         }
 
-        [data-theme="dark"] {
-            --bg-color: #0f0f0f;
-            --text-color: #ffffff;
-            --secondary-text-color: #888888;
-            --nav-bg-color: rgba(255, 255, 255, 0.05);
-            --nav-border-color: rgba(255, 255, 255, 0.15);
-            --nav-hover-color: rgba(255, 255, 255, 0.2);
-            --clock-bg-color: #0f0f0f;
-            --tooltip-bg-color: #333;
-            --tooltip-text-color: #ffffff;
-            --shadow-color: rgba(0, 0, 0, 0.3);
-            --toggle-border-color: rgba(255, 255, 255, 0.15);
-            --light-nav-border-color: transparent;
-            --card-bg-color: #1a1a1a;
-            --card-text-color: #fff;
-            
-            /* Design System: Monochromatic Gradient Palette for Dark Mode */
-            --case-study-qa-framework: rgb(22, 24, 28); /* Darkest gradient - sophisticated charcoal */
-            --case-study-design-system: rgb(28, 30, 35); /* Dark-mid gradient - refined slate */
-            --case-study-mobile-experience: rgb(35, 38, 42); /* Mid-light gradient - elegant graphite */
-            --case-study-ai-integration: rgb(42, 45, 50); /* Lightest gradient - premium steel */
-        }
+        /* Dark mode removed */
 
         /* =================================
            TYPOGRAPHY SYSTEM
@@ -349,10 +400,7 @@
         }
 
         
-        [data-theme="dark"] .nav-button {
-      
-            color: #ffffffb2;
-        }
+/* Dark mode removed */
 
         /* Navigation slider indicator */
         #nav-slider {
@@ -388,9 +436,7 @@
         }
 
         /* Dark mode navigation bar background */
-        [data-theme="dark"] #nav-container .blur-bg {
-            background-color: rgb(255 255 255 / 10%);
-        }
+/* Dark mode removed */
         /* Responsive adjustments for mobile */
         @media (max-width: 600px) {
             #nav-container {
@@ -436,7 +482,7 @@
         .section-content {
             width: 100%;
             margin: 0;
-            padding: 0 40px;
+            padding: 0px 40px 100px 40px;
             box-sizing: border-box;
             min-height: 0; /* Ensure consistent height calculation */
         }
@@ -544,7 +590,7 @@
             cursor: pointer;
         }
 
-        .card.tall-card[onclick]:hover {
+        .card.tall-card:hover {
             transform: translateY(-2px);
         }
 
@@ -792,6 +838,120 @@
             visibility: visible;
         }
 
+        /* =============== Gallery Slide 3 Muppet Grid =============== */
+        /* Scope strictly to slide 3 ONLY (do not affect tall-cards) */
+        .gallery-slides .gallery-slide:nth-child(3) {
+            overflow: hidden;
+        }
+
+        /* Hide default text/CTA on slide 3 to feature the grid */
+        .gallery-slides .gallery-slide:nth-child(3) h3,
+        .gallery-slides .gallery-slide:nth-child(3) p,
+        .gallery-slides .gallery-slide:nth-child(3) .gallery-cta {
+            display: none !important;
+        }
+
+        /* Grid container: 4 columns x 2 rows, flexible to container */
+        .gallery-slides .gallery-slide:nth-child(3) .muppet-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 8px;
+            width: 100%;
+            height: 100%;
+            align-content: stretch;
+            justify-content: stretch;
+        }
+
+        /* Cells cut off content at edges (no overflow beyond dividers) */
+        .gallery-slides .gallery-slide:nth-child(3) .muppet-cell {
+            position: relative;
+            overflow: hidden;
+            border-radius: 6px;
+            background: rgba(0,0,0,0.12);
+            outline: 1px solid rgba(255,255,255,0.14);
+            outline-offset: -1px;
+        }
+        /* Remove white outlines entirely for slide 3 grid cells */
+        .gallery-slides .gallery-slide:nth-child(3) .muppet-cell {
+            outline: none !important;
+            outline-offset: 0 !important;
+            border: none !important;
+        }
+
+        /* Content sits at the bottom and slides upward on reveal */
+        .gallery-slides .gallery-slide:nth-child(3) .muppet-content {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            transform: translateY(110%);
+            transform-origin: center bottom;
+            will-change: transform;
+            height: 100%;
+			opacity: 0;
+        }
+
+        /* Media fit: allow images/gifs/mp4 to behave consistently */
+        .gallery-slides .gallery-slide:nth-child(3) .muppet-content img,
+        .gallery-slides .gallery-slide:nth-child(3) .muppet-content video {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+			object-position: center center;
+        }
+
+		/* Trampoline-like peek: single bounce then magnetic snap into place with fade-in */
+        @keyframes muppetPopUp {
+            0%   { transform: translateY(110%); opacity: 0; }
+            35%  { opacity: 1; }
+            55%  { transform: translateY(-7%); }
+            100% { transform: translateY(0%); opacity: 1; }
+        }
+
+        /* Triggered only when slide 3 gets the .muppet-animate flag */
+        .gallery-slides .gallery-slide:nth-child(3).muppet-animate .muppet-content {
+            animation: muppetPopUp 800ms cubic-bezier(0.20, 0.75, 0.10, 1) both;
+        }
+
+        /* All cells animate together for a single smooth reveal */
+
+        /* After first play, keep contents revealed without re-animating */
+        .gallery-slides .gallery-slide:nth-child(3).muppet-played .muppet-content {
+            transform: translateY(0%) !important;
+			animation: none !important;
+			opacity: 1 !important;
+        }
+
+		/* Responsive reduction of visible cells: 8 -> 4 -> 2 -> 1 */
+		@media (max-width: 1024px) {
+			.gallery-slides .gallery-slide:nth-child(3) .muppet-grid {
+				grid-template-columns: repeat(2, 1fr);
+				grid-template-rows: repeat(2, 1fr);
+			}
+			/* Show first 4 cells only */
+			.gallery-slides .gallery-slide:nth-child(3) .muppet-grid .muppet-cell:nth-child(n+5) { display: none; }
+		}
+
+		@media (max-width: 680px) {
+			.gallery-slides .gallery-slide:nth-child(3) .muppet-grid {
+				grid-template-columns: repeat(2, 1fr);
+				grid-template-rows: 1fr;
+			}
+			/* Show first 2 cells only */
+			.gallery-slides .gallery-slide:nth-child(3) .muppet-grid .muppet-cell:nth-child(n+3) { display: none; }
+		}
+
+		@media (max-width: 420px) {
+			.gallery-slides .gallery-slide:nth-child(3) .muppet-grid {
+				grid-template-columns: 1fr;
+				grid-template-rows: 1fr;
+			}
+			/* Show first 1 cell only */
+			.gallery-slides .gallery-slide:nth-child(3) .muppet-grid .muppet-cell:nth-child(n+2) { display: none; }
+		}
+
         /* Gallery slides use the CSS variables defined above for consistent theming */
 
         .gallery-slide h3 {
@@ -807,6 +967,53 @@
             line-height: 1.5;
             opacity: 0.8;
             max-width: 300px;
+        }
+
+        /* Force gallery headings and paragraph text to white in all viewports */
+        .gallery-card .gallery-slide h3,
+        .gallery-card .gallery-slide p {
+            color: #ffffff !important;
+            /* keep default hidden state; GSAP reveals on hover */
+        }
+
+        /* Work tall-cards: white text, hidden by default for hover animation */
+        .card.tall-card h3,
+        .card.tall-card p {
+            color: #ffffff !important;
+            opacity: 0; /* revealed on hover via GSAP */
+            transform: translateX(-20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Tall-card background image fills card */
+        .card.tall-card { position: relative; overflow: hidden; }
+        .card.tall-card .card-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+            z-index: 0;
+            pointer-events: none;
+        }
+        /* Lift content above background */
+        .card.tall-card h3,
+        .card.tall-card p,
+        .card.tall-card .work-cta { position: relative; z-index: 1; }
+
+        /* Ensure tall-card content is visible on mobile (no hover on touch) */
+        @media (max-width: 768px) {
+            .card.tall-card h3,
+            .card.tall-card p { display: block !important; opacity: 1 !important; transform: none !important; }
+            .card.tall-card .work-cta { opacity: 1 !important; transform: none !important; }
+        }
+
+        /* Desktop fallback: reveal on hover even if JS fails */
+        @media (hover: hover) and (pointer: fine) {
+            .card.tall-card:hover h3,
+            .card.tall-card:hover p { opacity: 1; transform: none; }
+            .card.tall-card:hover .work-cta { opacity: 1; }
         }
 
         /* Gallery arrow navigation */
@@ -946,7 +1153,7 @@
             margin: 0 0 8px 0;
             font-weight: normal;
             color: var(--card-text-color);
-            opacity: 0;
+            opacity: 0; /* hidden by default; revealed on hover via GSAP */
             transform: translateX(-20px);
             transition: opacity 0.4s ease, transform 0.4s ease;
         }
@@ -957,7 +1164,7 @@
             margin: 0 0 16px 0;
             line-height: 1.4;
             color: var(--card-text-color);
-            opacity: 0;
+            opacity: 0; /* hidden by default; revealed on hover via GSAP */
             transform: translateX(-20px);
             transition: opacity 0.4s ease, transform 0.4s ease;
             max-width: 350px; /* Expanded for better readability - allows 5-6 words per line */
@@ -982,6 +1189,19 @@
             will-change: transform;
             white-space: nowrap; /* Prevent text wrapping */
         }
+
+		/* Match CTA height to gallery arrows on small viewports and ensure white description text */
+		@media (max-width: 768px) {
+			.gallery-card .gallery-cta.ui-btn {
+				height: 48px;
+				min-height: 48px;
+				padding: 0 16px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			.gallery-card .gallery-slide p { color: #ffffff !important; }
+		}
 
         /* First card CTA starts in final position */
         .gallery-slide:first-child .gallery-cta {
@@ -1178,6 +1398,16 @@
         }
 
         /* Contact section styling */
+        #contact {
+            border-top: 1px solid var(--border);
+            /* More white space above divider to separate from Work cards */
+            margin-top: 160px;
+            /* Tighter space between divider and Contact title */
+            padding-top: 24px;
+            /* Much more room at the bottom */
+            padding-bottom: 200px;
+            margin-bottom: 160px;
+        }
         .contact-container {
             display: flex;
             justify-content: center;
@@ -1198,19 +1428,24 @@
             border: 1px solid var(--toggle-border-color);
         }
 
-        [data-theme="dark"] .contact-form-card {
-            background-color: rgba(35, 35, 35, 0.9);
-            border: 1px solid var(--toggle-border-color);
-        }
+/* Dark mode removed */
 
 
 
         .contact-form {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 40px;
-            align-items: start;
+            grid-template-rows: auto auto;
+            gap: 24px;
+            align-items: stretch; /* allow spanning item to fill rows */
         }
+
+        /* Explicit grid placement for contact fields */
+        #contact .contact-name { grid-column: 1; grid-row: 1; }
+        #contact .contact-email { grid-column: 2; grid-row: 1; }
+        #contact .contact-message { grid-column: 1 / span 2; grid-row: 2; }
+        #contact .contact-submit { grid-column: 3; grid-row: 1 / span 2; display: flex; }
+        #contact .contact-submit .submit-button { width: 100%; height: 100%; min-height: 0; }
 
         .form-group {
             display: flex;
@@ -1248,8 +1483,7 @@
         }
 
         .form-group input:hover {
-            border-color: rgba(100, 100, 100, 0.4);
-            background-color: rgba(250, 250, 250, 1);
+
         }
 
         .form-group input:focus {
@@ -1258,12 +1492,7 @@
             background-color: #FFFFFF;
         }
 
-        [data-theme="dark"] .form-group input[type="text"],
-        [data-theme="dark"] .form-group input[type="email"],
-        [data-theme="dark"] .form-group input[type="tel"] {
-            background-color: rgba(255, 255, 255, 0.95);
-            color: #333;
-        }
+/* Dark mode removed */
 
         /* dark mode removed */
 
@@ -1452,14 +1681,9 @@
             color: var(--text-color);
         }
 
-        [data-theme="dark"] .trash-btn {
-            background-color: rgba(35, 35, 35, 0.95);
-        }
+/* Dark mode removed */
 
-        [data-theme="dark"] .trash-btn:hover {
-            background-color: rgba(35, 35, 35, 0.8);
-            border-color: rgba(150, 150, 150, 0.6);
-        }
+/* Dark mode removed */
 
 
 
@@ -1876,6 +2100,8 @@
         .gallery-container {
             cursor: grab;
             user-select: none;
+            -webkit-user-select: none;
+            touch-action: pan-y; /* allow vertical scrolling; keep horizontal for swipe */
         }
 
         .gallery-container:active {
@@ -1884,6 +2110,13 @@
 
         .gallery-slides {
             will-change: transform;
+        }
+        /* Prevent native media drag interfering with swipe */
+        .gallery-slide img,
+        .gallery-slide video {
+            -webkit-user-drag: none;
+            user-drag: none;
+            -webkit-touch-callout: none;
         }
 
         /* Ensure background video fills and stays behind content */
@@ -1943,15 +2176,46 @@
             grid-template-columns: repeat(6, 1fr);
             gap: 20px;
             align-items: start;
+            padding: 0; /* remove side padding so gallery-archive fills full width */
         }
         #archive .section-title {
-            grid-column: 2 / span 4; /* center across 4 columns */
-            justify-self: center;
+            grid-column: 1 / -1; /* span full grid */
+            justify-self: start; /* left-align title */
+            margin-left: 40px; /* align with global section padding */
         }
         #archive #archive-search-mount {
             grid-column: 2 / span 4; /* columns 2 through 5 */
             justify-self: center;
             width: 100%;
+        }
+        /* Ensure inserted custom element spans full grid width in legacy archive sections */
+        #archive .section-content > gallery-archive,
+        #archive-new .section-content > gallery-archive {
+            grid-column: 1 / -1 !important;
+            justify-self: stretch !important;
+            width: 100% !important;
+        }
+        /* archive-new and archive-v2 removed */
+
+        /* Fully standalone archive container (no grid parents) */
+        #archive-standalone {
+            width: 100%;
+            display: block;
+            margin: 40px 0;
+        }
+        #archive-standalone-container {
+            width: 100% !important;
+            max-width: none !important;
+            margin: 0 auto;
+            padding: 0 40px; /* match section padding */
+            box-sizing: border-box;
+            display: block;
+            min-height: 100px;
+        }
+        #archive-standalone-container > * {
+            display: block !important;
+            width: 100% !important;
+            max-width: none !important;
         }
         /* Contact overrides - scoped to #contact to avoid global collisions */
         #contact .contact-container {
@@ -1964,38 +2228,69 @@
         }
         #contact .contact-form {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 24px;
+            align-items: stretch;
             border-top: 1px solid var(--border-color);
         }
+        /* Grid placement */
+        #contact .contact-name { grid-column: 1; grid-row: 1; }
+        #contact .contact-email { grid-column: 2; grid-row: 1; }
+        #contact .contact-message { grid-column: 1 / span 2; grid-row: 2; }
+        #contact .contact-submit { grid-column: 3; grid-row: 1 / span 2; display: flex; }
+        #contact .contact-submit .submit-button { width: 100%; height: 100%; min-height: 0; }
         #contact .form-row { display: contents; }
-        #contact .form-group { border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color); position: relative; }
-        #contact .form-group:nth-child(even) { border-right: none; }
-        #contact .form-group.full-width { grid-column: 1 / -1; border-right: none; }
-        #contact .form-field { position: relative; width: 100%; }
-        #contact .form-field input, #contact .form-field textarea {
-            width: 100%; padding: 24px 20px; border: none; background: transparent; color: var(--text-color);
-            font-family: 'Unica77LL', Arial, sans-serif; font-size: 16px; outline: none; resize: none; box-sizing: border-box;
+        /* form-group removed: grid spans handled by .ui-input */
+        #contact .contact-form .ui-input.full-width { grid-column: 1 / -1; }
+        #contact .form-field { position: relative; width: 100%; display: block; }
+        /* Hugging label + field (chip variant) — exactly as component */
+        #contact .ui-input { display: inline-block; width: 100%; color: var(--ui-text); }
+        #contact .ui-field input, #contact .ui-field textarea { appearance: none; border: 0; outline: 0; background: transparent; width: 100%; color: inherit; font: inherit; line-height: inherit; }
+        #contact .ui-field input::placeholder, #contact .ui-field textarea::placeholder { color: #838383; }
+        #contact .ui-input[data-variant="chip"] .ui-label {
+          display: block; width: fit-content; padding: 2px 8px; background: var(--ui-bg);
+          border-top: 1px solid var(--ui-border); border-right: 1px solid var(--ui-border); border-left: 1px solid var(--ui-border); border-bottom: none;
+          border-radius: 4px 4px 0 0; font-size: 10px; font-weight: 400; margin: 0 0 -1px 0;
         }
-        #contact .form-field textarea { min-height: 120px; }
-        #contact .form-field input::placeholder, #contact .form-field textarea::placeholder { color: transparent; }
-        #contact .form-label { position: absolute; left: 20px; top: 24px; color: var(--secondary-text-color); font-family: 'Input', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; pointer-events: none; transition: all 0.2s ease; }
-        #contact .form-field input:focus + .form-label,
-        #contact .form-field input:not(:placeholder-shown) + .form-label,
-        #contact .form-field textarea:focus + .form-label,
-        #contact .form-field textarea:not(:placeholder-shown) + .form-label,
-        #contact .form-label.active { transform: translateY(-8px); font-size: 10px; color: var(--text-color); }
-        #contact .form-field input:focus, #contact .form-field textarea:focus { background: rgba(255,255,255,0.5); }
+        #contact .ui-input[data-variant="chip"] .ui-field {
+          display: block; width: 100%; padding: 12px 8px; border: 1px solid var(--ui-border); border-radius: 0 0 4px 4px; background: var(--ui-bg);
+          font-size: 14px; line-height: 16px; font-weight: 400;
+          transition: background var(--motion-ms) var(--ease-smooth), border-color var(--motion-ms) var(--ease-smooth), box-shadow var(--motion-ms) var(--ease-smooth);
+        }
+        #contact .ui-input[data-variant="chip"] .ui-field:hover { background: var(--ui-active-bg); }
+        #contact .ui-input[data-variant="chip"] .ui-field:focus-within { border-color: var(--ui-active-border); background: var(--ui-active-bg); }
+        /* Inputs inside chip fields are borderless */
+        #contact .form-field input, #contact .form-field textarea {
+            width: 100%; padding: 0; background: transparent; color: var(--ui-text);
+            border: none; border-radius: 0; font-family: 'Unica77LL', Arial, sans-serif; font-size: 16px; outline: none; resize: none; box-sizing: border-box;
+        }
+        #contact .form-field input { height: 24px; }
+        #contact .form-field textarea { min-height: 140px; padding-top: 2px; }
+        #contact .form-field input::placeholder, #contact .form-field textarea::placeholder { color: var(--text-muted); transition: opacity .2s ease; }
+        #contact .form-label { display: none; }
+        #contact .form-field input:focus, #contact .form-field textarea:focus {
+            background: var(--surface-color);
+            border-color: var(--border-focus);
+        }
+        #contact .form-field input:focus::placeholder, #contact .form-field textarea:focus::placeholder { opacity: 0; }
         #contact .submit-group { grid-column: 1 / -1; border-bottom: none; position: relative; overflow: hidden; }
-        #contact .submit-button { width: 100%; padding: 32px 20px; border: none; background: rgb(0,5,11); color: var(--bg-color); font-family: 'Input', monospace; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden; border-radius: 12px; }
-        #contact .submit-button:hover { background: rgb(0,3,8); }
-        #contact .submit-button:active { transform: translateY(1px); }
-        #contact .form-group:hover { background: rgba(255,255,255,0.3); }
-        #contact .form-group:focus-within { background: rgba(255,255,255,0.5); }
+        /* Ensure the submit CTA is in column 3 spanning both rows */
+        #contact .submit-group.contact-submit { grid-column: 3; grid-row: 1 / span 2; display: flex; align-items: stretch; }
+        #contact .submit-group.contact-submit .submit-button { width: 100%; height: 100%; min-height: 0; }
+        #contact .submit-button.ui-btn[data-variant="b1"] {
+            width: 100%;
+            height: 56px;
+            min-height: 56px;
+            border-radius: 12px;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+        }
+        /* form-group removed */
         @media (max-width: 768px) {
             #contact .contact-container { max-width: none; }
             #contact .contact-form { grid-template-columns: 1fr; }
-            #contact .form-group { border-right: none; }
+            /* form-group removed */
             #contact .form-field input, #contact .form-field textarea { padding: 20px 16px; }
             #contact .form-label { left: 16px; top: 20px; }
             #contact .submit-button { padding: 24px 16px; }
@@ -2009,8 +2304,8 @@
         :root {
             --ui-border: #D9D9D9;
             --ui-text: #000810;
-            --ui-bg: #ffffff;
-            --ui-active-border: #7EBB1C;
+            --ui-bg: var(--white);
+            --ui-active-border: var(--lime-border);
             --ui-active-bg: rgba(162,230,51,0.05);
             --ui-alt-active-border: #000810;
             --ui-alt-active-bg: rgba(0,8,16,0.03);
@@ -2020,14 +2315,15 @@
             --ease-smooth: cubic-bezier(.2,.7,.2,1);
             --btn-dark: #000810;
             --btn-lime: #A2E633;
-            --btn-lime-border: #7EBB1C;
+            --btn-lime-border: var(--lime-border);
             --btn-gray: #9C9C9C;
             --btn-gray-bg: #F0F0F0;
             --btn-lime-40: rgba(162,230,51,0.40);
-            --btn-white: #FFFFFF;
+            --btn-white: var(--white);
         }
 
-        body:not([data-theme="dark"]) .ui-btn {
+/* Dark mode removed: always apply light styles */
+.ui-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -2042,29 +2338,77 @@
             cursor: pointer;
             transition: background var(--motion-ms) var(--ease-smooth), border-color var(--motion-ms) var(--ease-smooth), color var(--motion-ms) var(--ease-smooth), box-shadow var(--motion-ms) var(--ease-smooth);
         }
-        body:not([data-theme="dark"]) .ui-btn.pill { border-radius: 999px; }
+        .ui-btn.pill { border-radius: 999px; }
         /* B1 */
-        body:not([data-theme="dark"]) .ui-btn[data-variant="b1"] { background: var(--btn-lime-40) !important; border-color: var(--btn-lime-border) !important; color: var(--ui-text) !important; }
-        body:not([data-theme="dark"]) .ui-btn[data-variant="b1"]:hover { background: var(--btn-lime) !important; border-color: var(--btn-lime-border) !important; }
-        body:not([data-theme="dark"]) .ui-btn[data-variant="b1"][aria-pressed="true"] { background: var(--btn-dark) !important; border-color: var(--btn-dark) !important; color: var(--btn-white) !important; }
+        .ui-btn[data-variant="b1"] { background: var(--btn-lime-40) !important; border-color: var(--btn-lime-border) !important; color: var(--ui-text) !important; }
+        .ui-btn[data-variant="b1"]:hover { background: var(--btn-lime) !important; border-color: var(--btn-lime-border) !important; }
+        .ui-btn[data-variant="b1"][aria-pressed="true"] { background: var(--btn-dark) !important; border-color: var(--btn-dark) !important; color: var(--btn-white) !important; }
         /* B2 */
-        body:not([data-theme="dark"]) .ui-btn[data-variant="b2"] { background: var(--btn-lime-40) !important; border-color: var(--btn-lime-border) !important; color: var(--ui-text) !important; }
-        body:not([data-theme="dark"]) .ui-btn[data-variant="b2"]:hover { background: var(--btn-lime-40) !important; border-color: var(--btn-lime-border) !important; }
-        body:not([data-theme="dark"]) .ui-btn[data-variant="b2"][aria-pressed="true"] { background: var(--btn-lime) !important; border-color: var(--btn-lime-border) !important; color: var(--ui-text) !important; }
+        .ui-btn[data-variant="b2"] { background: var(--btn-lime-40) !important; border-color: var(--btn-lime-border) !important; color: var(--ui-text) !important; }
+        .ui-btn[data-variant="b2"]:hover { background: var(--btn-lime-40) !important; border-color: var(--btn-lime-border) !important; }
+        .ui-btn[data-variant="b2"][aria-pressed="true"] { background: var(--btn-lime) !important; border-color: var(--btn-lime-border) !important; color: var(--ui-text) !important; }
         /* B4 */
-        body:not([data-theme="dark"]) .ui-btn[data-variant="b4"] {     background: rgba(240, 240, 240, 0.1); border: 1px solid rgba(240, 240, 240, 1);   color: rgba(240, 240, 240, 1); width: auto; height: 48px; }
-        body:not([data-theme="dark"]) .ui-btn[data-variant="b4"]:hover { background-color: rgba(240, 240, 240, 0.25); border-color: rgba(240, 240, 240, .6); color: rgba(240, 240, 240, .8); }
-        body:not([data-theme="dark"]) .ui-btn[data-variant="b4"][aria-pressed="true"] { background: var(--btn-dark) !important; border-color: var(--btn-dark) !important; color: var(--btn-white) !important; }
+        .ui-btn[data-variant="b4"] {     background: rgba(240, 240, 240, 0.1); border: 1px solid rgba(240, 240, 240, 1);   color: rgba(240, 240, 240, 1); width: auto; height: 48px; }
+        .ui-btn[data-variant="b4"]:hover { background-color: rgba(240, 240, 240, 0.25); border-color: rgba(240, 240, 240, .6); color: rgba(240, 240, 240, .8); }
+        .ui-btn[data-variant="b4"][aria-pressed="true"] { background: var(--btn-dark) !important; border-color: var(--btn-dark) !important; color: var(--btn-white) !important; }
         /* B5 */
-        body:not([data-theme="dark"]) .ui-btn.pill[data-variant="b5"] { background: var(--btn-white) !important; border-color: var(--btn-gray) !important; color: #777 !important; }
-        body:not([data-theme="dark"]) .ui-btn.pill[data-variant="b5"]:hover { background: var(--btn-white) !important; border-color: var(--btn-gray) !important; }
-        body:not([data-theme="dark"]) .ui-btn.pill[data-variant="b5"][aria-pressed="true"] { background: var(--btn-dark) !important; border-color: var(--btn-dark) !important; color: var(--btn-white) !important; }
+        .ui-btn.pill[data-variant="b5"] { background: var(--btn-white) !important; border-color: var(--btn-gray) !important; color: #777 !important; }
+        .ui-btn.pill[data-variant="b5"]:hover { background: var(--btn-white) !important; border-color: var(--btn-gray) !important; }
+        .ui-btn.pill[data-variant="b5"][aria-pressed="true"] { background: var(--btn-dark) !important; border-color: var(--btn-dark) !important; color: var(--btn-white) !important; }
         /* B6 */
-        body:not([data-theme="dark"]) .ui-btn.pill[data-variant="b6"] { background: var(--btn-white) !important; border-color: var(--btn-gray) !important; color: #777 !important; }
-        body:not([data-theme="dark"]) .ui-btn.pill[data-variant="b6"]:hover { background: var(--btn-dark) !important; border-color: var(--btn-dark) !important; color: var(--btn-white) !important; }
+        .ui-btn.pill[data-variant="b6"] { background: var(--btn-white) !important; border-color: var(--btn-gray) !important; color: #777 !important; }
+        .ui-btn.pill[data-variant="b6"]:hover { background: var(--btn-dark) !important; border-color: var(--btn-dark) !important; color: var(--btn-white) !important; }
+
+        /* Standardized Input Component (Default, Alt Active, Chip) */
+        .ui-input { display: inline-block; width: 100%; color: var(--ui-text); }
+        .ui-field input, .ui-field textarea { appearance: none; border: 0; outline: 0; background: transparent; width: 100%; color: inherit; font: inherit; line-height: inherit; }
+        .ui-field input::placeholder, .ui-field textarea::placeholder { color: #838383; }
+
+        /* Default + Alt Active label */
+        .ui-input[data-variant="default"] .ui-label,
+        .ui-input[data-variant="alt-active"] .ui-label {
+          display: block; width: 100%; padding: 2px 8px; border-radius: 4px 4px 0 0;
+          border-top: 1px solid var(--ui-border); border-right: 1px solid var(--ui-border); border-left: 1px solid var(--ui-border); border-bottom: none;
+          background: var(--ui-bg); font-size: 10px; font-weight: 400;
+        }
+        /* Default + Alt Active field */
+        .ui-input[data-variant="default"] .ui-field,
+        .ui-input[data-variant="alt-active"] .ui-field {
+          display: block; width: 100%; padding: 12px 8px; border: 1px solid var(--ui-border); border-radius: 0 0 4px 4px; background: var(--ui-bg);
+          font-size: 14px; font-weight: 400;
+          transition: background var(--motion-ms) var(--ease-smooth), border-color var(--motion-ms) var(--ease-smooth), box-shadow var(--motion-ms) var(--ease-smooth);
+        }
+        .ui-input[data-variant="default"] .ui-field:hover { background: var(--ui-active-bg); }
+        .ui-input[data-variant="default"] .ui-field:focus-within { border-color: var(--ui-active-border); background: var(--ui-active-bg); }
+        .ui-input[data-variant="alt-active"] .ui-field:hover { background: var(--ui-alt-active-bg); }
+        .ui-input[data-variant="alt-active"] .ui-field:focus-within { border-color: var(--ui-alt-active-border); background: var(--ui-alt-active-bg); }
+
+        /* Chip (hugging) */
+        .ui-input[data-variant="chip"] .ui-label {
+          display: block; width: fit-content; padding: 2px 8px; background: var(--ui-bg);
+          border-top: 1px solid var(--ui-border); border-right: 1px solid var(--ui-border); border-left: 1px solid var(--ui-border); border-bottom: none;
+          border-radius: 4px 4px 0 0; font-size: 10px; font-weight: 400; margin: 0 0 -1px 0;
+        }
+        .ui-input[data-variant="chip"] .ui-field {
+          display: block; width: 100%; padding: 12px 8px; border: 1px solid var(--ui-border); border-radius: 0 0 4px 4px; background: var(--ui-bg);
+          font-size: 14px; line-height: 16px; font-weight: 400;
+          transition: background var(--motion-ms) var(--ease-smooth), border-color var(--motion-ms) var(--ease-smooth), box-shadow var(--motion-ms) var(--ease-smooth);
+        }
+        .ui-input[data-variant="chip"] .ui-field:hover { background: var(--ui-active-bg); }
+        .ui-input[data-variant="chip"] .ui-field:focus-within { border-color: var(--ui-active-border); background: var(--ui-active-bg); }
+
+        /* Error state */
+        .ui-input[data-state="error"] .ui-field { border-color: var(--ui-error-border); background: var(--ui-error-bg); }
+        .ui-input[data-state="error"][data-variant="chip"] .ui-label { border-color: var(--ui-error-border); }
     </style>
 </head>
 <body>
+    <!-- Simple page preloader -->
+    <div id="preloader" style="position:fixed;inset:0;z-index:9999;background:var(--bg-color,#ffffff);display:flex;align-items:center;justify-content:center;opacity:1;transition:opacity .4s ease">
+        <div class="preloader-bar" style="width:min(560px,80vw);height:4px;background:linear-gradient(90deg,#cbd5e1,#9ca3af);border-radius:999px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)">
+            <div id="preloader-thumb" style="height:100%;width:0%;background:#d1d5db;transition:width .5s cubic-bezier(.22,.7,.2,1)"></div>
+        </div>
+    </div>
     <!-- Global Clock Component Container -->
     <div id="global-clock-container"></div>
 
@@ -2090,7 +2434,7 @@
                     <div class="gallery-container">
                         <div class="gallery-slides" id="gallery-slides">
                             <div class="gallery-slide active">
-                                <video class="gallery-bg-video" autoplay muted loop playsinline src="https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/assets/eye.mp4"></video>
+                                <video class="gallery-bg-video" autoplay muted loop playsinline preload="auto" src="https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/assets/eye.mp4"></video>
                                 <h3>QA Framework</h3>
                                 <p>A systematic approach to UI quality assurance<br>that ensures consistent design standards<br>across teams while maintaining<br>creative flexibility.</p>
                                 <button class="gallery-cta ui-btn" data-variant="b4" aria-pressed="false" onclick="navigateToCase('case-study-qa-framework.html')">Explore</button>
@@ -2104,9 +2448,17 @@
                                 <button class="gallery-cta ui-btn" data-variant="b4" aria-pressed="false">Currently Unavailable</button>
                             </div>
                             <div class="gallery-slide">
-                                <h3>Mobile Experience</h3>
-                                <p>Crafting intuitive mobile experiences that feel natural and delightful, with careful attention to touch interactions and performance.</p>
-                                <button class="gallery-cta ui-btn" data-variant="b4" aria-pressed="false">Currently Unavailable</button>
+                                <!-- Slide 3: Muppet grid content -->
+                                <div class="muppet-grid">
+                                    <div class="muppet-cell"><div class="muppet-content"><img src="https://picsum.photos/seed/mu1/800/800" alt="cell 1" /></div></div>
+                                    <div class="muppet-cell"><div class="muppet-content"><img src="https://picsum.photos/seed/mu2/800/800" alt="cell 2" /></div></div>
+                                    <div class="muppet-cell"><div class="muppet-content"><img src="https://picsum.photos/seed/mu3/800/800" alt="cell 3" /></div></div>
+                                    <div class="muppet-cell"><div class="muppet-content"><img src="https://picsum.photos/seed/mu4/800/800" alt="cell 4" /></div></div>
+                                    <div class="muppet-cell"><div class="muppet-content"><img src="https://picsum.photos/seed/mu5/800/800" alt="cell 5" /></div></div>
+                                    <div class="muppet-cell"><div class="muppet-content"><img src="https://picsum.photos/seed/mu6/800/800" alt="cell 6" /></div></div>
+                                    <div class="muppet-cell"><div class="muppet-content"><img src="https://picsum.photos/seed/mu7/800/800" alt="cell 7" /></div></div>
+                                    <div class="muppet-cell"><div class="muppet-content"><img src="https://picsum.photos/seed/mu8/800/800" alt="cell 8" /></div></div>
+                                </div>
                             </div>
                             <div class="gallery-slide">
                                 <h3>AI Integration</h3>
@@ -2144,10 +2496,20 @@
             <h2 id="archive-title" class="section-title">Archive</h2>
             
             <div id="archive-search-mount"></div>
+            <div id="new-search-mount"></div>
+
+            <gallery-archive style="display:block;">Loading archive…</gallery-archive>
 
             <!-- Archive grid removed as requested -->
         </div>
     </section>
+
+    <!-- archive-new and archive-v2 removed -->
+
+    <!-- Archive Standalone (outside any grid system entirely) -->
+    <div id="archive-standalone">
+        <div id="archive-standalone-container"></div>
+    </div>
 
     <!-- Work Section -->
     <section id="work" class="section">
@@ -2155,21 +2517,25 @@
             <h2 id="work-title" class="section-title">Work</h2>
             <div class="card-grid two-columns">
                 <div class="card tall-card">
+                    <img class="card-bg" src="https://picsum.photos/seed/work1/1200/800" alt="Work background" />
                     <h3>QA Framework</h3>
                     <p>A systematic approach to UI quality assurance that ensures consistent design standards across teams while maintaining creative flexibility.</p>
                     <button class="work-cta ui-btn" data-variant="b4" aria-pressed="false" onclick="navigateToCase('case-study-qa-framework.html')">Explore</button>
                 </div>
                 <div class="card tall-card">
+                    <img class="card-bg" src="https://picsum.photos/seed/work2/1200/800" alt="Work background" />
                     <h3>Design System</h3>
                     <p>Creating cohesive design languages that scale across products and teams, ensuring consistency and efficiency in every interaction.</p>
                     <button class="work-cta ui-btn" data-variant="b4" aria-pressed="false">Currently Unavailable</button>
                 </div>
                 <div class="card tall-card">
+                    <img class="card-bg" src="https://picsum.photos/id/1015/1200/800" alt="Work background" />
                     <h3>Mobile Experience</h3>
                     <p>Crafting intuitive mobile experiences that feel natural and delightful, with careful attention to touch interactions and performance.</p>
-                    <button class="work-cta ui-btn" data-variant="b4" aria-pressed="false">Currently Unavailable</button>
+                    <button class="work-cta ui-btn" data-variant="b4" aria-pressed="false">Explore</button>
                 </div>
                 <div class="card tall-card">
+                    <img class="card-bg" src="https://picsum.photos/seed/work4/1200/800" alt="Work background" />
                     <h3>AI Integration</h3>
                     <p>Seamlessly integrating artificial intelligence into user workflows, making complex tasks simple and intelligent automation accessible.</p>
                     <button class="work-cta ui-btn" data-variant="b4" aria-pressed="false">Currently Unavailable</button>
@@ -2185,28 +2551,28 @@
             <h2 id="contact-title" class="section-title">Contact</h2>
             <div class="contact-container">
                 <form id="contact-form" class="contact-form">
-                    <div class="form-group">
-                        <div class="form-field">
-                            <input type="text" id="name" name="name" placeholder="Your name" required>
-                            <label for="name" class="form-label">Name</label>
+                        <div class="ui-input contact-name" data-variant="chip">
+                            <label class="ui-label" for="name">Name</label>
+                            <div class="ui-field">
+                                <input type="text" id="name" name="name" placeholder="Hello" required>
+                            </div>
                         </div>
-                    </div>
                     
-                    <div class="form-group">
-                        <div class="form-field">
-                            <input type="email" id="email" name="email" placeholder="your@email.com" required>
-                            <label for="email" class="form-label">Email</label>
+                        <div class="ui-input contact-email" data-variant="chip">
+                            <label class="ui-label" for="email">Email</label>
+                            <div class="ui-field">
+                                <input type="email" id="email" name="email" placeholder="you@site.com" required>
+                            </div>
                         </div>
-                    </div>
                     
-                    <div class="form-group full-width">
-                        <div class="form-field">
-                            <textarea id="message" name="message" placeholder="Tell me about your project..." required></textarea>
-                            <label for="message" class="form-label">Message</label>
+                        <div class="ui-input contact-message" data-variant="chip">
+                            <label class="ui-label" for="message">Message</label>
+                            <div class="ui-field">
+                                <textarea id="message" name="message" placeholder="Tell me about your project..." required></textarea>
+                            </div>
                         </div>
-                    </div>
                     
-                    <div class="form-group submit-group">
+                    <div class="submit-group contact-submit">
                         <button type="submit" class="submit-button ui-btn" data-variant="b1" aria-pressed="false">
                             Send Message
                         </button>
@@ -2231,6 +2597,7 @@
             <div class="blur-bg"></div>
             <div id="nav-slider"></div>
             <a href="#home" class="nav-button">Home</a>
+            <a href="#archive" class="nav-button">Archive</a>
             <a href="#work" class="nav-button">Work</a>
             <a href="#contact" class="nav-button">Contact</a>
         </nav>
@@ -2777,10 +3144,73 @@ I have a deep curiousity in harmonizing humanity and technology.`;
         const prevButton = document.getElementById('gallery-prev');
         const nextButton = document.getElementById('gallery-next');
         
+        // Randomize slide 3's original image set each time the animation runs
+        function randomizeSlide3Muppets() {
+            const slide3 = document.querySelectorAll('.gallery-slide')[2];
+            if (!slide3) return;
+            const cells = slide3.querySelectorAll('.muppet-cell .muppet-content');
+            if (!cells || cells.length === 0) return;
+
+            // Use the original eight seeded images only
+            const originalImages = [
+                'https://picsum.photos/seed/mu1/800/800',
+                'https://picsum.photos/seed/mu2/800/800',
+                'https://picsum.photos/seed/mu3/800/800',
+                'https://picsum.photos/seed/mu4/800/800',
+                'https://picsum.photos/seed/mu5/800/800',
+                'https://picsum.photos/seed/mu6/800/800',
+                'https://picsum.photos/seed/mu7/800/800',
+                'https://picsum.photos/seed/mu8/800/800'
+            ];
+
+            // Place the provided MP4 in two early cells for visibility on small viewports
+            const videoSrc = 'https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/assets/Animation%20AI%20file%20Bigger%202_1.mp4';
+            const videoCells = [0, 1]; // zero-based indices
+            videoCells.forEach((cellIndex) => {
+                const contentEl = cells[cellIndex];
+                if (!contentEl) return;
+                contentEl.innerHTML = '';
+                const video = document.createElement('video');
+                video.setAttribute('muted', '');
+                video.setAttribute('autoplay', '');
+                video.setAttribute('loop', '');
+                video.setAttribute('playsinline', '');
+                video.src = videoSrc;
+                contentEl.appendChild(video);
+                contentEl.style.removeProperty('transform');
+            });
+
+            // Shuffle a copy
+            const picks = originalImages.slice();
+            for (let i = picks.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [picks[i], picks[j]] = [picks[j], picks[i]];
+            }
+
+            // Assign images to non-video cells; update existing <img> or create one
+            let pickIndex = 0;
+            cells.forEach((contentEl, idx) => {
+                if (videoCells.includes(idx)) return; // skip video cells
+                const src = picks[pickIndex % picks.length];
+                pickIndex++;
+                let img = contentEl.querySelector('img');
+                if (!img) {
+                    // Replace any other content with an img
+                    contentEl.innerHTML = '';
+                    img = document.createElement('img');
+                    img.alt = `grid media ${idx + 1}`;
+                    contentEl.appendChild(img);
+                }
+                img.src = src;
+                contentEl.style.removeProperty('transform');
+            });
+        }
+
         function updateGallerySlide(slideIndex) {
             currentSlide = slideIndex;
             const slides = document.querySelectorAll('.gallery-slide');
             const globalCta = document.querySelector('.gallery-global-cta');
+            const wasActive = document.querySelector('.gallery-slide.active');
             
             // Simple slide switching - just update active class
             slides.forEach((slide, index) => {
@@ -2794,10 +3224,19 @@ I have a deep curiousity in harmonizing humanity and technology.`;
                 if (bgVideo) {
                     try {
                         if (index === slideIndex) {
+                            bgVideo.setAttribute('playsinline', '');
+                            bgVideo.setAttribute('webkit-playsinline', '');
+                            bgVideo.setAttribute('muted', '');
+                            bgVideo.autoplay = true;
                             bgVideo.muted = true;
-                            const playPromise = bgVideo.play();
-                            if (playPromise && typeof playPromise.catch === 'function') {
-                                playPromise.catch(() => {});
+                            bgVideo.loop = true;
+                            if (bgVideo.paused) {
+                                const playPromise = bgVideo.play();
+                                if (playPromise && typeof playPromise.catch === 'function') {
+                                    playPromise.catch(() => {
+                                        setTimeout(() => { try { bgVideo.play(); } catch (_) {} }, 100);
+                                    });
+                                }
                             }
                         } else {
                             bgVideo.pause();
@@ -2805,6 +3244,7 @@ I have a deep curiousity in harmonizing humanity and technology.`;
                     } catch (_) {}
                 }
             });
+            // Animation is controlled in nextSlide/prevSlide for consistency
             
             // Sync global CTA label and click with active slide
             if (globalCta) {
@@ -2840,14 +3280,136 @@ I have a deep curiousity in harmonizing humanity and technology.`;
             }
         }
 
+        // Ensure active slide background video is reliably autoplaying and looping
+        function ensureActiveVideoPlaying() {
+            try {
+                const activeSlide = document.querySelector('.gallery-slide.active');
+                if (!activeSlide) return;
+                const video = activeSlide.querySelector('.gallery-bg-video');
+                if (!video) return;
+                video.setAttribute('playsinline', '');
+                video.setAttribute('webkit-playsinline', '');
+                video.setAttribute('muted', '');
+                video.autoplay = true;
+                video.muted = true;
+                video.loop = true;
+                // Kick the decoder if needed
+                if (video.readyState < 2) {
+                    try { video.load(); } catch (_) {}
+                }
+                const attemptPlay = () => {
+                    const p = video.play();
+                    if (p && typeof p.catch === 'function') {
+                        p.catch(() => setTimeout(() => { try { video.play(); } catch (_) {} }, 120));
+                    }
+                };
+                attemptPlay();
+            } catch (_) {}
+        }
+
+        // GSAP-powered directional fade for gallery titles/descriptions on hover
+        function animateActiveSlideContent(card, direction) {
+            try {
+                const active = card.querySelector('.gallery-slide.active') || card.querySelector('.gallery-slide');
+                if (!active) return;
+                const title = active.querySelector('h3');
+                const para = active.querySelector('p');
+                const elems = [title, para].filter(Boolean);
+                if (elems.length === 0) return;
+                gsap.killTweensOf(elems);
+                if (direction === 'in') {
+                    gsap.set(elems, { x: -18, opacity: 0 });
+                    if (title) gsap.to(title, { x: 0, opacity: 1, duration: 0.20, ease: 'power2.out' });
+                    if (para) gsap.to(para, { x: 0, opacity: 1, duration: 0.18, ease: 'power2.out', delay: 0.06 });
+                } else {
+                    gsap.to(elems, { x: -18, opacity: 0, duration: 0.18, ease: 'power2.in' });
+                }
+            } catch (_) {}
+        }
+
+        function setupGalleryHoverAnimations() {
+            document.querySelectorAll('.gallery-card').forEach((card) => {
+                card.addEventListener('mouseenter', () => animateActiveSlideContent(card, 'in'));
+                card.addEventListener('mouseleave', () => animateActiveSlideContent(card, 'out'));
+            });
+        }
+
+        // Apply identical animation to Work section tall cards
+        function animateTallCardContent(card, direction) {
+            try {
+                const title = card.querySelector('h3');
+                const para = card.querySelector('p');
+                const cta = card.querySelector('.work-cta');
+                const moveElems = [title, para].filter(Boolean);
+                const allElems = cta ? [...moveElems, cta] : moveElems;
+                if (allElems.length === 0) return;
+                gsap.killTweensOf(allElems);
+                if (direction === 'in') {
+                    // Title/paragraph slide + fade
+                    if (moveElems.length) gsap.set(moveElems, { x: -18, opacity: 0 });
+                    if (title) gsap.to(title, { x: 0, opacity: 1, duration: 0.20, ease: 'power2.out' });
+                    if (para) gsap.to(para, { x: 0, opacity: 1, duration: 0.18, ease: 'power2.out', delay: 0.06 });
+                    // CTA fade only (no movement)
+                    if (cta) {
+                        gsap.set(cta, { opacity: 0 });
+                        gsap.to(cta, { opacity: 1, duration: 0.18, ease: 'power2.out', delay: 0.06 });
+                    }
+                } else {
+                    if (moveElems.length) gsap.to(moveElems, { x: -18, opacity: 0, duration: 0.18, ease: 'power2.in' });
+                    if (cta) gsap.to(cta, { opacity: 0, duration: 0.18, ease: 'power2.in' });
+                }
+            } catch (_) {}
+        }
+
+        function setupTallCardHoverAnimations() {
+            document.querySelectorAll('.card.tall-card').forEach((card) => {
+                card.addEventListener('mouseenter', () => animateTallCardContent(card, 'in'));
+                card.addEventListener('mouseleave', () => animateTallCardContent(card, 'out'));
+            });
+        }
+
         function nextSlide() {
             const nextIndex = (currentSlide + 1) % totalSlides;
+            const prevIndex = currentSlide;
             updateGallerySlide(nextIndex);
+            // If moving from 2 -> 3, reset and play muppet animation
+            if (prevIndex === 1 && nextIndex === 2) {
+                const slides = document.querySelectorAll('.gallery-slide');
+                const slide3 = slides[2];
+                if (slide3) {
+                    randomizeSlide3Muppets();
+                    slide3.classList.remove('muppet-played', 'muppet-animate');
+                    // Force reflow to restart CSS animation properly
+                    void slide3.offsetWidth;
+                    slide3.classList.add('muppet-animate');
+                    setTimeout(() => {
+                        slide3.classList.remove('muppet-animate');
+                        slide3.classList.add('muppet-played');
+                    }, 950);
+                }
+            }
         }
 
         function prevSlide() {
             const prevIndex = (currentSlide - 1 + totalSlides) % totalSlides;
+            const fromIndex = currentSlide;
             updateGallerySlide(prevIndex);
+            // If moving from 4 -> 3, reset and play muppet animation
+            if (fromIndex === 3 && prevIndex === 2) {
+                const slides = document.querySelectorAll('.gallery-slide');
+                const slide3 = slides[2];
+                if (slide3) {
+                    randomizeSlide3Muppets();
+                    slide3.classList.remove('muppet-played', 'muppet-animate');
+                    // Force reflow
+                    void slide3.offsetWidth;
+                    slide3.classList.add('muppet-animate');
+                    setTimeout(() => {
+                        slide3.classList.remove('muppet-animate');
+                        slide3.classList.add('muppet-played');
+                    }, 950);
+                }
+            }
         }
 
         // Drag/slide variables
@@ -2928,6 +3490,42 @@ I have a deep curiousity in harmonizing humanity and technology.`;
         
         // Set initial arrow visibility
         updateArrowVisibility();
+        // Nudge autoplay for the initial active slide video
+        ensureActiveVideoPlaying();
+
+        // Initialize hover animations for gallery titles/descriptions
+        setupGalleryHoverAnimations();
+        // Ensure all tall-cards have title, paragraph, and CTA; then set up animations
+        (function ensureTallCardElements(){
+            document.querySelectorAll('.card.tall-card').forEach((card) => {
+                let title = card.querySelector('h3');
+                if (!title) {
+                    title = document.createElement('h3');
+                    title.textContent = 'Case Study';
+                    card.insertBefore(title, card.firstChild);
+                }
+                let para = card.querySelector('p');
+                const cta = card.querySelector('.work-cta');
+                if (!para) {
+                    para = document.createElement('p');
+                    para.textContent = 'Description coming soon.';
+                    if (cta) {
+                        card.insertBefore(para, cta);
+                    } else {
+                        card.appendChild(para);
+                    }
+                }
+                if (!cta) {
+                    const btn = document.createElement('button');
+                    btn.className = 'work-cta ui-btn';
+                    btn.setAttribute('data-variant','b4');
+                    btn.setAttribute('aria-pressed','false');
+                    btn.textContent = 'Explore';
+                    card.appendChild(btn);
+                }
+            });
+        })();
+        setupTallCardHoverAnimations();
 
         // Set initial state for all animated elements immediately to prevent layout shifts
         const initialCards = document.querySelectorAll('.card');
@@ -2955,16 +3553,65 @@ I have a deep curiousity in harmonizing humanity and technology.`;
         
         if (galleryCard) {
             gsap.set(galleryCard, { opacity: 0, y: 10 });
+            // Fade in after 1 second from page load
+            setTimeout(() => {
+                try {
+                    gsap.to(galleryCard, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
+                } catch (_) {
+                    // Fallback without GSAP
+                    galleryCard.style.transition = 'opacity .6s ease, transform .6s ease';
+                    galleryCard.style.opacity = '1';
+                    galleryCard.style.transform = 'translateY(0)';
+                }
+            }, 1000);
         }
+
+        // Preloader: brief delay to ensure it paints first, then simulate progress until DOM ready or max timeout
+        (function setupPreloader(){
+            const preloader = document.getElementById('preloader');
+            const thumb = document.getElementById('preloader-thumb');
+            if (!preloader || !thumb) return;
+
+            const start = () => {
+                let progress = 0;
+                const pump = () => {
+                    progress = Math.min(progress + (8 + Math.random() * 10), 92);
+                    thumb.style.width = progress + '%';
+                };
+                const interval = setInterval(pump, 140);
+
+                const finish = () => {
+                    clearInterval(interval);
+                    thumb.style.transition = 'width .35s cubic-bezier(.22,.7,.2,1)';
+                    thumb.style.width = '100%';
+                    setTimeout(() => {
+                        preloader.style.opacity = '0';
+                        setTimeout(() => { preloader.remove(); }, 400);
+                    }, 300);
+                };
+
+                const MAX_WAIT_MS = 2500;
+                let finished = false;
+                const safeFinish = () => { if (!finished) { finished = true; finish(); } };
+
+                if (document.readyState === 'interactive' || document.readyState === 'complete') {
+                    safeFinish();
+                } else {
+                    document.addEventListener('DOMContentLoaded', safeFinish, { once: true });
+                }
+                // Safety valve so the loader never lingers too long
+                setTimeout(safeFinish, MAX_WAIT_MS);
+            };
+
+            // Ensure the preloader is the first thing visible; start quickly but not blocking paint
+            setTimeout(start, 120);
+        })();
         
         // Set up contact container initial state
         const contactContainer = document.querySelector('.contact-container');
         if (contactContainer) {
-            gsap.set(contactContainer, {
-                opacity: 0,
-                y: 30,
-                force3D: true
-            });
+            // Ensure contact section is visible immediately
+            gsap.set(contactContainer, { opacity: 1, y: 0 });
         }
         
         // Set up intro text immediately to prevent home section height changes
@@ -3113,14 +3760,8 @@ I have a deep curiousity in harmonizing humanity and technology.`;
                 animatedCards.add(sectionId);
                 
                 if (sectionId === 'contact' && contactContainer) {
-                    // Contact section: animate contact container
-                    gsap.to(contactContainer, {
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.6,
-                        ease: "power2.out",
-                        delay: 0.3
-                    });
+                    // Contact section should be visible instantly; no delayed animation
+                    gsap.set(contactContainer, { opacity: 1, y: 0 });
                 } else if (sectionId === 'archive' && searchContainer) {
                     // Archive section: fade in search
                     gsap.to(searchContainer, {
@@ -3158,6 +3799,71 @@ I have a deep curiousity in harmonizing humanity and technology.`;
         // Initialize scroll listener for section animations
         window.addEventListener('scroll', checkSectionVisibility);
         window.addEventListener('load', checkSectionVisibility);
+
+        // Contact mode: if ?section=contact is present, load the page with contact in focus
+        (function initContactMode(){
+            try {
+                const params = new URLSearchParams(window.location.search);
+                const isContactMode = params.get('section') === 'contact';
+                if (!isContactMode) return;
+
+                // Mark Contact nav active and move thumb without scrolling
+                document.querySelectorAll('#nav-bar .nav-button').forEach(btn => btn.classList.remove('active'));
+                const contactNav = document.querySelector('#nav-bar .nav-button[href="#contact"]');
+                if (contactNav) contactNav.classList.add('active');
+                if (typeof moveToggleThumbToSection === 'function') {
+                    moveToggleThumbToSection('contact');
+                }
+
+                // Instantly set contact container visible and prevent other animations from overriding
+                const contactSection = document.getElementById('contact');
+                const contactContainerEl = document.querySelector('#contact .contact-container');
+                if (contactContainerEl) {
+                    gsap.set(contactContainerEl, { opacity: 1, y: 0 });
+                }
+
+                // Position so Contact title and form are fully in view beneath the fixed header
+                requestAnimationFrame(() => {
+                    const section = contactSection;
+                    if (!section) return;
+
+                    const computeAndScroll = () => {
+                        const header = document.getElementById('clock-container');
+                        const hh = header ? header.offsetHeight : 58; // prefer current height, fallback to scrolled height
+                        const topMargin = 12;
+                        const bottomMargin = 16;
+
+                        const rect = section.getBoundingClientRect();
+                        const top = rect.top + window.scrollY;
+                        const height = rect.height;
+
+                        // Range to keep section fully visible if it fits
+                        const minTop = top - (hh + topMargin); // align section top below header
+                        const maxTop = top + height - (window.innerHeight - bottomMargin); // align section bottom above viewport bottom
+
+                        const usable = window.innerHeight - hh - topMargin - bottomMargin;
+                        let target = minTop;
+                        if (height <= usable) {
+                            // Center within usable space to avoid clipping title/form
+                            target = Math.round((minTop + Math.max(minTop, maxTop)) / 2);
+                        }
+
+                        const maxScroll = Math.max(0, Math.max(document.documentElement.scrollHeight, document.body.scrollHeight) - window.innerHeight);
+                        target = Math.max(0, Math.min(maxScroll, target));
+                        window.scrollTo({ top: target, left: 0, behavior: 'auto' });
+                    };
+
+                    computeAndScroll();
+                    // Recompute after header collapses to scrolled state
+                    setTimeout(computeAndScroll, 140);
+                });
+
+                // Prevent over-scrolling downwards by ensuring body is scrollable normally
+                // No further constraints; just ensure we didn't attach any smooth scroll to hash
+            } catch (e) {
+                console.warn('initContactMode failed', e);
+            }
+        })();
 
         // Handle window resize to update description text if needed
         window.addEventListener('resize', function() {
@@ -3227,244 +3933,12 @@ I have a deep curiousity in harmonizing humanity and technology.`;
         (function mountArchiveSearchShadow() {
             const mount = document.getElementById('archive-search-mount');
             if (!mount) return;
+        })();
 
-            const shadow = mount.attachShadow({ mode: 'open' });
-            const container = document.createElement('div');
-            container.innerHTML = `
-<link rel="stylesheet" href="https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/assets/archive-search.css">
-<style id="archive-shadow-overrides">.search-container{position:relative;z-index:2000}.search-dropdown{z-index:4000}</style>
-<div class="search-section">
-  <div class="search-container">
-    <div class="ui-search">
-      <div class="ui-search-key">
-        <div class="ui-icon"></div>
-        <span class="ui-text">Search</span>
-      </div>
-      <div class="ui-search-field">
-        <input type="search" placeholder="What interests you?" aria-autocomplete="list" aria-expanded="false" aria-controls="search-suggestions"/>
-        <div class="ui-search-clear"><div class="ui-icon"></div></div>
-      </div>
-      <div id="search-suggestions" class="search-dropdown" role="listbox" aria-label="Search suggestions"></div>
-    </div>
-  </div>
-  <div class="filter-section">
-    <div class="filter-header">
-      <div class="filter-header-content">
-        <span class="filter-title">Filter</span>
-        <span class="filter-count">6 categories</span>
-      </div>
-      <div class="filter-controls">
-        <button class="control-btn" data-action="sort">A-Z</button>
-        <button class="control-btn view-toggle" data-view="list" aria-label="List view"><span class="control-icon list-icon"></span></button>
-        <button class="control-btn view-toggle active" data-view="grid" aria-label="Grid view"><span class="control-icon grid-icon"></span></button>
-      </div>
-    </div>
-    <div class="filter-content">
-      <div class="pills-grid active" role="listbox" aria-label="Filter categories grid">
-        <button class="ui-btn pill" data-variant="b6" data-value="Trending">Design Philosophy</button>
-        <button class="ui-btn pill" data-variant="b6" data-value="New Releases">Architecture</button>
-        <button class="ui-btn pill" data-variant="b6" data-value="Categories">Kinetic Typography</button>
-        <button class="ui-btn pill" data-variant="b6" data-value="Best Sellers">Editorial Design</button>
-        <button class="ui-btn pill" data-variant="b6" data-value="Top Rated">Simone Weil</button>
-        <button class="ui-btn pill" data-variant="b6" data-value="Sale Items">Kafka On the Shore</button>
-      </div>
-      <div class="pills-list" role="listbox" aria-label="Filter categories list">
-        <div class="filter-dropdown-item" data-value="Trending">Design Philosophy</div>
-        <div class="filter-dropdown-item" data-value="New Releases">Architecture</div>
-        <div class="filter-dropdown-item" data-value="Categories">Kinetic Typography</div>
-        <div class="filter-dropdown-item" data-value="Best Sellers">Editorial Design</div>
-        <div class="filter-dropdown-item" data-value="Top Rated">Simone Weil</div>
-        <div class="filter-dropdown-item" data-value="Sale Items">Kafka On the Shore</div>
-      </div>
-    </div>
-  </div>
-</div>`;
-            shadow.appendChild(container);
-
-            // Robustly load external CSS into shadow (in case <link> is blocked by CORS/cache)
-            (async () => {
-              try {
-                const res = await fetch('https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/assets/archive-search.css', { mode: 'cors', cache: 'no-cache' });
-                if (res.ok) {
-                  const cssText = await res.text();
-                  const styleEl = document.createElement('style');
-                  styleEl.setAttribute('data-injected', 'archive-search');
-                  styleEl.textContent = cssText + "\n/* ensure stacking */\n.search-container{position:relative;z-index:2000}.search-dropdown{z-index:4000}";
-                  shadow.appendChild(styleEl);
-                }
-              } catch (e) {
-                // Fallback: inline minimal critical styles to avoid unstyled field
-                const fallback = document.createElement('style');
-                fallback.textContent = `
-                  .ui-search{display:inline-flex;align-items:stretch;gap:0;width:100%;position:relative}
-                  .ui-search-key{display:inline-flex;align-items:center;padding:12px 16px;background:#F0F0F0;border:1px solid #D9D9D9;border-right:none;border-radius:6px 0 0 0}
-                  .ui-search-field{display:flex;align-items:center;flex:1;border:1px solid #D9D9D9;border-radius:0 6px 0 0;height:56px}
-                  .ui-search-field input{width:100%;padding:16px 20px;border:0;outline:0}
-                  .search-dropdown{position:absolute;top:100%;left:0;right:0;background:#fff;border:1px solid #D9D9D9;border-top:none;border-radius:0 0 6px 6px;opacity:0;visibility:hidden;transform:translateY(-10px);transition:opacity .3s,visibility .3s,transform .3s;z-index:4000}
-                  .search-dropdown.active{opacity:1;visibility:visible;transform:translateY(0)}
-                `;
-                shadow.appendChild(fallback);
-              }
-            })();
-
-            // Attach behavior directly from here (no script tag in shadow)
-            (function initShadowSearch(root) {
-              const searchSection  = root.querySelector('.search-section');
-              const searchInput    = root.querySelector('.ui-search-field input');
-              const searchClear    = root.querySelector('.ui-search-clear');
-              const searchField    = root.querySelector('.ui-search-field');
-              const searchDropdown = root.querySelector('#search-suggestions');
-              const uiSearch       = root.querySelector('.ui-search');
-
-              if (!searchSection || !searchInput || !searchField || !uiSearch || !searchDropdown) return;
-
-              const BASE_SUGGESTIONS = [
-                'Latest trends', 'New releases', 'Best sellers',
-                'Top rated items', 'Sale items', "Editor's picks",
-                'Featured collections', 'New arrivals'
-              ];
-
-              let selectedIndex = -1;
-
-              function openSearchDropdown() {
-                selectedIndex = -1;
-                searchDropdown.classList.add('active');
-                uiSearch.classList.add('searching');
-                searchInput.setAttribute('aria-expanded', 'true');
-                searchSection.classList.add('search-open');
-              }
-              function closeSearchDropdown() {
-                searchDropdown.classList.remove('active');
-                uiSearch.classList.remove('searching');
-                searchInput.setAttribute('aria-expanded', 'false');
-                selectedIndex = -1;
-                searchSection.classList.remove('search-open');
-              }
-
-              function renderSuggestions(items) {
-                searchDropdown.innerHTML = '';
-                items.forEach((text) => {
-                  const div = document.createElement('div');
-                  div.className = 'search-dropdown-item';
-                  div.setAttribute('role', 'option');
-                  div.textContent = text;
-                  div.addEventListener('mousedown', (e) => {
-                    e.preventDefault();
-                    searchInput.value = text;
-                    searchField.classList.add('has-value');
-                    closeSearchDropdown();
-                  });
-                  searchDropdown.appendChild(div);
-                });
-              }
-
-              function filterSuggestions(query) {
-                const q = (query || '').trim().toLowerCase();
-                if (!q) return BASE_SUGGESTIONS.slice(0, 6);
-                return BASE_SUGGESTIONS.filter(item => item.toLowerCase().includes(q)).slice(0, 8);
-              }
-
-              function updateSelection() {
-                const items = Array.from(searchDropdown.querySelectorAll('.search-dropdown-item'));
-                items.forEach((el, idx) => el.classList.toggle('selected', idx === selectedIndex));
-                if (items[selectedIndex]) items[selectedIndex].scrollIntoView({ block: 'nearest' });
-              }
-
-              searchInput.addEventListener('focus', () => {
-                searchSection.classList.add('search-linking');
-                const list = filterSuggestions(searchInput.value);
-                if (list.length) { renderSuggestions(list); openSearchDropdown(); } else { closeSearchDropdown(); }
-              });
-
-              uiSearch.addEventListener('focusin',  () => searchSection.classList.add('search-linking'));
-              uiSearch.addEventListener('focusout', () => searchSection.classList.remove('search-linking'));
-
-              searchInput.addEventListener('input', () => {
-                searchField.classList.toggle('has-value', !!searchInput.value.trim());
-                const list = filterSuggestions(searchInput.value);
-                if (list.length) { renderSuggestions(list); openSearchDropdown(); } else { closeSearchDropdown(); }
-              });
-
-              searchInput.addEventListener('blur', () => { setTimeout(() => closeSearchDropdown(), 120); });
-
-              searchInput.addEventListener('keydown', (e) => {
-                const items = Array.from(searchDropdown.querySelectorAll('.search-dropdown-item'));
-                if (!searchDropdown.classList.contains('active') || !items.length) return;
-                if (e.key === 'ArrowDown') { e.preventDefault(); selectedIndex = Math.min(selectedIndex + 1, items.length - 1); if (selectedIndex < 0) selectedIndex = 0; updateSelection(); }
-                else if (e.key === 'ArrowUp') { e.preventDefault(); selectedIndex = Math.max(selectedIndex - 1, 0); updateSelection(); }
-                else if (e.key === 'Enter') { e.preventDefault(); if (selectedIndex >= 0 && items[selectedIndex]) { searchInput.value = items[selectedIndex].textContent.trim(); searchField.classList.add('has-value'); } closeSearchDropdown(); }
-                else if (e.key === 'Escape') { closeSearchDropdown(); }
-              });
-
-              if (searchClear) {
-                searchClear.addEventListener('click', () => {
-                  searchInput.value = '';
-                  searchField.classList.remove('has-value');
-                  searchInput.focus();
-                  const list = filterSuggestions('');
-                  renderSuggestions(list);
-                  openSearchDropdown();
-                });
-              }
-
-              let currentSort = 'default';
-              let hideTimeout;
-              const sortBtn       = root.querySelector('[data-action="sort"]');
-              const viewButtons   = root.querySelectorAll('.view-toggle');
-              const pillsGrid     = root.querySelector('.pills-grid');
-              const pillsList     = root.querySelector('.pills-list');
-              const filterSectionEl = root.querySelector('.filter-section');
-
-              function showFilterDropdown() {
-                const filterContent = root.querySelector('.filter-content');
-                if (!filterContent) return;
-                clearTimeout(hideTimeout);
-                filterContent.classList.add('visible');
-                hideTimeout = setTimeout(() => filterContent.classList.remove('visible'), 2000);
-              }
-
-              function getListItems() { return pillsList ? Array.from(pillsList.querySelectorAll('.filter-dropdown-item')) : []; }
-              function getGridPills() { return pillsGrid ? Array.from(pillsGrid.querySelectorAll('.ui-btn.pill')) : []; }
-
-              if (sortBtn && pillsGrid && pillsList) {
-                sortBtn.addEventListener('click', (e) => {
-                  e.stopPropagation();
-                  currentSort = currentSort === 'default' ? 'alpha' : 'default';
-                  sortBtn.classList.toggle('active', currentSort === 'alpha');
-                  const defaultOrder = ['Trending','New Releases','Categories','Best Sellers','Top Rated','Sale Items'];
-                  const getText = (el) => (el.dataset.value || el.textContent).trim();
-                  const listItems = getListItems();
-                  const gridItems = getGridPills();
-                  const sorter = (a, b) => currentSort === 'alpha' ? getText(a).localeCompare(getText(b)) : defaultOrder.indexOf(getText(a)) - defaultOrder.indexOf(getText(b));
-                  listItems.sort(sorter).forEach(el => pillsList.appendChild(el));
-                  gridItems.sort(sorter).forEach(el => pillsGrid.appendChild(el));
-                  showFilterDropdown();
-                });
-              }
-
-              if (viewButtons && pillsGrid && pillsList) {
-                viewButtons.forEach(btn => {
-                  btn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    viewButtons.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    const isGrid = btn.dataset.view === 'grid';
-                    pillsGrid.classList.toggle('active', isGrid);
-                    pillsList.classList.toggle('active', !isGrid);
-                    closeSearchDropdown();
-                    showFilterDropdown();
-                  });
-                });
-              }
-
-              getListItems().forEach(item => item.addEventListener('click', () => item.classList.toggle('selected')));
-              getGridPills().forEach(pill => pill.addEventListener('click', () => pill.classList.toggle('active')));
-
-              if (filterSectionEl) {
-                filterSectionEl.addEventListener('mouseenter', () => { clearTimeout(hideTimeout); /* keep suggestions if open */ });
-                filterSectionEl.addEventListener('mouseleave', () => { const filterContent = root.querySelector('.filter-content'); if (!filterContent) return; clearTimeout(hideTimeout); filterContent.classList.remove('visible'); });
-              }
-            })(shadow);
+        // Archive V2: shadow search removed
+        (function mountArchiveV2SearchShadow() {
+            const mount = document.getElementById('archive-v2-search');
+            if (!mount) return;
         })();
 
         // Contact form and canvas functionality
@@ -3682,28 +4156,81 @@ I have a deep curiousity in harmonizing humanity and technology.`;
             }, 100);
         }
 
+        // Hover over nav buttons previews thumb position (including Archive)
+        document.querySelectorAll('.nav-button').forEach((btn) => {
+            btn.addEventListener('mouseenter', () => {
+                const href = btn.getAttribute('href') || '';
+                const id = href.startsWith('#') ? href.slice(1) : href;
+                if (typeof moveToggleThumbToSection === 'function') {
+                    moveToggleThumbToSection(id || 'home');
+                }
+            });
+        });
+
             function updateTogglePositions() {
                 const currentTrack = activeToggle.track;
                 if (!currentTrack) return;
-                
+
                 const trackWidth = currentTrack.offsetWidth;
                 const thumbWidth = 76; // Fixed thumb width for consistent calculation
-                const availableSpace = trackWidth - thumbWidth; // Space for thumb to move
-                const paddingPercent = 0.1; // 10% padding on each side like vertical centering
-                
-                window.leftPosition = availableSpace * paddingPercent;
-                window.rightPosition = trackWidth - thumbWidth - (availableSpace * paddingPercent);
-                window.midPoint = (window.leftPosition + window.rightPosition) / 2;
+                const paddingPercent = 0.08; // slightly reduced padding for better range
+
+                const minX = Math.round((trackWidth - thumbWidth) * paddingPercent);
+                const maxX = Math.round(trackWidth - thumbWidth - (trackWidth - thumbWidth) * paddingPercent);
+
+                // Define stops mapped to sections (ensure Archive is included)
+                const sectionOrder = ['home', 'archive', 'work', 'contact'];
+                const stopsCount = sectionOrder.length;
+                const span = maxX - minX;
+                const step = stopsCount > 1 ? span / (stopsCount - 1) : 0;
+
+                window.toggleMinX = minX;
+                window.toggleMaxX = maxX;
+                window.toggleStops = sectionOrder.map((id, idx) => ({ id, x: Math.round(minX + idx * step) }));
                 window.trackWidth = trackWidth;
                 window.thumbWidth = thumbWidth;
-                
-                console.log('Updated positions:', {
-                    trackWidth,
-                    thumbWidth,
-                    leftPosition: window.leftPosition,
-                    rightPosition: window.rightPosition,
-                    midPoint: window.midPoint
-                });
+
+                // Place thumb to current section stop if possible
+                const currentId = getActiveSectionId();
+                const idx = window.toggleStops.findIndex(s => s.id === currentId);
+                if (activeToggle.thumb && idx >= 0) {
+                    activeToggle.thumb.style.left = window.toggleStops[idx].x + 'px';
+                    window.currentStopIndex = idx;
+                }
+            }
+
+            function getActiveSectionId() {
+                const activeBtn = document.querySelector('.nav-button.active');
+                if (activeBtn) {
+                    const href = activeBtn.getAttribute('href') || '';
+                    const id = href.startsWith('#') ? href.slice(1) : href;
+                    return id || 'home';
+                }
+                // Fallback: detect by viewport
+                const sections = ['home','archive','work','contact'];
+                for (const id of sections) {
+                    const el = document.getElementById(id);
+                    if (!el) continue;
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top <= window.innerHeight * 0.4 && rect.bottom >= window.innerHeight * 0.4) {
+                        return id;
+                    }
+                }
+                return 'home';
+            }
+
+            // Move toggle thumb to a specific section stop without scrolling
+            function moveToggleThumbToSection(sectionId) {
+                try {
+                    const stops = window.toggleStops || [];
+                    if (!activeToggle || !activeToggle.thumb || !stops.length) return;
+                    const idx = stops.findIndex(s => s.id === sectionId);
+                    if (idx >= 0) {
+                        activeToggle.thumb.style.transition = 'left 0.25s ease';
+                        activeToggle.thumb.style.left = stops[idx].x + 'px';
+                        window.currentStopIndex = idx;
+                    }
+                } catch (_) {}
             }
 
             let clickTimeout = null;
@@ -3735,19 +4262,16 @@ I have a deep curiousity in harmonizing humanity and technology.`;
 
             function togglePosition() {
                 const currentThumb = activeToggle.thumb;
-                if (!currentThumb) return;
-                
-                isToggleActive = !isToggleActive;
+                if (!currentThumb || !Array.isArray(window.toggleStops) || !window.toggleStops.length) return;
                 currentThumb.style.transition = 'all 0.3s ease';
-                
-                if (isToggleActive) {
-                    currentThumb.style.left = window.rightPosition + 'px';
-                    currentThumb.classList.add('active');
-                    sendMessage();
-                } else {
-                    currentThumb.style.left = window.leftPosition + 'px';
-                    currentThumb.classList.remove('active');
-                }
+
+                // Advance to next stop cyclically
+                const nextIndex = (window.currentStopIndex || 0) + 1 >= window.toggleStops.length ? 0 : (window.currentStopIndex || 0) + 1;
+                window.currentStopIndex = nextIndex;
+                const target = window.toggleStops[nextIndex];
+                currentThumb.style.left = target.x + 'px';
+                // Scroll to the mapped section smoothly
+                smoothScrollToSection(`#${target.id}`);
             }
 
             function startDrag(e) {
@@ -3820,31 +4344,20 @@ I have a deep curiousity in harmonizing humanity and technology.`;
                 
                 // Update positions in case of resize
                 updateTogglePositions();
-                
-                console.log('Current position:', currentPosition);
-                console.log('Left position:', window.leftPosition);
-                console.log('Right position:', window.rightPosition);
-                
-                // Snap to nearest edge based on current position
-                const distanceToLeft = Math.abs(currentPosition - window.leftPosition);
-                const distanceToRight = Math.abs(currentPosition - window.rightPosition);
-                
-                console.log('Distance to left:', distanceToLeft);
-                console.log('Distance to right:', distanceToRight);
-                
-                if (distanceToLeft <= distanceToRight) {
-                    // Snap to left
-                    console.log('Snapping to left');
-                    currentThumb.style.left = window.leftPosition + 'px';
-                    currentThumb.classList.remove('active');
-                    isToggleActive = false;
-                } else {
-                    // Snap to right
-                    console.log('Snapping to right');
-                    currentThumb.style.left = window.rightPosition + 'px';
-                    currentThumb.classList.add('active');
-                    isToggleActive = true;
-                    sendMessage();
+
+                // Snap to nearest stop and navigate
+                const stops = window.toggleStops || [];
+                if (stops.length) {
+                    let nearestIdx = 0;
+                    let nearestDist = Infinity;
+                    stops.forEach((s, idx) => {
+                        const d = Math.abs(s.x - currentPosition);
+                        if (d < nearestDist) { nearestDist = d; nearestIdx = idx; }
+                    });
+                    window.currentStopIndex = nearestIdx;
+                    const target = stops[nearestIdx];
+                    currentThumb.style.left = target.x + 'px';
+                    smoothScrollToSection(`#${target.id}`);
                 }
                 
                 // Reset drag flag after the interaction is complete to allow future track clicks
@@ -3889,14 +4402,10 @@ I have a deep curiousity in harmonizing humanity and technology.`;
                 // Maintain current state position
                 if (sendToggleThumb) {
                     hasDraggedDistance = false; // Reset drag flag
-                    if (wasActive) {
-                        sendToggleThumb.style.left = window.rightPosition + 'px';
-                        sendToggleThumb.classList.add('active');
-                        isToggleActive = true;
-                    } else {
-                        sendToggleThumb.style.left = window.leftPosition + 'px';
-                        sendToggleThumb.classList.remove('active');
-                        isToggleActive = false;
+                    const idx = typeof window.currentStopIndex === 'number' ? window.currentStopIndex : 0;
+                    const target = (window.toggleStops && window.toggleStops[idx]) || (window.toggleStops && window.toggleStops[0]);
+                    if (target) {
+                        sendToggleThumb.style.left = target.x + 'px';
                     }
                 }
             });
@@ -3915,6 +4424,56 @@ I have a deep curiousity in harmonizing humanity and technology.`;
                 e.target.value = value;
             });
         }
+    </script>
+    <script src="gallery-archive.js"></script>
+    <script>
+        (function ensureArchiveComponent(){
+            const onReady = () => {
+                try {
+                    const mount = document.getElementById('archive-search-mount');
+                    if (!mount) return;
+                    const already = document.querySelector('gallery-archive');
+                    if (!already) {
+                        const el = document.createElement('gallery-archive');
+                        el.style.display = 'block';
+                        el.style.marginTop = '16px';
+                        mount.insertAdjacentElement('afterend', el);
+                    }
+                } catch (e) {
+                    console.error('gallery-archive mount failed', e);
+                }
+            };
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', onReady, { once: true });
+            } else {
+                onReady();
+            }
+        })();
+
+        // Archive V2: ensure gallery component is mounted inside the v2 container
+        (function ensureArchiveV2Component(){
+            const onReady = () => {
+                try {
+                    const container = document.getElementById('archive-v2-container');
+                    if (!container) return;
+                    const alreadyInside = container.querySelector('gallery-archive');
+                    if (!alreadyInside) {
+                        const el = document.createElement('gallery-archive');
+                        el.style.display = 'block';
+                        el.style.width = '100%';
+                        el.style.marginTop = '16px';
+                        container.appendChild(el);
+                    }
+                } catch (e) {
+                    console.error('archive-v2 gallery mount failed', e);
+                }
+            };
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', onReady, { once: true });
+            } else {
+                onReady();
+            }
+        })();
     </script>
 </body>
 </html>
