@@ -7637,6 +7637,23 @@ body .triage-component-container .custom-enhanced-dropdown.open .custom-dropdown
             }
         }
 
+        /* Mobile: keep CTAs inline on first row; put slider caption on its own centered row */
+        @media (max-width: 768px) {
+            .triage-compare-toolbar { display:flex; flex-wrap: wrap; align-items:center; justify-content: space-between; gap:6px; }
+            /* Upload buttons shrink, but remain inline */
+            .triage-compare-upload { display:inline-flex; align-items:center; justify-content:center; gap:6px; padding:4px 8px !important; min-height:28px !important; font-size:11px !important; line-height:1.2 !important; flex:1 1 0; min-width:0; box-sizing:border-box !important; border-radius:6px !important; }
+            .triage-compare-upload .triage-compare-upload-text { font-size: 11px !important; }
+            .triage-compare-upload-icon { width: 14px !important; height: 14px !important; }
+            /* Flatten title children into toolbar flow so subtitle can move to its own row */
+            .triage-compare-toolbar-title { display: contents; }
+            .triage-compare-reset { order:2; padding:4px 8px !important; min-height:28px !important; font-size:11px !important; line-height:1.2 !important; display:inline-flex; align-items:center; justify-content:center; flex:1 1 0; min-width:0; border-radius:6px !important; }
+            /* Order the CTAs left, reset, right on first row */
+            .triage-compare-upload-left { order:1; }
+            .triage-compare-upload-right { order:3; }
+            /* Slider caption on its own row, centered, with minimal padding */
+            .triage-compare-subtext { order:4; flex: 0 0 100%; text-align:center; font-size:10px !important; padding:2px 0 !important; margin:2px 0 !important; }
+        }
+
         /* Dark mode removed: defect glossary */
 
         /* Dark mode removed: severity/defect list overrides */
