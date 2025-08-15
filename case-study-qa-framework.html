@@ -7677,6 +7677,67 @@ body .triage-component-container .custom-enhanced-dropdown.open .custom-dropdown
             border: 1px solid var(--border-color);
             background: var(--surface-color);
             color: var(--text-secondary);
+            transition: background var(--motion-ms) var(--ease-smooth), border-color var(--motion-ms) var(--ease-smooth), color var(--motion-ms) var(--ease-smooth);
+        }
+        /* Active/selected severity matches the 'ALL' active style: dark background + white text */
+        .severity-btn.active,
+        .severity-btn.selected,
+        .severity-btn[aria-pressed="true"],
+        .severity-btn[aria-current="true"],
+        .severity-btn[aria-checked="true"],
+        .severity-btn[data-selected="true"] {
+            background: var(--btn-dark) !important;
+            border-color: var(--btn-dark) !important;
+            color: var(--btn-white) !important;
+        }
+        .severity-btn.active:hover,
+        .severity-btn.selected:hover,
+        .severity-btn[aria-pressed="true"]:hover,
+        .severity-btn[aria-current="true"]:hover,
+        .severity-btn[aria-checked="true"]:hover,
+        .severity-btn[data-selected="true"]:hover,
+        .severity-btn.active:focus-visible,
+        .severity-btn.selected:focus-visible,
+        .severity-btn[aria-pressed="true"]:focus-visible,
+        .severity-btn[aria-current="true"]:focus-visible,
+        .severity-btn[aria-checked="true"]:focus-visible,
+        .severity-btn[data-selected="true"]:focus-visible,
+        .severity-btn.active:active,
+        .severity-btn.selected:active,
+        .severity-btn[aria-pressed="true"]:active,
+        .severity-btn[aria-current="true"]:active,
+        .severity-btn[aria-checked="true"]:active,
+        .severity-btn[data-selected="true"]:active {
+            background: var(--btn-dark) !important;
+            border-color: var(--btn-dark) !important;
+            color: var(--btn-white) !important;
+        }
+
+        /* Scope-specific hard overrides to exactly match ALL button state inside glossary filters */
+        #glossary-severity-filters .severity-btn.active,
+        #glossary-severity-filters .severity-btn.selected,
+        #glossary-severity-filters .severity-btn[aria-pressed="true"],
+        #glossary-severity-filters .severity-btn[aria-current="true"],
+        #glossary-severity-filters .severity-btn[aria-checked="true"],
+        #glossary-severity-filters .severity-btn[data-selected="true"],
+        #glossary-severity-filters .severity-btn.low-severity.active,
+        #glossary-severity-filters .severity-btn.medium-severity.active,
+        #glossary-severity-filters .severity-btn.high-severity.active {
+            background: var(--btn-dark) !important;
+            border-color: var(--btn-dark) !important;
+            color: var(--btn-white) !important;
+            box-shadow: none !important;
+            text-shadow: none !important;
+        }
+        #glossary-severity-filters .severity-btn.active:hover,
+        #glossary-severity-filters .severity-btn.selected:hover,
+        #glossary-severity-filters .severity-btn[aria-pressed="true"]:hover,
+        #glossary-severity-filters .severity-btn[aria-current="true"]:hover,
+        #glossary-severity-filters .severity-btn[aria-checked="true"]:hover,
+        #glossary-severity-filters .severity-btn[data-selected="true"]:hover {
+            background: var(--btn-dark) !important;
+            border-color: var(--btn-dark) !important;
+            color: var(--btn-white) !important;
         }
 
         /* Legacy greyscale severity overrides removed */
