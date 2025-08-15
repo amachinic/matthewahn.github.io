@@ -375,7 +375,7 @@ class GalleryArchive extends HTMLElement {
         /* Overlay scrollbar */
         .os-host{ position:relative; overflow:hidden; }
         .os-host.full{ position:absolute; inset:0; }
-        .sidebar .os-host{ flex:1 1 auto; min-height:240px; }
+        .sidebar .os-host{ flex:1 1 auto; min-height:0; }
         .os-content{ width:100%; height:100%; overflow:auto; scrollbar-width:none; }
         /* Allow sidebar list to size naturally instead of requiring a fixed parent height */
         .sidebar .os-host .os-content{ height:auto; max-height:100%; }
@@ -465,12 +465,12 @@ class GalleryArchive extends HTMLElement {
           100%{ background-position: 150% 0; }
         }
         @keyframes fadeUpItem{
-          from{ opacity:0; transform: translateY(10px); }
+          from{ opacity:0; transform: translateY(24px); }
           to{ opacity:1; transform: translateY(0); }
         }
-        .grid.staggering .item{ opacity:0; transform: translateY(10px); }
-        .grid.staggering .item.stagger-in{ animation: fadeUpItem .44s var(--ease) forwards; animation-delay: var(--stagger-delay, 0ms); }
-        .item.fade-in{ animation: fadeUpItem .44s var(--ease) both; }
+        .grid.staggering .item{ opacity:0; transform: translateY(24px); }
+        .grid.staggering .item.stagger-in{ animation: fadeUpItem .6s var(--ease) forwards; animation-delay: var(--stagger-delay, 0ms); }
+        .item.fade-in{ animation: fadeUpItem .6s var(--ease) both; }
         .item:hover{ background:var(--chip-hover); box-shadow:0 6px 16px rgba(0,0,0,.08); }
         .card.dark .item:hover{ box-shadow:0 6px 16px rgba(0,0,0,.25); }
 
@@ -551,6 +551,8 @@ class GalleryArchive extends HTMLElement {
           }
           .content{ display:none !important; }
           .sidebar{ padding:8px 12px; }
+          /* Constrain sidebar scroll area to roughly 12 items */
+          .sidebar .os-host{ max-height: calc(12 * 42px + 24px) !important; }
           /* Narrower thumb on mobile */
           :host{ --thumb-w: calc(var(--switch-colW) - 6px); }
         }
