@@ -2054,8 +2054,12 @@
             
             /* Gallery CTA mobile sizing and positioning */
             .gallery-cta {
-                padding: 10px 18px; /* Slightly larger for touch */
-                top: 38px; /* Arrow center: 20px (top) + 18px (half of 36px height) = 38px */
+                padding: 0 18px !important;
+                top: 20px; /* Align with arrows top */
+                height: 36px !important;
+                min-height: 36px !important;
+                display: inline-flex;
+                align-items: center;
             }
 
             /* First card uses same base position - translateY handles the offset */
@@ -2076,12 +2080,23 @@
             .gallery-arrow {
                 width: 80px; /* Reduced from 116px */
                 height: 36px; /* Match actual CTA rendered height */
+                display: inline-flex; align-items: center; justify-content: center;
             }
             
             /* Smaller chevron icons for mobile arrows */
             .gallery-arrow svg {
                 width: 32px; /* Reduced from 48px */
                 height: 32px; /* Reduced from 48px */
+            }
+
+            /* Ensure global CTA matches arrow height on mobile */
+            .gallery-global-cta {
+                position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
+                height: 36px !important;
+                min-height: 36px !important;
+                padding: 0 18px !important;
+                display: inline-flex;
+                align-items: center;
             }
             
             /* Adjust line positioning for mobile width */
@@ -2154,7 +2169,7 @@
             }
 
             .gallery-card {
-                height: 58vh;
+                height: 48vh;
             }
 
             .gallery-slide {
@@ -2168,9 +2183,45 @@
             .gallery-slide p {
                 font-size: 14px;
             }
+
+            /* Work tall-cards: ensure CTA aligns with content padding on mobile */
+            #work .card.tall-card {
+                padding: 20px; /* match slide/content padding */
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+            #work .card.tall-card h3,
+            #work .card.tall-card p { margin: 0; }
+            #work .card.tall-card .work-cta.ui-btn[data-variant="b4"] {
+                height: 36px !important;
+                min-height: 36px !important;
+                padding: 0 16px !important; /* align with card padding rhythm */
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                position: static !important; /* ensure it sits in normal flow */
+                inset: auto !important;
+                align-self: flex-start; /* keep within content column, not full width */
+                max-width: 100%;
+                box-sizing: border-box;
+            }
         }
 
         /* Archive grid layout: 6 columns; search spans centered 4 columns */
+        /* Work cards: ensure CTAs fit within card bounds and align padding */
+        #work .card.tall-card { position: relative; padding: 20px; box-sizing: border-box; }
+        #work .card.tall-card .work-cta.ui-btn[data-variant="b4"] {
+            height: 36px !important;
+            min-height: 36px !important;
+            padding: 0 16px !important;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
         #archive .section-content {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
@@ -2231,8 +2282,8 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             grid-template-rows: auto auto;
-            column-gap: 48px;
-            row-gap: 36px;
+            column-gap: 36px;
+            row-gap: 28px;
             align-items: stretch; /* allow spanning item to fill rows */
             justify-items: stretch;
             border-top: 1px solid var(--border-color);
@@ -2270,7 +2321,7 @@
             border: none; border-radius: 0; font-family: 'Unica77LL', Arial, sans-serif; font-size: 16px; outline: none; resize: none; box-sizing: border-box;
         }
         #contact .form-field input { height: 24px; }
-        #contact .form-field textarea { min-height: 140px; padding-top: 2px; }
+        #contact .form-field textarea { min-height: 140px; padding-top: 2px; resize: vertical; overflow: auto; }
         #contact .form-field input::placeholder, #contact .form-field textarea::placeholder { color: var(--text-muted); transition: opacity .2s ease; }
         #contact .form-label { display: none; }
         #contact .form-field input:focus, #contact .form-field textarea:focus {
@@ -2286,20 +2337,20 @@
             width: 100%;
             height: 56px;
             min-height: 56px;
-            border-radius: 12px;
+            border-radius: 6px;
             font-size: 16px;
             letter-spacing: 0.5px;
         }
         /* Align submit button styling to search bar behavior */
         #contact .submit-button.ui-btn {
-            background: #FFF !important;
+            background: rgba(162,230,51,0.15) !important;
             color: var(--ui-text) !important;
-            border: 1px solid var(--ui-border, #D9D9D9) !important;
+            border: 1px solid var(--btn-lime-border, #A2E633) !important;
             transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1), border-color 300ms cubic-bezier(0.4, 0, 0.2, 1), color 300ms cubic-bezier(0.4, 0, 0.2, 1);
         }
         #contact .submit-button.ui-btn:hover,
         #contact .submit-button.ui-btn:focus-visible {
-            background: rgba(162,230,51,0.15) !important;
+            background: rgba(162,230,51,0.25) !important;
             border-color: var(--btn-lime-border, #A2E633) !important;
         }
         #contact .submit-button.ui-btn[aria-pressed="true"],
@@ -2310,11 +2361,24 @@
         /* form-group removed */
         @media (max-width: 768px) {
             #contact .contact-container { max-width: none; }
-            #contact .contact-form { grid-template-columns: 1fr; }
-            /* form-group removed */
-            #contact .form-field input, #contact .form-field textarea { padding: 20px 16px; }
-            #contact .form-label { left: 16px; top: 20px; }
-            #contact .submit-button { padding: 24px 16px; }
+            #contact .contact-form {
+                grid-template-columns: 1fr;
+                column-gap: 0;
+                row-gap: 16px;
+            }
+            /* Reset grid placement for single-column layout */
+            #contact .contact-name,
+            #contact .contact-email,
+            #contact .contact-message,
+            #contact .contact-submit { grid-column: 1; grid-row: auto; }
+            #contact .submit-group.contact-submit { grid-column: 1; grid-row: auto; }
+            #contact .contact-submit { align-self: stretch; height: auto; margin-top: 12px; }
+            #contact .submit-button { width: 100%; min-height: 48px; height: auto; padding: 16px; }
+            /* Compact field padding on mobile while keeping full width */
+            #contact .form-field input, #contact .form-field textarea { padding: 16px 14px; }
+            #contact .form-label { left: 14px; top: 16px; }
+            /* Reduce large vertical gap by removing enforced min-height on Archive section */
+            #archive.section { min-height: auto !important; }
         }
         #contact .form-success { padding: 40px 20px; text-align: center; border: 1px solid var(--border-color); background: rgba(255,255,255,0.5); border-radius: 12px; margin-top: 16px; }
         #contact .form-success h3 { margin: 0 0 12px 0; font-family: 'Unica77LL', Arial, sans-serif; font-size: 18px; font-weight: 500; }
@@ -2369,7 +2433,7 @@
         .ui-btn[data-variant="b2"]:hover { background: var(--btn-lime-40) !important; border-color: var(--btn-lime-border) !important; }
         .ui-btn[data-variant="b2"][aria-pressed="true"] { background: var(--btn-lime) !important; border-color: var(--btn-lime-border) !important; color: var(--ui-text) !important; }
         /* B4 */
-        .ui-btn[data-variant="b4"] {     background: rgba(240, 240, 240, 0.1); border: 1px solid rgba(240, 240, 240, 1);   color: rgba(240, 240, 240, 1); width: auto; height: 48px; }
+        .ui-btn[data-variant="b4"] {     background: rgba(240, 240, 240, 0.1); border: 1px solid rgba(240, 240, 240, 1);   color: rgba(240, 240, 240, 1); width: auto; height: 36px; }
         .ui-btn[data-variant="b4"]:hover { background-color: rgba(240, 240, 240, 0.25); border-color: rgba(240, 240, 240, .6); color: rgba(240, 240, 240, .8); }
         .ui-btn[data-variant="b4"][aria-pressed="true"] { background: var(--btn-dark) !important; border-color: var(--btn-dark) !important; color: var(--btn-white) !important; }
         /* B5 */
@@ -2620,7 +2684,7 @@
             <a href="#home" class="nav-button">Home</a>
             <a href="#archive" class="nav-button">Archive</a>
             <a href="#work" class="nav-button">Work</a>
-            <a href="#contact" class="nav-button">Contact</a>
+            <a href="#contact" class="nav-button">Collaborate</a>
         </nav>
     </div>
 
@@ -3663,7 +3727,7 @@ I have a deep curiousity in harmonizing humanity and technology.`;
         const sectionTitles = [
             { id: 'archive-title', text: 'Archive' },
             { id: 'work-title', text: 'Work' },
-            { id: 'contact-title', text: 'Contact' }
+            { id: 'contact-title', text: 'Collaborate' }
         ];
 
         const animatedSections = new Set();
@@ -3834,6 +3898,14 @@ I have a deep curiousity in harmonizing humanity and technology.`;
                 if (contactContainerEl) {
                     gsap.set(contactContainerEl, { opacity: 1, y: 0 });
                 }
+                // Ensure the Collaborate title is wrapped and animated on entry
+                try {
+                    const titleEl = document.getElementById('contact-title');
+                    if (titleEl && !animatedSections.has('contact-title')) {
+                        wrapSectionTitleLetters(titleEl, 'Collaborate');
+                        typeSectionTitle({ id: 'contact-title', text: 'Collaborate' });
+                    }
+                } catch (_) {}
 
                 // Position so Contact title and form are fully in view beneath the fixed header
                 requestAnimationFrame(() => {
