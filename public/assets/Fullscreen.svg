@@ -11,10 +11,10 @@
       }
     </style>
   </defs>
-  <polyline class="st0" points="1.81 7.81 1.81 1.81 7.81 1.81"/>
+  <polyline class="st0" points="1.81 6.24 1.81 1.81 6.24 1.81"/>
+  <polyline class="st0" points="17.76 1.81 22.19 1.81 22.19 6.24"/>
+  <polyline class="st0" points="22.19 17.76 22.19 22.19 17.76 22.19"/>
+  <polyline class="st0" points="6.24 22.19 1.81 22.19 1.81 17.76"/>
   <path class="st0" d="M1.81,1.81l20.37,20.37"/>
   <path class="st0" d="M1.81,22.19L22.19,1.81"/>
-  <polyline class="st0" points="7.81 22.19 1.81 22.19 1.81 16.19"/>
-  <polyline class="st0" points="22.19 16.19 22.19 22.19 16.19 22.19"/>
-  <polyline class="st0" points="16.19 1.81 22.19 1.81 22.19 7.81"/>
 </svg>
