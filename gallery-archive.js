@@ -35,6 +35,14 @@ class GalleryArchive extends HTMLElement {
           --card-shadow: 0 8px 30px rgba(0,0,0,.08);
           --inner-bottom-fade: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,.08));
 
+          /* Unified icon color */
+          --icon-color: #3b3b3b;
+          /* Toggle thumb inset padding inside each column */
+          --thumb-inset: 3px;
+
+          /* Unified state fade duration */
+          --state-fade-dur: .30s;
+
           --filters-w: 640px; /* JS syncs this to search width */
 
           /* Drawer (inner filter menu) motion */
@@ -78,14 +86,15 @@ class GalleryArchive extends HTMLElement {
 
         .card, .sidebar, .searchbar, .filters, .filters-toggle,
         .pill, .option-pill, .item, .expander, .expander-close,
-        .result-item, .mode-toggle, .filters-head h4 {
+        .result-item, .mode-toggle, .filters-head h4, .fullscreen-btn {
           transition:
-            background-color .35s var(--ease),
-            color .35s var(--ease),
-            border-color .35s var(--ease),
-            box-shadow .35s var(--ease);
+            background-color var(--state-fade-dur) var(--ease),
+            color var(--state-fade-dur) var(--ease),
+            border-color var(--state-fade-dur) var(--ease),
+            box-shadow var(--state-fade-dur) var(--ease),
+            opacity var(--state-fade-dur) var(--ease);
         }
-        .mode-thumb { transition: transform .22s var(--ease), background-color .35s var(--ease); }
+        .mode-thumb { transition: transform .22s var(--ease), background-color var(--state-fade-dur) var(--ease), box-shadow var(--state-fade-dur) var(--ease); }
 
         @media (prefers-reduced-motion: reduce){
           * { transition: none !important; animation: none !important; }
@@ -157,7 +166,7 @@ class GalleryArchive extends HTMLElement {
           border-right: 1px solid #A2E633;
         }
         .search-icon svg{ width: var(--search-icon, 16px); height: var(--search-icon, 16px); }
-        .search-icon svg path{ stroke:#8a8f98; }
+        .search-icon svg path{ stroke: var(--icon-color); }
         .searchbar:focus-within .search-icon{
           background: rgba(162,230,51,0.25);
           border-right: 1px solid #A2E633;
@@ -174,12 +183,13 @@ class GalleryArchive extends HTMLElement {
           display: none; align-items: center; justify-content: center; cursor: pointer;
           transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1), border-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
         }
+        .search-clear{ color: var(--icon-color); }
         .searchbar.has-value .search-clear{ display:inline-flex; }
 
         .search-row .mode-toggle{ height: var(--search-h, var(--control-h)); }
 
         /* Toolbar wipe */
-        .toolbar{ grid-area: toolbar; }
+        .toolbar{ grid-area: toolbar; margin-top: calc(-1 * var(--gap)); }
         .toolbar-wipe{
           overflow: hidden;
           height: 0;
@@ -192,6 +202,8 @@ class GalleryArchive extends HTMLElement {
             opacity var(--wipe-fade-dur) var(--wipe-ease-open),
             transform var(--wipe-dur-open) var(--wipe-ease-open);
         }
+        /* Add visual gap only when expanded */
+        .toolbar-wipe.is-open{ margin-top: var(--gap); }
         .toolbar-wipe.is-open{
           opacity: 1;
           transform: none;
@@ -223,6 +235,11 @@ class GalleryArchive extends HTMLElement {
           background: transparent; color: var(--muted);
           display:inline-flex; align-items:center; justify-content:center; cursor:pointer;
         }
+        .fullscreen-btn:hover{ background: rgba(162,230,51,0.15); border-color: #A2E633; }
+        .card.dark .fullscreen-btn:hover{ background: rgba(162,230,51,0.18); border-color: #8DCB1F; }
+        .fullscreen-btn .fullscreen-icon{ width:32px; height:32px; object-fit:contain; display:block; filter: invert(1) brightness(0.76) invert(1); transition: filter var(--state-fade-dur) var(--ease), opacity var(--state-fade-dur) var(--ease); }
+        @media (max-width: 768px){ .fullscreen-btn .fullscreen-icon{ width:28px; height:28px; } }
+        
 
         /* Fullscreen layout adjustments */
         .card:fullscreen, .card:-webkit-full-screen{
@@ -259,7 +276,7 @@ class GalleryArchive extends HTMLElement {
 
         .filters-toggle{
           width:32px; height:28px; display:grid; place-items:center;
-          background:var(--panel-bg); color:var(--text);
+          background:var(--panel-bg); color: var(--icon-color);
           border:1px solid var(--border-strong);
           border-radius:var(--radius); cursor:pointer;
         }
@@ -333,21 +350,26 @@ class GalleryArchive extends HTMLElement {
         .filters-right .mode-toggle{ height: var(--filters-h, var(--control-h)); }
         .mode-thumb{
           position:absolute; z-index:1; pointer-events:none;
-          top:var(--switch-pad); left:var(--switch-pad);
+          top:var(--switch-pad);
+          left: calc(var(--switch-pad) + var(--thumb-inset));
           height: calc(100% - (2 * var(--switch-pad)));
-          width: var(--thumb-w, var(--switch-colW));
+          width: calc(var(--switch-colW) - (2 * var(--thumb-inset)));
           border-radius:var(--radius);
           background:var(--panel-bg);
           box-shadow:-2px 1px 2px rgba(0, 0, 0, .08) inset, 0 2px 6px rgba(0, 0, 0, .10);
           transform: translateX(0);
         }
-        .card.dark .mode-thumb{ transform: translateX(calc(var(--switch-colW) + var(--switch-gap))); }
+        .card.dark .mode-thumb{ transform: translateX(calc(var(--switch-colW) + var(--switch-gap))); background:#1e1e1e; box-shadow:-2px 1px 2px rgba(0,0,0,.25) inset, 0 2px 6px rgba(0,0,0,.35); }
         /* Prevent thumb from overshooting due to fractional rounding */
         @media (max-width: 768px){
           .mode-thumb{ will-change: transform; }
-          .card.dark .mode-thumb{ transform: translateX(calc(var(--switch-colW) + var(--switch-gap) - ((var(--switch-colW) - var(--thumb-w)) / 2))); }
+          .card.dark 
+          .mode-thumb{ transform: translateX(calc(var(--switch-colW) + var(--switch-gap))); }
         }
         .mode-label{ position:relative; z-index:2; display:flex; align-items:center; justify-content:center; font-weight:700; color:var(--text); }
+        .mode-label .mode-icon{ width:24px; height:24px; display:block; object-fit:contain; filter: invert(1) brightness(0.76) invert(1); transition: filter var(--state-fade-dur) var(--ease), opacity var(--state-fade-dur) var(--ease); }
+        @media (max-width: 768px){ .mode-label .mode-icon{ width:20px; height:20px; } }
+        /* Icons remain dark grey in dark mode per request */
 
         /* Sidebar & content */
         .sidebar{
@@ -405,13 +427,17 @@ class GalleryArchive extends HTMLElement {
 
         /* ===== Mobile responsiveness for gallery-archive (sidebar + header) ===== */
         @media (max-width: 768px){
+          :host{ --thumb-inset-mobile: 12px; }
+          /* Mobile: make thumb narrower and align further left */
+          .mode-thumb{ left: calc(var(--switch-pad) + var(--thumb-inset-mobile) - 10px); width: calc(var(--switch-colW) - (2 * var(--thumb-inset-mobile))); }
+          .card.dark .mode-thumb{ transform: translateX(calc(var(--switch-colW) + var(--switch-gap) - (2 * var(--thumb-inset-mobile)) + 4px)); }
           .card{ min-height:auto; }
           .card-body{ height:auto; }
           .sidebar{ width:100%; box-sizing:border-box; padding:8px 10px; overflow-x:hidden; }
           .section{ overflow-x:hidden; }
           .os-content{ overflow-x:hidden; }
           .fullscreen-btn{ display:none !important; }
-          .search-row{ grid-template-columns: minmax(0,1fr) auto; }
+          .search-row{ grid-template-columns: 1fr; }
           .filtersbar{ flex-direction: row; align-items: center; gap:8px; }
           .filters{ min-width:0; width:auto; max-width:100%; flex: 1 1 auto; }
           .filters-right{ flex: 0 0 auto; }
@@ -419,14 +445,17 @@ class GalleryArchive extends HTMLElement {
           .search-icon{ padding:10px 12px; }
           .searchbar input{ font-size: var(--search-fz); padding: 12px 14px; }
           .search-clear{ width:22px; height:22px; }
-          .mode-toggle{ width:120px; height:36px; --mode-w:120px; }
+          .mode-toggle{ width:100px; height:36px; --mode-w:100px; }
           .mode-label{ font-size:12px; }
           /* Keep list item fonts as-is per request */
         }
 
         /* Ultra-small devices (e.g., 320px width) */
         @media (max-width: 360px){
-          :host{ --pad:12px; --gap:8px; }
+          :host{ --pad:12px; --gap:8px; --thumb-inset-mobile: 14px; }
+          /* XS Mobile: even narrower/closer alignment */
+          .mode-thumb{ left: calc(var(--switch-pad) + var(--thumb-inset-mobile) - 12px); width: calc(var(--switch-colW) - (2 * var(--thumb-inset-mobile))); }
+          .card.dark .mode-thumb{ transform: translateX(calc(var(--switch-colW) + var(--switch-gap) - (2 * var(--thumb-inset-mobile)) + 4px)); }
           .card{ padding: var(--pad); }
           .sidebar{ padding:6px 8px; }
           .sidebar .os-host{ min-height:200px; }
@@ -434,7 +463,7 @@ class GalleryArchive extends HTMLElement {
           .search-icon{ padding:8px 10px; }
           .searchbar input{ font-size: var(--search-fz); padding: 10px 12px; }
           .search-clear{ width:20px; height:20px; }
-          .mode-toggle{ width:100px; height:32px; --mode-w:100px; }
+          .mode-toggle{ width:88px; height:32px; --mode-w:88px; }
           .mode-label{ font-size:11px; }
           .filters{ padding:8px; min-width:0; width:100%; max-width:100%; }
           .filters-head h4{ font-size:12px; }
@@ -523,6 +552,8 @@ class GalleryArchive extends HTMLElement {
         .card.dark .expander-close{
           background:rgba(20,20,20,.85); color:#fff; border-color: rgba(255,255,255,.25);
         }
+        .expander-close .close-icon{ width:20px; height:20px; display:block; filter: invert(1) brightness(0.76) invert(1); transition: filter var(--state-fade-dur) var(--ease), opacity var(--state-fade-dur) var(--ease); }
+        @media (max-width: 768px){ .expander-close .close-icon{ width:18px; height:18px; } }
 
         /* Mobile: list-only; viewer fills sidebar bounds */
         .mobile-viewer{
@@ -608,8 +639,8 @@ class GalleryArchive extends HTMLElement {
                   <div class="filters-right">
                     <button class="mode-toggle" id="modeToggle" type="button" role="switch" aria-checked="false" title="Toggle dark mode">
                       <div class="mode-thumb" aria-hidden="true"></div>
-                      <span class="mode-label">Light</span>
-                      <span class="mode-label">Dark</span>
+                      <span class="mode-label"><img class="mode-icon" src="Assets/Sun.svg" alt="Light" /></span>
+                      <span class="mode-label"><img class="mode-icon" src="Assets/Moon.svg" alt="Dark" /></span>
                     </button>
                   </div>
                 </div>
@@ -625,14 +656,18 @@ class GalleryArchive extends HTMLElement {
 
               <!-- Mobile full-size viewer in sidebar bounds -->
               <div class="mobile-viewer" id="mobileViewer" aria-hidden="true">
-                <button class="expander-close" id="mobileViewerClose" aria-label="Close">×</button>
+                <button class="expander-close" id="mobileViewerClose" aria-label="Close">
+                  <img class="close-icon" src="Assets/Close.svg" alt="Close" />
+                </button>
                 <img class="mobile-viewer-img" id="mobileViewerImg" alt="">
               </div>
             </aside>
 
             <section class="content" id="content">
               <div class="expander" id="expander">
-                <button class="expander-close" id="expanderClose" aria-label="Close">×</button>
+                <button class="expander-close" id="expanderClose" aria-label="Close">
+                  <img class="close-icon" src="Assets/Close.svg" alt="Close" />
+                </button>
                 <img class="expander-img" id="expanderImg" alt="">
               </div>
 
@@ -664,6 +699,19 @@ class GalleryArchive extends HTMLElement {
 
     const toolbarWipe = $('#toolbarWipe');
     const fullscreenBtn = $('#fullscreenBtn');
+    // Insert fullscreen icon into button; allow override via host attribute
+    try {
+      if (fullscreenBtn && !fullscreenBtn.querySelector('img.fullscreen-icon')) {
+        const iconUrl = root.host.getAttribute('fullscreen-icon') || 'Assets/Fullscreen.svg';
+        const img = document.createElement('img');
+        img.className = 'fullscreen-icon';
+        img.alt = 'Fullscreen';
+        img.decoding = 'async';
+        img.loading = 'lazy';
+        img.src = iconUrl;
+        fullscreenBtn.appendChild(img);
+      }
+    } catch(_) {}
 
     const filtersBlock = $('#filtersBlock');
     const filtersToggle = $('#filtersToggle');

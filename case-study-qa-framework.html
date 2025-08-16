@@ -168,6 +168,44 @@
             --lime-border: var(--brand-lime-600);
         }
 
+        /* Back arrow (nav-back) hover highlight: brand green, consistent with CTA */
+        .nav-back,
+        .gallery-arrow.nav-back,
+        .nav-back.gallery-arrow-style,
+        .gallery-arrow-style.nav-back {
+            transition: background-color var(--motion-slow) ease, border-color var(--motion-slow) ease, color var(--motion-slow) ease;
+        }
+        /* Default arrow icon color: ink */
+        .nav-back.gallery-arrow-style svg,
+        .gallery-arrow.nav-back svg { color: var(--ink-950) !important; }
+        .nav-back.gallery-arrow-style svg path,
+        .nav-back.gallery-arrow-style svg line,
+        .gallery-arrow.nav-back svg path,
+        .gallery-arrow.nav-back svg line { stroke: var(--ink-950) !important; }
+        .nav-back:hover,
+        .nav-back:focus-visible,
+        .gallery-arrow.nav-back:hover,
+        .gallery-arrow.nav-back:focus-visible,
+        .nav-back.gallery-arrow-style:hover,
+        .nav-back.gallery-arrow-style:focus-visible {
+            background-color: rgba(162, 230, 51, 0.15) !important;
+            border-color: var(--btn-lime-border) !important;
+            color: var(--ink-950) !important; /* keep arrow icon in ink */
+        }
+        /* Ensure embedded SVGs stay ink on hover */
+        .nav-back.gallery-arrow-style:hover svg,
+        .nav-back.gallery-arrow-style:focus-visible svg,
+        .gallery-arrow.nav-back:hover svg,
+        .gallery-arrow.nav-back:focus-visible svg { color: var(--ink-950) !important; }
+        .nav-back.gallery-arrow-style:hover svg path,
+        .nav-back.gallery-arrow-style:hover svg line,
+        .nav-back.gallery-arrow-style:focus-visible svg path,
+        .nav-back.gallery-arrow-style:focus-visible svg line,
+        .gallery-arrow.nav-back:hover svg path,
+        .gallery-arrow.nav-back:hover svg line,
+        .gallery-arrow.nav-back:focus-visible svg path,
+        .gallery-arrow.nav-back:focus-visible svg line { stroke: var(--ink-950) !important; }
+
         /* Dark mode removed */
 
         /* =================================

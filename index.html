@@ -471,7 +471,9 @@
             padding: 60px 0;
             margin-bottom: 0;
             box-sizing: border-box;
+            perspective: 1000px; /* enable 3D depth for convex transitions */
         }
+        .section .section-content { transform-style: preserve-3d; }
 
         /* Archive section removed */
 
@@ -777,7 +779,7 @@
             border-radius: 8px;
             overflow: hidden;
             position: relative;
-            height: 58vh;
+            height: 60vh;
             width: 100%;
             will-change: transform, opacity;
         }
@@ -2137,6 +2139,10 @@
         /* Ensure background video fills and stays behind content */
         .gallery-card { position: relative; overflow: hidden; }
         .gallery-bg-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; pointer-events: none; }
+        /* Consistent control button height across viewports */
+        .gallery-arrow,
+        .gallery-global-cta,
+        .gallery-cta { height: 36px; min-height: 36px; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; }
         /* Ensure background video fits within the slide/card bounds */
         .gallery-slide .gallery-bg-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
         /* Ensure active slide stacks above others and only its video is visible */
@@ -2169,7 +2175,7 @@
             }
 
             .gallery-card {
-                height: 48vh;
+                height: 50vh;
             }
 
             .gallery-slide {
@@ -2490,8 +2496,8 @@
 <body>
     <!-- Simple page preloader -->
     <div id="preloader" style="position:fixed;inset:0;z-index:9999;background:var(--bg-color,#ffffff);display:flex;align-items:center;justify-content:center;opacity:1;transition:opacity .4s ease">
-        <div class="preloader-bar" style="width:min(560px,80vw);height:4px;background:linear-gradient(90deg,#cbd5e1,#9ca3af);border-radius:999px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)">
-            <div id="preloader-thumb" style="height:100%;width:0%;background:#d1d5db;transition:width .5s cubic-bezier(.22,.7,.2,1)"></div>
+        <div class="preloader-bar" style="width:min(560px,80vw);height:4px;background:linear-gradient(90deg,#e5e7eb,#d1d5db);border-radius:999px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)">
+            <div id="preloader-thumb" style="height:100%;width:0%;background:#e5e7eb;transition:width .5s cubic-bezier(.22,.7,.2,1)"></div>
         </div>
     </div>
     <!-- Global Clock Component Container -->
@@ -3028,6 +3034,62 @@ humanity and technology.`;
                 window.smoother = smoother;
             } catch (e) {
                 console.warn('ScrollSmoother init failed:', e);
+            }
+        })();
+
+        // Convex perspective section transitions
+        (function convexSectionTransitions(){
+            try {
+                const sections = document.querySelectorAll('.section');
+                sections.forEach((section, i) => {
+                    const content = section.querySelector('.section-content');
+                    if (!content) return;
+
+                    // Reset initial state for both outgoing and incoming motions
+                    gsap.set(content, { transformPerspective: 1000, transformOrigin: '50% 50%', z: 0 });
+
+                    // As this section scrolls out (past center), tilt/scale/fade away
+                    ScrollTrigger.create({
+                        trigger: section,
+                        start: 'top top',
+                        end: 'bottom top',
+                        scrub: true,
+                        onUpdate: self => {
+                            const p = self.progress; // 0→1 as section leaves viewport top
+                            const rotateX = gsap.utils.mapRange(0, 1, 0, 8, p); // slight tilt away
+                            const scale = gsap.utils.mapRange(0, 1, 1, 0.92, p);
+                            const opacity = gsap.utils.mapRange(0, 1, 1, 0.0, p);
+                            const translateZ = gsap.utils.mapRange(0, 1, 0, -120, p);
+                            gsap.to(content, { rotateX, scale, opacity, z: translateZ, overwrite: true, duration: 0 });
+                        }
+                    });
+
+                    // As next section enters, bring it forward to full presence
+                    const next = sections[i+1];
+                    if (next) {
+                        const nextContent = next.querySelector('.section-content');
+                        if (nextContent) {
+                            // Prepare incoming state once
+                            gsap.set(nextContent, { transformPerspective: 1000, rotateX: -4, scale: 0.97, z: -80, opacity: 0.0, transformOrigin: '50% 50%' });
+                            ScrollTrigger.create({
+                                trigger: next,
+                                start: 'top bottom',
+                                end: 'top top',
+                                scrub: true,
+                                onUpdate: self => {
+                                    const p = self.progress; // 0→1 as next reaches top
+                                    const rotateX = gsap.utils.mapRange(0, 1, -4, 0, p);
+                                    const scale = gsap.utils.mapRange(0, 1, 0.97, 1, p);
+                                    const opacity = gsap.utils.mapRange(0, 1, 0.0, 1, p);
+                                    const translateZ = gsap.utils.mapRange(0, 1, -80, 0, p);
+                                    gsap.to(nextContent, { rotateX, scale, opacity, z: translateZ, overwrite: true, duration: 0 });
+                                }
+                            });
+                        }
+                    }
+                });
+            } catch (e) {
+                console.warn('convexSectionTransitions failed', e);
             }
         })();
 
