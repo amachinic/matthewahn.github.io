@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#f0f0f0" id="theme-color-meta">
+	<title>Case Study - Universal Onboarding Application</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollToPlugin.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollSmoother.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/Draggable.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+	<script src="global-clock-component.js"></script>
+	<style>
+		@font-face {
+			font-family: 'Unica77LL';
+			src: url('public/typeface/UTypeface.woff') format('woff'),
+				 url('https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/typeface/UTypeface.woff') format('woff');
+			font-weight: 300;
+			font-style: normal;
+		}
+		@font-face {
+			font-family: 'Input';
+			src: url('public/typeface/ITypeface.woff') format('woff'),
+				 url('https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/typeface/ITypeface.woff') format('woff');
+			font-weight: 300;
+			font-style: normal;
+		}
+	</style>
+</head>
+<body>
+	<script>
+		// Keep CSS aligned with the QA framework case study by injecting its <style> at runtime
+		(async () => {
+			try {
+				const res = await fetch('case-study-qa-framework.html');
+				const text = await res.text();
+				const cssBlock = (text.match(/<style>[\s\S]*?<\/style>/i) || [])[0] || '';
+				if (cssBlock) {
+					const holder = document.createElement('div');
+					holder.innerHTML = cssBlock;
+					document.head.appendChild(holder.firstChild);
+				}
+			} catch (_) {}
+		})();
+	</script>
+
+	<div id="global-clock-container"></div>
+
+	<main id="content">
+		<section id="hero" class="section">
+			<div class="section-content">
+				<h1 class="type-h1">Universal Onboarding Application</h1>
+				<p class="type-body">This page is a 1:1 scaffold of our QA framework case study, with the title updated. Replace content with the onboarding application narrative while keeping the same interactions and layout.</p>
+			</div>
+		</section>
+
+		<section id="overview" class="section">
+			<div class="section-content">
+				<h2 class="type-h2">Overview</h2>
+				<p class="type-body">Outline the problem, goals, constraints, and audience for the universal onboarding application.</p>
+			</div>
+		</section>
+
+		<section id="details" class="section">
+			<div class="section-content">
+				<h2 class="type-h2">Implementation Details</h2>
+				<p class="type-body">Describe the architecture, flows, and UX patterns. All components and interactions mirror the QA framework template to ensure consistency.</p>
+			</div>
+		</section>
+	</main>
+
+	<script>
+		// Initialize Global Clock (identical behavior to other case studies)
+		(function initClock(){
+			try {
+				const globalClock = new GlobalClockComponent({
+					showNameDisplay: true,
+					hideLocationClock: true,
+					backLinkText: '← Back to Portfolio'
+				});
+				const style = document.createElement('style');
+				style.textContent = globalClock.getCSS();
+				document.head.appendChild(style);
+				const mount = document.getElementById('global-clock-container');
+				mount.innerHTML = globalClock.getHTML();
+				globalClock.init();
+			} catch (_) {}
+		})();
+
+		try { gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, ScrollSmoother); } catch(_) {}
+	</script>
+</body>
+</html>
