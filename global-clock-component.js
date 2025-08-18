@@ -88,6 +88,16 @@ class GlobalClockComponent {
                 padding: 10px 20px;
                 border-bottom: 1px solid var(--toggle-border-color);
             }
+            /* In scrolled state, let controls take remaining space and align right */
+            #clock-container.scrolled #controls-container {
+                position: static;
+                margin-left: auto;
+                display: flex;
+                justify-content: flex-end;
+                width: auto !important;
+                max-width: 100% !important;
+                flex: 1 1 auto;
+            }
             
             #clock-container > div:first-child {
                 display: flex;
@@ -210,7 +220,7 @@ class GlobalClockComponent {
                 left: 50%;
                 top: 50%;
                 transform: translate(-50%, -50%);
-                font-family: 'Input', monospace;
+                font-family: 'Input', Helvetica, sans-serif;
                 font-size: 14px;
                 color: var(--text-color);
                 opacity: 0;
@@ -256,8 +266,7 @@ class GlobalClockComponent {
                 width: auto !important;
                 height: 38px !important;
                 box-sizing: border-box !important;
-                flex-shrink: 0 !important;
-                flex-grow: 0 !important;
+                transition: width 0.3s ease, margin 0.3s ease;
             }
 
             /* Home Button */
@@ -277,11 +286,13 @@ class GlobalClockComponent {
 				position: relative;
 				border-radius: 8px;
 				white-space: nowrap;
-				width: 116px !important;
+				width: auto !important;
 				height: 38px !important;
 				box-sizing: border-box !important;
-				flex-shrink: 0 !important;
+				flex-shrink: 1 !important;
 				flex-grow: 0 !important;
+				min-width: 0 !important;
+				max-width: 100% !important;
 			}
 
             #home-button-container .blur-bg {
@@ -319,12 +330,14 @@ class GlobalClockComponent {
             }
 
             #contact-button {
-                padding: 0 20px !important;
-                font-family: 'Unica77LL', Arial, sans-serif !important;
+                padding: 0 12px !important;
+                font-family: 'Input', monospace !important;
                 font-size: 14px !important;
                 position: relative;
                 height: 36px !important;
-                min-width: 116px !important;
+                min-width: 0 !important;
+                width: auto !important;
+                max-width: none !important;
                 display: inline-flex;
                 justify-content: center;
                 align-items: center;
@@ -337,6 +350,9 @@ class GlobalClockComponent {
                 box-sizing: border-box !important;
                 flex-shrink: 0 !important;
                 flex-grow: 0 !important;
+                white-space: nowrap !important;
+                overflow: visible !important;
+                text-overflow: clip !important;
             }
 
             #home-button:hover,
@@ -365,7 +381,7 @@ class GlobalClockComponent {
 				z-index: 2;
 				white-space: nowrap !important;
 				font-weight: 500 !important;
-                font-family: 'Unica77LL', Arial, sans-serif !important;
+                font-family: 'Input', monospace !important;
 				font-size: 14px !important;
 				letter-spacing: 0 !important;
 				text-rendering: optimizeLegibility !important;
@@ -474,8 +490,19 @@ class GlobalClockComponent {
                     gap: 8px !important;
                     width: auto !important;
                     height: 26px !important;
-                    flex-shrink: 0 !important;
-                    flex-grow: 0 !important;
+                    position: static;
+                    margin-left: auto;
+                }
+                /* Mobile scrolled override: place controls in flow and align right */
+                #clock-container.scrolled #controls-container {
+                    position: static;
+                    right: auto;
+                    transform: none;
+                    margin-left: auto;
+                    width: auto !important;
+                    max-width: 100% !important;
+                    flex: 1 1 auto;
+                    justify-content: flex-end;
                 }
 
 				#home-button-container, #contact-button-container {
@@ -517,7 +544,7 @@ class GlobalClockComponent {
                 
                 /* Mobile adjustments for home page */
                 body.home-page #controls-container {
-                    width: 56px !important;
+                    width: auto !important;
                 }
             }
             
@@ -528,7 +555,7 @@ class GlobalClockComponent {
             
 			/* Adjust controls container when navigation buttons are hidden */
 			body.home-page #controls-container {
-                width: 76px !important;
+                width: auto !important;
             }
             
             /* Dark mode toggle removed */

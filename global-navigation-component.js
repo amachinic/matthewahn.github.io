@@ -145,6 +145,12 @@ class GlobalNavigationComponent {
         setTimeout(() => {
             this.addNavigationListeners();
             this.updateActiveNavigation();
+            // Ensure proper sizing after fonts/layout settle
+            const rerun = () => this.updateActiveNavigation();
+            try { if (document.fonts && document.fonts.ready) { document.fonts.ready.then(() => setTimeout(rerun, 0)); } } catch(_) {}
+            window.addEventListener('load', () => setTimeout(rerun, 0), { once: true });
+            setTimeout(rerun, 150);
+            setTimeout(rerun, 350);
         }, 100);
     }
 
@@ -156,10 +162,16 @@ class GlobalNavigationComponent {
         const slider = document.getElementById('nav-slider');
         
         if (activeButton) {
-            // Use offsetLeft for accurate positioning relative to the nav-bar
+            // Hug the active button's width precisely
             const left = activeButton.offsetLeft;
             const width = activeButton.offsetWidth;
-            
+            if (!width || width < 4) {
+                // Defer until fonts/layout have settled
+                slider.style.opacity = '0';
+                try { if (document.fonts && document.fonts.ready) { document.fonts.ready.then(() => this.updateNavSlider(activeButton)); } } catch(_) {}
+                requestAnimationFrame(() => this.updateNavSlider(activeButton));
+                return;
+            }
             slider.style.left = `${left}px`;
             slider.style.width = `${width}px`;
             slider.style.opacity = '1';
@@ -173,32 +185,54 @@ class GlobalNavigationComponent {
         // Don't update navigation during theme toggle or manual navigation
         if (this.isTogglingTheme || this.isManualNavigation) return;
 
-        const sections = document.querySelectorAll('.section');
-        const navButtons = document.querySelectorAll('.nav-button');
-        const headerOffset = 120; // Fixed header height
+        let sectionIds = (this.sections || []).map(s => s.id).filter(Boolean);
+        if (!sectionIds.length) {
+            sectionIds = Array.from(document.querySelectorAll('.section'))
+                .map(el => el.getAttribute('id'))
+                .filter(Boolean);
+        }
+        const navBarEl = document.getElementById('nav-bar');
+        const navButtons = navBarEl ? navBarEl.querySelectorAll('.nav-button') : document.querySelectorAll('.nav-button');
+        const headerEl = document.getElementById('clock-container');
+        const headerOffset = headerEl ? Math.max(0, Math.min(window.innerHeight, headerEl.getBoundingClientRect().height)) : 120;
         const currentScrollY = window.scrollY;
         const windowHeight = window.innerHeight;
         const documentHeight = document.documentElement.scrollHeight;
 
-        let currentSection = this.sections[0]?.id || 'hero'; // Default to first section
+        let currentSection = (sectionIds[0]) || 'home'; // Default to first detected section
         let activeButton = null;
 
         // Check if we're near the bottom of the page for better last section detection
         const isNearBottom = (currentScrollY + windowHeight) >= (documentHeight - 50);
 
-        sections.forEach((section, index) => {
-            const sectionTop = section.offsetTop - headerOffset; // Account for header offset
-            const sectionBottom = sectionTop + section.offsetHeight;
-            const sectionId = section.getAttribute('id');
-            const isLastSection = index === sections.length - 1;
-
-            // For the last section, activate when near bottom or when in normal range
+        // Pick the section with the largest visible portion within the viewport below header
+        let bestId = currentSection;
+        let bestVisible = -1;
+        sectionIds.forEach((id, index) => {
+            const section = document.getElementById(id);
+            if (!section) return;
+            const rect = section.getBoundingClientRect();
+            const vpTop = headerOffset;
+            const vpBottom = windowHeight;
+            const topClamped = Math.max(rect.top, vpTop);
+            const bottomClamped = Math.min(rect.bottom, vpBottom);
+            const visible = Math.max(0, bottomClamped - topClamped);
+            const sectionId = id;
+            const isLastSection = index === sectionIds.length - 1;
+            // Early contact/collaborate detection: if top enters within 25% below header, favor it
+            const entersEarly = (sectionId === 'contact') && (rect.top <= (headerOffset + windowHeight * 0.25));
             if (isLastSection && isNearBottom) {
-                currentSection = sectionId;
-            } else if (currentScrollY >= sectionTop && currentScrollY < sectionBottom) {
-                currentSection = sectionId;
+                bestId = sectionId;
+                bestVisible = Number.MAX_SAFE_INTEGER;
+            } else if (entersEarly) {
+                bestId = sectionId;
+                bestVisible = Number.MAX_SAFE_INTEGER - 1;
+            } else if (visible > bestVisible) {
+                bestVisible = visible;
+                bestId = sectionId;
             }
         });
+        currentSection = bestId;
 
         // Update navigation buttons and find active button
         navButtons.forEach(button => {

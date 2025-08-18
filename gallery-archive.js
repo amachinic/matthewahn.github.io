@@ -59,6 +59,7 @@ class GalleryArchive extends HTMLElement {
           --wipe-ease-close: cubic-bezier(.4,.14,.3,1);
           --wipe-fade-dur: .26s;
           display:block;
+          font-family: 'Unica77LL', Helvetica, sans-serif;
         }
 
         .card.dark{
@@ -82,7 +83,7 @@ class GalleryArchive extends HTMLElement {
         .card.dark .searchbar input::placeholder{ color:#9aa0a6; }
 
         *{ box-sizing:border-box }
-        .section{ width:100%; padding:24px; overflow:visible; background:transparent; color:inherit; font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
+        .section{ width:100%; padding:24px; overflow:visible; background:transparent; color:inherit; font:16px/1.45 'Unica77LL', Helvetica, sans-serif; }
 
         .card, .sidebar, .searchbar, .filters, .filters-toggle,
         .pill, .option-pill, .item, .expander, .expander-close,
@@ -173,7 +174,7 @@ class GalleryArchive extends HTMLElement {
         }
         .searchbar input{
           appearance:none; border:0; outline:0; background:transparent; flex:1 1 auto; min-width:0;
-          padding:16px 20px; color:var(--text); font: inherit; font-size: var(--search-fz);
+          padding:16px 20px; color:var(--text); font-family:'Unica77LL', Arial, sans-serif; font-size: var(--search-fz);
           line-height:1.2;
         }
         /* Clear button like ui-search */
@@ -268,7 +269,7 @@ class GalleryArchive extends HTMLElement {
           display:grid; grid-template-columns: auto 1fr auto; align-items:center; gap:8px; min-width:0;
           min-height: var(--pill-sm-h);
         }
-        .filters-head h4{ margin:0; font-size:13px; font-weight:700; color:#374151; letter-spacing:.2px; white-space:nowrap; }
+        .filters-head h4{ margin:0; font-size:13px; font-weight:500; color:#374151; letter-spacing:.2px; white-space:nowrap; font-family:'Unica77LL', Helvetica, sans-serif; }
         .card.dark .filters-head h4{ color:#e2e2e2; }
 
         .head-slot{ display:flex; align-items:center; gap:8px; min-width:0; overflow:auto; scrollbar-width:none; }
@@ -290,8 +291,9 @@ class GalleryArchive extends HTMLElement {
           background:var(--chip-bg); color:var(--text);
           border:1px solid var(--border-strong);
           border-radius:var(--radius); cursor:pointer; white-space:nowrap;
+          font-family:'Unica77LL', Helvetica, sans-serif;
         }
-        .pill .x{ font-weight:800; opacity:.7; }
+        .pill .x{ font-weight:500; opacity:.7; }
         .pill-placeholder{ background:transparent; color:#6b7280; border:1px dashed var(--border-strong); }
         .pill-placeholder:hover{ background:var(--panel-alt); color:var(--text); border-style:solid; }
         .pill--compact{ height: var(--pill-sm-h); padding: 0 10px; font-size:13px; }
@@ -329,7 +331,7 @@ class GalleryArchive extends HTMLElement {
           display:inline-flex; align-items:center; gap:6px;
           padding:6px 10px; background:var(--chip-bg); color:var(--text);
           border:1px solid var(--border-strong);
-          border-radius:var(--radius); cursor:pointer; font-size:13px;
+          border-radius:var(--radius); cursor:pointer; font-size:13px; font-family:'Unica77LL', Helvetica, sans-serif;
         }
         .option-pill:hover{ background:var(--chip-hover); }
         .option-pill.is-selected{ background:var(--chip-selected); border-color:#cbd5e1; box-shadow:0 2px 10px rgba(0,0,0,.06) inset; }
@@ -366,7 +368,7 @@ class GalleryArchive extends HTMLElement {
           .card.dark 
           .mode-thumb{ transform: translateX(calc(var(--switch-colW) + var(--switch-gap))); }
         }
-        .mode-label{ position:relative; z-index:2; display:flex; align-items:center; justify-content:center; font-weight:700; color:var(--text); }
+        .mode-label{ position:relative; z-index:2; display:flex; align-items:center; justify-content:center; font-weight:500; color:var(--text); }
         .mode-label .mode-icon{ width:24px; height:24px; display:block; object-fit:contain; filter: invert(1) brightness(0.76) invert(1); transition: filter var(--state-fade-dur) var(--ease), opacity var(--state-fade-dur) var(--ease); }
         @media (max-width: 768px){ .mode-label .mode-icon{ width:20px; height:20px; } }
         /* Icons remain dark grey in dark mode per request */
@@ -389,7 +391,7 @@ class GalleryArchive extends HTMLElement {
         }
         .result-item:last-child{ border-bottom:0; }
         .result-item:hover{ background:var(--list-hover); }
-        .result-item .title{ font-size:13px; font-weight:700; color:#374151; }
+        .result-item .title{ font-size:13px; font-weight:500; color:#374151; font-family:'Unica77LL', Arial, sans-serif; }
         .card.dark .result-item .title{ color:#e2e2e2; }
         .result-item .desc{ font-size:12px; color:#6b7280; line-height:1.35;
                             display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
@@ -639,8 +641,8 @@ class GalleryArchive extends HTMLElement {
                   <div class="filters-right">
                     <button class="mode-toggle" id="modeToggle" type="button" role="switch" aria-checked="false" title="Toggle dark mode">
                       <div class="mode-thumb" aria-hidden="true"></div>
-                      <span class="mode-label"><img class="mode-icon" src="Assets/Sun.svg" alt="Light" /></span>
-                      <span class="mode-label"><img class="mode-icon" src="Assets/Moon.svg" alt="Dark" /></span>
+                      <span class="mode-label"><img class="mode-icon" src="https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/assets/Sun.svg" alt="Light" /></span>
+                      <span class="mode-label"><img class="mode-icon" src="https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/assets/Moon.svg" alt="Dark" /></span>
                     </button>
                   </div>
                 </div>
@@ -657,7 +659,7 @@ class GalleryArchive extends HTMLElement {
               <!-- Mobile full-size viewer in sidebar bounds -->
               <div class="mobile-viewer" id="mobileViewer" aria-hidden="true">
                 <button class="expander-close" id="mobileViewerClose" aria-label="Close">
-                  <img class="close-icon" src="Assets/Close.svg" alt="Close" />
+                  <img class="close-icon" src="https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/assets/Close.svg" alt="Close" />
                 </button>
                 <img class="mobile-viewer-img" id="mobileViewerImg" alt="">
               </div>
@@ -666,7 +668,7 @@ class GalleryArchive extends HTMLElement {
             <section class="content" id="content">
               <div class="expander" id="expander">
                 <button class="expander-close" id="expanderClose" aria-label="Close">
-                  <img class="close-icon" src="Assets/Close.svg" alt="Close" />
+                  <img class="close-icon" src="https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/assets/Close.svg" alt="Close" />
                 </button>
                 <img class="expander-img" id="expanderImg" alt="">
               </div>
@@ -702,7 +704,7 @@ class GalleryArchive extends HTMLElement {
     // Insert fullscreen icon into button; allow override via host attribute
     try {
       if (fullscreenBtn && !fullscreenBtn.querySelector('img.fullscreen-icon')) {
-        const iconUrl = root.host.getAttribute('fullscreen-icon') || 'Assets/Fullscreen.svg';
+        const iconUrl = root.host.getAttribute('fullscreen-icon') || 'https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/assets/Fullscreen.svg';
         const img = document.createElement('img');
         img.className = 'fullscreen-icon';
         img.alt = 'Fullscreen';
