@@ -432,10 +432,9 @@ class GalleryArchive extends HTMLElement {
         .grid{
           display:grid; gap:var(--gap);
           grid-template-columns: repeat(var(--cols), 1fr);
-          grid-template-rows: auto;
-          grid-auto-rows: auto;
+          /* let rows be fully intrinsic; do not force template rows */
           grid-auto-flow: row dense;
-          width:100%; height:100%;
+          width:100%; height:auto;
         }
 
         /* ===== Mobile responsiveness for gallery-archive (sidebar + header) ===== */
@@ -488,8 +487,7 @@ class GalleryArchive extends HTMLElement {
           position:relative; border-radius:0;
           border:0; background:transparent; cursor:pointer; overflow:hidden;
           transition: opacity .16s var(--ease), transform .16s var(--ease);
-          display:grid; place-items:center;
-          max-height: var(--tile-max-h);
+          display:block;
         }
         /* Selection flash (subtle lime fade-in/out) */
         @keyframes selectFlash{
@@ -517,7 +515,7 @@ class GalleryArchive extends HTMLElement {
         .card.dark .item:hover{ box-shadow:none; }
 
         .thumb{
-          max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; display:block;
+          width:100%; height:auto; object-fit:contain; display:block;
           opacity:0; transform: scale(1);
           transition: opacity .38s var(--ease), transform .38s var(--ease);
           will-change: opacity, transform;
@@ -890,6 +888,19 @@ class GalleryArchive extends HTMLElement {
         id: 4,
         src: 'https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/assets/Hardcover_6.png',
         title: 'Untitled 0.4',
+        desc: ''
+      },
+      {
+        id: 5,
+        src: 'https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/assets/kinetic%20typography.mp4',
+        title: 'Untitled 0.5',
+        desc: '',
+        type: 'video'
+      },
+      {
+        id: 6,
+        src: 'https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/assets/FINAL-APP.gif',
+        title: 'Untitled 0.6',
         desc: ''
       }
     ];
