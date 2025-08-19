@@ -2893,11 +2893,14 @@ humanity and technology.`;
                     
                     descriptionIndex++;
                     
-                    // Trigger gallery fade-in right after the first sentence finishes
-                    const firstPeriodIndex = currentDescriptionText.indexOf('.');
-                    if (firstPeriodIndex !== -1 && descriptionIndex >= firstPeriodIndex + 1 && !galleryTriggered) {
-                        galleryTriggered = true;
-                        triggerGalleryFadeIn();
+                    // Dramatic gallery reveal once the word "engineer" is fully typed
+                    const engineerIndex = currentDescriptionText.indexOf('engineer');
+                    if (engineerIndex !== -1 && !galleryTriggered) {
+                        const engineerEnd = engineerIndex + 'engineer'.length;
+                        if (descriptionIndex >= engineerEnd) {
+                            galleryTriggered = true;
+                            triggerGalleryFadeIn();
+                        }
                     }
                     
                     typeDescription();
@@ -2939,6 +2942,8 @@ humanity and technology.`;
         function scrambleNearby(e) {
             const greetingSpans = introGreeting.querySelectorAll('span');
             const descriptionSpans = introDescription.querySelectorAll('span');
+            const contactGreetingSpans = contactGreetingEl ? contactGreetingEl.querySelectorAll('span') : [];
+            const contactDescriptionSpans = contactDescriptionEl ? contactDescriptionEl.querySelectorAll('span') : [];
 
             const rect = e.currentTarget.getBoundingClientRect();
             const mouseX = e.clientX - rect.left;
@@ -2981,6 +2986,42 @@ humanity and technology.`;
                     }
                 });
             }
+
+            // Contact greeting scramble
+            if (isContactGreetingComplete && contactGreetingSpans.length) {
+                contactGreetingSpans.forEach(span => {
+                    const spanRect = span.getBoundingClientRect();
+                    const spanX = spanRect.left - rect.left + spanRect.width / 2;
+                    const spanY = spanRect.top - rect.top + spanRect.height / 2;
+                    const distance = Math.sqrt(Math.pow(mouseX - spanX, 2) + Math.pow(mouseY - spanY, 2));
+                    if (distance < 15 && span.dataset.char !== '.') {
+                        span.textContent = getRandomChar();
+                        span.classList.add('scrambled');
+                    } else {
+                        const originalChar = span.dataset.char;
+                        span.innerHTML = originalChar === ' ' ? '&nbsp;' : originalChar;
+                        span.classList.remove('scrambled');
+                    }
+                });
+            }
+
+            // Contact description scramble
+            if (isContactDescriptionComplete && contactDescriptionSpans.length) {
+                contactDescriptionSpans.forEach(span => {
+                    const spanRect = span.getBoundingClientRect();
+                    const spanX = spanRect.left - rect.left + spanRect.width / 2;
+                    const spanY = spanRect.top - rect.top + spanRect.height / 2;
+                    const distance = Math.sqrt(Math.pow(mouseX - spanX, 2) + Math.pow(mouseY - spanY, 2));
+                    if (distance < 15 && span.dataset.char !== '.') {
+                        span.textContent = getRandomChar();
+                        span.classList.add('scrambled');
+                    } else {
+                        const originalChar = span.dataset.char;
+                        span.innerHTML = originalChar === ' ' ? '&nbsp;' : originalChar;
+                        span.classList.remove('scrambled');
+                    }
+                });
+            }
         }
 
         function revertText() {
@@ -2996,6 +3037,24 @@ humanity and technology.`;
             if (isDescriptionComplete) {
                 const descriptionSpans = introDescription.querySelectorAll('span');
                 descriptionSpans.forEach(span => {
+                    const originalChar = span.dataset.char;
+                    span.innerHTML = originalChar === ' ' ? '&nbsp;' : originalChar;
+                    span.classList.remove('scrambled');
+                });
+            }
+
+            // Reset contact spans back to original
+            if (isContactGreetingComplete && contactGreetingEl) {
+                const spans = contactGreetingEl.querySelectorAll('span');
+                spans.forEach(span => {
+                    const originalChar = span.dataset.char;
+                    span.innerHTML = originalChar === ' ' ? '&nbsp;' : originalChar;
+                    span.classList.remove('scrambled');
+                });
+            }
+            if (isContactDescriptionComplete && contactDescriptionEl) {
+                const spans = contactDescriptionEl.querySelectorAll('span');
+                spans.forEach(span => {
                     const originalChar = span.dataset.char;
                     span.innerHTML = originalChar === ' ' ? '&nbsp;' : originalChar;
                     span.classList.remove('scrambled');
@@ -3020,6 +3079,13 @@ humanity and technology.`;
                 });
             }
         }, { once: true });
+
+        // Contact hover handling (mirror intro)
+        const contactSectionEl = document.getElementById('contact');
+        if (contactSectionEl) {
+            contactSectionEl.addEventListener('mousemove', scrambleNearby);
+            contactSectionEl.addEventListener('mouseleave', revertText);
+        }
 
 
 
@@ -3258,9 +3324,10 @@ humanity and technology.`;
                 opacity: 1,
                 y: 0,
                 scale: 1,
-                duration: 1.4,
-                ease: "power2.out",
-                delay: 0.2
+                filter: 'blur(0px)',
+                duration: 1.8,
+                ease: "power3.out",
+                delay: 0.15
             });
         }
 
@@ -3805,18 +3872,8 @@ I have a deep curiousity in harmonizing humanity and technology.`;
         });
         
         if (galleryCard) {
-            gsap.set(galleryCard, { opacity: 0, y: 10 });
-            // Fade in after 1 second from page load
-            setTimeout(() => {
-                try {
-                    gsap.to(galleryCard, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
-                } catch (_) {
-                    // Fallback without GSAP
-                    galleryCard.style.transition = 'opacity .6s ease, transform .6s ease';
-                    galleryCard.style.opacity = '1';
-                    galleryCard.style.transform = 'translateY(0)';
-                }
-            }, 1000);
+            // Prepare for dramatic fade-in later (after "engineer" is typed)
+            gsap.set(galleryCard, { opacity: 0, y: 24, scale: 0.96, filter: 'blur(10px)' });
         }
 
         // Preloader: brief delay to ensure it paints first, then simulate progress until DOM ready or max timeout
@@ -3907,6 +3964,8 @@ I have a deep curiousity in harmonizing humanity and technology.`;
         // Contact typing sequence mirroring home intro
         let contactGreetingIndex = 0;
         let contactDescriptionIndex = 0;
+        let isContactGreetingComplete = false;
+        let isContactDescriptionComplete = false;
         function typeContactGreeting() {
             const spans = contactGreetingEl ? contactGreetingEl.querySelectorAll('span') : [];
             if (!spans.length) return;
@@ -3915,6 +3974,7 @@ I have a deep curiousity in harmonizing humanity and technology.`;
                 contactGreetingIndex++;
                 setTimeout(typeContactGreeting, 30);
             } else {
+                isContactGreetingComplete = true;
                 setTimeout(typeContactDescription, 400);
             }
         }
@@ -3926,6 +3986,8 @@ I have a deep curiousity in harmonizing humanity and technology.`;
                 spans[contactDescriptionIndex].style.opacity = '1';
                 contactDescriptionIndex++;
                 setTimeout(typeContactDescription, 24);
+            } else {
+                isContactDescriptionComplete = true;
             }
         }
         
