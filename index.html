@@ -375,6 +375,7 @@
             line-height: 1.2;
             margin-bottom: 18px;
             display: block;
+            letter-spacing: -0.03em;
         }
         #intro-description {
             font-size: 18px;
@@ -4139,6 +4140,20 @@ I have a deep curiousity in harmonizing humanity and technology.`;
 
         // Auto-advance removed - gallery is now fully manual
         
+        // Safety: ensure greeting/description spans exist and are hidden before typing
+        if (introGreeting && introGreeting.childElementCount === 0) {
+            introGreeting.innerHTML = greetingText.split('').map(char =>
+                char === ' ' ? `<span data-char="${char}" style="opacity: 0;">&nbsp;</span>` : `<span data-char="${char}" style="opacity: 0;">${char}</span>`
+            ).join('');
+        }
+        if (introDescription && introDescription.childElementCount === 0) {
+            const currentDescriptionText = window.descriptionText || descriptionText;
+            introDescription.innerHTML = currentDescriptionText.split('').map(char => {
+                if (char === '\n') return '<br>';
+                return char === ' ' ? `<span data-char="${char}" style="opacity: 0;">&nbsp;</span>` : `<span data-char="${char}" style="opacity: 0;">${char}</span>`;
+            }).join('');
+        }
+
         // Reset animation state and start greeting
         greetingIndex = 0;
         descriptionIndex = 0;
