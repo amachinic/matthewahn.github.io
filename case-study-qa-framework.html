@@ -283,6 +283,11 @@
         
         /* Mobile Typography */
         @media (max-width: 768px) {
+            .meta-label,
+            .annotation-label,
+            .type-label,
+            .type-caption,
+            .ui-label { letter-spacing: 0.03em; }
             .type-h1 {
                 font-size: 40px;
             }
@@ -311,6 +316,11 @@
         
         /* Extra Small Mobile Typography */
         @media (max-width: 480px) {
+            .meta-label,
+            .annotation-label,
+            .type-label,
+            .type-caption,
+            .ui-label { letter-spacing: 0.04em; }
             .type-h1 {
                 font-size: 32px;
             }
@@ -591,6 +601,7 @@
             font-family: "Akz", sans-serif;
             font-size: 64px; /* type-h1 */
             font-weight: 500;
+            letter-spacing: -0.04em;
             color: var(--text-color);
             margin: 0;
             line-height: 1.2;
@@ -662,6 +673,10 @@
             font-size: 14px; /* type-body */
             font-weight: 400;
             color: var(--text-color);
+            font-kerning: normal;
+            font-feature-settings: 'kern' 1;
+            text-rendering: optimizeLegibility;
+            letter-spacing: 0.02em;
         }
 
         /* Meta value extends H3 typography */
@@ -2661,6 +2676,18 @@ body .triage-component-container .custom-enhanced-dropdown.open .custom-dropdown
         .description-section > .ui-input > .ui-label {
             width: fit-content !important;
             display: inline-block !important;
+        }
+
+        /* UI field labels - consistent micro-typography */
+        .ui-label {
+            font-family: var(--font-sans);
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            font-kerning: normal;
+            font-feature-settings: 'kern' 1;
+            text-rendering: optimizeLegibility;
         }
 
         /* Removed all .defect-dropdown and .severity-dropdown CSS garbage - we only use custom dropdowns now */
@@ -4717,6 +4744,10 @@ font-family: " Akz", sans-serif;
 font-family: " Akz", sans-serif;
             font-size: clamp(32px, 5vw, 56px); /* between type-h2 and type-h1 */
             font-weight: 500;
+            font-kerning: normal;
+            font-feature-settings: 'kern' 1;
+            text-rendering: optimizeLegibility;
+            letter-spacing: -0.04em;
             margin-bottom: 40px; /* consistent space between title and content */
             opacity: 0;
             transform: translateY(30px);
@@ -4794,6 +4825,7 @@ font-family: " Akz", sans-serif;
 font-family: " Akz", sans-serif;
             font-size: clamp(32px, 5vw, 56px); /* Consistent with other section titles */
             font-weight: 500;
+            letter-spacing: -0.04em;
             color: var(--text-color);
             margin: 0 0 40px 0;
             text-align: left;
@@ -6020,6 +6052,7 @@ font-family: " Akz", sans-serif;
             padding: 0;
             width: max-content;
             animation: impactMarqueeLeft 35s linear infinite;
+            font-family: 'Input', monospace !important;
         }
 
         .impact-marquee-content.reverse { animation: impactMarqueeRight 35s linear infinite; }
@@ -6055,7 +6088,7 @@ font-family: " Akz", sans-serif;
             height: 36px;
             padding: 0 20px;
             border-radius: 999px;
-font-family: " Akz", sans-serif;
+            font-family: 'Input', monospace;
             font-size: 14px;
             font-weight: 500;
             white-space: nowrap;
@@ -6063,6 +6096,8 @@ font-family: " Akz", sans-serif;
             text-transform: none;
             transition: background var(--motion-ms) var(--ease-smooth), border-color var(--motion-ms) var(--ease-smooth), color var(--motion-ms) var(--ease-smooth);
         }
+        /* Ensure impact pills use Input in all themes */
+        .impact-pill { font-family: 'Input', monospace !important; }
         body:not([data-theme="dark"]) .impact-pill:hover {
             background: var(--btn-dark);
             border-color: var(--btn-dark);
@@ -7008,7 +7043,7 @@ font-family: " Akz", sans-serif;
         /* Word-by-word animation for hmw title */
         .hmw-animated-title {
             opacity: 1;
-            letter-spacing: -0.02em !important;
+            letter-spacing: -0.04em !important;
             line-height: 1.2 !important;
 
         }

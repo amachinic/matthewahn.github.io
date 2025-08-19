@@ -23,6 +23,31 @@
 		}
 		:root { --font-sans: "Akz", sans-serif; }
 		html, body, .section, .section * { font-family: var(--font-sans) !important; }
+
+		/* Section title kerning for readability */
+		.section-title {
+			font-kerning: normal;
+			font-feature-settings: 'kern' 1;
+			text-rendering: optimizeLegibility;
+			letter-spacing: -0.04em;
+		}
+
+		/* Project title, synopsis title, and HMW title tracking */
+		.project-title,
+		.synopsis-title,
+		.hmw-animated-title { letter-spacing: -0.04em; }
+
+		/* UI field labels - consistent micro-typography */
+		.ui-label {
+			font-family: var(--font-sans);
+			font-size: 12px;
+			font-weight: 500;
+			text-transform: uppercase;
+			letter-spacing: 0.02em;
+			font-kerning: normal;
+			font-feature-settings: 'kern' 1;
+			text-rendering: optimizeLegibility;
+		}
 	</style>
 </head>
 <body>
