@@ -3821,6 +3821,8 @@ I have a deep curiousity in harmonizing humanity and technology.`;
 
         // Initialize gallery on page load
         updateGallerySlide(0);
+        // Force-play the first slide's background video after init
+        setTimeout(() => { try { ensureActiveVideoPlaying(); } catch(_){} }, 50);
         
         // Set initial arrow visibility
         updateArrowVisibility();
