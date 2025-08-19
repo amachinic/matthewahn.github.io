@@ -14,19 +14,15 @@
 	<script src="global-clock-component.js"></script>
 	<style>
 		@font-face {
-			font-family: 'Unica77LL';
-			src: url('public/typeface/UTypeface.woff') format('woff'),
-				 url('https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/typeface/UTypeface.woff') format('woff');
-			font-weight: 300;
+			font-family: 'Akz';
+			src: url('https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/typeface/Akz.woff') format('woff'),
+				 url('public/typeface/Akz.woff') format('woff');
+			font-weight: 400;
 			font-style: normal;
+			font-display: swap;
 		}
-		@font-face {
-			font-family: 'Input';
-			src: url('public/typeface/ITypeface.woff') format('woff'),
-				 url('https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/typeface/ITypeface.woff') format('woff');
-			font-weight: 300;
-			font-style: normal;
-		}
+		:root { --font-sans: "Akz", sans-serif; }
+		html, body, .section, .section * { font-family: var(--font-sans) !important; }
 	</style>
 </head>
 <body>
@@ -93,3 +89,4 @@
 	</script>
 </body>
 </html>
+

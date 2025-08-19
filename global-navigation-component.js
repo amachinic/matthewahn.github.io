@@ -52,7 +52,7 @@ class GlobalNavigationComponent {
                 background: none;
                 border: none;
                 color: var(--text-color);
-                font-family: 'Unica77LL', Arial, sans-serif;
+                font-family: "Akz", sans-serif;
                 font-size: 12px;
                 font-weight: 400;
                 padding: 8px 14px;
