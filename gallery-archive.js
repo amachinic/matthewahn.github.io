@@ -119,7 +119,7 @@ class GalleryArchive extends HTMLElement {
 
         .card-body{
           position:relative; flex:1 1 auto; min-height:0;
-          height:720px; /* ensure grid rows have a definite height context */
+          height:auto; /* let content define height for dynamic stacking */
           display:grid; gap:var(--gap);
           grid-template-columns: var(--sidebar-w) repeat(var(--cols), 1fr);
           grid-template-rows: auto auto 1fr;
@@ -432,9 +432,10 @@ class GalleryArchive extends HTMLElement {
         .grid{
           display:grid; gap:var(--gap);
           grid-template-columns: repeat(var(--cols), 1fr);
-          /* let rows be fully intrinsic; do not force template rows */
+          grid-template-rows: auto;
+          grid-auto-rows: auto;
           grid-auto-flow: row dense;
-          width:100%; height:auto;
+          width:100%; height:auto; /* grow with content */
         }
 
         /* ===== Mobile responsiveness for gallery-archive (sidebar + header) ===== */
