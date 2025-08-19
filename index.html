@@ -2370,19 +2370,19 @@
         }
         #contact .contact-form {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-columns: repeat(8, 1fr);
             grid-template-rows: auto auto;
-            column-gap: 36px;
-            row-gap: 28px;
+            column-gap: 24px;
+            row-gap: 24px;
             align-items: stretch; /* allow spanning item to fill rows */
             justify-items: stretch;
             border-top: 1px solid var(--border-color);
         }
-        /* Grid placement */
-        #contact .contact-name { grid-column: 1; grid-row: 1; }
-        #contact .contact-email { grid-column: 2; grid-row: 1; }
-        #contact .contact-message { grid-column: 1 / span 2; grid-row: 2; }
-        #contact .contact-submit { grid-column: 3; grid-row: 1 / span 2; display: flex; }
+        /* Grid placement for 8-col layout (desktop) */
+        #contact .contact-name { grid-column: 1 / span 5; grid-row: 1; }
+        #contact .contact-email { grid-column: 1 / span 5; grid-row: 2; }
+        #contact .contact-message { grid-column: 1 / span 5; grid-row: 3; }
+        #contact .contact-submit { grid-column: 5 / span 4; grid-row: 1 / span 2; display: flex; }
         #contact .contact-submit .submit-button { width: 100%; height: 100%; min-height: 0; }
         #contact .form-row { display: contents; }
         /* form-group removed: grid spans handled by .ui-input */
@@ -2419,10 +2419,10 @@
             border-color: var(--border-focus);
         }
         #contact .form-field input:focus::placeholder, #contact .form-field textarea:focus::placeholder { opacity: 0; }
-        #contact .submit-group { grid-column: 1 / -1; border-bottom: none; position: relative; overflow: hidden; }
-        /* Ensure the submit CTA is in column 3 spanning both rows and fills height */
-        #contact .submit-group.contact-submit { grid-column: 3; grid-row: 1 / span 2; display: flex; align-items: stretch; height: 100%; align-self: stretch; }
-        #contact .submit-group.contact-submit .submit-button { width: 100%; height: 100% !important; min-height: 0 !important; }
+        #contact .submit-group { grid-column: auto; border-bottom: none; position: relative; overflow: hidden; }
+        /* Submit CTA spans columns 5-8 and rows 1-2 in desktop 8-col layout */
+        #contact .submit-group.contact-submit { grid-column: 6 / 9; grid-row: 1 / 4; display: flex; align-items: stretch; height: 100%; align-self: stretch; }
+        #contact .submit-group.contact-submit .submit-button { width: 100%; height: 95% !important; min-height: 0 !important; }
         #contact .submit-button.ui-btn[data-variant="b1"] {
             width: 100%;
             height: 56px;
@@ -2430,6 +2430,11 @@
             border-radius: 6px;
             font-size: 16px;
             letter-spacing: 0.5px;
+        }
+        /* Desktop: nudge submit group down to align with top of input fields (below labels)
+           and pull bottom up to align with bottom of message field (compensate row-gap) */
+        @media (min-width: 769px) {
+            #contact .submit-group.contact-submit { margin-top: 16px; }
         }
         /* Align submit button styling to search bar behavior */
         #contact .submit-button.ui-btn {
@@ -2646,19 +2651,19 @@
                     
                     <!-- Arrow Navigation - Inside gallery card -->
                     <div class="gallery-arrows">
-                        <button class="gallery-arrow gallery-arrow-left" id="gallery-prev">
+                        <button class="gallery-arrow gallery-arrow-left" id="gallery-prev" aria-label="Previous slide">
                             <svg width="42" height="42" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </button>
-                        <button class="gallery-arrow gallery-arrow-right" id="gallery-next">
+                        <button class="gallery-arrow gallery-arrow-right" id="gallery-next" aria-label="Next slide">
                             <svg width="42" height="42" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </button>
                     </div>
                     <!-- Global overlay CTA that mirrors the active slide's CTA -->
-                    <button class="gallery-global-cta ui-btn" data-variant="b4" aria-pressed="false">Explore</button>
+                    <button class="gallery-global-cta ui-btn" data-variant="b4" aria-pressed="false" aria-label="Explore current case study">Explore</button>
                 </div>
                 </div>
             </div>
@@ -2726,30 +2731,30 @@
             <div id="contact-greeting"></div>
             <div id="contact-description"></div>
             <div class="contact-container" style="max-width: none; width: 100%;">
-                <form id="contact-form" class="contact-form" style="width: 100%;">
+                <form id="contact-form" class="contact-form" style="width: 100%;" aria-labelledby="contact-greeting" aria-describedby="contact-description">
                         <div class="ui-input contact-name" data-variant="chip">
                             <label class="ui-label" for="name">Name</label>
                             <div class="ui-field">
-                                <input type="text" id="name" name="name" placeholder="Hello" required>
+                                <input type="text" id="name" name="name" placeholder="Hello" required aria-required="true" autocomplete="name">
                             </div>
                         </div>
                     
                         <div class="ui-input contact-email" data-variant="chip">
                             <label class="ui-label" for="email">Email</label>
                             <div class="ui-field">
-                                <input type="email" id="email" name="email" placeholder="you@site.com" required>
+                                <input type="email" id="email" name="email" placeholder="you@site.com" required aria-required="true" autocomplete="email">
                             </div>
                         </div>
                     
                         <div class="ui-input contact-message" data-variant="chip">
                             <label class="ui-label" for="message">Message</label>
                             <div class="ui-field">
-                                <textarea id="message" name="message" placeholder="Tell me about your project..." required></textarea>
+                                <textarea id="message" name="message" placeholder="Tell me about your project..." required aria-required="true" rows="5"></textarea>
                             </div>
                         </div>
                     
                     <div class="submit-group contact-submit">
-                        <button type="submit" class="submit-button ui-btn" data-variant="b1" aria-pressed="false">
+                        <button type="submit" class="submit-button ui-btn" data-variant="b1" aria-pressed="false" aria-label="Send message">
                             Send Message
                         </button>
                     </div>
@@ -2769,9 +2774,9 @@
 
     <!-- New navigation bar -->
     <div id="nav-container">
-        <nav id="nav-bar">
+        <nav id="nav-bar" aria-label="Primary">
             <div class="blur-bg"></div>
-            <div id="nav-slider"></div>
+            <div id="nav-slider" aria-hidden="true"></div>
             <a href="#home" class="nav-button">Home</a>
             <a href="#archive" class="nav-button">Archive</a>
             <a href="#work" class="nav-button">Work</a>
@@ -3946,6 +3951,9 @@ I have a deep curiousity in harmonizing humanity and technology.`;
         // Contact greeting/description typing (same behavior as home intro)
         const contactGreetingEl = document.getElementById('contact-greeting');
         const contactDescriptionEl = document.getElementById('contact-description');
+        if (contactGreetingEl) contactGreetingEl.setAttribute('role','heading');
+        if (contactGreetingEl) contactGreetingEl.setAttribute('aria-level','2');
+        if (contactDescriptionEl) contactDescriptionEl.setAttribute('aria-live','polite');
         const contactGreetingText = `Let's collaborate!`;
         const contactDescriptionText = `I'm open to projects of all scales and degrees of complexity. Let's make a connection!`;
 
@@ -4311,8 +4319,32 @@ I have a deep curiousity in harmonizing humanity and technology.`;
         // Start typing animation with greeting only
         typeGreeting();
 
-        // Also animate contact intro after initial load
-        setTimeout(() => { try { typeContactGreeting(); } catch(_){} }, 800);
+        // Trigger contact intro only when the contact form is visible in viewport
+        (function initContactTypingWhenVisible(){
+            const contactSection = document.getElementById('contact');
+            if (!contactSection) return;
+            let started = false;
+            function tryStart(){
+                if (started) return;
+                const rect = contactSection.getBoundingClientRect();
+                const header = document.getElementById('clock-container');
+                const headerH = header ? header.getBoundingClientRect().height : 0;
+                const vpTop = headerH;
+                const vpBottom = window.innerHeight;
+                const visible = Math.max(0, Math.min(rect.bottom, vpBottom) - Math.max(rect.top, vpTop));
+                const threshold = Math.min(rect.height, vpBottom - vpTop) * 0.35; // 35% visible
+                if (visible >= threshold) {
+                    started = true;
+                    try { typeContactGreeting(); } catch(_){}
+                    window.removeEventListener('scroll', tryStart);
+                    window.removeEventListener('resize', tryStart);
+                }
+            }
+            window.addEventListener('scroll', tryStart);
+            window.addEventListener('resize', tryStart);
+            // attempt once on load
+            tryStart();
+        })();
 
 
 
