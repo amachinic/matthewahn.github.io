@@ -27,7 +27,7 @@
             font-display: swap;
         }
 
-        :root { --font-sans: "Akz", sans-serif; }
+        :root { --font-sans: "Akz", sans-serif; --ls-tight: -0.05em; }
 
         .type-h1,
         .type-h2,
@@ -381,6 +381,7 @@
             font-size: 18px;
             line-height: 1.2;
             white-space: pre-wrap;
+            letter-spacing: var(--ls-tight);
         }
         /* Contact intro uses same styling as home intro */
         #contact-greeting {
@@ -401,6 +402,7 @@
             max-width: 100%;
             overflow-wrap: break-word;
             word-break: normal;
+            letter-spacing: var(--ls-tight);
         }
         #contact .section-content { overflow-x: hidden; }
 
@@ -2474,6 +2476,13 @@
             #contact .form-label { left: 14px; top: 16px; }
             /* Reduce large vertical gap by removing enforced min-height on Archive section */
             #archive.section { min-height: auto !important; }
+        }
+
+        /* Smaller viewports and shorter heights: reduce bottom spacing in Contact section */
+        @media (max-width: 768px), (max-height: 740px) {
+            #contact .section-content { padding-bottom: 16px !important; }
+            #contact .contact-container { margin-bottom: 24px !important; }
+            #contact #contact-description { margin-bottom: 24px !important; }
         }
         #contact .form-success { padding: 40px 20px; text-align: center; border: 1px solid var(--border-color); background: rgba(255,255,255,0.5); border-radius: 12px; margin-top: 16px; }
         #contact .form-success h3 { margin: 0 0 12px 0; font-family: "Akz", sans-serif;; font-size: 18px; font-weight: 500; }

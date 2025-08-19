@@ -29,6 +29,8 @@ class GalleryArchive extends HTMLElement {
 
           --sidebar-w: clamp(220px, 24vw, 320px);
           --cols:4;  --rows:3;
+          /* Allow explicit row height override to shrink thumbnails significantly */
+          --row-h-override: 120px;
 
           --row-h: calc((100% - (var(--rows) - 1) * var(--gap)) / var(--rows));
 
@@ -428,8 +430,8 @@ class GalleryArchive extends HTMLElement {
         .grid{
           display:grid; gap:var(--gap);
           grid-template-columns: repeat(var(--cols), 1fr);
-          grid-template-rows: repeat(var(--rows), var(--row-h));
-          grid-auto-rows: var(--row-h);
+          grid-template-rows: auto;
+          grid-auto-rows: auto;
           grid-auto-flow: row dense;
           width:100%; height:100%;
         }
@@ -481,11 +483,10 @@ class GalleryArchive extends HTMLElement {
         }
 
         .item{
-          position:relative; border-radius:var(--radius);
-          border:1px solid var(--border-strong);
-          background:var(--panel-bg); cursor:pointer; overflow:hidden;
-          transition:background .16s ease, border-color .16s ease, box-shadow .16s ease;
-          display:grid; place-items:center;
+          position:relative; border-radius:0;
+          border:0; background:transparent; cursor:pointer; overflow:hidden;
+          transition: opacity .16s var(--ease), transform .16s var(--ease);
+          display:block;
         }
         /* Selection flash (subtle lime fade-in/out) */
         @keyframes selectFlash{
@@ -509,12 +510,12 @@ class GalleryArchive extends HTMLElement {
         .grid.staggering .item{ opacity:0; transform: translateY(24px); }
         .grid.staggering .item.stagger-in{ animation: fadeUpItem .6s var(--ease) forwards; animation-delay: var(--stagger-delay, 0ms); }
         .item.fade-in{ animation: fadeUpItem .6s var(--ease) both; }
-        .item:hover{ background:var(--chip-hover); box-shadow:0 6px 16px rgba(0,0,0,.08); }
-        .card.dark .item:hover{ box-shadow:0 6px 16px rgba(0,0,0,.25); }
+        .item:hover{ background:transparent; box-shadow:none; }
+        .card.dark .item:hover{ box-shadow:none; }
 
         .thumb{
-          width:100%; height:100%; object-fit:cover; display:block;
-          opacity:0; transform: scale(.985);
+          width:100%; height:auto; object-fit:contain; display:block;
+          opacity:0; transform: scale(1);
           transition: opacity .38s var(--ease), transform .38s var(--ease);
           will-change: opacity, transform;
         }
@@ -542,14 +543,13 @@ class GalleryArchive extends HTMLElement {
 
         .expander{
           position:absolute; inset:0; display:none;
-          border:1px solid var(--border-strong);
-          border-radius:var(--radius);
+          border:0; border-radius:0;
           background:var(--panel-bg); box-shadow:0 10px 40px rgba(0,0,0,.15);
           overflow:hidden; z-index:10;
           opacity:0; transition: opacity .25s var(--ease);
         }
         .expander.open{ display:grid; place-items:center; opacity:1; }
-        .expander-img{ width:100%; height:100%; display:block; user-select:none; -webkit-user-drag:none; object-fit:contain; }
+        .expander-img{ width:auto; height:auto; max-width:100%; max-height:100%; display:block; user-select:none; -webkit-user-drag:none; object-fit:contain; }
         .expander-close{
           position:absolute; top:var(--pad); right:var(--pad); z-index:11;
           width:40px; height:40px; border-radius:var(--radius);
@@ -569,8 +569,7 @@ class GalleryArchive extends HTMLElement {
           position:absolute;
           z-index: 50;
           inset: 0;
-          border:1px solid var(--border-strong);
-          border-radius: var(--radius);
+          border:0; border-radius: 0;
           background: var(--panel-bg);
           box-shadow:0 10px 40px rgba(0,0,0,.15);
           display:none;
@@ -578,7 +577,7 @@ class GalleryArchive extends HTMLElement {
           transition: opacity .25s var(--ease);
         }
         .mobile-viewer.open{ display:grid; place-items:center; opacity:1; }
-        .mobile-viewer-img{ width:100%; height:100%; object-fit:contain; display:block; }
+        .mobile-viewer-img{ width:auto; height:auto; max-width:100%; max-height:100%; object-fit:contain; display:block; }
 
         @media (max-width: 768px){
           :host{ --sidebar-w: 100%; }
@@ -861,14 +860,35 @@ class GalleryArchive extends HTMLElement {
     });
 
     // ========= Data =========
-    const availableFilters = ['Architecture','Portrait','Nature','Abstract','Minimal','Urban','Macro','Night','Texture','Vibrant'];
-    const items = Array.from({length:24}, (_,i)=>({
-      id:i+1,
-      src:`https://picsum.photos/seed/${700+i}/1600/1200`,
-      title:`Item ${i+1}`,
-      desc:'Sample description text to demonstrate list layout.',
-      tags: (()=>{ const c=[...availableFilters]; c.sort(()=>Math.random()-0.5); return c.slice(0, Math.random()>0.5?2:1); })()
-    }));
+    const availableFilters = [];
+    // Replace items with provided assets only; titles as Untitled 0.x and no descriptions
+    const items = [
+      {
+        id: 1,
+        src: 'https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/assets/simone.mp4',
+        title: 'Untitled 0.1',
+        desc: '',
+        type: 'video'
+      },
+      {
+        id: 2,
+        src: 'https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/assets/The%20Hour%20of%20the%20Orchard%20Final2.jpg',
+        title: 'Untitled 0.2',
+        desc: ''
+      },
+      {
+        id: 3,
+        src: 'https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/assets/The%20Hour%20of%20the%20Orchard%20Final14.jpg',
+        title: 'Untitled 0.3',
+        desc: ''
+      },
+      {
+        id: 4,
+        src: 'https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/assets/Hardcover_6.png',
+        title: 'Untitled 0.4',
+        desc: ''
+      }
+    ];
 
     // ========= Overlay Scrollbars =========
     function makeOverlayScrollbar(host){
@@ -1289,9 +1309,29 @@ class GalleryArchive extends HTMLElement {
     // ========= Grid & list builders =========
     function gridItemEl(d){
       const el=document.createElement('article'); el.className='item loading fade-in'; el.dataset.id=d.id;
-      const img=document.createElement('img'); img.className='thumb';
-      img.alt=d.title||`Image ${d.id}`; img.loading='lazy'; img.decoding='async'; img.dataset.src=d.src;
-      el.append(img);
+      // Ensure items shrink-wrap height to media while filling width
+      el.style.display = 'block';
+      el.style.placeItems = '';
+      el.style.height = 'auto';
+      const isVideo = /\.(mp4|webm|ogg)(\?|$)/i.test(d.src) || d.type === 'video';
+      if (isVideo) {
+        const video = document.createElement('video');
+        video.className = 'thumb';
+        video.muted = true; video.loop = true; video.playsInline = true; video.autoplay = true;
+        video.src = d.src;
+        video.style.objectFit = 'contain';
+        video.style.width = '100%';
+        video.style.height = 'auto';
+        video.addEventListener('loadeddata', ()=>{ el.classList.remove('loading'); video.classList.add('is-loaded'); });
+        el.append(video);
+      } else {
+        const img=document.createElement('img'); img.className='thumb';
+        img.alt=d.title||`Image ${d.id}`; img.loading='lazy'; img.decoding='async'; img.dataset.src=d.src;
+        img.style.objectFit = 'contain';
+        img.style.width = '100%';
+        img.style.height = 'auto';
+        el.append(img);
+      }
       el.addEventListener('click',()=>{
         try{
           el.classList.remove('select-flash');
@@ -1304,17 +1344,12 @@ class GalleryArchive extends HTMLElement {
       return el;
     }
     function applySpansToGrid(gridEl){
-      const COLS=4;
-      const MOSAIC_PATTERNS=[
-        {w:1,h:1,weight:58},{w:2,h:1,weight:14},{w:1,h:2,weight:12},
-        {w:2,h:2,weight:10},{w:3,h:1,weight:4},{w:1,h:3,weight:2}
-      ];
-      const total = MOSAIC_PATTERNS.reduce((a,p)=>a+p.weight,0);
-      function pick(){ let r=Math.random()*total; for(const p of MOSAIC_PATTERNS){ if((r-=p.weight)<=0) return p; } return MOSAIC_PATTERNS[0]; }
-      const spans=[...gridEl.children].map(()=>{ let {w,h}=pick(); if(w>COLS) w=COLS; return {w,h}; });
-      [...gridEl.children].forEach((child,idx)=>{ const s=spans[idx];
-        child.style.gridColumn=`span ${s.w}`; child.style.gridRow=`span ${s.h}`;
-        child.dataset.w=s.w; child.dataset.h=s.h; });
+      // With contain sizing and full-image display, use 1x1 spans so tiles hug media
+      [...gridEl.children].forEach((child)=>{
+        child.style.gridColumn = 'span 1';
+        child.style.gridRow = 'auto';
+        child.dataset.w = 1; child.dataset.h = 1;
+      });
     }
 
     // Staggered fade-up animation: top-to-bottom, then left-to-right
@@ -1428,28 +1463,64 @@ class GalleryArchive extends HTMLElement {
 
     // ========= Desktop expander =========
     function openExpander(d){
-      expander.classList.add('open'); expanderImg.style.opacity='0';
-      expanderImg.onload=()=>{ expanderImg.style.opacity='1'; };
-      expanderImg.src=d.src; expanderImg.alt=d.title||'';
+      expander.classList.add('open');
+      const isVideo = /\.(mp4|webm|ogg)(\?|$)/i.test(d.src) || d.type === 'video';
+      // Remove any previous video
+      const prevVid = expander.querySelector('#expanderVideo'); if (prevVid) prevVid.remove();
+      if (isVideo) {
+        expanderImg.removeAttribute('src'); expanderImg.removeAttribute('alt');
+        expanderImg.style.display = 'none';
+        const v = document.createElement('video');
+        v.id = 'expanderVideo'; v.controls = true; v.autoplay = true; v.loop = true; v.playsInline = true;
+        v.style.width = '100%'; v.style.height = '100%'; v.style.objectFit = 'contain';
+        v.src = d.src;
+        expander.appendChild(v);
+      } else {
+        expanderImg.style.display = '';
+        expanderImg.style.opacity='0';
+        expanderImg.onload=()=>{ expanderImg.style.opacity='1'; };
+        expanderImg.src=d.src; expanderImg.alt=d.title||'';
+      }
     }
-    function closeExpander(){ expander.classList.remove('open'); expanderImg.removeAttribute('src'); expanderImg.removeAttribute('alt'); }
+    function closeExpander(){
+      expander.classList.remove('open');
+      const prevVid = expander.querySelector('#expanderVideo'); if (prevVid) prevVid.remove();
+      expanderImg.removeAttribute('src'); expanderImg.removeAttribute('alt');
+      expanderImg.style.display = '';
+    }
     expanderClose.addEventListener('click', closeExpander);
     expander.addEventListener('click', e=>{ if(e.target===expander) closeExpander(); });
 
     // ========= Mobile viewer =========
     function openMobileViewer(d){
-      mobileViewerImg.style.opacity='0';
-      mobileViewerImg.onload = ()=>{ mobileViewerImg.style.opacity='1'; };
-      mobileViewerImg.src = d.src;
-      mobileViewerImg.alt = d.title || '';
+      const isVideo = /\.(mp4|webm|ogg)(\?|$)/i.test(d.src) || d.type === 'video';
+      // Remove any previous video
+      const prevVid = mobileViewer.querySelector('#mobileViewerVideo'); if (prevVid) prevVid.remove();
+      if (isVideo) {
+        mobileViewerImg.removeAttribute('src'); mobileViewerImg.removeAttribute('alt');
+        mobileViewerImg.style.display='none';
+        const v = document.createElement('video');
+        v.id = 'mobileViewerVideo'; v.controls = true; v.autoplay = true; v.loop = true; v.playsInline = true;
+        v.style.width = '100%'; v.style.height = '100%'; v.style.objectFit = 'contain';
+        v.src = d.src;
+        mobileViewer.appendChild(v);
+      } else {
+        mobileViewerImg.style.display='';
+        mobileViewerImg.style.opacity='0';
+        mobileViewerImg.onload = ()=>{ mobileViewerImg.style.opacity='1'; };
+        mobileViewerImg.src = d.src;
+        mobileViewerImg.alt = d.title || '';
+      }
       mobileViewer.classList.add('open');
       mobileViewer.setAttribute('aria-hidden','false');
     }
     function closeMobileViewer(){
       mobileViewer.classList.remove('open');
       mobileViewer.setAttribute('aria-hidden','true');
+      const prevVid = mobileViewer.querySelector('#mobileViewerVideo'); if (prevVid) prevVid.remove();
       mobileViewerImg.removeAttribute('src');
       mobileViewerImg.removeAttribute('alt');
+      mobileViewerImg.style.display='';
     }
     mobileViewerClose.addEventListener('click', closeMobileViewer);
     mobileViewer.addEventListener('click', e=>{ if(e.target===mobileViewer) closeMobileViewer(); });
