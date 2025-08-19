@@ -31,6 +31,8 @@ class GalleryArchive extends HTMLElement {
           --cols:4;  --rows:3;
           /* Allow explicit row height override to shrink thumbnails significantly */
           --row-h-override: 120px;
+          /* Max height for mosaic tiles so portrait images never overflow container */
+          --tile-max-h: clamp(160px, 40vh, 520px);
 
           --row-h: calc((100% - (var(--rows) - 1) * var(--gap)) / var(--rows));
 
@@ -486,7 +488,8 @@ class GalleryArchive extends HTMLElement {
           position:relative; border-radius:0;
           border:0; background:transparent; cursor:pointer; overflow:hidden;
           transition: opacity .16s var(--ease), transform .16s var(--ease);
-          display:block;
+          display:grid; place-items:center;
+          max-height: var(--tile-max-h);
         }
         /* Selection flash (subtle lime fade-in/out) */
         @keyframes selectFlash{
@@ -514,7 +517,7 @@ class GalleryArchive extends HTMLElement {
         .card.dark .item:hover{ box-shadow:none; }
 
         .thumb{
-          width:100%; height:auto; object-fit:contain; display:block;
+          max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; display:block;
           opacity:0; transform: scale(1);
           transition: opacity .38s var(--ease), transform .38s var(--ease);
           will-change: opacity, transform;
@@ -549,7 +552,7 @@ class GalleryArchive extends HTMLElement {
           opacity:0; transition: opacity .25s var(--ease);
         }
         .expander.open{ display:grid; place-items:center; opacity:1; }
-        .expander-img{ width:auto; height:100%; max-height:100%; display:block; user-select:none; -webkit-user-drag:none; object-fit:contain; }
+        .expander-img{ width:auto; height:auto; max-width:100%; max-height:100%; display:block; user-select:none; -webkit-user-drag:none; object-fit:contain; }
         .expander-close{
           position:absolute; top:var(--pad); right:var(--pad); z-index:11;
           width:40px; height:40px; border-radius:var(--radius);
@@ -577,10 +580,11 @@ class GalleryArchive extends HTMLElement {
           transition: opacity .25s var(--ease);
         }
         .mobile-viewer.open{ display:grid; place-items:center; opacity:1; }
-        .mobile-viewer-img{ width:auto; height:100%; max-height:100%; object-fit:contain; display:block; }
+        .mobile-viewer-img{ width:auto; height:auto; max-width:100%; max-height:100%; object-fit:contain; display:block; }
 
         @media (max-width: 768px){
           :host{ --sidebar-w: 100%; }
+          :host{ --tile-max-h: 42vh; }
           .card-body{
             grid-template-columns: 1fr;
             grid-template-areas:
@@ -1472,7 +1476,7 @@ class GalleryArchive extends HTMLElement {
         expanderImg.style.display = 'none';
         const v = document.createElement('video');
         v.id = 'expanderVideo'; v.controls = true; v.autoplay = true; v.loop = true; v.playsInline = true;
-        v.style.width = '100%'; v.style.height = '100%'; v.style.objectFit = 'contain';
+        v.style.width = 'auto'; v.style.height = 'auto'; v.style.maxWidth = '100%'; v.style.maxHeight = '100%'; v.style.objectFit = 'contain';
         v.src = d.src;
         expander.appendChild(v);
       } else {
@@ -1501,7 +1505,7 @@ class GalleryArchive extends HTMLElement {
         mobileViewerImg.style.display='none';
         const v = document.createElement('video');
         v.id = 'mobileViewerVideo'; v.controls = true; v.autoplay = true; v.loop = true; v.playsInline = true;
-        v.style.width = '100%'; v.style.height = '100%'; v.style.objectFit = 'contain';
+        v.style.width = 'auto'; v.style.height = 'auto'; v.style.maxWidth = '100%'; v.style.maxHeight = '100%'; v.style.objectFit = 'contain';
         v.src = d.src;
         mobileViewer.appendChild(v);
       } else {
