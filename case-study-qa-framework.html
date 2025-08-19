@@ -716,6 +716,7 @@
             background: #ffffff !important;
             color: var(--text-color) !important;
             border-color: var(--toggle-border-color) !important;
+            transition: all 0.2s ease;
         }
 
         /* Special styling for client pill */
@@ -4818,7 +4819,7 @@ font-family: " Akz", sans-serif;
             max-width: 100%;
             margin: 0;
             position: relative;
-            margin-top: 120px;
+            margin-top: 60px;
         }
 
         .synopsis-title {
@@ -5167,9 +5168,9 @@ font-family: " Akz", sans-serif;
         }
 
         .voice-pill:hover:not(.speaking) {
-            background: #a2e633;
-            color: transparent;
-            border: 2px solid #7ebb1c !important;
+            background: rgba(0, 8, 16, 0.10);
+            color: transparent !important;
+            border: 1px solid var(--toggle-border-color) !important;
             position: relative;
         }
 
@@ -5187,7 +5188,7 @@ font-family: " Akz", sans-serif;
 
         .voice-pill.speaking {
             background: #a2e633;
-            color: transparent;
+            color: transparent !important;
             border-color: #a2e633;
             position: relative;
         }
@@ -6015,10 +6016,10 @@ font-family: " Akz", sans-serif;
         }
 
         /* Impact header explicit spacing */
-        #impact-header { padding-top: 0; }
+        #impact-header { padding-top: 40px; }
 
         /* Explicit spacing between marquee block and section header */
-        #results .impact-marquee { margin-bottom: 60px; }
+        #results .impact-marquee { margin-bottom: 120px; }
 
         /* Impact Marquee (intro animation above metrics) */
         .impact-marquee {
@@ -6277,6 +6278,8 @@ font-family: " Akz", sans-serif;
                 margin-right: 10px;
             }
             .impact-fade-left, .impact-fade-right { width: 80px; }
+
+            #results .impact-marquee { margin-bottom: 60px; }
         }
 
         /* How might we Section - Same styling as Results */
@@ -7036,6 +7039,14 @@ font-family: " Akz", sans-serif;
 
         .hmw-pill:hover {
             transform: translateY(-1px);
+        }
+
+        /* Fainter hover using ink color to avoid implying clickability */
+        .project-meta-layout .pill:hover,
+        .hmw-pill:hover {
+            background: rgba(0, 8, 16, 0.10) !important; /* var(--ink-950) @ 10% */
+            border-color: var(--toggle-border-color) !important;
+            color: var(--text-color);
         }
 
         /* Dark mode removed */
@@ -8252,7 +8263,7 @@ font-family: " Akz", sans-serif;
                             </button>
                             <button class="cta-pill tldr-pill pill-2 ui-btn" data-variant="b2" aria-pressed="false" data-option="tldr" id="tldrPill">tl;dr</button>
                         </div>
-                        <button class="cta-pill voice-pill pill-3 ui-btn" data-variant="b6" aria-pressed="false" data-cta="voice" id="voicePill" data-pill-id="synopsis-voice" data-audio="https://raw.githubusercontent.com/amachinic/Merem/main/QA%20Voiceover.mp3">Voice</button>
+                        <button class="cta-pill voice-pill pill-3 ui-btn" data-variant="b6" aria-pressed="false" data-cta="voice" id="voicePill" data-pill-id="synopsis-voice" aria-label="Play voiceover" data-audio="https://raw.githubusercontent.com/amachinic/Merem/main/QA%20Voiceover.mp3"></button>
                     </div>
                     
                     <div class="story-content">
@@ -8308,7 +8319,7 @@ font-family: " Akz", sans-serif;
                             </button>
                             <button class="cta-pill tldr-pill pill-2 ui-btn" data-variant="b2" aria-pressed="false" data-option="tldr">tl;dr</button>
                 </div>
-                        <button class="cta-pill voice-pill pill-3" data-cta="voice" id="hmwVoicePill" data-pill-id="hmw-voice" data-audio="https://raw.githubusercontent.com/amachinic/Merem/main/QA%20-%20Defect%20list.mp3"></button>
+                        <button class="cta-pill voice-pill pill-3" data-cta="voice" id="hmwVoicePill" data-pill-id="hmw-voice" aria-label="Play voiceover" data-audio="https://raw.githubusercontent.com/amachinic/Merem/main/QA%20-%20Defect%20list.mp3"></button>
                     </div>
                     <p><span class="highlight-target" data-highlight="tldr">The challenge wasn’t just about finding defects—it was about creating a shared language between disciplines that had historically worked in silos, especially in enterprise environments. Designers think in experiences, developers think in logic, and QA thinks in edge cases. Each lens is critical, but without meaningful collaboration between them, key issues inevitably slip through the cracks.</span></p>
                     <p>Our framework needed to bridge these disconnects while keeping pace with the speed and agility modern development demands. We couldn’t just add more meetings or documentation—we had to build transparency directly into the tools and workflows teams were already using, so collaboration felt natural, not forced.</p>
@@ -8373,7 +8384,7 @@ font-family: " Akz", sans-serif;
                             </button>
                             <button class="cta-pill tldr-pill pill-2 ui-btn" data-variant="b2" aria-pressed="false" data-option="tldr">tl;dr</button>
                         </div>
-                        <button class="cta-pill voice-pill pill-3 ui-btn" data-variant="b6" aria-pressed="false" data-cta="voice" id="defectVoicePill" data-pill-id="defect-voice" data-audio="https://raw.githubusercontent.com/amachinic/Merem/main/QA%20-%20Defect%20Glossary.mp3">Voice</button>
+                        <button class="cta-pill voice-pill pill-3 ui-btn" data-variant="b6" aria-pressed="false" data-cta="voice" id="defectVoicePill" data-pill-id="defect-voice" aria-label="Play voiceover" data-audio="https://raw.githubusercontent.com/amachinic/Merem/main/QA%20-%20Defect%20Glossary.mp3"></button>
                     </div>
                     <p>Understanding the taxonomy of defects is crucial for effective quality assurance. <span class="highlight-target" data-highlight="tldr">Visual defects</span> include misaligned elements, incorrect typography, color inconsistencies, and spacing issues that compromise the design integrity. <span class="highlight-target" data-highlight="tldr">These seemingly minor issues compound over time, eroding user trust and brand perception.</span></p>
                     
@@ -13581,6 +13592,74 @@ font-family: " Akz", sans-serif;
 
         }, 100); // End setTimeout - give DOM time to render
 
+    </script>
+
+    <script>
+    (function(){
+        function shortenUploadTextIfDefault(el){
+            const original = el.dataset.originalText || el.textContent.trim();
+            if (!el.dataset.originalText) {
+                el.dataset.originalText = original;
+            }
+            const lower = original.toLowerCase();
+            if (lower.startsWith('upload ')) {
+                const parts = original.trim().split(/\s+/);
+                const last = parts[parts.length - 1];
+                el.textContent = last.toUpperCase();
+                el.dataset.shortened = '1';
+            }
+        }
+
+        function restoreUploadText(el){
+            if (el.dataset.originalText) {
+                el.textContent = el.dataset.originalText;
+                el.dataset.shortened = '';
+            }
+        }
+
+        function shortenResetTextIfDefault(btn){
+            const original = btn.dataset.originalText || btn.textContent.trim();
+            if (!btn.dataset.originalText) {
+                btn.dataset.originalText = original;
+            }
+            if (original.toLowerCase() === 'reset canvas') {
+                btn.textContent = 'Reset';
+                btn.dataset.shortened = '1';
+            }
+        }
+
+        function restoreResetText(btn){
+            if (btn.dataset.originalText) {
+                btn.textContent = btn.dataset.originalText;
+                btn.dataset.shortened = '';
+            }
+        }
+
+        function applyMobileText(){
+            document.querySelectorAll('.triage-compare-upload .triage-compare-upload-text').forEach(shortenUploadTextIfDefault);
+            const resetBtn = document.querySelector('.triage-compare-reset');
+            if (resetBtn) shortenResetTextIfDefault(resetBtn);
+        }
+
+        function restoreDesktopText(){
+            document.querySelectorAll('.triage-compare-upload .triage-compare-upload-text').forEach(restoreUploadText);
+            const resetBtn = document.querySelector('.triage-compare-reset');
+            if (resetBtn) restoreResetText(resetBtn);
+        }
+
+        const mq = window.matchMedia('(max-width: 768px)');
+        function handleChange(e){
+            if (e.matches) applyMobileText(); else restoreDesktopText();
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => handleChange(mq));
+        } else {
+            handleChange(mq);
+        }
+        if (mq.addEventListener) mq.addEventListener('change', handleChange);
+        else if (mq.addListener) mq.addListener(handleChange);
+    })();
     </script>
         </div>
     </div>

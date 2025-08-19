@@ -382,6 +382,39 @@
             line-height: 1.2;
             white-space: pre-wrap;
         }
+        /* Contact intro uses same styling as home intro */
+        #contact-greeting {
+            font-size: 24px;
+            line-height: 1.2;
+            display: block;
+            letter-spacing: -0.03em;
+            max-width: 100%;
+            overflow-wrap: break-word;
+            word-break: normal;
+        }
+        #contact-description {
+            font-size: 18px;
+            line-height: 1.4;
+            white-space: pre-wrap;
+            margin-top: 20px;
+            margin-bottom: 60px;
+            max-width: 100%;
+            overflow-wrap: break-word;
+            word-break: normal;
+        }
+        #contact .section-content { overflow-x: hidden; }
+
+        /* Mobile: prevent mid-word breaks; allow lines to wrap by spaces */
+        @media (max-width: 768px) {
+            #contact-greeting,
+            #contact-description {
+                overflow-wrap: normal;
+                word-break: normal;
+                hyphens: none;
+            }
+        }
+        /* Add top padding for Contact section content */
+        #contact .section-content { padding-top: 40px; }
         .trailing-char {
             display: inline-block;
             color: var(--secondary-text-color);
@@ -2614,12 +2647,12 @@
                     <!-- Arrow Navigation - Inside gallery card -->
                     <div class="gallery-arrows">
                         <button class="gallery-arrow gallery-arrow-left" id="gallery-prev">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="42" height="42" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </button>
                         <button class="gallery-arrow gallery-arrow-right" id="gallery-next">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="42" height="42" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </button>
@@ -2690,7 +2723,8 @@
     <!-- Contact Section -->
     <section id="contact" class="section">
         <div class="section-content">
-            <h2 id="contact-title" class="section-title">Collaborate</h2>
+            <div id="contact-greeting"></div>
+            <div id="contact-description"></div>
             <div class="contact-container" style="max-width: none; width: 100%;">
                 <form id="contact-form" class="contact-form" style="width: 100%;">
                         <div class="ui-input contact-name" data-variant="chip">
@@ -3224,8 +3258,9 @@ humanity and technology.`;
                 opacity: 1,
                 y: 0,
                 scale: 1,
-                duration: 0.6,
-                ease: "power2.out"
+                duration: 1.4,
+                ease: "power2.out",
+                delay: 0.2
             });
         }
 
@@ -3850,6 +3885,49 @@ I have a deep curiousity in harmonizing humanity and technology.`;
                 }
             }).join('');
         }
+
+        // Contact greeting/description typing (same behavior as home intro)
+        const contactGreetingEl = document.getElementById('contact-greeting');
+        const contactDescriptionEl = document.getElementById('contact-description');
+        const contactGreetingText = `Let's collaborate!`;
+        const contactDescriptionText = `I'm open to projects of all scales and degrees of complexity. Let's make a connection!`;
+
+        // Build hidden spans for contact intro content
+        if (contactGreetingEl && contactGreetingEl.childElementCount === 0) {
+            contactGreetingEl.innerHTML = contactGreetingText.split('').map(char =>
+                char === ' ' ? `<span data-char=\"${char}\" style=\"opacity: 0;\"> </span>` : `<span data-char=\"${char}\" style=\"opacity: 0;\">${char}</span>`
+            ).join('');
+        }
+        if (contactDescriptionEl && contactDescriptionEl.childElementCount === 0) {
+            contactDescriptionEl.innerHTML = contactDescriptionText.split('').map(char =>
+                char === ' ' ? `<span data-char=\"${char}\" style=\"opacity: 0;\"> </span>` : `<span data-char=\"${char}\" style=\"opacity: 0;\">${char}</span>`
+            ).join('');
+        }
+
+        // Contact typing sequence mirroring home intro
+        let contactGreetingIndex = 0;
+        let contactDescriptionIndex = 0;
+        function typeContactGreeting() {
+            const spans = contactGreetingEl ? contactGreetingEl.querySelectorAll('span') : [];
+            if (!spans.length) return;
+            if (contactGreetingIndex < spans.length) {
+                spans[contactGreetingIndex].style.opacity = '1';
+                contactGreetingIndex++;
+                setTimeout(typeContactGreeting, 30);
+            } else {
+                setTimeout(typeContactDescription, 400);
+            }
+        }
+
+        function typeContactDescription() {
+            const spans = contactDescriptionEl ? contactDescriptionEl.querySelectorAll('span') : [];
+            if (!spans.length) return;
+            if (contactDescriptionIndex < spans.length) {
+                spans[contactDescriptionIndex].style.opacity = '1';
+                contactDescriptionIndex++;
+                setTimeout(typeContactDescription, 24);
+            }
+        }
         
         // Force all sections to maintain stable layout during animations
         const allSections = document.querySelectorAll('.section');
@@ -3868,7 +3946,7 @@ I have a deep curiousity in harmonizing humanity and technology.`;
         const sectionTitles = [
             { id: 'archive-title', text: 'Archive' },
             { id: 'work-title', text: 'Work' },
-            { id: 'contact-title', text: 'Collaborate' }
+            // contact now uses custom greeting/description typing
         ];
 
         const animatedSections = new Set();
@@ -4170,6 +4248,9 @@ I have a deep curiousity in harmonizing humanity and technology.`;
         
         // Start typing animation with greeting only
         typeGreeting();
+
+        // Also animate contact intro after initial load
+        setTimeout(() => { try { typeContactGreeting(); } catch(_){} }, 800);
 
 
 
