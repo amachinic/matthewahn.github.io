@@ -549,7 +549,7 @@ class GalleryArchive extends HTMLElement {
           opacity:0; transition: opacity .25s var(--ease);
         }
         .expander.open{ display:grid; place-items:center; opacity:1; }
-        .expander-img{ width:auto; height:auto; max-width:100%; max-height:100%; display:block; user-select:none; -webkit-user-drag:none; object-fit:contain; }
+        .expander-img{ width:auto; height:100%; max-height:100%; display:block; user-select:none; -webkit-user-drag:none; object-fit:contain; }
         .expander-close{
           position:absolute; top:var(--pad); right:var(--pad); z-index:11;
           width:40px; height:40px; border-radius:var(--radius);
@@ -577,7 +577,7 @@ class GalleryArchive extends HTMLElement {
           transition: opacity .25s var(--ease);
         }
         .mobile-viewer.open{ display:grid; place-items:center; opacity:1; }
-        .mobile-viewer-img{ width:auto; height:auto; max-width:100%; max-height:100%; object-fit:contain; display:block; }
+        .mobile-viewer-img{ width:auto; height:100%; max-height:100%; object-fit:contain; display:block; }
 
         @media (max-width: 768px){
           :host{ --sidebar-w: 100%; }
