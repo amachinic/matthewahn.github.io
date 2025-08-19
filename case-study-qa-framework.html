@@ -222,6 +222,7 @@
 
         :root {
             --font-sans: "Akz", sans-serif;
+            --ls-tight: -0.05em;
         }
 
         /* =================================
@@ -601,7 +602,7 @@
             font-family: "Akz", sans-serif;
             font-size: 64px; /* type-h1 */
             font-weight: 500;
-            letter-spacing: -0.04em;
+            letter-spacing: calc(-0.04em + var(--ls-tight, 0em));
             color: var(--text-color);
             margin: 0;
             line-height: 1.2;
@@ -4748,7 +4749,7 @@ font-family: " Akz", sans-serif;
             font-kerning: normal;
             font-feature-settings: 'kern' 1;
             text-rendering: optimizeLegibility;
-            letter-spacing: -0.04em;
+            letter-spacing: calc(-0.04em + var(--ls-tight, 0em));
             margin-bottom: 40px; /* consistent space between title and content */
             opacity: 0;
             transform: translateY(30px);
@@ -4826,7 +4827,7 @@ font-family: " Akz", sans-serif;
 font-family: " Akz", sans-serif;
             font-size: clamp(32px, 5vw, 56px); /* Consistent with other section titles */
             font-weight: 500;
-            letter-spacing: -0.04em;
+            letter-spacing: calc(-0.04em + var(--ls-tight, 0em));
             color: var(--text-color);
             margin: 0 0 40px 0;
             text-align: left;
@@ -7054,7 +7055,7 @@ font-family: " Akz", sans-serif;
         /* Word-by-word animation for hmw title */
         .hmw-animated-title {
             opacity: 1;
-            letter-spacing: -0.04em !important;
+            letter-spacing: calc(-0.04em + var(--ls-tight, 0em)) !important;
             line-height: 1.2 !important;
 
         }

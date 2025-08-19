@@ -21,7 +21,7 @@
 			font-style: normal;
 			font-display: swap;
 		}
-		:root { --font-sans: "Akz", sans-serif; }
+		:root { --font-sans: "Akz", sans-serif; --ls-tight: -0.05em; }
 		html, body, .section, .section * { font-family: var(--font-sans) !important; }
 
 		/* Section title kerning for readability */
@@ -29,13 +29,13 @@
 			font-kerning: normal;
 			font-feature-settings: 'kern' 1;
 			text-rendering: optimizeLegibility;
-			letter-spacing: -0.04em;
+			letter-spacing: calc(-0.04em + var(--ls-tight, 0em));
 		}
 
 		/* Project title, synopsis title, and HMW title tracking */
 		.project-title,
 		.synopsis-title,
-		.hmw-animated-title { letter-spacing: -0.04em; }
+		.hmw-animated-title { letter-spacing: calc(-0.04em + var(--ls-tight, 0em)); }
 
 		/* UI field labels - consistent micro-typography */
 		.ui-label {
