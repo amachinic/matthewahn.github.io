@@ -147,25 +147,32 @@ class GalleryArchive extends HTMLElement {
           border:1px solid #D9D9D9; border-radius:6px; background:#FFF;
           height: var(--search-h, 56px);
           min-width:0;
+          will-change: background-color, border-color;
+          transform: translateZ(0);
         }
         .searchbar:focus-within{
           background: rgba(162,230,51,0.25);
           border-color: #A2E633;
+          border-bottom-color: #A2E633;
         }
         .searchbar:hover{
           background: rgba(162,230,51,0.15);
           border-color: #A2E633;
+          border-bottom-color: #A2E633;
         }
         .search-icon{
           display:inline-flex; align-items:center; justify-content:center; gap:6px; flex-shrink:0;
           padding:12px 16px; height: 100%;
           border-right:1px solid #D9D9D9; background:#F0F0F0; color:#2C2C2C;
-          border-radius:6px 0 0 0; /* visual parity with ui-search-key */
+          border-radius:6px 0 0 6px; /* match parent bottom-left rounding to avoid seam flicker */
         }
         .searchbar:hover .search-icon{
           background: rgba(162,230,51,0.15); /* transparent lime */
           border-right: 1px solid #A2E633;
         }
+        /* Make search icon white on hover/focus */
+        .searchbar:hover .search-icon svg path,
+        .searchbar:focus-within .search-icon svg path{ stroke: #ffffff; }
         .search-icon svg{ width: var(--search-icon, 16px); height: var(--search-icon, 16px); }
         .search-icon svg path{ stroke: var(--icon-color); }
         .searchbar:focus-within .search-icon{

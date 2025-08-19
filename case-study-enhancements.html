@@ -13,16 +13,19 @@
       <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
       <script src="global-clock-component.js"></script>
     <style>
-        @font-face {
-            font-family: 'Unica77LL';
-            src: url('Unica77LLWeb-Medium.woff') format('woff');
-            font-weight: 500;
-            font-style: normal;
+        /* Swap Unica to Akz */
+        .type-h1,
+        .type-h2,
+        .type-h3,
+        .ui-btn {
+            font-family: "Akz", sans-serif !important;
+            font-optical-sizing: auto;
         }
 
         @font-face {
             font-family: 'Input';
-            src: url('https://github.com/amachinic/Merem/raw/main/Input-Regular_(InputSansNarrow-Light).ttf') format('truetype');
+            src: url('public/typeface/ITypeface.woff') format('woff'),
+                 url('https://raw.githubusercontent.com/amachinic/matthewahn.github.io/main/public/typeface/ITypeface.woff') format('woff');
             font-weight: 300;
             font-style: normal;
         }
@@ -6863,6 +6866,21 @@
             }
         }
     </style>
+    <script>
+    // Keep CSS aligned with the QA framework case study by injecting its <style> at runtime
+    (async () => {
+        try {
+            const res = await fetch('case-study-qa-framework.html');
+            const text = await res.text();
+            const cssBlock = (text.match(/<style>[\s\S]*?<\/style>/i) || [])[0] || '';
+            if (cssBlock) {
+                const holder = document.createElement('div');
+                holder.innerHTML = cssBlock;
+                document.head.appendChild(holder.firstChild);
+            }
+        } catch (_) {}
+    })();
+    </script>
 </head>
 <body>
     <!-- Global Clock Container Component (Outside ScrollSmoother for fixed positioning) -->
